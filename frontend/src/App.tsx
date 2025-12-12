@@ -1,15 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
+import HomePage from './pages/HomePage'
+import TeamPage from './pages/TeamPage'
+import EventsPage from './pages/Events/EventsPage'
+import PublicationsPage from './pages/Publications/PublicationsPage'
+import ContactPage from './pages/ContactPage'
+import AlumniPage from './pages/Alumni/AlumniPage'
+import GalleryPage from './pages/Gallery/GalleryPage'
+import CanvasPage from './pages/Canvas/CanvasPage'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <h1 className="text-red-500 text-3xl font-bold">Vite + React</h1>
-    </>
+    <Router>
+      <div className="bg-brand-white">
+        <Navbar />
+        <main className="pt-20">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/team" element={<TeamPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/publications" element={<PublicationsPage />} />
+              <Route path="/alumni" element={<AlumniPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/canvas" element={<CanvasPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 

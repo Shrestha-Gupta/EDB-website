@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+/* Global Typography */
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: #0a0a0a;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Georgia', serif;
+  color: #0a0a0a;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #D91B1B;
+  color: #ffffff;
+}
+
+/* Link Styles */
+a {
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #D91B1B;
+}
+
+/* Button Transitions */
+button {
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D91B1B;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FBBF24;
+}
