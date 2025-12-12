@@ -60,7 +60,7 @@ export default function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-gold via-brand-orange to-brand-scarlet bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-gold via-brand-orange to-brand-scarlet bg-clip-text text-transparent mb-6">
             Gallery
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -81,7 +81,7 @@ export default function GalleryPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-3 font-bold border-2 transition-all ${
                 selectedCategory === category
-                  ? 'bg-gradient-to-r from-brand-orange to-brand-gold text-white border-transparent'
+                  ? 'bg-linear-to-r from-brand-orange to-brand-gold text-white border-transparent'
                   : 'border-brand-gold text-brand-black hover:border-brand-orange'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -109,7 +109,7 @@ export default function GalleryPage() {
             >
               <div className="relative overflow-hidden shadow-xl border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300">
                 {/* Image Placeholder */}
-                <div className={`aspect-square bg-gradient-to-br ${image.color} relative overflow-hidden`}>
+                <div className={`aspect-square bg-linear-to-br ${image.color} relative overflow-hidden`}>
                   <motion.div
                     className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
@@ -131,7 +131,7 @@ export default function GalleryPage() {
 
                   {/* Title Overlay */}
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"
+                    className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6"
                     initial={{ y: 100 }}
                     whileHover={{ y: 0 }}
                     transition={{ duration: 0.3 }}
@@ -147,19 +147,19 @@ export default function GalleryPage() {
 
         {/* Upload CTA */}
         <motion.div
-          className="mt-20 bg-gradient-to-r from-brand-orange/10 to-brand-gold/10 border-4 border-brand-orange p-12 text-center"
+          className="mt-20 bg-linear-to-r from-brand-orange/10 to-brand-gold/10 border-4 border-brand-orange p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-4">
             Share Your Moments
           </h2>
           <p className="text-xl text-brand-black/70 mb-8">
             Have photos from our events? Share them with the community!
           </p>
           <motion.button
-            className="bg-gradient-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
+            className="bg-linear-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(255, 140, 66, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >

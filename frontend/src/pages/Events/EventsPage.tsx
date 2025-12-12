@@ -84,7 +84,7 @@ export default function EventsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Events
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -105,7 +105,7 @@ export default function EventsPage() {
               onClick={() => setFilter(filterType)}
               className={`px-6 py-3 font-bold border-2 transition-all ${
                 filter === filterType
-                  ? 'bg-gradient-to-r from-brand-red to-brand-scarlet text-white border-transparent'
+                  ? 'bg-linear-to-r from-brand-red to-brand-scarlet text-white border-transparent'
                   : 'border-brand-gold text-brand-black hover:border-brand-scarlet'
               }`}
               whileHover={{ scale: 1.05 }}
@@ -133,7 +133,7 @@ export default function EventsPage() {
               <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-xl">
                 <div className="grid md:grid-cols-[300px_1fr] gap-0">
                   {/* Event Date Card */}
-                  <div className={`bg-gradient-to-br from-${event.color} to-brand-gold p-8 flex flex-col justify-center items-center text-white relative overflow-hidden`}>
+                  <div className={`bg-linear-to-br from-${event.color} to-brand-gold p-8 flex flex-col justify-center items-center text-white relative overflow-hidden`}>
                     <motion.div
                       className="absolute inset-0 bg-black/10"
                       whileHover={{ scale: 1.1 }}
@@ -171,7 +171,7 @@ export default function EventsPage() {
                     </p>
                     <div className="flex gap-4">
                       <motion.button
-                        className="bg-gradient-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8"
+                        className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -196,19 +196,19 @@ export default function EventsPage() {
 
         {/* Submit Event CTA */}
         <motion.div
-          className="mt-20 bg-gradient-to-r from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-orange p-12 text-center"
+          className="mt-20 bg-linear-to-r from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-orange p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-scarlet to-brand-orange bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-scarlet to-brand-orange bg-clip-text text-transparent mb-4">
             Have an Event Idea?
           </h2>
           <p className="text-xl text-brand-black/70 mb-8">
             We're always open to new ideas and collaborations!
           </p>
           <motion.button
-            className="bg-gradient-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
+            className="bg-linear-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(255, 140, 66, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >

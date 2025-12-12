@@ -7,7 +7,7 @@ const publications = [
     title: 'Voices of MMMUT - Volume 5',
     type: 'Annual Anthology',
     year: '2024',
-    cover: 'bg-gradient-to-br from-brand-red to-brand-scarlet',
+    cover: 'bg-linear-to-br from-brand-red to-brand-scarlet',
     description: 'Our flagship publication featuring the finest poetry, prose, and essays from students and faculty.',
     pages: 240,
     contributors: 45
@@ -17,7 +17,7 @@ const publications = [
     title: 'Technical Tales',
     type: 'Quarterly Journal',
     year: '2024',
-    cover: 'bg-gradient-to-br from-brand-orange to-brand-gold',
+    cover: 'bg-linear-to-br from-brand-orange to-brand-gold',
     description: 'Creative writing from the technical perspective - where engineering meets literature.',
     pages: 120,
     contributors: 28
@@ -27,7 +27,7 @@ const publications = [
     title: 'The Canvas Collection',
     type: 'Digital Magazine',
     year: '2024',
-    cover: 'bg-gradient-to-br from-brand-cyan to-brand-teal',
+    cover: 'bg-linear-to-br from-brand-cyan to-brand-teal',
     description: 'A digital-first publication exploring contemporary themes and experimental forms.',
     pages: 180,
     contributors: 35
@@ -37,7 +37,7 @@ const publications = [
     title: 'Alumni Reflections',
     type: 'Special Edition',
     year: '2023',
-    cover: 'bg-gradient-to-br from-brand-gold to-brand-yellow',
+    cover: 'bg-linear-to-br from-brand-gold to-brand-yellow',
     description: 'Stories and experiences from our distinguished alumni across the globe.',
     pages: 200,
     contributors: 52
@@ -84,7 +84,7 @@ export default function PublicationsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Publications
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -153,7 +153,7 @@ export default function PublicationsPage() {
                   {/* Actions */}
                   <div className="flex gap-4">
                     <motion.button
-                      className="flex-1 bg-gradient-to-r from-brand-red to-brand-scarlet text-white font-bold py-3"
+                      className="flex-1 bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -181,8 +181,8 @@ export default function PublicationsPage() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           {/* Submit Work */}
-          <div className="bg-gradient-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-10">
-            <h2 className="text-3xl font-serif font-bold bg-gradient-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-4">
+          <div className="bg-linear-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-10">
+            <h2 className="text-3xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-4">
               Submit Your Work
             </h2>
             <p className="text-brand-black/70 mb-6">
@@ -203,7 +203,7 @@ export default function PublicationsPage() {
               </li>
             </ul>
             <motion.button
-              className="bg-gradient-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8 w-full"
+              className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8 w-full"
               whileHover={{ scale: 1.02, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
               whileTap={{ scale: 0.98 }}
             >
@@ -212,8 +212,8 @@ export default function PublicationsPage() {
           </div>
 
           {/* Guidelines */}
-          <div className="bg-gradient-to-br from-brand-gold/10 to-brand-yellow/10 border-4 border-brand-gold p-10">
-            <h2 className="text-3xl font-serif font-bold bg-gradient-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-4">
+          <div className="bg-linear-to-br from-brand-gold/10 to-brand-yellow/10 border-4 border-brand-gold p-10">
+            <h2 className="text-3xl font-serif font-bold bg-linear-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-4">
               Submission Guidelines
             </h2>
             <p className="text-brand-black/70 mb-6">

@@ -92,7 +92,7 @@ export default function TeamPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Our Team
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -117,7 +117,7 @@ export default function TeamPage() {
             >
               <div className="bg-brand-white border-2 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-lg">
                 {/* Card Header with Gradient */}
-                <div className={`h-40 bg-gradient-to-br ${member.color} flex items-center justify-center relative overflow-hidden`}>
+                <div className={`h-40 bg-linear-to-br ${member.color} flex items-center justify-center relative overflow-hidden`}>
                   <motion.div
                     className="absolute inset-0 bg-black/20"
                     whileHover={{ scale: 1.1 }}
@@ -139,7 +139,7 @@ export default function TeamPage() {
 
                 {/* Animated Border */}
                 <motion.div
-                  className="h-1 bg-gradient-to-r from-brand-gold to-brand-scarlet"
+                  className="h-1 bg-linear-to-r from-brand-gold to-brand-scarlet"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4 }}
@@ -151,19 +151,19 @@ export default function TeamPage() {
 
         {/* Join Team CTA */}
         <motion.div
-          className="mt-20 bg-gradient-to-br from-brand-orange/10 to-brand-gold/10 border-4 border-brand-gold p-12 text-center"
+          className="mt-20 bg-linear-to-br from-brand-orange/10 to-brand-gold/10 border-4 border-brand-gold p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
             Join Our Team
           </h2>
           <p className="text-xl text-brand-black/70 mb-8 max-w-2xl mx-auto">
             We're always looking for passionate individuals who share our vision for literary excellence and creative expression.
           </p>
           <motion.button
-            className="bg-gradient-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-10 text-lg"
+            className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-10 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >

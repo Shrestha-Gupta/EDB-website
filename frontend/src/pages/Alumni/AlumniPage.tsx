@@ -75,7 +75,7 @@ export default function AlumniPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Alumni & Archive
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -90,7 +90,7 @@ export default function AlumniPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-8 text-center">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-8 text-center">
             Batch Archives
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -107,7 +107,7 @@ export default function AlumniPage() {
                 onClick={() => setSelectedBatch(batch.year)}
               >
                 <div className="text-center">
-                  <div className="text-3xl font-bold bg-gradient-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-2">
+                  <div className="text-3xl font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-2">
                     {batch.year}
                   </div>
                   <div className="text-brand-black/60 mb-4">{batch.members} Members</div>
@@ -125,7 +125,7 @@ export default function AlumniPage() {
           initial="hidden"
           animate="visible"
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-12 text-center">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-12 text-center">
             Featured Alumni
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -137,7 +137,7 @@ export default function AlumniPage() {
               >
                 <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-xl">
                   {/* Profile Header */}
-                  <div className={`h-48 bg-gradient-to-br ${alumni.color} flex items-center justify-center relative overflow-hidden`}>
+                  <div className={`h-48 bg-linear-to-br ${alumni.color} flex items-center justify-center relative overflow-hidden`}>
                     <motion.div
                       className="absolute inset-0 bg-black/20"
                       whileHover={{ scale: 1.1 }}
@@ -165,12 +165,12 @@ export default function AlumniPage() {
 
         {/* Canvas Section */}
         <motion.div
-          className="bg-gradient-to-br from-brand-gold/10 to-brand-orange/10 border-4 border-brand-gold p-12"
+          className="bg-linear-to-br from-brand-gold/10 to-brand-orange/10 border-4 border-brand-gold p-12"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-6 text-center">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-orange to-brand-gold bg-clip-text text-transparent mb-6 text-center">
             Alumni Canvas
           </h2>
           <p className="text-xl text-brand-black/70 text-center mb-8 max-w-3xl mx-auto">
@@ -178,7 +178,7 @@ export default function AlumniPage() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <motion.button
-              className="bg-gradient-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
+              className="bg-linear-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
               whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(255, 140, 66, 0.3)' }}
               whileTap={{ scale: 0.95 }}
             >
@@ -196,7 +196,7 @@ export default function AlumniPage() {
 
         {/* Stay Connected */}
         <motion.div
-          className="mt-12 bg-gradient-to-r from-brand-cyan/10 to-brand-teal/10 border-4 border-brand-cyan p-12 text-center"
+          className="mt-12 bg-linear-to-r from-brand-cyan/10 to-brand-teal/10 border-4 border-brand-cyan p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}

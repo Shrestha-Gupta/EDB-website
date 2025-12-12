@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 export default function About() {
   return (
     <section id="about" className="bg-brand-white py-20 px-6">
@@ -15,7 +17,7 @@ export default function About() {
 
           {/* Content */}
           <div>
-            <h3 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-6">
+            <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-6">
               About Us
             </h3>
             <p className="text-lg text-brand-black/70 mb-6 leading-relaxed">
@@ -27,18 +29,60 @@ export default function About() {
 
             {/* Key Points */}
             <div className="space-y-4">
-              <div className="flex gap-4">
-                <div className="w-3 h-3 bg-brand-scarlet rounded-full mt-2 flex-shrink-0 shadow-md"></div>
+              <motion.div 
+                className="flex gap-4 items-center"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-brand-scarlet shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </motion.svg>
                 <p className="text-brand-black/80">Curated literary excellence</p>
-              </div>
-              <div className="flex gap-4">
-                <div className="w-3 h-3 bg-brand-cyan rounded-full mt-2 flex-shrink-0 shadow-md"></div>
+              </motion.div>
+              <motion.div 
+                className="flex gap-4 items-center"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-brand-cyan shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </motion.svg>
                 <p className="text-brand-black/80">Platform for emerging voices</p>
-              </div>
-              <div className="flex gap-4">
-                <div className="w-3 h-3 bg-brand-gold rounded-full mt-2 flex-shrink-0 shadow-md"></div>
+              </motion.div>
+              <motion.div 
+                className="flex gap-4 items-center"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 text-brand-gold shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </motion.svg>
                 <p className="text-brand-black/80">Cultural and scholarly discourse</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

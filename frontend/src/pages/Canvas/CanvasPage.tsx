@@ -74,7 +74,7 @@ export default function CanvasPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-gradient-to-r from-brand-cyan via-brand-teal to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-cyan via-brand-teal to-brand-gold bg-clip-text text-transparent mb-6">
             Canvas
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -84,7 +84,7 @@ export default function CanvasPage() {
 
         {/* Featured Quote */}
         <motion.div
-          className="mb-16 bg-gradient-to-br from-brand-gold/20 to-brand-orange/20 border-l-8 border-brand-gold p-10"
+          className="mb-16 bg-linear-to-br from-brand-gold/20 to-brand-orange/20 border-l-8 border-brand-gold p-10"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -173,19 +173,19 @@ export default function CanvasPage() {
 
         {/* Share Your Story CTA */}
         <motion.div
-          className="bg-gradient-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-12 text-center"
+          className="bg-linear-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-gradient-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
             Share Your Story
           </h2>
           <p className="text-xl text-brand-black/70 mb-8 max-w-2xl mx-auto">
             Your experiences can inspire current and future board members. Share your journey, lessons, and memories on Canvas.
           </p>
           <motion.button
-            className="bg-gradient-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-12 text-lg"
+            className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-12 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >
