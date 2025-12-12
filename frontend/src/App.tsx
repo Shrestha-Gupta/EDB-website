@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import HomePage from './pages/HomePage'
@@ -12,9 +13,20 @@ import GalleryPage from './pages/Gallery/GalleryPage'
 import CanvasPage from './pages/Canvas/CanvasPage'
 import './App.css'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="bg-brand-white">
         <Navbar />
         <main className="pt-20">
