@@ -56,8 +56,7 @@ const eventCardVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.6
     }
   }
 }
@@ -84,7 +83,7 @@ export default function EventsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Events
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -105,8 +104,8 @@ export default function EventsPage() {
               onClick={() => setFilter(filterType)}
               className={`px-6 py-3 font-bold border-2 transition-all ${
                 filter === filterType
-                  ? 'bg-linear-to-r from-brand-red to-brand-scarlet text-white border-transparent'
-                  : 'border-brand-gold text-brand-black hover:border-brand-scarlet'
+                  ? 'bg-linear-to-r from-brand-red to-brand-red text-white border-transparent'
+                  : 'border-brand-gold text-brand-black hover:border-brand-red'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -124,13 +123,13 @@ export default function EventsPage() {
           animate="visible"
           key={filter}
         >
-          {filteredEvents.map((event, index) => (
+          {filteredEvents.map((event) => (
             <motion.div
               key={event.id}
               variants={eventCardVariants}
               className="group"
             >
-              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-xl">
+              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-xl">
                 <div className="grid md:grid-cols-[300px_1fr] gap-0">
                   {/* Event Date Card */}
                   <div className={`bg-linear-to-br from-${event.color} to-brand-gold p-8 flex flex-col justify-center items-center text-white relative overflow-hidden`}>
@@ -155,7 +154,7 @@ export default function EventsPage() {
                   {/* Event Details */}
                   <div className="p-8">
                     <div className="flex items-start justify-between mb-4">
-                      <h3 className="text-3xl font-serif font-bold text-brand-black group-hover:text-brand-scarlet transition-colors">
+                      <h3 className="text-3xl font-serif font-bold text-brand-black group-hover:text-brand-red transition-colors">
                         {event.title}
                       </h3>
                       <span className={`px-4 py-2 rounded-full text-sm font-bold ${
@@ -171,7 +170,7 @@ export default function EventsPage() {
                     </p>
                     <div className="flex gap-4">
                       <motion.button
-                        className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8"
+                        className="bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-3 px-8"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -196,12 +195,12 @@ export default function EventsPage() {
 
         {/* Submit Event CTA */}
         <motion.div
-          className="mt-20 bg-linear-to-r from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-orange p-12 text-center"
+          className="mt-20 bg-linear-to-r from-brand-red/10 to-brand-orange/10 border-4 border-brand-orange p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-scarlet to-brand-orange bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-4">
             Have an Event Idea?
           </h2>
           <p className="text-xl text-brand-black/70 mb-8">

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 const canvasStories = [
   {
@@ -50,14 +49,12 @@ const storyVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.5
     }
   }
 }
 
 export default function CanvasPage() {
-  const [selectedStory, setSelectedStory] = useState<number | null>(null)
 
   return (
     <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
@@ -108,7 +105,7 @@ export default function CanvasPage() {
               variants={storyVariants}
               className="group"
             >
-              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-lg">
+              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-lg">
                 <div className="p-8">
                   {/* Author Info */}
                   <div className="flex items-start justify-between mb-4">
@@ -117,7 +114,7 @@ export default function CanvasPage() {
                         {story.author.charAt(0)}
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-brand-black group-hover:text-brand-scarlet transition-colors">
+                        <h3 className="text-xl font-bold text-brand-black group-hover:text-brand-red transition-colors">
                           {story.author}
                         </h3>
                         <p className="text-brand-black/60">{story.batch}</p>
@@ -127,7 +124,7 @@ export default function CanvasPage() {
                   </div>
 
                   {/* Story Content */}
-                  <h2 className="text-3xl font-serif font-bold text-brand-black mb-4 group-hover:text-brand-scarlet transition-colors">
+                  <h2 className="text-3xl font-serif font-bold text-brand-black mb-4 group-hover:text-brand-red transition-colors">
                     {story.title}
                   </h2>
                   <p className="text-lg text-brand-black/70 mb-6 leading-relaxed">
@@ -138,7 +135,7 @@ export default function CanvasPage() {
                   <div className="flex items-center justify-between pt-6 border-t border-brand-gold/30">
                     <div className="flex gap-6 items-center">
                       <motion.button
-                        className="flex items-center gap-2 text-brand-red hover:text-brand-scarlet"
+                        className="flex items-center gap-2 text-brand-red hover:text-brand-red"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
@@ -173,7 +170,7 @@ export default function CanvasPage() {
 
         {/* Share Your Story CTA */}
         <motion.div
-          className="bg-linear-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-12 text-center"
+          className="bg-linear-to-br from-brand-red/10 to-brand-orange/10 border-4 border-brand-red p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -185,7 +182,7 @@ export default function CanvasPage() {
             Your experiences can inspire current and future board members. Share your journey, lessons, and memories on Canvas.
           </p>
           <motion.button
-            className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-12 text-lg"
+            className="bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-4 px-12 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >

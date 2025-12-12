@@ -7,23 +7,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Logo Primary Colors
-        'brand-red': '#C41E3A',           // Deep crimson from ribbon
-        'brand-scarlet': '#E63946',       // Upper sun gradient
-        'brand-orange': '#FF8C42',        // Mid sun gradient
-        'brand-gold': '#FFD60A',          // Sun center & ribbon trim
-        'brand-yellow': '#FFC300',        // Soft gold accent
-        'brand-teal': '#0095B6',          // Wing/feather cyan
-        'brand-cyan': '#0EA5E9',          // Light teal accent
-        'brand-black': '#1a1a1a',         // Pen nib & text
-        'brand-white': '#ffffff',         // Background
+        // Primary Colors
+        'brand-white': '#FFFFFF',         // Outer circular background, text backgrounds
+        'brand-black': '#000000',         // Central pen nib, text, outlines
+        'brand-navy': '#001a4d',          // Very dark blue variant
         
-        // Gradient helpers
-        'brand-navy': '#001a4d',          // Deep wing shadows
+        // Warm Colors (Golden Yellow → Orange Gradient)
+        'brand-gold': '#FFD700',          // Golden yellow (warmth/knowledge)
+        'brand-yellow': '#FFC300',        // Yellow accent
+        'brand-orange': '#FF8C42',        // Orange gradient end
+        'brand-red': '#C41E3A',           // Ribbon red
+        
+        // Cool Colors (Blue Shades)
+        'brand-blue-light': '#87CEEB',    // Light blue (wings/pages)
+        'brand-blue': '#4A90E2',          // Medium blue (scholarly feel)
+        'brand-blue-dark': '#1E40AF',     // Dark blue shade
+        'brand-cyan': '#00CED1',          // Cyan/Teal highlights
+        'brand-teal': '#0095B6',          // Teal accent
       },
       fontFamily: {
-        'serif': ['Georgia', 'serif'],
-        'sans': ['Segoe UI', 'Roboto', 'sans-serif'],
+        'serif': ['Times New Roman', 'Times', 'serif'],
+        'sans': ['Times New Roman', 'Times', 'serif'],
+        'display': ['Times New Roman', 'Times', 'serif'],
       },
       backgroundImage: {
         'sun-gradient': 'linear-gradient(135deg, #E63946 0%, #FF8C42 50%, #FFD60A 100%)',

@@ -10,7 +10,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* About */}
           <div>
-            <h4 className="text-xl font-serif font-bold mb-4">The Editorial Board</h4>
+            <img
+              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
+              alt="The Editorial Board"
+              className="h-8 mb-4 object-contain"
+            />
             <p className="text-brand-white/70 text-sm">
               A literary journal celebrating creativity, culture, and scholarly discourse at MMMUT.
             </p>

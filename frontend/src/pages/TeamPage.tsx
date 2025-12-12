@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 const teamMembers = [
   {
@@ -7,7 +6,7 @@ const teamMembers = [
     name: 'Chief Editor',
     role: 'Overall Vision & Direction',
     description: 'Leading the editorial board with vision and excellence',
-    color: 'from-brand-red to-brand-scarlet',
+    color: 'from-brand-red to-brand-red',
     image: ''
   },
   {
@@ -31,7 +30,7 @@ const teamMembers = [
     name: 'Design Lead',
     role: 'Visual & Layout Design',
     description: 'Crafting beautiful visual experiences',
-    color: 'from-brand-scarlet to-brand-orange',
+    color: 'from-brand-red to-brand-orange',
     image: ''
   },
   {
@@ -68,14 +67,12 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.6
     }
   }
 }
 
 export default function TeamPage() {
-  const [selectedMember, setSelectedMember] = useState<number | null>(null)
 
   return (
     <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
@@ -112,10 +109,9 @@ export default function TeamPage() {
               key={member.id}
               variants={cardVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              onClick={() => setSelectedMember(member.id)}
               className="group cursor-pointer"
             >
-              <div className="bg-brand-white border-2 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-lg">
+              <div className="bg-brand-white border-2 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-lg">
                 {/* Card Header with Gradient */}
                 <div className={`h-40 bg-linear-to-br ${member.color} flex items-center justify-center relative overflow-hidden`}>
                   <motion.div
@@ -130,7 +126,7 @@ export default function TeamPage() {
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-serif font-bold text-brand-black mb-2 group-hover:text-brand-scarlet transition-colors">
+                  <h3 className="text-2xl font-serif font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">
                     {member.name}
                   </h3>
                   <p className="text-brand-orange font-semibold mb-3">{member.role}</p>
@@ -139,7 +135,7 @@ export default function TeamPage() {
 
                 {/* Animated Border */}
                 <motion.div
-                  className="h-1 bg-linear-to-r from-brand-gold to-brand-scarlet"
+                  className="h-1 bg-linear-to-r from-brand-gold to-brand-red"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4 }}
@@ -163,7 +159,7 @@ export default function TeamPage() {
             We're always looking for passionate individuals who share our vision for literary excellence and creative expression.
           </p>
           <motion.button
-            className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-4 px-10 text-lg"
+            className="bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-4 px-10 text-lg"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >

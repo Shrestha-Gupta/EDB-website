@@ -55,7 +55,7 @@ export default function Works() {
   return (
     <section id="works" className="bg-brand-white py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-12 text-center">
+        <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-12 text-center">
           Our Works
         </h3>
 
@@ -63,7 +63,7 @@ export default function Works() {
           {works.map((work) => (
             <motion.div
               key={work.id}
-              className="bg-brand-white border-2 border-brand-gold hover:shadow-xl hover:border-brand-scarlet transition-all duration-300 overflow-hidden group cursor-pointer"
+              className="bg-brand-white border-2 border-brand-gold hover:shadow-xl hover:border-brand-red transition-all duration-300 overflow-hidden group cursor-pointer"
               whileHover={{ y: -10 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -78,7 +78,7 @@ export default function Works() {
                 </motion.div>
               </div>
               <div className="p-6">
-                <h4 className="text-lg font-serif font-bold text-brand-black mb-2 group-hover:text-brand-scarlet transition-colors">
+                <h4 className="text-lg font-serif font-bold text-brand-black mb-2 group-hover:text-brand-red transition-colors">
                   {work.title}
                 </h4>
                 <p className="text-sm text-brand-black/60">{work.description}</p>
@@ -89,7 +89,7 @@ export default function Works() {
 
         <div className="text-center mt-12">
           <motion.button 
-            className="group border-2 border-brand-scarlet text-brand-scarlet hover:bg-brand-scarlet hover:text-white font-bold py-3 px-8 transition-all duration-200 flex items-center gap-2 mx-auto"
+            className="group border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white font-bold py-3 px-8 transition-all duration-200 flex items-center gap-2 mx-auto"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

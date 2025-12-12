@@ -4,11 +4,11 @@ import { useState } from 'react'
 const galleryCategories = ['All', 'Events', 'Campus', 'Workshops', 'Celebrations']
 
 const images = [
-  { id: 1, category: 'Events', title: 'Literary Festival 2024', color: 'from-brand-red to-brand-scarlet' },
+  { id: 1, category: 'Events', title: 'Literary Festival 2024', color: 'from-brand-red to-brand-red' },
   { id: 2, category: 'Campus', title: 'Editorial Board Office', color: 'from-brand-orange to-brand-gold' },
   { id: 3, category: 'Workshops', title: 'Creative Writing Workshop', color: 'from-brand-gold to-brand-yellow' },
   { id: 4, category: 'Celebrations', title: 'Book Launch Ceremony', color: 'from-brand-cyan to-brand-teal' },
-  { id: 5, category: 'Events', title: 'Poetry Slam Night', color: 'from-brand-scarlet to-brand-orange' },
+  { id: 5, category: 'Events', title: 'Poetry Slam Night', color: 'from-brand-red to-brand-orange' },
   { id: 6, category: 'Campus', title: 'Reading Corner', color: 'from-brand-teal to-brand-cyan' },
   { id: 7, category: 'Workshops', title: 'Photography Session', color: 'from-brand-gold to-brand-orange' },
   { id: 8, category: 'Celebrations', title: 'Annual Awards', color: 'from-brand-red to-brand-gold' },
@@ -31,15 +31,13 @@ const imageVariants = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.5
     }
   }
 }
 
 export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
   const filteredImages = selectedCategory === 'All'
     ? images
@@ -60,7 +58,7 @@ export default function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-gold via-brand-orange to-brand-scarlet bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-gold via-brand-orange to-brand-red bg-clip-text text-transparent mb-6">
             Gallery
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -105,9 +103,8 @@ export default function GalleryPage() {
               key={image.id}
               variants={imageVariants}
               className="group cursor-pointer"
-              onClick={() => setSelectedImage(image.id)}
             >
-              <div className="relative overflow-hidden shadow-xl border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300">
+              <div className="relative overflow-hidden shadow-xl border-4 border-brand-gold hover:border-brand-red transition-all duration-300">
                 {/* Image Placeholder */}
                 <div className={`aspect-square bg-linear-to-br ${image.color} relative overflow-hidden`}>
                   <motion.div

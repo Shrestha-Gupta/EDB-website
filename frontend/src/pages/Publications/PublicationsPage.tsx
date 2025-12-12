@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 const publications = [
   {
@@ -7,7 +6,7 @@ const publications = [
     title: 'Voices of MMMUT - Volume 5',
     type: 'Annual Anthology',
     year: '2024',
-    cover: 'bg-linear-to-br from-brand-red to-brand-scarlet',
+    cover: 'bg-linear-to-br from-brand-red to-brand-red',
     description: 'Our flagship publication featuring the finest poetry, prose, and essays from students and faculty.',
     pages: 240,
     contributors: 45
@@ -60,14 +59,12 @@ const publicationVariants = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.5
     }
   }
 }
 
 export default function PublicationsPage() {
-  const [selectedPub, setSelectedPub] = useState<number | null>(null)
 
   return (
     <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
@@ -105,9 +102,8 @@ export default function PublicationsPage() {
               variants={publicationVariants}
               whileHover={{ y: -10 }}
               className="group cursor-pointer"
-              onClick={() => setSelectedPub(pub.id)}
             >
-              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-2xl">
+              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-2xl">
                 {/* Book Cover */}
                 <div className={`${pub.cover} h-80 relative overflow-hidden flex items-center justify-center`}>
                   <motion.div
@@ -153,7 +149,7 @@ export default function PublicationsPage() {
                   {/* Actions */}
                   <div className="flex gap-4">
                     <motion.button
-                      className="flex-1 bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3"
+                      className="flex-1 bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-3"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -181,7 +177,7 @@ export default function PublicationsPage() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           {/* Submit Work */}
-          <div className="bg-linear-to-br from-brand-scarlet/10 to-brand-orange/10 border-4 border-brand-scarlet p-10">
+          <div className="bg-linear-to-br from-brand-red/10 to-brand-orange/10 border-4 border-brand-red p-10">
             <h2 className="text-3xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-4">
               Submit Your Work
             </h2>
@@ -190,20 +186,20 @@ export default function PublicationsPage() {
             </p>
             <ul className="space-y-3 text-brand-black/70 mb-8">
               <li className="flex items-start gap-2">
-                <span className="text-brand-scarlet font-bold">•</span>
+                <span className="text-brand-red font-bold">•</span>
                 <span>Poetry, prose, essays, and artwork</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-brand-scarlet font-bold">•</span>
+                <span className="text-brand-red font-bold">•</span>
                 <span>Original, unpublished work only</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-brand-scarlet font-bold">•</span>
+                <span className="text-brand-red font-bold">•</span>
                 <span>Follow submission guidelines</span>
               </li>
             </ul>
             <motion.button
-              className="bg-linear-to-r from-brand-red to-brand-scarlet text-white font-bold py-3 px-8 w-full"
+              className="bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-3 px-8 w-full"
               whileHover={{ scale: 1.02, boxShadow: '0 10px 30px rgba(196, 30, 58, 0.3)' }}
               whileTap={{ scale: 0.98 }}
             >

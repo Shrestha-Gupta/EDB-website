@@ -15,7 +15,7 @@ const featuredAlumni = [
     batch: '2016-2020',
     role: 'Published Author & Professor',
     achievement: 'Published 3 novels, teaches Creative Writing at Delhi University',
-    color: 'from-brand-red to-brand-scarlet'
+    color: 'from-brand-red to-brand-red'
   },
   {
     id: 2,
@@ -51,8 +51,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      duration: 0.6
     }
   }
 }
@@ -75,7 +74,7 @@ export default function AlumniPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-scarlet via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-6">
             Alumni & Archive
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -90,7 +89,7 @@ export default function AlumniPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-8 text-center">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-8 text-center">
             Batch Archives
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,7 +98,7 @@ export default function AlumniPage() {
                 key={batch.year}
                 className={`border-4 p-6 cursor-pointer transition-all ${
                   selectedBatch === batch.year
-                    ? 'border-brand-scarlet bg-brand-scarlet/10'
+                    ? 'border-brand-red bg-brand-red/10'
                     : 'border-brand-gold hover:border-brand-orange'
                 }`}
                 whileHover={{ y: -5 }}
@@ -125,7 +124,7 @@ export default function AlumniPage() {
           initial="hidden"
           animate="visible"
         >
-          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-12 text-center">
+          <h2 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-12 text-center">
             Featured Alumni
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -135,7 +134,7 @@ export default function AlumniPage() {
                 variants={itemVariants}
                 className="group"
               >
-                <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-scarlet transition-all duration-300 overflow-hidden shadow-xl">
+                <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-xl">
                   {/* Profile Header */}
                   <div className={`h-48 bg-linear-to-br ${alumni.color} flex items-center justify-center relative overflow-hidden`}>
                     <motion.div
@@ -150,7 +149,7 @@ export default function AlumniPage() {
 
                   {/* Profile Content */}
                   <div className="p-6">
-                    <h3 className="text-2xl font-serif font-bold text-brand-black mb-1 group-hover:text-brand-scarlet transition-colors">
+                    <h3 className="text-2xl font-serif font-bold text-brand-black mb-1 group-hover:text-brand-red transition-colors">
                       {alumni.name}
                     </h3>
                     <p className="text-brand-orange font-semibold mb-2">{alumni.batch}</p>

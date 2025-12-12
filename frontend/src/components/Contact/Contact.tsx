@@ -24,7 +24,7 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-brand-white py-20 px-6">
       <div className="max-w-4xl mx-auto">
-        <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-4 text-center">
+        <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-4 text-center">
           Get in Touch
         </h3>
         <p className="text-center text-brand-black/60 mb-12">
@@ -37,7 +37,7 @@ export default function Contact() {
               <label className="flex items-center gap-2 text-brand-black font-bold mb-2">
                 <motion.svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-brand-scarlet"
+                  className="w-5 h-5 text-brand-red"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -54,7 +54,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your Name"
-                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-scarlet focus:ring-2 focus:ring-brand-orange/20 transition-all"
+                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
                 required
               />
             </div>
@@ -79,7 +79,7 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="your@email.com"
-                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-scarlet focus:ring-2 focus:ring-brand-orange/20 transition-all"
+                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
                 required
               />
             </div>
@@ -106,7 +106,7 @@ export default function Contact() {
               value={formData.subject}
               onChange={handleChange}
               placeholder="What's this about?"
-              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-scarlet focus:ring-2 focus:ring-brand-orange/20 transition-all"
+              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
               required
             />
           </div>
@@ -132,14 +132,14 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Your message here..."
               rows={6}
-              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-scarlet focus:ring-2 focus:ring-brand-orange/20 transition-all resize-none"
+              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all resize-none"
               required
             ></textarea>
           </div>
 
           <motion.button
             type="submit"
-            className="group w-full bg-linear-to-r from-brand-red to-brand-scarlet hover:shadow-lg text-white font-bold py-3 transition-all duration-200 flex items-center justify-center gap-2"
+            className="group w-full bg-linear-to-r from-brand-red to-brand-red hover:shadow-lg text-white font-bold py-3 transition-all duration-200 flex items-center justify-center gap-2"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -173,7 +173,7 @@ export default function Contact() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8 text-brand-scarlet"
+                className="w-8 h-8 text-brand-red"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -181,7 +181,7 @@ export default function Contact() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </motion.div>
-            <h4 className="text-brand-scarlet font-bold mb-2">Email</h4>
+            <h4 className="text-brand-red font-bold mb-2">Email</h4>
             <p className="text-brand-black/70">editorial@mmmut.ac.in</p>
           </motion.div>
           <motion.div 

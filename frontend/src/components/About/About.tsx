@@ -5,19 +5,18 @@ export default function About() {
     <section id="about" className="bg-brand-white py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Logo Placeholder */}
+          {/* Logo */}
           <div className="flex justify-center">
-            <div className="w-64 h-64 bg-sun-gradient rounded-full flex items-center justify-center shadow-2xl border-8 border-white">
-              <div className="text-center text-white">
-                <p className="text-2xl font-serif font-bold">MMMUT</p>
-                <p className="text-sm mt-2">Editorial Board</p>
-              </div>
-            </div>
+            <img
+              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
+              alt="The Editorial Board"
+              className="w-80 h-80 object-contain"
+            />
           </div>
 
           {/* Content */}
           <div>
-            <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-scarlet bg-clip-text text-transparent mb-6">
+            <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-6">
               About Us
             </h3>
             <p className="text-lg text-brand-black/70 mb-6 leading-relaxed">
@@ -36,7 +35,7 @@ export default function About() {
               >
                 <motion.svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6 text-brand-scarlet shrink-0"
+                  className="w-6 h-6 text-brand-red shrink-0"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
