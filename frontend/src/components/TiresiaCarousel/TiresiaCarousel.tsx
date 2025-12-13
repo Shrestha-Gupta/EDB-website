@@ -72,28 +72,28 @@ export default function TiresiaCarousel() {
   return (
     <section className="py-10 md:py-20">
       <div className="relative px-4 sm:px-8 md:px-12 lg:px-16">
-        {/* Left Side Navigation Button */}
+        {/* Left Side Navigation Button - Hidden on mobile */}
         <motion.button
           whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(217, 27, 27, 0.5)' }}
           whileTap={{ scale: 0.95 }}
           onClick={() => swiperRef?.slidePrev()}
-          className="absolute -left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 bg-brand-red hover:bg-brand-red/90 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 shadow-2xl flex items-center justify-center"
+          className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-brand-red hover:bg-brand-red/90 text-white p-3 md:p-4 rounded-full transition-all duration-300 shadow-2xl items-center justify-center"
           aria-label="Previous issue"
           title="Slide Left"
         >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" strokeWidth={3} />
+          <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
         </motion.button>
 
-        {/* Right Side Navigation Button */}
+        {/* Right Side Navigation Button - Hidden on mobile */}
         <motion.button
           whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(217, 27, 27, 0.5)' }}
           whileTap={{ scale: 0.95 }}
           onClick={() => swiperRef?.slideNext()}
-          className="absolute -right-2 sm:right-0 top-1/2 -translate-y-1/2 z-20 bg-brand-red hover:bg-brand-red/90 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 shadow-2xl flex items-center justify-center"
+          className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-brand-red hover:bg-brand-red/90 text-white p-3 md:p-4 rounded-full transition-all duration-300 shadow-2xl items-center justify-center"
           aria-label="Next issue"
           title="Slide Right"
         >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" strokeWidth={3} />
+          <ChevronRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
         </motion.button>
 
         <Swiper
@@ -109,6 +109,9 @@ export default function TiresiaCarousel() {
           }}
           onSwiper={setSwiperRef}
           className="pb-12 md:pb-16"
+          touchRatio={1}
+          simulateTouch={true}
+          grabCursor={true}
         >
           {tiresiaIssues.map((issue) => (
             <SwiperSlide key={issue.id}>
