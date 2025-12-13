@@ -1,6 +1,7 @@
 import { motion, useAnimation } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Award, BookOpen, Users, TrendingUp, MessageSquare, Link as LinkIcon } from 'lucide-react'
+import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 const batches = [
   { year: '2020-2024', members: 42, achievements: 'Published 3 anthologies, 12 awards', icon: Award },
@@ -108,7 +109,8 @@ export default function AlumniPage() {
   }, [])
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen relative">
+      <ParticlesBackground />
       {/* Hero Section with Image */}
       <motion.div 
         className="relative h-[60vh] md:h-[70vh] overflow-hidden group"
@@ -162,7 +164,13 @@ export default function AlumniPage() {
             >
               Celebrating the legacy and achievements of our distinguished alumni who continue to inspire generations
             </p>
-            
+            <motion.button
+              className="bg-brand-gold hover:bg-brand-orange active:bg-brand-orange focus:bg-brand-gold text-black font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Join Alumni Network
+            </motion.button>
           </motion.div>
         </div>
 
@@ -197,7 +205,7 @@ export default function AlumniPage() {
               return (
                 <motion.div
                   key={stat.label}
-                  className="bg-white/90 backdrop-blur-lg rounded-2xl p-6 sm:p-8 text-center shadow-xl border border-brand-gold/20"
+                  className="bg-white/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 text-center shadow-xl border border-brand-gold/20"
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                   initial={{ opacity: 0, y: 30 }}
@@ -232,7 +240,7 @@ export default function AlumniPage() {
               return (
                 <motion.div
                   key={batch.year}
-                  className={`relative overflow-hidden rounded-2xl p-6 cursor-pointer transition-all duration-300 ${
+                  className={`relative overflow-hidden rounded-3xl p-6 cursor-pointer transition-all duration-300 ${
                     selectedBatch === batch.year
                       ? 'bg-linear-to-br from-brand-cyan to-brand-teal text-white shadow-2xl'
                       : 'bg-white/90 backdrop-blur-lg hover:bg-linear-to-br hover:from-brand-gold/10 hover:to-brand-orange/10 border border-brand-gold/30 hover:border-brand-gold shadow-lg'
@@ -293,7 +301,7 @@ export default function AlumniPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div className="bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-brand-gold/20 hover:border-brand-gold">
+                <div className="bg-white/90 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-brand-gold/20 hover:border-brand-gold">
                   {/* Profile Image */}
                   <div className="relative h-64 bg-linear-to-br from-brand-cyan via-brand-teal to-brand-cyan overflow-hidden">
                     {alumni.image ? (
@@ -360,14 +368,14 @@ export default function AlumniPage() {
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <motion.button
-                className="bg-linear-to-r from-brand-gold to-brand-orange hover:from-brand-orange hover:to-brand-gold text-white font-bold py-4 px-10 rounded-lg text-lg shadow-lg transition-all duration-300"
+                className="bg-linear-to-r from-brand-gold to-brand-orange hover:from-brand-orange hover:to-brand-gold active:from-brand-gold active:to-brand-orange focus:from-brand-gold focus:to-brand-orange text-white font-bold py-4 px-10 rounded-xl text-lg shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Share Your Story
               </motion.button>
               <motion.button
-                className="border-2 border-brand-gold text-black font-bold py-4 px-10 rounded-lg text-lg hover:bg-brand-gold/10 transition-all duration-300"
+                className="border-2 border-brand-gold text-black bg-white active:bg-brand-gold/10 focus:bg-white hover:bg-brand-gold/10 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -394,14 +402,14 @@ export default function AlumniPage() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <motion.button
-              className="bg-white text-brand-cyan font-bold py-4 px-10 rounded-lg text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg"
+              className="bg-white text-brand-cyan active:bg-gray-100 focus:bg-white font-bold py-4 px-10 rounded-xl text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-cyan"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               Join Network
             </motion.button>
             <motion.button
-              className="border-2 border-white text-white font-bold py-4 px-10 rounded-lg text-lg hover:bg-white/10 transition-all duration-300"
+              className="border-2 border-white text-white bg-transparent active:bg-white/10 focus:bg-transparent font-bold py-4 px-10 rounded-xl text-lg hover:bg-white/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-cyan"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

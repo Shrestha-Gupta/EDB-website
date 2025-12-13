@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 const canvasStories = [
   {
@@ -57,7 +58,8 @@ const storyVariants = {
 export default function CanvasPage() {
 
   return (
-    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
+    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6 relative">
+      <ParticlesBackground />
       <motion.div
         className="max-w-5xl mx-auto"
         initial={{ opacity: 0 }}

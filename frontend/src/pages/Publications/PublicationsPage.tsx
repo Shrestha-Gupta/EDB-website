@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 type TabType = 'all' | 'newsletter' | 'magazine'
 
@@ -95,7 +96,8 @@ export default function PublicationsPage() {
   }
 
   return (
-    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
+    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6 relative">
+      <ParticlesBackground />
       <motion.div
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}
@@ -180,7 +182,7 @@ export default function PublicationsPage() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl shadow-2xl overflow-hidden"
+              className="bg-white rounded-3xl shadow-2xl overflow-hidden"
             >
               <div className="grid md:grid-cols-2 gap-8 p-8">
                 {/* Left: Cover Image */}
@@ -242,7 +244,7 @@ export default function PublicationsPage() {
                         e.stopPropagation()
                         setSelectedPdf(latestIssue.downloadUrl)
                       }}
-                      className="flex-1 bg-brand-orange text-white px-6 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-brand-red transition-colors"
+                      className="flex-1 bg-brand-orange text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-red active:bg-brand-red focus:bg-brand-orange transition-colors focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -337,7 +339,7 @@ export default function PublicationsPage() {
               whileHover={{ y: -8, boxShadow: '0 15px 30px rgba(0,0,0,0.2)' }}
               className="group cursor-pointer"
             >
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg border-2 border-gray-200 hover:border-brand-orange transition-all duration-300">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg border-2 border-gray-200 hover:border-brand-orange transition-all duration-300">
                 {/* Book Cover with Image */}
                 <div className="h-64 relative overflow-hidden">
                   <motion.img 
@@ -359,7 +361,7 @@ export default function PublicationsPage() {
                         e.stopPropagation()
                         setSelectedPdf(pub.downloadUrl)
                       }}
-                      className="bg-white text-black px-5 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-gray-100 text-sm"
+                      className="bg-white text-black px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-gray-100 active:bg-gray-200 focus:bg-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -376,7 +378,7 @@ export default function PublicationsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="bg-brand-orange text-white px-5 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-brand-red text-sm"
+                      className="bg-brand-orange text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-brand-red active:bg-brand-red focus:bg-brand-orange text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -421,7 +423,7 @@ export default function PublicationsPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="bg-white rounded-2xl w-full max-w-7xl h-[95vh] flex flex-col shadow-2xl overflow-hidden"
+              className="bg-white rounded-3xl w-full max-w-7xl h-[95vh] flex flex-col shadow-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between p-6 border-b-2 border-gray-200 bg-linear-to-r from-brand-orange to-brand-red">
@@ -435,7 +437,7 @@ export default function PublicationsPage() {
                     download
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-white text-brand-orange px-6 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-gray-100"
+                    className="bg-white text-brand-orange px-6 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-gray-100 active:bg-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

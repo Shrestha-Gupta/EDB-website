@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 const galleryCategories = ['All', 'Events', 'Campus', 'Workshops', 'Celebrations']
 
@@ -44,7 +45,8 @@ export default function GalleryPage() {
     : images.filter(img => img.category === selectedCategory)
 
   return (
-    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
+    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6 relative">
+      <ParticlesBackground />
       <motion.div
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}

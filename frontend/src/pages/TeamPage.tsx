@@ -164,19 +164,19 @@ const sophomoreTeam = [
     id: 1,
     name: 'Aditi Mishra',
     department: 'Electronics and Communication Engineering',
-    image: '',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646713/IMG_20251028_064513492_2_-_Akansha_Mishra_tmbqyz.jpg',
   },
   {
     id: 2,
     name: 'Anurag Banerjee',
     department: 'Computer Science and Engineering',
-    image: '',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646717/1000071523_-_Anurag_Banerjee_vsb06m.jpg',
   },
   {
     id: 3,
     name: 'Anushka Shukla',
     department: 'Civil Engineering',
-    image: '',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648279/1000140304_-_Anushka_Shukla_leluen.jpg',
   },
   {
     id: 4,
@@ -222,7 +222,7 @@ const sophomoreTeam = [
   },
   {
     id: 11,
-    name: 'Ritesh',
+    name: 'Ritesh Yadav',
     department: 'Computer Science and Engineering',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg',
   },
@@ -230,7 +230,7 @@ const sophomoreTeam = [
     id: 12,
     name: 'Shambhavi',
     department: 'Information Technology',
-    image: '',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648259/IMG-20250724-WA0018_-_Shambhavi_wd2pe4.jpg',
   },
   {
     id: 13,
@@ -254,6 +254,20 @@ const sophomoreTeam = [
 
 
 export default function TeamPage() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const offset = 100 // Account for fixed header
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <div className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Gradient Background - warm golden undertones for editorial prestige */}
@@ -283,8 +297,42 @@ export default function TeamPage() {
           <div className="w-24 h-1 bg-linear-to-r from-brand-gold via-brand-orange to-brand-gold mx-auto rounded-full" />
         </motion.div>
 
+        {/* Navigation Buttons */}
+        <motion.div
+          className="flex justify-center gap-4 mb-12 flex-wrap"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <motion.button
+            onClick={() => scrollToSection('final-year')}
+            className="bg-linear-to-r from-brand-gold to-brand-orange hover:from-brand-orange hover:to-brand-gold active:from-brand-gold active:to-brand-orange focus:from-brand-gold focus:to-brand-orange text-white font-bold py-3 px-8 rounded-xl text-base sm:text-lg shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Final Year
+          </motion.button>
+          <motion.button
+            onClick={() => scrollToSection('pre-final')}
+            className="bg-linear-to-r from-brand-cyan to-brand-teal hover:from-brand-teal hover:to-brand-cyan active:from-brand-cyan active:to-brand-teal focus:from-brand-cyan focus:to-brand-teal text-white font-bold py-3 px-8 rounded-xl text-base sm:text-lg shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:ring-offset-2"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Pre-Final Year
+          </motion.button>
+          <motion.button
+            onClick={() => scrollToSection('sophomore')}
+            className="border-2 border-brand-gold text-black bg-white hover:bg-brand-gold/10 active:bg-brand-gold/10 focus:bg-white font-bold py-3 px-8 rounded-xl text-base sm:text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Sophomore
+          </motion.button>
+        </motion.div>
+
         {/* Final Year Team Section */}
         <motion.div
+          id="final-year"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -293,7 +341,7 @@ export default function TeamPage() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Final Year Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 sm:gap-6">
             {finalYearTeam.map((member) => (
               <TeamCard
                 key={member.id}
@@ -309,6 +357,7 @@ export default function TeamPage() {
 
         {/* Pre-Final Year Team Section */}
         <motion.div
+          id="pre-final"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -317,7 +366,7 @@ export default function TeamPage() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Pre-Final Year Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {preFinalTeam.map((member) => (
               <TeamCard
                 key={member.id}
@@ -333,6 +382,7 @@ export default function TeamPage() {
 
         {/* Sophomore Team Section */}
         <motion.div
+          id="sophomore"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -341,7 +391,7 @@ export default function TeamPage() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Sophomore Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6">
             {sophomoreTeam.map((member) => (
               <TeamCard
                 key={member.id}

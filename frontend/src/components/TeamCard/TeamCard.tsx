@@ -48,9 +48,7 @@ export default function TeamCard({
       </h3>
 
       {/* Role - warm golden-orange for prestige */}
-      <p className="relative z-10 text-2xs sm:text-xs font-medium uppercase tracking-[0.2em] text-brand-orange mb-2 text-center">
-        {role}
-      </p>
+      
 
       {/* Department - scholarly gray */}
       <p className="relative z-10 text-sm sm:text-base text-gray-600 mb-4 text-center font-light leading-relaxed">
@@ -58,50 +56,10 @@ export default function TeamCard({
       </p>
 
       {/* Skills/Tags - subtle with golden-orange hover */}
-      <div className="relative z-10 flex flex-wrap gap-2 justify-center mb-6">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1.5 text-xs sm:text-sm bg-white/80 backdrop-blur-sm text-gray-700 rounded-full border border-brand-gold/20 shadow-sm hover:bg-brand-gold/10 hover:border-brand-gold/40 transition-all duration-300 font-medium"
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
+      
 
       {/* Social Links - scholarly blue/cyan with red only on hover for emphasis */}
-      <div className="relative z-10 flex gap-4">
-        {linkedin && (
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-800 hover:text-brand-cyan transition-colors duration-200"
-          >
-            <Linkedin className="w-6 h-6" />
-          </a>
-        )}
-        {github && (
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-800 hover:text-brand-cyan transition-colors duration-200"
-          >
-            <Github className="w-6 h-6" />
-          </a>
-        )}
-        {website && (
-          <a
-            href={website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-800 hover:text-brand-red transition-colors duration-200"
-          >
-            <Globe className="w-6 h-6" />
-          </a>
-        )}
-      </div>
+      
     </motion.div>
   )
 }

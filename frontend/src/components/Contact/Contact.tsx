@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import ParticlesBackground from '../ParticlesBackground/ParticlesBackground'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,8 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="min-h-screen bg-linear-to-br from-gray-50 via-white to-amber-50/20 py-24 px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="min-h-screen bg-linear-to-br from-gray-50 via-white to-amber-50/20 py-24 px-4 sm:px-6 lg:px-8 relative">
+      <ParticlesBackground />
       <div className="max-w-6xl mx-auto">
         {/* Two Column Layout */}
         <div className="grid lg:grid-cols-5 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden">
