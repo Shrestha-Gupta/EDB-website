@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { MagazineIssueCard } from '../../components/MagazineIssueCard'
+import { TiresiaCarousel } from '../../components/TiresiaCarousel'
 
 const publications = [
   {
@@ -104,6 +106,16 @@ export default function PublicationsPage() {
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
             Discover our collection of literary works, journals, and anthologies that showcase the creative brilliance of MMMUT.
           </p>
+        </motion.div>
+
+        {/* TIRESIA Magazine Carousel */}
+        <motion.div
+          className="mb-32"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <TiresiaCarousel />
         </motion.div>
 
         {/* Publications Grid */}
