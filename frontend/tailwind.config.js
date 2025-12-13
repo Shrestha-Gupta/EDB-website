@@ -29,6 +29,7 @@ export default {
         'serif': ['Times New Roman', 'Times', 'serif'],
         'sans': ['Times New Roman', 'Times', 'serif'],
         'display': ['Times New Roman', 'Times', 'serif'],
+        
       },
       backgroundImage: {
         'sun-gradient': 'linear-gradient(135deg, #E63946 0%, #FF8C42 50%, #FFD60A 100%)',

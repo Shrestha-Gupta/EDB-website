@@ -1,45 +1,61 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const publications = [
   {
     id: 1,
     title: 'Voices of MMMUT - Volume 5',
-    type: 'Annual Anthology',
+    type: 'ANNUAL ANTHOLOGY',
     year: '2024',
-    cover: 'bg-linear-to-br from-brand-red to-brand-red',
+    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.43_dhbora.jpg',
     description: 'Our flagship publication featuring the finest poetry, prose, and essays from students and faculty.',
     pages: 240,
-    contributors: 45
+    contributors: 45,
+    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/malvika.pdf'
   },
   {
     id: 2,
     title: 'Technical Tales',
-    type: 'Quarterly Journal',
+    type: 'QUARTERLY JOURNAL',
     year: '2024',
-    cover: 'bg-linear-to-br from-brand-orange to-brand-gold',
+    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.43_dhbora.jpg',
     description: 'Creative writing from the technical perspective - where engineering meets literature.',
     pages: 120,
-    contributors: 28
+    contributors: 28,
+    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/malvika.pdf'
   },
   {
     id: 3,
     title: 'The Canvas Collection',
-    type: 'Digital Magazine',
+    type: 'DIGITAL MAGAZINE',
     year: '2024',
-    cover: 'bg-linear-to-br from-brand-cyan to-brand-teal',
+    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.43_dhbora.jpg',
     description: 'A digital-first publication exploring contemporary themes and experimental forms.',
     pages: 180,
-    contributors: 35
+    contributors: 35,
+    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/malvika.pdf'
   },
   {
     id: 4,
     title: 'Alumni Reflections',
-    type: 'Special Edition',
+    type: 'SPECIAL EDITION',
     year: '2023',
-    cover: 'bg-linear-to-br from-brand-gold to-brand-yellow',
+    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.43_dhbora.jpg',
     description: 'Stories and experiences from our distinguished alumni across the globe.',
     pages: 200,
-    contributors: 52
+    contributors: 52,
+    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/malvika.pdf'
+  },
+  {
+    id: 5,
+    title: 'TIRESIA - Volume 16, Issue 2',
+    type: 'QUARTERLY MAGAZINE',
+    year: '2024',
+    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_1_wzbldy.jpg',
+    description: 'The May Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community. Featuring interviews, campus buzz, tech insights, and much more.',
+    pages: 150,
+    contributors: 32,
+    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/vol%2016%20issue%20%202.pdf'
   }
 ]
 
@@ -65,6 +81,7 @@ const publicationVariants = {
 }
 
 export default function PublicationsPage() {
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null)
 
   return (
     <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6">
@@ -100,74 +117,126 @@ export default function PublicationsPage() {
             <motion.div
               key={pub.id}
               variants={publicationVariants}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}
               className="group cursor-pointer"
             >
-              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-2xl">
-                {/* Book Cover */}
-                <div className={`${pub.cover} h-80 relative overflow-hidden flex items-center justify-center`}>
-                  <motion.div
-                    className="absolute inset-0 bg-black/20"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
+              <div className="bg-white border-3 border-black overflow-hidden shadow-xl">
+                {/* Book Cover with Image */}
+                <div className="h-96 relative overflow-hidden">
+                  <img 
+                    src={pub.coverImage} 
+                    alt={pub.title}
+                    className="w-full h-full object-cover"
                   />
-                  <div className="relative z-10 text-center text-white p-8">
-                    <div className="text-sm font-bold mb-4 uppercase tracking-wide">{pub.type}</div>
-                    <h3 className="text-4xl font-serif font-bold mb-2">{pub.title}</h3>
-                    <div className="text-xl font-semibold">{pub.year}</div>
-                  </div>
-
-                  {/* Floating Badge */}
-                  <motion.div
-                    className="absolute top-4 right-4 bg-white text-brand-black px-4 py-2 rounded-full font-bold text-sm shadow-lg"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5, type: 'spring' }}
-                  >
+                  {/* NEW Badge */}
+                  <div className="absolute top-4 right-4 bg-white text-black px-4 py-1.5 rounded-full font-bold text-xs z-10">
                     NEW
-                  </motion.div>
+                  </div>
+                  
+                  {/* Hover Overlay with Preview/Download */}
+                  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    <motion.button
+                      onClick={() => setSelectedPdf(pub.downloadUrl)}
+                      className="bg-white text-black px-6 py-3 rounded font-bold flex items-center gap-2 hover:bg-gray-100"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Preview
+                    </motion.button>
+                    
+                    <motion.a
+                      href={pub.downloadUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#FF8C69] text-white px-6 py-3 rounded font-bold flex items-center gap-2 hover:bg-[#ff7a54]"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Download
+                    </motion.a>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <p className="text-brand-black/70 mb-6 line-clamp-3">
+                <div className="p-8 bg-white border-t-3 border-black">
+                  <div className="text-xs font-semibold mb-2 tracking-widest text-brand-red">{pub.type}</div>
+                  <h3 className="text-3xl font-serif font-bold mb-2">{pub.title}</h3>
+                  <div className="text-lg text-gray-600 mb-4">{pub.year}</div>
+                  
+                  <p className="text-gray-700 mb-6 text-base leading-relaxed">
                     {pub.description}
                   </p>
 
                   {/* Stats */}
-                  <div className="flex gap-6 mb-6 text-sm">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-brand-orange rounded-full"></div>
-                      <span className="text-brand-black/60">{pub.pages} pages</span>
+                  <div className="flex gap-8 mb-8 text-sm">
+                    <div className="text-black font-medium">
+                      {pub.pages} pages
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-brand-cyan rounded-full"></div>
-                      <span className="text-brand-black/60">{pub.contributors} contributors</span>
+                    <div className="text-black font-medium">
+                      {pub.contributors} contributors
                     </div>
                   </div>
 
-                  {/* Actions */}
-                  <div className="flex gap-4">
-                    <motion.button
-                      className="flex-1 bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-3"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      READ ONLINE
-                    </motion.button>
-                    <motion.button
-                      className="border-2 border-brand-gold text-brand-black font-bold py-3 px-6 hover:bg-brand-gold/10"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      DOWNLOAD
-                    </motion.button>
-                  </div>
+                  {/* Download Button */}
+                  <motion.a
+                    href={pub.downloadUrl}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block border-3 border-black text-black font-bold py-3 px-12 hover:bg-black hover:text-white transition-colors duration-300 text-center w-auto"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    DOWNLOAD
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+
+        {/* PDF Viewer Modal */}
+        {selectedPdf && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedPdf(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="bg-white rounded-lg w-full max-w-6xl h-[90vh] flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between p-4 border-b">
+                <h3 className="text-lg font-bold">PDF Preview</h3>
+                <button
+                  onClick={() => setSelectedPdf(null)}
+                  className="text-gray-500 hover:text-black"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <iframe
+                src={selectedPdf}
+                className="flex-1 w-full"
+                title="PDF Viewer"
+              />
+            </motion.div>
+          </motion.div>
+        )}
 
         {/* Submission Guidelines */}
         <motion.div

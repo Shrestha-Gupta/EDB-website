@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -53,62 +53,70 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-brand-white/95 backdrop-blur-md border-b-2 border-brand-gold shadow-md"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-lg border-b border-gray-200 shadow-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-2">
+      <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-1.5 group">
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
-              className="h-10 md:h-12 object-contain"
+              className="h-8 md:h-9 object-contain"
+              whileHover={{ scale: 1.08, rotate: 2 }}
+              transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
+            />
+            <motion.img
+              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
+              alt="The Editorial Board"
+              className="h-6 md:h-7 object-contain font-serif tracking-tight"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
           </Link>
-          <Link to="/" className="flex items-center gap-2 group">
-            <motion.img
-              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
-              alt="The Editorial Board"
-              className="h-8 md:h-10 object-contain"
-            />
-          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex gap-4">
+          <div className="hidden lg:flex gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="relative group"
               >
-                <motion.span
-                  className={`flex items-center gap-1.5 text-brand-black font-serif text-sm font-medium hover:text-brand-red transition-colors duration-200 ${
-                    isActive(link.path) ? 'text-brand-red' : ''
+                <motion.div
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                    isActive(link.path) 
+                      ? 'bg-[#FF8C69] text-white shadow-md' 
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    transition: { duration: 0.2, type: "spring", stiffness: 400 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <motion.span
-                    className="w-3.5 h-3.5"
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
+                    className="w-4 h-4"
+                    animate={isActive(link.path) ? { 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 5, -5, 0]
+                    } : {}}
+                    transition={{ 
+                      duration: 0.5,
+                      repeat: isActive(link.path) ? Infinity : 0,
+                      repeatDelay: 3
+                    }}
+                    whileHover={{ 
+                      rotate: 360,
+                      transition: { duration: 0.6, type: "spring" }
+                    }}
                   >
                     {link.icon}
                   </motion.span>
-                  {link.name}
-                </motion.span>
-                {isActive(link.path) && (
-                  <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-linear-to-r from-brand-gold to-brand-red"
-                    layoutId="navbar-indicator"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
+                  <span className="capitalize">{link.name.charAt(0) + link.name.slice(1).toLowerCase()}</span>
+                </motion.div>
               </Link>
             ))}
           </div>
@@ -116,14 +124,17 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-brand-black hover:text-brand-red transition-colors"
-            whileTap={{ scale: 0.9 }}
+            className="lg:hidden text-gray-700 hover:text-[#FF8C69] transition-colors"
+            whileTap={{ scale: 0.9, rotate: 90 }}
+            whileHover={{ scale: 1.1 }}
           >
-            <svg
-              className="w-5 h-5"
+            <motion.svg
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              animate={isOpen ? { rotate: 180 } : { rotate: 0 }}
+              transition={{ duration: 0.3 }}
             >
               {isOpen ? (
                 <path
@@ -140,34 +151,52 @@ export default function Navbar() {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               )}
-            </svg>
+            </motion.svg>
           </motion.button>
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <motion.div
-            className="lg:hidden mt-3 flex flex-col gap-3 border-t-2 border-brand-gold pt-3"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {navLinks.map((link) => (
-              <Link
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="lg:hidden mt-4 pb-4 border-t border-gray-200"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex flex-col gap-2 mt-4">
+            {navLinks.map((link, index) => (
+              <motion.div
                 key={link.name}
-                to={link.path}
-                className={`flex items-center gap-2 text-brand-black font-serif text-sm hover:text-brand-red transition-colors ${
-                  isActive(link.path) ? 'text-brand-red font-bold' : ''
-                }`}
-                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
               >
-                <span className="w-3.5 h-3.5">{link.icon}</span>
-                {link.name}
-              </Link>
+                <Link
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
+                    isActive(link.path)
+                      ? 'bg-[#FF8C69] text-white shadow-md'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <motion.span 
+                    className="w-5 h-5"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {link.icon}
+                  </motion.span>
+                  <span className="capitalize">{link.name.charAt(0) + link.name.slice(1).toLowerCase()}</span>
+                </Link>
+              </motion.div>
             ))}
-          </motion.div>
-        )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   )

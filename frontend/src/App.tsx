@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage'
 import AlumniPage from './pages/Alumni/AlumniPage'
 import GalleryPage from './pages/Gallery/GalleryPage'
 import CanvasPage from './pages/Canvas/CanvasPage'
+import MagazineIssues from './pages/MagazineIssues'
 import './App.css'
 
 function ScrollToTop() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/team" element={<TeamPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/publications" element={<PublicationsPage />} />
+              <Route path="/magazine" element={<MagazineIssues />} />
               <Route path="/alumni" element={<AlumniPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/canvas" element={<CanvasPage />} />
