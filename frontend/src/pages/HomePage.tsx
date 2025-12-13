@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import Hero from '../components/Hero/Hero'
 import About from '../components/About/About'
 import Works from '../components/Works/Works'
-import Team from '../components/Team/Team'
 import Contact from '../components/Contact/Contact'
 
 const containerVariants = {
@@ -26,7 +25,6 @@ export default function HomePage() {
       <Hero />
       <About />
       <Works />
-      <Team />
       <Contact />
     </motion.div>
   )
