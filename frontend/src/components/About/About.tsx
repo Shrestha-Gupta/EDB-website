@@ -6,13 +6,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Logo */}
-          <div className="flex justify-center">
-            <img
-              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
-              alt="The Editorial Board"
-              className="w-80 h-80 object-contain"
-            />
-          </div>
+          
 
           {/* Content */}
           <div>

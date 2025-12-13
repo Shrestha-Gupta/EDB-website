@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Mail, Phone, MapPin } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -22,215 +23,130 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-brand-white py-20 px-6">
-      <div className="max-w-4xl mx-auto">
-        <h3 className="text-4xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-4 text-center">
-          Get in Touch
-        </h3>
-        <p className="text-center text-brand-black/60 mb-12">
-          Have a submission or inquiry? We'd love to hear from you!
-        </p>
+    <section id="contact" className="min-h-screen bg-linear-to-br from-gray-50 via-white to-amber-50/20 py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-5 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden">
+          
+          {/* Left Panel - Contact Information */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2 bg-linear-to-br from-brand-cyan via-brand-teal to-brand-cyan/90 p-8 sm:p-10 md:p-12 text-white relative overflow-hidden"
+          >
+            {/* Decorative circle */}
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-20 translate-y-20" />
+            
+            <div className="relative z-10">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Contact Information</h2>
+              <p className="text-white/90 mb-12 leading-relaxed">
+                We'll create high-quality linkable content and build at least 40 high-authority.
+              </p>
 
-        <form onSubmit={handleSubmit} className="bg-brand-white border-4 border-brand-gold p-8 md:p-12 shadow-lg">
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="flex items-center gap-2 text-brand-black font-bold mb-2">
-                <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-brand-red"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </motion.svg>
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
-                required
-              />
+              {/* Contact Details */}
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <Phone className="w-6 h-6 mt-1 shrink-0" />
+                  <div>
+                    <p className="font-medium">+8801779717686</p>
+                    <p className="font-medium">+988678363866</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Mail className="w-6 h-6 mt-1 shrink-0" />
+                  <div>
+                    <p className="font-medium">editorial@mmmut.ac.in</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-6 h-6 mt-1 shrink-0" />
+                  <div>
+                    <p className="font-medium">MMMUT, Gorakhpur, UP</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="flex items-center gap-2 text-brand-black font-bold mb-2">
-                <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-brand-orange"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </motion.svg>
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <label className="flex items-center gap-2 text-brand-black font-bold mb-2">
-              <motion.svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-brand-gold"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-              </motion.svg>
-              Subject
-            </label>
-            <input
-              type="text"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              placeholder="What's this about?"
-              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="flex items-center gap-2 text-brand-black font-bold mb-2">
-              <motion.svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-brand-cyan"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-              </motion.svg>
-              Message
-            </label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Your message here..."
-              rows={6}
-              className="w-full border-2 border-brand-gold/50 p-3 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-orange/20 transition-all resize-none"
-              required
-            ></textarea>
-          </div>
-
-          <motion.button
-            type="submit"
-            className="group w-full bg-linear-to-r from-brand-red to-brand-red hover:shadow-lg text-white font-bold py-3 transition-all duration-200 flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            SEND MESSAGE
-            <motion.svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              initial={{ x: 0 }}
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </motion.svg>
-          </motion.button>
-        </form>
-
-        {/* Contact Info */}
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
-          <motion.div 
-            className="text-center border-t-4 border-brand-gold pt-4"
-            whileHover={{ y: -5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div
-              className="flex justify-center mb-2"
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8 text-brand-red"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </motion.div>
-            <h4 className="text-brand-red font-bold mb-2">Email</h4>
-            <p className="text-brand-black/70">editorial@mmmut.ac.in</p>
           </motion.div>
+
+          {/* Right Panel - Contact Form */}
           <motion.div 
-            className="text-center border-t-4 border-brand-orange pt-4"
-            whileHover={{ y: -5 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-3 p-8 sm:p-10 md:p-12"
           >
-            <motion.div
-              className="flex justify-center mb-2"
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8 text-brand-orange"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name and Email Row */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="John Trangely"
+                    className="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-brand-cyan transition-colors text-black placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-2">Your Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="hello@nurency.com"
+                    className="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-brand-cyan transition-colors text-black placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label className="block text-xs text-gray-500 mb-2">Your Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="I want to hire you quickly"
+                  className="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-brand-cyan transition-colors text-black placeholder:text-gray-400"
+                  required
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-xs text-brand-cyan mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Write here your message"
+                  rows={6}
+                  className="w-full border-b-2 border-brand-cyan pb-2 focus:outline-none focus:border-brand-cyan transition-colors text-black placeholder:text-gray-400 resize-none"
+                  required
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <motion.button
+                type="submit"
+                className="bg-brand-cyan hover:bg-brand-teal text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </motion.div>
-            <h4 className="text-brand-orange font-bold mb-2">Phone</h4>
-            <p className="text-brand-black/70">+91 (XXX) XXX-XXXX</p>
+                Send Message
+              </motion.button>
+            </form>
           </motion.div>
-          <motion.div 
-            className="text-center border-t-4 border-brand-cyan pt-4"
-            whileHover={{ y: -5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <motion.div
-              className="flex justify-center mb-2"
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8 text-brand-cyan"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </motion.div>
-            <h4 className="text-brand-cyan font-bold mb-2">Address</h4>
-            <p className="text-brand-black/70">MMMUT, Gorakhpur</p>
-          </motion.div>
+
         </div>
       </div>
     </section>

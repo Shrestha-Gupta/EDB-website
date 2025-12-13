@@ -11,6 +11,11 @@ export default function Footer() {
           {/* About */}
           <div>
             <img
+              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
+              alt="The Editorial Board"
+              className="h-8 mb-4 object-contain"
+            />
+            <img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
               alt="The Editorial Board"
               className="h-8 mb-4 object-contain"
