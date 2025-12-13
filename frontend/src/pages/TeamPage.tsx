@@ -5,472 +5,253 @@ import ParticlesBackground from '../components/ParticlesBackground/ParticlesBack
 const finalYearTeam = [
   {
     id: 1,
-    name: 'John Doe',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Content', 'Design'],
+    name: 'Aadrika Barnwal',
+    department: 'Information Technology',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Editorial', 'Writing'],
+    name: 'Aastha Singh',
+    department: 'Civil Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 3,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Harshit Pandey',
+    department: 'Mechanical Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 4,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Jayant Singh',
+    department: 'Electronics and Communication Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 5,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Jyoti Singh',
+    department: 'Bachelor of Pharmacy',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 6,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Nandini Mishra',
+    department: 'Civil Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 7,
-    name: 'Mike Johnson',
-    role: 'executive',
+    name: 'Shivam Pal',
     department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 8,
-    name: 'Mike Johnson',
-    role: 'executive',
+    name: 'Shivam Rai',
     department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 9,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Vishal Kotak',
+    department: 'Information Technology',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 10,
-    name: 'Mike Johnson',
-    role: 'executive',
+    name: 'Vishwadeep Singh',
     department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 11,
-    name: 'Mike Johnson',
-    role: 'executive',
-    department: 'Computer Science & Engineering',
-    skills: ['Technical', 'Management'],
+    name: 'Vivek Mani Tripathy',
+    department: 'Information Technology',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   }
-]
+];
 
 const preFinalTeam = [
   {
     id: 1,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641916/WhatsApp_Image_2025-12-13_at_21.34.40_ahne8s.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Aditi Sharma',
+    department: 'Electronics and Communication Engineering',
+    image: '',
   },
   {
     id: 2,
-    name: 'Liam Brooks',
-    role: 'executive',
-    department: 'Electrical Engineering',
-    skills: ['Operations', 'Coordination'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0000_-_Vaishnavi_Rai_jez32z.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Alok Kumar',
+    department: 'Electronics and Communication Engineering',
+    image: '',
   },
   {
     id: 3,
-    name: 'Sophia Patel',
-    role: 'executive',
-    department: 'Mechanical Engineering',
-    skills: ['Content', 'Community'],
+    name: 'Ashmi Singh',
+    department: 'Electrical Engineering',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0004_-_ASHMI_SINGH_dp8an0.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 4,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622863/IMG0250725_205903_WhatsApp_-_Pranav_Mishra_moxnqf.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Divyansh Singh Rathore',
+    department: 'Electronics and Communication Engineering',
+    image: '',
   },
   {
     id: 5,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Gaurav Vishwakarma',
+    department: 'Electronics and Communication Engineering',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20250301-WA0024_-_GAURAV_VISHWAKARMA_vep5e1.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 6,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Himanshu Mishra',
+    department: 'Chemical Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 7,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Jagriti Singh',
+    department: 'Civil Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 8,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
-    image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Pragya Kumari',
+    department: 'Electrical Engineering',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641916/WhatsApp_Image_2025-12-13_at_21.34.40_ahne8s.jpg',
   },
   {
     id: 9,
-    name: 'Ava Turner',
-    role: 'executive',
+    name: 'Pranav Mishra',
     department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
-    image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622863/IMG0250725_205903_WhatsApp_-_Pranav_Mishra_moxnqf.jpg',
   },
   {
     id: 10,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Shatakshi Srivastava',
+    department: 'Electronics and Communication Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 11,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
-    image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Vaishnavi Rai',
+    department: 'Civil Engineering',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0000_-_Vaishnavi_Rai_jez32z.jpg',
   },
   {
     id: 12,
-    name: 'Ava Turner',
-    role: 'executive',
+    name: 'Vinayak Yadav',
     department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 13,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Yashvardhan Ojha',
+    department: 'Computer Science and Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
   {
     id: 14,
-    name: 'Ava Turner',
-    role: 'executive',
-    department: 'Information Technology',
-    skills: ['Research', 'Strategy'],
+    name: 'Shreshtha Gupta',
+    department: 'Electronics and Communication Engineering',
     image: '',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
-]
+];
+
 
 const sophomoreTeam = [
   {
     id: 1,
-    name: 'Ethan Lee',
-    role: 'associate',
-    department: 'Computer Science & Engineering',
-    skills: ['Design', 'Illustration'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Aditi Mishra',
+    department: 'Electronics and Communication Engineering',
+    image: '',
   },
   {
     id: 2,
-    name: 'Maya Singh',
-    role: 'associate',
-    department: 'Electronics & Communication',
-    skills: ['Social', 'Outreach'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Anurag Banerjee',
+    department: 'Computer Science and Engineering',
+    image: '',
   },
   {
     id: 3,
-    name: 'Noah Kim',
-    role: 'associate',
+    name: 'Anushka Shukla',
     department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621857/20250625_133952_-_Kaustubh_Nigam_p5yl7v.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    image: '',
   },
-   {
+  {
     id: 4,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
-  },
-   {
-    id: 5,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641689/Screenshot_20251213_164042_Gallery_-_ojashwani_singh_cb9jdj.jpg',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
-  },
-   {
-    id: 6,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
+    name: 'Arpit Tripathi',
+    department: 'Computer Science and Engineering',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641690/1000070315-removebg-preview_-_Arpit_Tripathi_lovf7l.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
-   {
+  {
+    id: 5,
+    name: 'Gaurav',
+    department: 'Electrical Engineering',
+    image: '',
+  },
+  {
+    id: 6,
+    name: 'Kaustubh Nigam',
+    department: 'Information Technology',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621857/20250625_133952_-_Kaustubh_Nigam_p5yl7v.jpg',
+  },
+  {
     id: 7,
-    name: 'Noah Kim',
-    role: 'associate',
+    name: 'Mayank Sharma',
     department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    image: '',
   },
-   {
+  {
     id: 8,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Ojashwani Singh Chauhan',
+    department: 'Mechanical Engineering',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641689/Screenshot_20251213_164042_Gallery_-_ojashwani_singh_cb9jdj.jpg',
   },
-   {
+  {
     id: 9,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Prathit Mishra',
+    department: 'Electrical Engineering',
+    image: '',
   },
-   {
+  {
     id: 10,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Pratyaditya Singh',
+    department: 'Electrical Engineering',
+    image: '',
   },
-   {
+  {
     id: 11,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Ritesh',
+    department: 'Computer Science and Engineering',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg',
   },
-   {
+  {
     id: 12,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Shambhavi',
+    department: 'Information Technology',
+    image: '',
   },
-   {
+  {
     id: 13,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
+    name: 'Shlok',
+    department: 'Computer Science and Engineering',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg',
   },
-   {
+  {
     id: 14,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
+    name: 'Shivam Gupta',
+    department: 'Electronics and Communication Engineering',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
   },
-   {
+  {
     id: 15,
-    name: 'Noah Kim',
-    role: 'associate',
-    department: 'Civil Engineering',
-    skills: ['Logistics', 'Support'],
-    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    website: 'https://example.com'
-  }
-]
+    name: 'Tushit Shaurya',
+    department: 'Electrical Engineering',
+    image: '',
+  },
+];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6
-    }
-  }
-}
 
 export default function TeamPage() {
   return (
@@ -517,13 +298,10 @@ export default function TeamPage() {
               <TeamCard
                 key={member.id}
                 name={member.name}
-                role={member.role}
+                role=""
                 department={member.department}
-                skills={member.skills}
+                skills={[]}
                 image={member.image}
-                linkedin={member.linkedin}
-                github={member.github}
-                website={member.website}
               />
             ))}
           </div>
@@ -544,13 +322,10 @@ export default function TeamPage() {
               <TeamCard
                 key={member.id}
                 name={member.name}
-                role={member.role}
+                role=""
                 department={member.department}
-                skills={member.skills}
+                skills={[]}
                 image={member.image}
-                linkedin={member.linkedin}
-                github={member.github}
-                website={member.website}
               />
             ))}
           </div>
@@ -571,13 +346,10 @@ export default function TeamPage() {
               <TeamCard
                 key={member.id}
                 name={member.name}
-                role={member.role}
+                role=""
                 department={member.department}
-                skills={member.skills}
+                skills={[]}
                 image={member.image}
-                linkedin={member.linkedin}
-                github={member.github}
-                website={member.website}
               />
             ))}
           </div>
