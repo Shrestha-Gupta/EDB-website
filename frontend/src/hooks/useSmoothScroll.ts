@@ -1,25 +1,49 @@
 import { useEffect } from 'react'
-import Lenis from '@studio-freight/lenis'
 
 export function useSmoothScroll() {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
-    })
+    // Simple smooth scroll implementation
+    const smoothScrollTo = (target: Element) => {
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset
+      const startPosition = window.pageYOffset
+      const distance = targetPosition - startPosition
+      const duration = 1000
+      let start: number | null = null
 
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp
+        const progress = timestamp - start
+        const progressPercentage = Math.min(progress / duration, 1)
+        
+        const easeInOutCubic = (t: number): number => {
+          return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+        }
+        
+        window.scrollTo(0, startPosition + distance * easeInOutCubic(progressPercentage))
+        
+        if (progress < duration) {
+          window.requestAnimationFrame(step)
+        }
+      }
+      
+      window.requestAnimationFrame(step)
     }
 
-    requestAnimationFrame(raf)
+    const handleSmoothScroll = (e: Event) => {
+      const target = e.target as HTMLAnchorElement
+      if (target.hash) {
+        e.preventDefault()
+        const element = document.querySelector(target.hash)
+        if (element) {
+          smoothScrollTo(element)
+        }
+      }
+    }
 
+    document.addEventListener('click', handleSmoothScroll)
+    
     return () => {
-      lenis.destroy()
+      document.removeEventListener('click', handleSmoothScroll)
     }
   }, [])
 }

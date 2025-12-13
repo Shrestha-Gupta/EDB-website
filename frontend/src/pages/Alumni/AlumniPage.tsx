@@ -1,6 +1,7 @@
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Award, BookOpen, Users, TrendingUp, MessageSquare, Link as LinkIcon } from 'lucide-react'
+import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe } from 'lucide-react'
+// Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 const batches = [
@@ -109,8 +110,12 @@ export default function AlumniPage() {
   }, [])
 
   return (
-    <div className="bg-white min-h-screen relative">
-      <ParticlesBackground />
+    <div className="bg-white min-h-screen relative overflow-hidden">
+      {/* Background Particles - fixed to allow clicking */}
+      <div className="absolute inset-0 pointer-events-none">
+        <ParticlesBackground />
+      </div>
+
       {/* Hero Section with Image */}
       <motion.div 
         className="relative h-[60vh] md:h-[70vh] overflow-hidden group"
@@ -118,7 +123,7 @@ export default function AlumniPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        {/* Background Image with Hover Effect */}
+        {/* Background Image */}
         <div className="absolute inset-0">
           <motion.img 
             src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765643612/atal_r2cyx8.jpg"
@@ -127,10 +132,9 @@ export default function AlumniPage() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           />
-          {/* Enhanced Overlay for Better Text Visibility */}
-          <div className="absolute inset-0 bg-linear-to-br from-black/50 via-black/40 to-brand-cyan/20" />
-          {/* Additional gradient from bottom for better readability */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
+          {/* Overlay: Warm Sunset Gradient (Softer) */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-orange-800/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </div>
 
         {/* Hero Content */}
@@ -144,28 +148,30 @@ export default function AlumniPage() {
             <h1 
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tight leading-tight"
               style={{ 
-                color: '#ffffff',
-                textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8), 0 0 30px rgba(34,211,238,0.3)'
+                textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 0 30px rgba(251, 146, 60, 0.3)' // Lighter orange shadow
               }}
             >
               <span style={{ color: '#ffffff' }}>{displayedText}</span>
+              {/* Softer orange cursor */}
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-1 h-16 sm:h-20 md:h-24 lg:h-28 bg-brand-cyan ml-2 align-middle"
+                className="inline-block w-1 h-16 sm:h-20 md:h-24 lg:h-28 bg-orange-400 ml-2 align-middle"
               />
             </h1>
-            <div className="w-32 h-1 bg-linear-to-r from-brand-gold via-brand-orange to-brand-gold mx-auto mb-6" />
+            {/* Softer gradient line */}
+            <div className="w-32 h-1 bg-gradient-to-r from-orange-500 via-amber-300 to-orange-500 mx-auto mb-6 rounded-full" />
             <p 
-              className="text-xl sm:text-2xl md:text-3xl text-white mb-8 font-light"
+              className="text-xl sm:text-2xl md:text-3xl text-gray-100 mb-8 font-light"
               style={{ 
-                textShadow: '0 2px 15px rgba(0,0,0,0.9), 0 1px 8px rgba(0,0,0,0.8)'
+                textShadow: '0 2px 10px rgba(0,0,0,0.8)'
               }}
             >
-              Celebrating the legacy and achievements of our distinguished alumni who continue to inspire generations
+              Celebrating the legacy and achievements of our distinguished alumni.
             </p>
+            {/* Softer button colors */}
             <motion.button
-              className="bg-brand-gold hover:bg-brand-orange active:bg-brand-orange focus:bg-brand-gold text-black font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-orange-400/30 focus:outline-none border-2 border-orange-500"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -187,7 +193,7 @@ export default function AlumniPage() {
       </motion.div>
 
       <motion.div
-        className="max-w-7xl mx-auto px-6"
+        className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -205,16 +211,18 @@ export default function AlumniPage() {
               return (
                 <motion.div
                   key={stat.label}
-                  className="bg-white/90 backdrop-blur-lg rounded-3xl p-6 sm:p-8 text-center shadow-xl border border-brand-gold/20"
+                  // Lighter border
+                  className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 sm:p-8 text-center shadow-xl border border-orange-50"
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <Icon className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-3 text-brand-cyan" />
-                  <div className="text-3xl sm:text-4xl font-bold text-black mb-2">{stat.value}</div>
-                  <p className="text-sm sm:text-base text-gray-600 font-medium">{stat.label}</p>
+                  {/* Softer icon color */}
+                  <Icon className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-3 text-orange-500" />
+                  <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                  <p className="text-sm sm:text-base text-gray-500 font-medium">{stat.label}</p>
                 </motion.div>
               )
             })}
@@ -229,10 +237,12 @@ export default function AlumniPage() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold text-black mb-4">
+            {/* Softer text gradient */}
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-gradient-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
               Batch Archives
             </h2>
-            <div className="w-24 h-1 bg-linear-to-r from-brand-gold to-brand-orange mx-auto" />
+            {/* Softer line gradient */}
+            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {batches.map((batch) => {
@@ -240,35 +250,29 @@ export default function AlumniPage() {
               return (
                 <motion.div
                   key={batch.year}
+                  // Softer selected state and lighter hover border
                   className={`relative overflow-hidden rounded-3xl p-6 cursor-pointer transition-all duration-300 ${
                     selectedBatch === batch.year
-                      ? 'bg-linear-to-br from-brand-cyan to-brand-teal text-white shadow-2xl'
-                      : 'bg-white/90 backdrop-blur-lg hover:bg-linear-to-br hover:from-brand-gold/10 hover:to-brand-orange/10 border border-brand-gold/30 hover:border-brand-gold shadow-lg'
+                      ? 'bg-gradient-to-br from-orange-500 to-amber-400 text-white shadow-xl shadow-orange-400/20'
+                      : 'bg-white border border-gray-100 hover:border-orange-200 shadow-md hover:shadow-lg'
                   }`}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedBatch(batch.year)}
                 >
                   <div className="relative z-10 text-center">
-                    <Icon className={`w-10 h-10 mx-auto mb-3 ${selectedBatch === batch.year ? 'text-white' : 'text-brand-cyan'}`} />
-                    <div className={`text-3xl font-bold mb-2 ${selectedBatch === batch.year ? 'text-white' : 'text-black'}`}>
+                    {/* Softer unselected icon color */}
+                    <Icon className={`w-10 h-10 mx-auto mb-3 ${selectedBatch === batch.year ? 'text-white' : 'text-orange-500'}`} />
+                    <div className={`text-2xl font-bold mb-2 ${selectedBatch === batch.year ? 'text-white' : 'text-gray-900'}`}>
                       {batch.year}
                     </div>
                     <div className={`mb-3 font-semibold ${selectedBatch === batch.year ? 'text-white/90' : 'text-gray-600'}`}>
                       {batch.members} Members
                     </div>
-                    <p className={`text-sm ${selectedBatch === batch.year ? 'text-white/80' : 'text-gray-600'}`}>
+                    <p className={`text-sm ${selectedBatch === batch.year ? 'text-white/80' : 'text-gray-500'}`}>
                       {batch.achievements}
                     </p>
                   </div>
-                  {selectedBatch === batch.year && (
-                    <motion.div
-                      className="absolute inset-0 bg-white/5"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.div>
               )
             })}
@@ -280,67 +284,64 @@ export default function AlumniPage() {
           className="py-16"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold text-black mb-4">
+            {/* Softer text gradient */}
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-gradient-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
               Featured Alumni
             </h2>
-            <div className="w-24 h-1 bg-linear-to-r from-brand-gold to-brand-orange mx-auto mb-4" />
+            {/* Softer line gradient */}
+            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto mb-4 rounded-full" />
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Meet the accomplished individuals who have made significant contributions in their respective fields
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredAlumni.map((alumni, index) => (
+            {featuredAlumni.map((alumni) => (
               <motion.div
                 key={alumni.id}
                 variants={itemVariants}
-                className="group"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group h-full"
               >
-                <div className="bg-white/90 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-brand-gold/20 hover:border-brand-gold">
-                  {/* Profile Image */}
-                  <div className="relative h-64 bg-linear-to-br from-brand-cyan via-brand-teal to-brand-cyan overflow-hidden">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+                  {/* Profile Image Area - Lighter gradient placeholder */}
+                  <div className="relative h-64 bg-gradient-to-br from-amber-100 to-orange-50 overflow-hidden flex items-center justify-center">
                     {alumni.image ? (
                       <img src={alumni.image} alt={alumni.name} className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-5xl font-bold border-4 border-white/30">
-                          {alumni.name.charAt(0)}
-                        </div>
+                      // Softer text color for placeholder
+                      <div className="w-24 h-24 bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-orange-500 text-4xl font-serif font-bold border-4 border-white">
+                        {alumni.name.charAt(0)}
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+                    {/* Overlay on Hover */}
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
                   {/* Profile Content */}
-                  <div className="p-5">
-                    <h3 className="text-xl font-serif font-bold text-black mb-2 group-hover:text-brand-cyan transition-colors leading-tight">
+                  <div className="p-6 flex flex-col flex-grow">
+                    {/* Softer hover color */}
+                    <h3 className="text-xl font-serif font-bold text-gray-900 mb-1 group-hover:text-orange-600 transition-colors">
                       {alumni.name}
                     </h3>
-                    <p className="text-sm text-brand-orange font-semibold mb-2">{alumni.batch}</p>
-                    <p className="text-sm text-gray-700 font-medium mb-2">{alumni.currentPosition}</p>
-                    <p className="text-xs text-gray-600 mb-3">{alumni.company}</p>
-                    <p className="text-sm text-gray-600 leading-relaxed mb-4">{alumni.achievement}</p>
+                    {/* Softer batch color */}
+                    <p className="text-sm text-orange-500 font-bold mb-3">{alumni.batch}</p>
                     
-                    {/* Social Links */}
-                    <div className="flex gap-3 pt-3 border-t border-gray-200">
-                      <a
-                        href={alumni.linkedin}
-                        className="text-gray-600 hover:text-brand-cyan transition-colors"
-                        aria-label="LinkedIn"
-                      >
-                        <LinkIcon className="w-5 h-5" />
+                    <div className="mb-4 flex-grow">
+                        <p className="text-sm text-gray-800 font-semibold">{alumni.currentPosition}</p>
+                        <p className="text-xs text-gray-500 mb-2">{alumni.company}</p>
+                        <p className="text-sm text-gray-600 italic">"{alumni.achievement}"</p>
+                    </div>
+                    
+                    {/* Social Links - Softer hover color */}
+                    <div className="flex gap-4 pt-4 border-t border-gray-100 mt-auto">
+                      <a href={alumni.linkedin} className="text-gray-400 hover:text-orange-500 transition-colors">
+                        <Linkedin className="w-5 h-5" />
                       </a>
-                      <a
-                        href={alumni.website}
-                        className="text-gray-600 hover:text-brand-cyan transition-colors"
-                        aria-label="Website"
-                      >
-                        <MessageSquare className="w-5 h-5" />
+                      <a href={alumni.website} className="text-gray-400 hover:text-orange-500 transition-colors">
+                        <Globe className="w-5 h-5" />
                       </a>
                     </div>
                   </div>
@@ -352,30 +353,36 @@ export default function AlumniPage() {
 
         {/* Alumni Canvas Section */}
         <motion.div
-          className="py-16 bg-linear-to-br from-brand-gold/5 to-brand-orange/5 rounded-3xl"
+          // Very subtle background tint and border
+          className="py-16 my-16 bg-gradient-to-br from-amber-50/50 to-orange-50/50 rounded-3xl border border-orange-50"
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
           <div className="max-w-4xl mx-auto text-center px-6">
-            <MessageSquare className="w-16 h-16 mx-auto mb-6 text-brand-gold" />
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold text-black mb-6">
+            {/* Softer icon */}
+            <MessageSquare className="w-16 h-16 mx-auto mb-6 text-orange-400" />
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold text-gray-900 mb-6">
               Alumni Canvas
             </h2>
-            <div className="w-24 h-1 bg-linear-to-r from-brand-gold to-brand-orange mx-auto mb-6" />
+            {/* Softer line gradient */}
+            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-amber-400 mx-auto mb-6 rounded-full" />
             <p className="text-xl text-gray-700 mb-10 leading-relaxed">
               Share your experiences, memories, and wisdom with current and future board members. Your stories inspire the next generation!
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
+              {/* Softer primary button */}
               <motion.button
-                className="bg-linear-to-r from-brand-gold to-brand-orange hover:from-brand-orange hover:to-brand-gold active:from-brand-gold active:to-brand-orange focus:from-brand-gold focus:to-brand-orange text-white font-bold py-4 px-10 rounded-xl text-lg shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl text-lg shadow-lg transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Share Your Story
               </motion.button>
+              {/* Softer secondary button border and text */}
               <motion.button
-                className="border-2 border-brand-gold text-black bg-white active:bg-brand-gold/10 focus:bg-white hover:bg-brand-gold/10 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2"
+                className="bg-white text-orange-600 border-2 border-orange-100 hover:border-orange-400 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -387,29 +394,32 @@ export default function AlumniPage() {
 
         {/* Stay Connected */}
         <motion.div
-          className="my-16 bg-linear-to-br from-brand-cyan via-brand-teal to-brand-cyan rounded-3xl p-12 text-center text-white shadow-2xl"
+          // Softer gradient background
+          className="my-16 bg-gradient-to-br from-orange-700 via-orange-500 to-amber-500 rounded-3xl p-12 text-center text-white shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <Users className="w-16 h-16 mx-auto mb-6" />
+          <Users className="w-16 h-16 mx-auto mb-6 text-white/90" />
           <h2 className="text-4xl sm:text-5xl font-serif font-bold mb-4">
             Stay Connected
           </h2>
-          <div className="w-24 h-1 bg-white/50 mx-auto mb-6" />
+          <div className="w-24 h-1 bg-white/50 mx-auto mb-6 rounded-full" />
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join our alumni network and stay updated with the latest news, events, and opportunities
+            Join our alumni network and stay updated with the latest news, events, and opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
+            {/* Softer text color */}
             <motion.button
-              className="bg-white text-brand-cyan active:bg-gray-100 focus:bg-white font-bold py-4 px-10 rounded-xl text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-cyan"
+              className="bg-white text-orange-600 hover:bg-orange-50 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               Join Network
             </motion.button>
             <motion.button
-              className="border-2 border-white text-white bg-transparent active:bg-white/10 focus:bg-transparent font-bold py-4 px-10 rounded-xl text-lg hover:bg-white/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-cyan"
+              className="border-2 border-white/80 text-white bg-transparent hover:bg-white/10 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

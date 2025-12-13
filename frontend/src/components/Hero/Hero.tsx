@@ -1,101 +1,101 @@
+
+
 export default function Hero() {
   return (
-    <section className="bg-brand-white min-h-screen flex items-start md:items-center justify-center px-6 pt-24 md:pt-0 relative overflow-hidden">
-      {/* Background Logo with Low Opacity and Pop-out Animation */}
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 pointer-events-none">
+    <section className="bg-white min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+      
+      {/* 1. Background Gradient Tint */}
+      <div className="absolute inset-0 bg-linear-to-b from-orange-50/40 via-white to-white pointer-events-none" />
+
+      {/* 2. Background Logo with Pop-out Animation */}
+      {/* We use a wrapper for positioning to avoid conflict with the scale animation */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0">
         <img
           src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
           alt="Background Logo"
-          className="w-150 h-150 object-contain opacity-15"
+          className="w-75 h-75 md:w-150 md:h-150 object-contain opacity-0" // Start opacity 0
           style={{
-            animation: 'popOutTop 2.5s ease-out forwards'
+            animation: 'popOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards'
           }}
         />
       </div>
 
-      <div className="text-center max-w-4xl mx-auto relative z-10">
-        {/* Sanskrit Text with Writing Animation */}
-        <p className="text-brand-teal text-lg mb-8 font-serif font-semibold overflow-hidden whitespace-nowrap inline-block"
-           style={{
-             animation: 'typeWriter 3.5s steps(19) 0.5s both, fadeInOpacity 0.8s ease-out 0.5s both'
-           }}>
-          योगः कर्मसु कौशलम्
-        </p>
+      {/* 3. Main Content */}
+      <div className="text-center max-w-5xl mx-auto relative z-10 pt-20 md:pt-0">
+        
+        {/* Sanskrit Text - Typewriter Effect */}
+        <div className="inline-block mb-6 relative">
+          <p className="text-orange-600 text-lg md:text-2xl font-serif font-semibold overflow-hidden whitespace-nowrap border-r-4 border-orange-400 pr-1"
+             style={{
+               animation: 'typeWriter 3s steps(30) 0.5s both, blinkCursor 0.75s step-end infinite'
+             }}>
+            योगः कर्मसु कौशलम्
+          </p>
+        </div>
 
-        {/* Main Heading with Slide-in Animation */}
-        <h2 className="text-5xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-black to-brand-red bg-clip-text text-transparent mb-4 animate-[slideInLeft_1s_ease-out_0.5s_both]"
+        {/* Main Heading 1: "Where Words" */}
+        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight"
             style={{
-              animation: 'slideInLeft 1.8s ease-out 0.8s both'
+              animation: 'slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both'
             }}>
           Where Words
-        </h2>
-        <h2 className="text-5xl md:text-6xl font-serif font-bold bg-linear-to-r from-brand-red via-brand-orange to-brand-gold bg-clip-text text-transparent mb-8 italic animate-[slideInRight_1s_ease-out_0.7s_both]"
+        </h1>
+
+        {/* Main Heading 2: "Find Their Voice" */}
+        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight"
             style={{
-              animation: 'slideInRight 1.8s ease-out 1.2s both'
+              animation: 'slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both'
             }}>
           Find Their Voice
-        </h2>
+        </h1>
 
-        {/* Subtitle with Fade-in Animation */}
-        <p className="text-lg md:text-xl text-brand-black/70 mb-12 max-w-2xl mx-auto leading-relaxed animate-[fadeIn_1s_ease-out_0.9s_both]"
+        {/* Subtitle */}
+        <p className="text-lg md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light"
            style={{
-             animation: 'fadeIn 1.5s ease-out 1.6s both'
+             animation: 'fadeInUp 1.0s ease-out 1.2s both'
            }}>
           A literary journal celebrating creativity, culture, and scholarly discourse
           at Madan Mohan Malaviya University of Technology.
         </p>
+
+        {/* Optional CTA Button */}
+        <button 
+          className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1"
+          style={{
+             animation: 'fadeInUp 1.0s ease-out 1.4s both'
+           }}
+        >
+          Read Latest Issue
+        </button>
       </div>
 
-      {/* CSS Keyframes */}
+      {/* 4. CSS Keyframes */}
       <style>{`
-        @keyframes popOutTop {
+        @keyframes popOut {
           0% {
-            transform: scale(0);
+            transform: scale(0.5);
             opacity: 0;
-          }
-          50% {
-            transform: scale(1.3);
-            opacity: 0.2;
           }
           100% {
             transform: scale(1);
-            opacity: 0.15;
+            opacity: 0.08; /* Low opacity final state */
           }
         }
 
         @keyframes typeWriter {
-          0% {
-            width: 0;
-          }
-          100% {
-            width: 100%;
-          }
+          from { width: 0; }
+          to { width: 100%; }
         }
 
-        @keyframes fadeInOpacity {
-          0% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-
-        @keyframes fadeInDown {
-          0% {
-            opacity: 0;
-            transform: translateY(-30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        @keyframes blinkCursor {
+          from, to { border-color: transparent; }
+          50% { border-color: #f97316; } /* Orange-500 */
         }
 
         @keyframes slideInLeft {
           0% {
             opacity: 0;
-            transform: translateX(-100px);
+            transform: translateX(-50px);
           }
           100% {
             opacity: 1;
@@ -106,7 +106,7 @@ export default function Hero() {
         @keyframes slideInRight {
           0% {
             opacity: 0;
-            transform: translateX(100px);
+            transform: translateX(50px);
           }
           100% {
             opacity: 1;
@@ -114,12 +114,14 @@ export default function Hero() {
           }
         }
 
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
           0% {
             opacity: 0;
+            transform: translateY(20px);
           }
           100% {
             opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
