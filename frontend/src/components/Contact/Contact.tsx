@@ -1,162 +1,212 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Upload, X } from 'lucide-react'
-import ParticlesBackground from '../ParticlesBackground/ParticlesBackground'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Upload,
+  X,
+  ArrowUpRight,
+} from "lucide-react";
+import ParticlesBackground from "../ParticlesBackground/ParticlesBackground";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<{type: 'success' | 'error', message: string} | null>(null)
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    if (submitStatus) setSubmitStatus(null)
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (submitStatus) setSubmitStatus(null);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0])
+      setSelectedFile(e.target.files[0]);
     }
-  }
+  };
 
   const removeFile = () => {
-    setSelectedFile(null)
-  }
+    setSelectedFile(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
     try {
       // Create FormData to handle text fields + file
-      const data = new FormData()
-      data.append('name', formData.name)
-      data.append('email', formData.email)
-      data.append('subject', formData.subject)
-      data.append('message', formData.message)
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("subject", formData.subject);
+      data.append("message", formData.message);
       if (selectedFile) {
-        data.append('image', selectedFile)
+        data.append("image", selectedFile);
       }
 
-      // NOTE: Do not set Content-Type header manually when using FormData; 
+      // NOTE: Do not set Content-Type header manually when using FormData;
       // the browser sets it automatically with the boundary.
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        body: data, 
-      })
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        body: data,
+      });
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (response.ok && result.success) {
-        setSubmitStatus({ type: 'success', message: result.message })
-        setFormData({ name: '', email: '', subject: '', message: '' })
-        setSelectedFile(null)
+        setSubmitStatus({ type: "success", message: result.message });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setSelectedFile(null);
       } else {
-        setSubmitStatus({ type: 'error', message: result.message || 'Failed to send message' })
+        setSubmitStatus({
+          type: "error",
+          message: result.message || "Failed to send message",
+        });
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus({ 
-        type: 'error', 
-        message: 'Network error. Please make sure the backend server is running.' 
-      })
+      console.error("Error submitting form:", error);
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Network error. Please make sure the backend server is running.",
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <section id="contact" className="min-h-screen relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background with Subtle Warm Tint */}
+    <section
+      id="contact"
+      className="min-h-screen relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
+      {/* Warm light background gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-stone-50 via-orange-50/30 to-amber-50/20" />
-      
+
       {/* Particles Layer */}
       <div className="absolute inset-0 pointer-events-none">
         <ParticlesBackground />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        
         {/* Section Header */}
-        <motion.div 
-          className="text-center mb-16"
+        <motion.div
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4">
-            Get in Touch
+            Get in touch
           </h1>
-          <div className="w-24 h-1 bg-linear-to-r from-orange-400 via-amber-300 to-orange-400 mx-auto rounded-full opacity-80" />
+          <div className="w-28 h-1 bg-linear-to-r from-amber-400 via-yellow-300 to-amber-400 mx-auto rounded-full opacity-90" />
         </motion.div>
 
         {/* Contact Container */}
-        <div className="grid lg:grid-cols-5 gap-0 bg-white rounded-3xl shadow-xl overflow-hidden border border-orange-100/50">
-          
+        <div className="grid lg:grid-cols-5 gap-8 bg-transparent rounded-3xl overflow-hidden">
           {/* Left Panel - Contact Information */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 bg-linear-to-br from-orange-600 via-orange-500 to-amber-500 p-8 sm:p-10 md:p-12 text-white relative overflow-hidden"
+            className="lg:col-span-2 p-8 sm:p-10 md:p-12 relative overflow-hidden"
           >
-            {/* Decorative circles */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-10 -translate-y-10 blur-2xl" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-600/20 rounded-full -translate-x-10 translate-y-10 blur-3xl" />
-            
+            {/* Light info cards - left column */}
             <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <h2 className="text-3xl font-serif font-bold mb-6 text-white">Contact Information</h2>
-                <p className="text-orange-50 mb-10 leading-relaxed text-lg font-light">
-                  Have a story to share? Want to contribute to the next edition of Tiresia? 
-                  Reach out to us for collaborations, queries, or just to say hello.
+              <div className="space-y-6">
+                <h2 className="text-3xl font-serif font-semibold mb-2 text-gray-800">
+                  Get in touch
+                </h2>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Have questions or ready to transform your contribution? Reach
+                  out to us for submissions, collaborations, or queries.
                 </p>
 
-                {/* Contact Details */}
-                <div className="space-y-8">
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors backdrop-blur-sm">
-                      <Phone className="w-5 h-5 text-amber-100" />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-orange-50 rounded-lg border border-orange-100">
+                        <Phone className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
+                          Phone
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          +91 123 456 7890
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs text-orange-200 uppercase tracking-wider mb-1">Phone</p>
-                      <p className="font-medium text-lg text-white">+91 123 456 7890</p>
-                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors backdrop-blur-sm">
-                      <Mail className="w-5 h-5 text-amber-100" />
+                  <div className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-orange-50 rounded-lg border border-orange-100">
+                        <Mail className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
+                          Email us
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          editorial@mmmut.ac.in
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs text-orange-200 uppercase tracking-wider mb-1">Email</p>
-                      <p className="font-medium text-lg text-white">editorial@mmmut.ac.in</p>
-                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="p-3 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors backdrop-blur-sm">
-                      <MapPin className="w-5 h-5 text-amber-100" />
+                  <div className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-orange-50 rounded-lg border border-orange-100">
+                        <MapPin className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
+                          Our location
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          MMMUT Campus, Gorakhpur, UP
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs text-orange-200 uppercase tracking-wider mb-1">Location</p>
-                      <p className="font-medium text-lg text-white">MMMUT Campus,<br/>Gorakhpur, UP - 273010</p>
-                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
                   </div>
+                </div>
+
+                {/* Google Maps Embed */}
+                <div className="mt-6 rounded-xl overflow-hidden border border-orange-100 shadow-sm">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.328676844447!2d83.41270707549926!3d26.88168437666672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991469f99999999%3A0xc6f6f6f6f6f6f6f6!2sMadan%20Mohan%20Malaviya%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1702000000000!5m2!1sen!2sin"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="MMMUT Location"
+                  ></iframe>
                 </div>
               </div>
 
-              {/* Socials / Extra Info */}
-              <div className="mt-12 pt-8 border-t border-white/20">
-                <p className="text-sm text-orange-100 italic font-serif">
+              <div className="mt-8 text-left">
+                <p className="text-sm text-gray-500 italic">
                   "योगः कर्मसु कौशलम्"
                 </p>
               </div>
@@ -164,89 +214,127 @@ export default function Contact() {
           </motion.div>
 
           {/* Right Panel - Contact Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 p-8 sm:p-10 md:p-12 bg-white"
+            className="lg:col-span-3 p-8 sm:p-10 md:p-12"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            <motion.form
+              onSubmit={handleSubmit}
+              className="space-y-6 bg-white/70 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/50"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <motion.div
+                className="grid md:grid-cols-2 gap-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
                 <div className="group">
-                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-orange-500 transition-colors">Your Name</label>
+                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    Name
+                  </label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className="w-full border-b border-gray-200 py-2 focus:outline-none focus:border-orange-400 transition-all text-gray-700 placeholder:text-gray-300 bg-transparent"
+                    className="w-full bg-gray-50 border border-gray-200 py-3 px-4 rounded-lg text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
                     required
                   />
                 </div>
                 <div className="group">
-                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-orange-500 transition-colors">Your Email</label>
+                  <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                    Email
+                  </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
-                    className="w-full border-b border-gray-200 py-2 focus:outline-none focus:border-orange-400 transition-all text-gray-700 placeholder:text-gray-300 bg-transparent"
+                    className="w-full bg-gray-50 border border-gray-200 py-3 px-4 rounded-lg text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
                     required
                   />
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="group">
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-orange-500 transition-colors">Subject</label>
+              <motion.div
+                className="group"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+              >
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                  Subject
+                </label>
                 <input
                   type="text"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Regarding Article Submission..."
-                  className="w-full border-b border-gray-200 py-2 focus:outline-none focus:border-orange-400 transition-all text-gray-700 placeholder:text-gray-300 bg-transparent"
+                  className="w-full bg-gray-50 border border-gray-200 py-3 px-4 rounded-lg text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
                   required
                 />
-              </div>
+              </motion.div>
 
-              <div className="group">
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 group-focus-within:text-orange-500 transition-colors">Message</label>
+              <motion.div
+                className="group"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.7 }}
+              >
+                <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Write your message here..."
-                  rows={4}
-                  className="w-full border-b border-gray-200 py-2 focus:outline-none focus:border-orange-400 transition-all text-gray-700 placeholder:text-gray-300 bg-transparent resize-none"
+                  rows={8}
+                  className="w-full bg-gray-50 border border-gray-200 py-4 px-4 rounded-lg text-gray-800 placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-orange-300"
                   required
                 ></textarea>
-              </div>
+              </motion.div>
 
               {/* Image Upload Section - New Addition */}
-              <div className="group">
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Upload Attachment (Optional)</label>
+              <motion.div
+                className="group"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.8 }}
+              >
+                <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-3">
+                  Upload Attachment (Optional)
+                </label>
                 <div className="flex items-center gap-4">
-                  <label 
-                    htmlFor="file-upload" 
-                    className="flex items-center gap-2 cursor-pointer bg-orange-50 hover:bg-orange-100 text-orange-700 px-4 py-2 rounded-lg border border-orange-200 transition-colors text-sm font-medium"
+                  <label
+                    htmlFor="file-upload"
+                    className="flex items-center gap-2 cursor-pointer bg-linear-to-r from-orange-50 to-amber-50 text-orange-700 px-4 py-2 rounded-lg border border-orange-200 transition-colors text-sm font-medium"
                   >
-                    <Upload className="w-4 h-4" />
-                    <span>Choose File</span>
-                    <input 
-                      id="file-upload" 
-                      type="file" 
-                      className="hidden" 
-                      accept="image/*,.pdf" 
+                    <Upload className="w-4 h-4 text-orange-600" />
+                    <span className="text-orange-700">Choose File</span>
+                    <input
+                      id="file-upload"
+                      type="file"
+                      className="hidden"
+                      accept="image/*,.pdf"
                       onChange={handleFileChange}
                     />
                   </label>
                   {selectedFile ? (
-                    <div className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-md border border-gray-200">
-                      <span className="text-sm text-gray-600 truncate max-w-50">{selectedFile.name}</span>
-                      <button 
-                        type="button" 
+                    <div className="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-md border border-gray-200">
+                      <span className="text-sm text-gray-700 truncate max-w-50">
+                        {selectedFile.name}
+                      </span>
+                      <button
+                        type="button"
                         onClick={removeFile}
                         className="text-gray-400 hover:text-red-500 transition-colors"
                       >
@@ -254,10 +342,12 @@ export default function Contact() {
                       </button>
                     </div>
                   ) : (
-                    <span className="text-xs text-gray-400 italic">No file selected</span>
+                    <span className="text-xs text-gray-400 italic">
+                      No file selected
+                    </span>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Status Message */}
               {submitStatus && (
@@ -265,21 +355,27 @@ export default function Contact() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className={`p-4 rounded-lg text-sm font-medium ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-50 text-green-700 border border-green-100' 
-                      : 'bg-red-50 text-red-700 border border-red-100'
+                    submitStatus.type === "success"
+                      ? "bg-green-50 text-green-700 border border-green-100"
+                      : "bg-red-50 text-red-700 border border-red-100"
                   }`}
                 >
                   {submitStatus.message}
                 </motion.div>
               )}
 
-              <div className="pt-4">
+              <motion.div
+                className="pt-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.9 }}
+              >
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3.5 px-10 rounded-xl shadow-lg hover:shadow-orange-500/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transition-all transform active:scale-95"
-                  whileHover={!isSubmitting ? { y: -2 } : {}}
+                  whileHover={!isSubmitting ? { y: -2, scale: 1.02 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 >
                   {isSubmitting ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -289,12 +385,11 @@ export default function Contact() {
                     </>
                   )}
                 </motion.button>
-              </div>
-            </form>
+              </motion.div>
+            </motion.form>
           </motion.div>
-
         </div>
       </div>
     </section>
-  )
+  );
 }
