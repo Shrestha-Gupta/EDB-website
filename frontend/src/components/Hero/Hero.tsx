@@ -1,19 +1,24 @@
-
+import React from 'react';
 
 export default function Hero() {
   return (
     <section className="bg-white min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
       
-      {/* 1. Background Gradient Tint */}
-      <div className="absolute inset-0 bg-linear-to-b from-orange-50/40 via-white to-white pointer-events-none" />
+      {/* 1. Background: Pattern + Gradient Tint */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* INCREASED DOT SIZE: Changed 1px to 3px and spacing to 30px */}
+        <div className="absolute inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_3px,transparent_3px)] [background-size:30px_30px]"></div>
+        
+        {/* Gradient Overlay to fade the pattern and add the Orange Tint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-white/90 to-white"></div>
+      </div>
 
       {/* 2. Background Logo with Pop-out Animation */}
-      {/* We use a wrapper for positioning to avoid conflict with the scale animation */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0">
         <img
           src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
           alt="Background Logo"
-          className="w-75 h-75 md:w-150 md:h-150 object-contain opacity-0" // Start opacity 0
+          className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] object-contain opacity-0"
           style={{
             animation: 'popOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards'
           }}
@@ -23,7 +28,7 @@ export default function Hero() {
       {/* 3. Main Content */}
       <div className="text-center max-w-5xl mx-auto relative z-10 pt-20 md:pt-0">
         
-        {/* Sanskrit Text - Typewriter Effect */}
+        {/* Sanskrit Text */}
         <div className="inline-block mb-6 relative">
           <p className="text-orange-600 text-lg md:text-2xl font-serif font-semibold overflow-hidden whitespace-nowrap border-r-4 border-orange-400 pr-1"
              style={{
@@ -33,7 +38,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Main Heading 1: "Where Words" */}
+        {/* Main Heading 1 */}
         <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight"
             style={{
               animation: 'slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both'
@@ -41,7 +46,7 @@ export default function Hero() {
           Where Words
         </h1>
 
-        {/* Main Heading 2: "Find Their Voice" */}
+        {/* Main Heading 2 */}
         <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-gradient-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight"
             style={{
               animation: 'slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both'
@@ -72,57 +77,28 @@ export default function Hero() {
       {/* 4. CSS Keyframes */}
       <style>{`
         @keyframes popOut {
-          0% {
-            transform: scale(0.5);
-            opacity: 0;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 0.08; /* Low opacity final state */
-          }
+          0% { transform: scale(0.5); opacity: 0; }
+          100% { transform: scale(1); opacity: 0.08; }
         }
-
         @keyframes typeWriter {
           from { width: 0; }
           to { width: 100%; }
         }
-
         @keyframes blinkCursor {
           from, to { border-color: transparent; }
-          50% { border-color: #f97316; } /* Orange-500 */
+          50% { border-color: #f97316; }
         }
-
         @keyframes slideInLeft {
-          0% {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          0% { opacity: 0; transform: translateX(-50px); }
+          100% { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes slideInRight {
-          0% {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          0% { opacity: 0; transform: translateX(50px); }
+          100% { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </section>
