@@ -45,7 +45,7 @@ const sophomoreTeam = [
   { id: 7, name: 'Mayank Sharma', department: 'Civil Engineering', image: '' },
   { id: 8, name: 'Ojashwani Singh Chauhan', department: 'Mechanical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641689/Screenshot_20251213_164042_Gallery_-_ojashwani_singh_cb9jdj.jpg' },
   { id: 9, name: 'Prathit Mishra', department: 'Electrical Engineering', image: '' },
-  { id: 10, name: 'Pratyaditya Singh', department: 'Electrical Engineering', image: '' },
+  { id: 10, name: 'Pratyaditya Singh', department: 'Electrical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765785418/9610jk_-_Pratyaditya_Singh_qmwnbv.jpg' },
   { id: 11, name: 'Ritesh Yadav', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg' },
   { id: 12, name: 'Shambhavi', department: 'Information Technology', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648259/IMG-20250724-WA0018_-_Shambhavi_wd2pe4.jpg' },
   { id: 13, name: 'Shlok', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg' },
