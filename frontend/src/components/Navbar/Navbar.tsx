@@ -1,6 +1,64 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
+const SpotlightButton = () => {
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const spanRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const { width } = target.getBoundingClientRect();
+      const offset = e.offsetX;
+      const left = `${(offset / width) * 100}%`;
+
+      if (spanRef.current) {
+        spanRef.current.animate({ left }, { duration: 250, fill: "forwards" });
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (spanRef.current) {
+        spanRef.current.animate(
+          { left: "50%" },
+          { duration: 100, fill: "forwards" }
+        );
+      }
+    };
+
+    const btn = btnRef.current;
+    if (btn) {
+      btn.addEventListener("mousemove", handleMouseMove);
+      btn.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (btn) {
+        btn.removeEventListener("mousemove", handleMouseMove);
+        btn.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, []);
+
+  return (
+    <Link to="/contact">
+      <motion.button
+        whileTap={{ scale: 0.985 }}
+        ref={btnRef}
+        className="relative overflow-hidden rounded-full bg-orange-500 px-6 py-2.5 text-sm font-semibold text-white"
+      >
+        <span className="pointer-events-none relative z-10 mix-blend-difference uppercase tracking-wider">
+          Contact Us
+        </span>
+        <span
+          ref={spanRef}
+          className="pointer-events-none absolute left-[50%] top-[50%] h-32 w-32 -translate-x-[50%] -translate-y-[50%] rounded-full bg-white"
+        />
+      </motion.button>
+    </Link>
+  );
+};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -222,25 +280,7 @@ export default function Navbar() {
 
           {/* Right: Contact CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link to="/contact">
-              <motion.button
-                className="relative px-6 py-2.5 bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-full overflow-hidden group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-linear-to-r from-orange-600 to-amber-600 opacity-0 group-hover:opacity-100"
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.span
-                  className="relative inline-block"
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  CONTACT US
-                </motion.span>
-              </motion.button>
-            </Link>
+            <SpotlightButton />
           </div>
 
           {/* Mobile Menu Button */}
