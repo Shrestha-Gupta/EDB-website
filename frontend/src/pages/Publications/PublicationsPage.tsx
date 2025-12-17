@@ -73,7 +73,7 @@ const magazines = [
     pages: 240,
     contributors: 45,
     downloadUrl:
-      "https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/malvika.pdf",
+      "https://drive.google.com/file/d/1otl11ABJgRuG6QPzY0h4wXKWibV0wFkG/view?usp=drive_link",
   },
   {
     id: 5,
@@ -89,6 +89,20 @@ const magazines = [
     downloadUrl:
       "https://drive.google.com/file/d/1ujW5ayrxj7mRdFZbabfg7Fs2nIrOpkdB/view?usp=drive_link",
   },
+  {
+    id: 6,
+    title: "Malvika - Annual Magazine 2024",
+    type: "ANNUAL MAGAZINE",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765945632/Screenshot_2025-12-17_at_2.06.20_AM_aerfwl.png",
+    description:
+      "Our flagship annual publication featuring the finest poetry, prose, and essays from students and faculty.",
+    pages: 240,
+    contributors: 45,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
+  }
 ];
 
 const allPublications = [...newsletters, ...magazines];
