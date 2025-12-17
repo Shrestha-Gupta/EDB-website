@@ -7,7 +7,7 @@ import {
   Calendar,
   Tag,
   Download,
-  Eye
+  Eye,
 } from "lucide-react";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground.tsx";
 import PDFViewer from "../../components/PDFViewer/PDFViewer.tsx";
@@ -57,11 +57,350 @@ const newsletters = [
     downloadUrl:
       "https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/vol%2016%20issue%201.pdf",
   },
+  {
+    id: 3,
+    title: "TIRESIA - Volume 16, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_ffabep.jpg",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/vol%2016%20issue%201.pdf",
+  },
+  {
+  id: 4,
+  title: "TIRESIA - Volume 16, Issue 2",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 5,
+  title: "TIRESIA - Volume 16, Issue 3",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 6,
+  title: "TIRESIA - Volume 16, Issue 4",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 7,
+  title: "TIRESIA - Volume 16, Issue 5",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 8,
+  title: "TIRESIA - Volume 16, Issue 6",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 9,
+  title: "TIRESIA - Volume 16, Issue 7",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 10,
+  title: "TIRESIA - Volume 16, Issue 8",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 11,
+  title: "TIRESIA - Volume 16, Issue 9",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 12,
+  title: "TIRESIA - Volume 16, Issue 10",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 13,
+  title: "TIRESIA - Volume 16, Issue 11",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 14,
+  title: "TIRESIA - Volume 16, Issue 12",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 15,
+  title: "TIRESIA - Volume 16, Issue 13",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 16,
+  title: "TIRESIA - Volume 16, Issue 14",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 17,
+  title: "TIRESIA - Volume 16, Issue 15",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 18,
+  title: "TIRESIA - Volume 16, Issue 16",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 19,
+  title: "TIRESIA - Volume 16, Issue 17",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 20,
+  title: "TIRESIA - Volume 16, Issue 18",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 21,
+  title: "TIRESIA - Volume 16, Issue 19",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 22,
+  title: "TIRESIA - Volume 16, Issue 20",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 23,
+  title: "TIRESIA - Volume 16, Issue 21",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 24,
+  title: "TIRESIA - Volume 16, Issue 22",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 25,
+  title: "TIRESIA - Volume 16, Issue 23",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 26,
+  title: "TIRESIA - Volume 16, Issue 24",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 27,
+  title: "TIRESIA - Volume 16, Issue 25",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 28,
+  title: "TIRESIA - Volume 16, Issue 26",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 29,
+  title: "TIRESIA - Volume 16, Issue 27",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+{
+  id: 30,
+  title: "TIRESIA - Volume 16, Issue 28",
+  type: "NEWSLETTER",
+  year: "2025",
+  coverImage: "",
+  description:
+    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+  pages: 145,
+  contributors: 30,
+  downloadUrl: "",
+},
+
 ];
 
 const magazines = [
   {
-    id: 4,
+    id: 1,
     title: "Malvika - Annual Magazine 2024",
     type: "ANNUAL MAGAZINE",
     year: "2024",
@@ -75,7 +414,7 @@ const magazines = [
       "https://drive.google.com/file/d/1otl11ABJgRuG6QPzY0h4wXKWibV0wFkG/view?usp=drive_link",
   },
   {
-    id: 5,
+    id: 2,
     title: "Malvika - Annual Magazine 2023",
     type: "ANNUAL MAGAZINE",
     year: "2023",
@@ -89,7 +428,7 @@ const magazines = [
       "https://drive.google.com/file/d/1ujW5ayrxj7mRdFZbabfg7Fs2nIrOpkdB/view?usp=drive_link",
   },
   {
-    id: 6,
+    id: 3,
     title: "Malvika - Annual Magazine 2024",
     type: "ANNUAL MAGAZINE",
     year: "2024",
@@ -101,7 +440,7 @@ const magazines = [
     contributors: 45,
     downloadUrl:
       "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
-  }
+  },
 ];
 
 const allPublications = [...newsletters, ...magazines];
@@ -191,20 +530,24 @@ export default function PublicationsPage() {
           </div>
 
           <div className="relative max-w-6xl mx-auto">
-            {/* Arrows */}
-            <button
+            {/* Arrows with Hover Effects */}
+            <motion.button
               onClick={handlePrevLatest}
-              className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl hover:bg-orange-600 transition-colors cursor-pointer"
+              whileHover={{ scale: 1.1, backgroundColor: "#ea580c" }}
+              whileTap={{ scale: 0.9 }}
+              className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-6 h-6" />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={handleNextLatest}
-              className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl hover:bg-orange-600 transition-colors cursor-pointer"
+              whileHover={{ scale: 1.1, backgroundColor: "#ea580c" }}
+              whileTap={{ scale: 0.9 }}
+              className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl transition-colors cursor-pointer"
             >
               <ChevronRight className="w-6 h-6" />
-            </button>
+            </motion.button>
 
             {/* Main Card */}
             <div className="relative overflow-hidden rounded-3xl bg-white shadow-2xl">
@@ -214,6 +557,10 @@ export default function PublicationsPage() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
+                  whileHover={{ 
+                    scale: 1.005, 
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" 
+                  }}
                   transition={{ duration: 0.4 }}
                   className="grid md:grid-cols-2 gap-8 p-8"
                 >
@@ -271,7 +618,9 @@ export default function PublicationsPage() {
                       </div>
                     </div>
 
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         setSelectedPdf(latestIssue.downloadUrl);
                         setSelectedTitle(latestIssue.title);
@@ -280,7 +629,7 @@ export default function PublicationsPage() {
                     >
                       <Eye className="w-5 h-5" />
                       View Full Issue
-                    </button>
+                    </motion.button>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -303,7 +652,7 @@ export default function PublicationsPage() {
           </div>
         </motion.div>
 
-        {/* Tab Buttons (FIXED VISIBILITY) */}
+        {/* Tab Buttons */}
         <div className="flex gap-4 justify-center mb-12 flex-wrap">
           <button
             onClick={() => setActiveTab("all")}
@@ -353,8 +702,15 @@ export default function PublicationsPage() {
                 className="group cursor-pointer"
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                  {/* Image */}
-                  <div className="h-64 relative overflow-hidden shrink-0">
+                  {/* Image Container */}
+                  <div
+                    // UPDATED: Added onClick to the image container
+                    onClick={() => {
+                      setSelectedPdf(pub.downloadUrl);
+                      setSelectedTitle(pub.title);
+                    }}
+                    className="h-64 relative overflow-hidden shrink-0 cursor-pointer"
+                  >
                     <img
                       src={pub.coverImage}
                       alt={pub.title}
@@ -366,10 +722,11 @@ export default function PublicationsPage() {
                         : "Newsletter"}
                     </div>
 
-                    {/* Hover Overlay */}
+                    {/* Hover Overlay (Still exists for desktop, but clicking image now works everywhere) */}
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
                       <button
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent double trigger
                           setSelectedPdf(pub.downloadUrl);
                           setSelectedTitle(pub.title);
                         }}
@@ -382,6 +739,7 @@ export default function PublicationsPage() {
                         download
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()} // Prevent opening preview when downloading
                         className="bg-orange-500 text-white p-3 rounded-full hover:bg-orange-600 transition-colors"
                       >
                         <Download className="w-5 h-5" />
@@ -397,9 +755,8 @@ export default function PublicationsPage() {
                     <p className="text-gray-500 text-sm mb-4 line-clamp-3 grow">
                       {pub.description}
                     </p>
-                    <div className="pt-4 border-t border-gray-100 flex justify-between text-xs text-gray-400 font-medium">
+                    <div className="pt-4 border-t border-gray-100 text-xs text-gray-400 font-medium">
                       <span>{pub.year}</span>
-                      <span>{pub.pages} Pages</span>
                     </div>
                   </div>
                 </div>
