@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Hero() {
   return (
     <section className="bg-white min-h-screen flex items-center justify-center px-6 relative overflow-hidden -mt-20 pt-20">

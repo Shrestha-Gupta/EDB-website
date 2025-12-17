@@ -7,8 +7,7 @@ import {
   Calendar,
   Tag,
   Download,
-  Eye,
-  X,
+  Eye
 } from "lucide-react";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground.tsx";
 import PDFViewer from "../../components/PDFViewer/PDFViewer.tsx";
