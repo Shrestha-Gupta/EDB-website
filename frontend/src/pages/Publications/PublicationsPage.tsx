@@ -543,7 +543,7 @@ const newsletters = [
 
 const magazines = [
   {
-    id: 1,
+    id: 100,
     title: "Malvika - Annual Magazine 2025",
     type: "ANNUAL MAGAZINE",
     year: "2025",
@@ -557,7 +557,7 @@ const magazines = [
       "https://drive.google.com/file/d/1otl11ABJgRuG6QPzY0h4wXKWibV0wFkG/view?usp=drive_link",
   },
   {
-    id: 2,
+    id: 101,
     title: "Malvika - Annual Magazine 2023",
     type: "ANNUAL MAGAZINE",
     year: "2023",
@@ -571,7 +571,7 @@ const magazines = [
       "https://drive.google.com/file/d/1ujW5ayrxj7mRdFZbabfg7Fs2nIrOpkdB/view?usp=drive_link",
   },
   {
-    id: 3,
+    id: 102,
     title: "Malvika - Annual Magazine 2020",
     type: "ANNUAL MAGAZINE",
     year: "2020",
@@ -585,7 +585,7 @@ const magazines = [
       "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
   },
   {
-    id: 4,
+    id: 103,
     title: "Malvika - Annual Magazine 2019",
     type: "ANNUAL MAGAZINE",
     year: "2019",
@@ -599,7 +599,7 @@ const magazines = [
       "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
   },
   {
-    id: 5,
+    id: 104,
     title: "Malvika - Annual Magazine 2018",
     type: "ANNUAL MAGAZINE",
     year: "2018",
@@ -613,7 +613,7 @@ const magazines = [
       "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
   },
   {
-    id: 6,
+    id: 105,
     title: "Malvika - Annual Magazine 2017",
     type: "ANNUAL MAGAZINE",
     year: "2017",
