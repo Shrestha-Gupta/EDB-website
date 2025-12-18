@@ -199,7 +199,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
 },
 {
   id: 16,
@@ -211,7 +211,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1d_e2M401eADThtLR3X89uvOEF0MHWTnz/view?usp=drive_link",
 },
 {
   id: 17,
@@ -223,7 +223,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1EWpYmbL0OBQ1506ow2NaZt9i89kINxh3/view?usp=drive_link",
 },
 {
   id: 18,
@@ -235,7 +235,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
 },
 {
   id: 19,
@@ -247,7 +247,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/14v1bDnUGs1Cc_lh8hX8pl1djTLKUny1m/view?usp=drive_link",
 },
 {
   id: 20,
@@ -259,7 +259,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1AFHr_exCP6N6pnpHxcKG2jTDSkgZsvQP/view?usp=drive_link",
 },
 {
   id: 21,
@@ -271,7 +271,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1AIhUb_Ldu1AEwb2sXcjdSfzS9M8cC6Pv/view?usp=drive_link",
 },
 {
   id: 22,
@@ -283,7 +283,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1J_gMEvH4nwM5qvV7p4XtyN38R6udX2hh/view?usp=drive_link",
 },
 
 {
@@ -296,7 +296,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/19g7bARaEw6Xpbz3NVr-zFVps7hO0aP4j/view?usp=drive_link",
 },
 {
   id: 24,
@@ -308,7 +308,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1kTEqh9RYXa38ZrM--4syxsHgHW5LgfEV/view?usp=drive_link",
 },
 {
   id: 25,
@@ -320,7 +320,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1Q6nRpuU6dUw03KSz6G3XxyV32fjybyO0/view?usp=drive_link",
 },
 {
   id: 26,
@@ -332,7 +332,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1_EoY-LWLp3FDAlV8vU8zg8AQy-3uP4DD/view?usp=drive_link",
 },
 {
   id: 27,
@@ -344,7 +344,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1u5elip-KEdQACmH-bxZCBhT_rYwvlvKC/view?usp=drive_link",
 },
 {
   id: 28,
@@ -356,7 +356,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1sEdQq18aYyyH6Gdg_8VYRhLftWGgNtYe/view?usp=drive_link",
 },
 {
   id: 29,
@@ -368,7 +368,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1TXGQPUuQ-VA8rQ5jpG3G68Hm7BmUBGyW/view?usp=drive_link",
   },
 {
   id: 30,
@@ -380,7 +380,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1dVAckX2xryBWNiQfw9MvFk4x_tRudOPB/view?usp=drive_link",
   },
 {
   id: 31,
@@ -392,7 +392,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1H_EgiciH7Uc4cSnHMUCfaJSiPoHHdcLA/view?usp=drive_link",
   },
 {
   id: 32,
@@ -404,7 +404,7 @@ const newsletters = [
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1YIhV_gdGMZZjGJ_kmzVoTkO_d1kV4XVA/view?usp=drive_link",
   },
   {
   id: 33,
@@ -416,7 +416,7 @@ const newsletters = [
     "Exploring creative expression through student-led narratives, artwork, and academic reflections.",
   pages: 138,
   contributors: 28,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/18sCQlcgSFnKp6KyipPqb1kcZ2O8oysGo/view?usp=drive_link",
 },
 {
   id: 34,
@@ -428,7 +428,7 @@ const newsletters = [
     "A blend of cultural commentary, poetry, and thought-provoking essays by emerging voices.",
   pages: 132,
   contributors: 27,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1KcXpAM3ko91iM9bXKNU7AZSgk1fRRMKY/view?usp=drive_link",
 },
 {
   id: 35,
@@ -440,7 +440,7 @@ const newsletters = [
     "This issue highlights innovation, literature, and student perspectives on modern academia.",
   pages: 129,
   contributors: 26,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1iqa6g4_FYZxaZZcWaAG99KoPCZHpg7w0/view?usp=drive_link",
 },
 {
   id: 36,
@@ -452,7 +452,7 @@ const newsletters = [
     "An artistic compilation featuring poetry, short prose, and interdisciplinary ideas.",
   pages: 124,
   contributors: 25,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1NBD6WXu-nTLDW24Qto_YIvzrSobQeJ4n/view?usp=drive_link",
 },
 {
   id: 37,
@@ -464,7 +464,7 @@ const newsletters = [
     "Capturing campus life, social reflections, and creative storytelling.",
   pages: 120,
   contributors: 24,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1hQyP3a6ZhvQWl7-D01KZP4YniiN_qBon/view?usp=drive_link",
 },
 {
   id: 38,
@@ -476,7 +476,7 @@ const newsletters = [
     "A thoughtful collection of student opinions, literature, and visual expression.",
   pages: 116,
   contributors: 23,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1Qu3HrYgE1bP_dKpZcwexvrZRuwV8Xu2a/view?usp=drive_link",
 },
 {
   id: 39,
@@ -488,7 +488,7 @@ const newsletters = [
     "The opening issue of Volume 6, setting the tone with diverse academic and creative works.",
   pages: 110,
   contributors: 22,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1hrwLZ-ORcgnfmVq3Ttgw8kVV_ufcVZwv/view?usp=drive_link",
 },
 {
   id: 40,
@@ -500,7 +500,7 @@ const newsletters = [
     "A reflective edition featuring literary depth and evolving student perspectives.",
   pages: 105,
   contributors: 21,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/10wXVGsNzVFKxUtWgC6ytnwltWB1o_3Qw/view?usp=drive_link",
 },
 {
   id: 41,
@@ -512,7 +512,7 @@ const newsletters = [
     "Showcasing campus creativity through essays, poems, and design pieces.",
   pages: 100,
   contributors: 20,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1h2qHw2jQh_w8zEPAeIVqn_iSUBNDaxb2/view?usp=drive_link",
 },
 {
   id: 42,
@@ -524,7 +524,7 @@ const newsletters = [
     "An engaging mix of intellectual discourse and artistic exploration.",
   pages: 96,
   contributors: 19,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1BxgBP6DwFGE2Td3wzfnd5TMrGrGs1FiQ/view?usp=drive_link",
 },
 {
   id: 43,
@@ -536,10 +536,8 @@ const newsletters = [
     "Continuing the legacy of TIRESIA with powerful voices and meaningful narratives.",
   pages: 92,
   contributors: 18,
-  downloadUrl: "",
+  downloadUrl: "https://drive.google.com/file/d/1WjWNnTENUdQ-OIoTEYH4Mk14wRjoQNC2/view?usp=drive_link",
 }
-
-
 
 ];
 
