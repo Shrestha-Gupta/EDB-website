@@ -6,17 +6,7 @@ import { ChevronLeft, ChevronRight, Download, Eye, X } from 'lucide-react'
 
 // TIRESIA magazine issues data
 const tiresiaIssues = [
-  {
-    id: 1,
-    coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_2_gjepmx.jpg',
-    title: 'TIRESIA',
-    subtitle: 'Volume 16, Issue 3 - Eclectic Essence',
-    description: 'The May Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community. Featuring interviews, campus buzz, tech insights, and much more.',
-    publishedBy: 'The Editorial Board, MMMUT',
-    releaseDate: 'June 2025',
-    category: 'Newsletter',
-    downloadUrl: 'https://ogclndqjxchntpvsnhkp.supabase.co/storage/v1/object/public/TheEDB/vol%2016%20issue3.pdf'
-  },
+  
   {
     id: 2,
     coverImage: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_1_wzbldy.jpg',
