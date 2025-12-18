@@ -351,7 +351,7 @@ const newsletters = [
   title: "TIRESIA - Volume 7, Issue 5",
   type: "NEWSLETTER",
   year: "2025",
-  coverImage: "",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037025/Screenshot_2025-12-18_at_11.19.39_AM_woit4s.png",
   description:
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
@@ -363,7 +363,7 @@ const newsletters = [
   title: "TIRESIA - Volume 7, Issue 4",
   type: "NEWSLETTER",
   year: "2025",
-  coverImage: "",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037047/Screenshot_2025-12-18_at_11.19.26_AM_lmknmq.png",
   description:
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
@@ -372,10 +372,10 @@ const newsletters = [
   },
 {
   id: 30,
-  title: "TIRESIA - Volume 7, Issue 4",
+  title: "TIRESIA - Volume 7, Issue 3",
   type: "NEWSLETTER",
   year: "2025",
-  coverImage: "",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037092/Screenshot_2025-12-18_at_11.19.14_AM_n3vfds.png",
   description:
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
@@ -384,10 +384,10 @@ const newsletters = [
   },
 {
   id: 31,
-  title: "TIRESIA - Volume 7, Issue 4",
+  title: "TIRESIA - Volume 7, Issue 2",
   type: "NEWSLETTER",
   year: "2025",
-  coverImage: "",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037146/Screenshot_2025-12-18_at_11.18.58_AM_scxpit.png",
   description:
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
@@ -396,49 +396,159 @@ const newsletters = [
   },
 {
   id: 32,
-  title: "TIRESIA - Volume 7, Issue 4",
+  title: "TIRESIA - Volume 7, Issue 1",
   type: "NEWSLETTER",
   year: "2025",
-  coverImage: "",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037240/Screenshot_2025-12-18_at_11.18.45_AM_skbwkp.png",
   description:
     "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
   pages: 145,
   contributors: 30,
   downloadUrl: "",
   },
-{
+  {
   id: 33,
-  title: "TIRESIA - Volume 7, Issue 4",
+  title: "TIRESIA - Volume 6, Issue 7",
   type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980123/Screenshot_2025-12-17_at_7.27.48_PM_ctzhki.png",
   description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "",
-  },
-{
-  id: 34,
-  title: "TIRESIA - Volume 7, Issue 4",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
+    "Exploring creative expression through student-led narratives, artwork, and academic reflections.",
+  pages: 138,
+  contributors: 28,
   downloadUrl: "",
 },
+{
+  id: 34,
+  title: "TIRESIA - Volume 6, Issue 6",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.34_PM_h7eeir.png",
+  description:
+    "A blend of cultural commentary, poetry, and thought-provoking essays by emerging voices.",
+  pages: 132,
+  contributors: 27,
+  downloadUrl: "",
+},
+{
+  id: 35,
+  title: "TIRESIA - Volume 6, Issue 5",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.17_PM_mqjlln.png",
+  description:
+    "This issue highlights innovation, literature, and student perspectives on modern academia.",
+  pages: 129,
+  contributors: 26,
+  downloadUrl: "",
+},
+{
+  id: 36,
+  title: "TIRESIA - Volume 6, Issue 4",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.04_PM_yqvdmb.png",
+  description:
+    "An artistic compilation featuring poetry, short prose, and interdisciplinary ideas.",
+  pages: 124,
+  contributors: 25,
+  downloadUrl: "",
+},
+{
+  id: 37,
+  title: "TIRESIA - Volume 6, Issue 3",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.27_PM_c1rhna.png",
+  description:
+    "Capturing campus life, social reflections, and creative storytelling.",
+  pages: 120,
+  contributors: 24,
+  downloadUrl: "",
+},
+{
+  id: 38,
+  title: "TIRESIA - Volume 6, Issue 2",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.07_PM_pb0aum.png",
+  description:
+    "A thoughtful collection of student opinions, literature, and visual expression.",
+  pages: 116,
+  contributors: 23,
+  downloadUrl: "",
+},
+{
+  id: 39,
+  title: "TIRESIA - Volume 6, Issue 1",
+  type: "NEWSLETTER",
+  year: "2024",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980125/Screenshot_2025-12-17_at_7.25.44_PM_pjo4pi.png",
+  description:
+    "The opening issue of Volume 6, setting the tone with diverse academic and creative works.",
+  pages: 110,
+  contributors: 22,
+  downloadUrl: "",
+},
+{
+  id: 40,
+  title: "TIRESIA - Volume 5, Issue 6",
+  type: "NEWSLETTER",
+  year: "2023",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037587/Screenshot_2025-12-18_at_11.28.47_AM_fdsk78.png",
+  description:
+    "A reflective edition featuring literary depth and evolving student perspectives.",
+  pages: 105,
+  contributors: 21,
+  downloadUrl: "",
+},
+{
+  id: 41,
+  title: "TIRESIA - Volume 5, Issue 5",
+  type: "NEWSLETTER",
+  year: "2023",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037585/Screenshot_2025-12-18_at_11.28.36_AM_qwwmnk.png",
+  description:
+    "Showcasing campus creativity through essays, poems, and design pieces.",
+  pages: 100,
+  contributors: 20,
+  downloadUrl: "",
+},
+{
+  id: 42,
+  title: "TIRESIA - Volume 5, Issue 4",
+  type: "NEWSLETTER",
+  year: "2023",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037560/Screenshot_2025-12-18_at_11.28.14_AM_bsjwqs.png",
+  description:
+    "An engaging mix of intellectual discourse and artistic exploration.",
+  pages: 96,
+  contributors: 19,
+  downloadUrl: "",
+},
+{
+  id: 43,
+  title: "TIRESIA - Volume 5, Issue 3",
+  type: "NEWSLETTER",
+  year: "2023",
+  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037550/Screenshot_2025-12-18_at_11.27.59_AM_wjw7vi.png",
+  description:
+    "Continuing the legacy of TIRESIA with powerful voices and meaningful narratives.",
+  pages: 92,
+  contributors: 18,
+  downloadUrl: "",
+}
+
+
 
 ];
 
 const magazines = [
   {
     id: 1,
-    title: "Malvika - Annual Magazine 2024",
+    title: "Malvika - Annual Magazine 2025",
     type: "ANNUAL MAGAZINE",
-    year: "2024",
+    year: "2025",
     coverImage:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.43_dhbora.jpg",
     description:
@@ -464,11 +574,53 @@ const magazines = [
   },
   {
     id: 3,
-    title: "Malvika - Annual Magazine 2024",
+    title: "Malvika - Annual Magazine 2020",
     type: "ANNUAL MAGAZINE",
-    year: "2024",
+    year: "2020",
     coverImage:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765945632/Screenshot_2025-12-17_at_2.06.20_AM_aerfwl.png",
+    description:
+      "Our flagship annual publication featuring the finest poetry, prose, and essays from students and faculty.",
+    pages: 240,
+    contributors: 45,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
+  },
+  {
+    id: 4,
+    title: "Malvika - Annual Magazine 2019",
+    type: "ANNUAL MAGAZINE",
+    year: "2019",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766038752/Screenshot_2025-12-18_at_11.48.26_AM_hoqi9b.png",
+    description:
+      "Our flagship annual publication featuring the finest poetry, prose, and essays from students and faculty.",
+    pages: 240,
+    contributors: 45,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
+  },
+  {
+    id: 5,
+    title: "Malvika - Annual Magazine 2018",
+    type: "ANNUAL MAGAZINE",
+    year: "2018",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766038747/Screenshot_2025-12-18_at_11.48.12_AM_x7lijs.png  ",
+    description:
+      "Our flagship annual publication featuring the finest poetry, prose, and essays from students and faculty.",
+    pages: 240,
+    contributors: 45,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Y3eH_YFvmsAPgL9YAKjMCEzS3VuCk_M1/view?usp=drive_link",
+  },
+  {
+    id: 6,
+    title: "Malvika - Annual Magazine 2017",
+    type: "ANNUAL MAGAZINE",
+    year: "2017",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766038748/Screenshot_2025-12-18_at_11.48.00_AM_xmf0dl.png",
     description:
       "Our flagship annual publication featuring the finest poetry, prose, and essays from students and faculty.",
     pages: 240,
