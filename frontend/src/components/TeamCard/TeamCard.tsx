@@ -15,12 +15,12 @@ export default function TeamCard({ name, department, image }: TeamCardProps) {
       whileHover={{ y: -5 }}
     >
       {/* Top Gradient Bar - Deep Orange to Amber */}
-      <div className="h-2 w-full bg-gradient-to-r from-orange-800 via-orange-500 to-amber-400" />
+      <div className="h-2 w-full bg-linear-to-r from-orange-800 via-orange-500 to-amber-400" />
       
       {/* Image Container */}
       <div className="relative pt-8 pb-4 px-6 flex justify-center">
         {/* Ring Gradient - Sunset Theme */}
-        <div className="relative w-32 h-32 rounded-full p-1 bg-gradient-to-br from-amber-300 to-orange-700 shadow-lg">
+        <div className="relative w-32 h-32 rounded-full p-1 bg-linear-to-br from-amber-300 to-orange-700 shadow-lg">
           <div className="w-full h-full rounded-full overflow-hidden bg-gray-50 border-4 border-white">
             {image ? (
               <img 
@@ -45,7 +45,7 @@ export default function TeamCard({ name, department, image }: TeamCardProps) {
       </div>
 
       {/* Content */}
-      <div className="px-6 pb-6 text-center flex-grow flex flex-col justify-between">
+      <div className="px-6 pb-6 text-center grow flex flex-col justify-between">
         <div>
           {/* Name turns Orange on Hover */}
           <h3 className="text-xl font-serif font-bold text-gray-900 mb-1 group-hover:text-orange-700 transition-colors">

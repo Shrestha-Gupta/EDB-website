@@ -133,8 +133,8 @@ export default function AlumniPage() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           />
           {/* Overlay: Warm Sunset Gradient (Softer) */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-orange-800/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/50 to-orange-800/30" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
         </div>
 
         {/* Hero Content */}
@@ -160,7 +160,7 @@ export default function AlumniPage() {
               />
             </h1>
             {/* Softer gradient line */}
-            <div className="w-32 h-1 bg-gradient-to-r from-orange-500 via-amber-300 to-orange-500 mx-auto mb-6 rounded-full" />
+            <div className="w-32 h-1 bg-linear-to-r from-orange-500 via-amber-300 to-orange-500 mx-auto mb-6 rounded-full" />
             <p 
               className="text-xl sm:text-2xl md:text-3xl text-gray-100 mb-8 font-light"
               style={{ 
@@ -238,11 +238,11 @@ export default function AlumniPage() {
         >
           <div className="text-center mb-12">
             {/* Softer text gradient */}
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-gradient-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
               Batch Archives
             </h2>
             {/* Softer line gradient */}
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
+            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {batches.map((batch) => {
@@ -253,7 +253,7 @@ export default function AlumniPage() {
                   // Softer selected state and lighter hover border
                   className={`relative overflow-hidden rounded-3xl p-6 cursor-pointer transition-all duration-300 ${
                     selectedBatch === batch.year
-                      ? 'bg-gradient-to-br from-orange-500 to-amber-400 text-white shadow-xl shadow-orange-400/20'
+                      ? 'bg-linear-to-br from-orange-500 to-amber-400 text-white shadow-xl shadow-orange-400/20'
                       : 'bg-white border border-gray-100 hover:border-orange-200 shadow-md hover:shadow-lg'
                   }`}
                   whileHover={{ y: -5 }}
@@ -289,11 +289,11 @@ export default function AlumniPage() {
         >
           <div className="text-center mb-12">
             {/* Softer text gradient */}
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-gradient-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
               Featured Alumni
             </h2>
             {/* Softer line gradient */}
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto mb-4 rounded-full" />
+            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto mb-4 rounded-full" />
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Meet the accomplished individuals who have made significant contributions in their respective fields
             </p>
@@ -307,7 +307,7 @@ export default function AlumniPage() {
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
                   {/* Profile Image Area - Lighter gradient placeholder */}
-                  <div className="relative h-64 bg-gradient-to-br from-amber-100 to-orange-50 overflow-hidden flex items-center justify-center">
+                  <div className="relative h-64 bg-linear-to-br from-amber-100 to-orange-50 overflow-hidden flex items-center justify-center">
                     {alumni.image ? (
                       <img src={alumni.image} alt={alumni.name} className="w-full h-full object-cover" />
                     ) : (
@@ -321,7 +321,7 @@ export default function AlumniPage() {
                   </div>
 
                   {/* Profile Content */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col grow">
                     {/* Softer hover color */}
                     <h3 className="text-xl font-serif font-bold text-gray-900 mb-1 group-hover:text-orange-600 transition-colors">
                       {alumni.name}
@@ -329,7 +329,7 @@ export default function AlumniPage() {
                     {/* Softer batch color */}
                     <p className="text-sm text-orange-500 font-bold mb-3">{alumni.batch}</p>
                     
-                    <div className="mb-4 flex-grow">
+                    <div className="mb-4 grow">
                         <p className="text-sm text-gray-800 font-semibold">{alumni.currentPosition}</p>
                         <p className="text-xs text-gray-500 mb-2">{alumni.company}</p>
                         <p className="text-sm text-gray-600 italic">"{alumni.achievement}"</p>
@@ -354,7 +354,7 @@ export default function AlumniPage() {
         {/* Alumni Canvas Section */}
         <motion.div
           // Very subtle background tint and border
-          className="py-16 my-16 bg-gradient-to-br from-amber-50/50 to-orange-50/50 rounded-3xl border border-orange-50"
+          className="py-16 my-16 bg-linear-to-br from-amber-50/50 to-orange-50/50 rounded-3xl border border-orange-50"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -367,7 +367,7 @@ export default function AlumniPage() {
               Alumni Canvas
             </h2>
             {/* Softer line gradient */}
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-amber-400 mx-auto mb-6 rounded-full" />
+            <div className="w-24 h-1 bg-linear-to-r from-orange-500 to-amber-400 mx-auto mb-6 rounded-full" />
             <p className="text-xl text-gray-700 mb-10 leading-relaxed">
               Share your experiences, memories, and wisdom with current and future board members. Your stories inspire the next generation!
             </p>
@@ -395,7 +395,7 @@ export default function AlumniPage() {
         {/* Stay Connected */}
         <motion.div
           // Softer gradient background
-          className="my-16 bg-gradient-to-br from-orange-700 via-orange-500 to-amber-500 rounded-3xl p-12 text-center text-white shadow-2xl"
+          className="my-16 bg-linear-to-br from-orange-700 via-orange-500 to-amber-500 rounded-3xl p-12 text-center text-white shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
