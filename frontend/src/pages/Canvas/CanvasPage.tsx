@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import TestimonialCard from "../../components/Canvas/TestimonialCard";
 
@@ -158,7 +159,6 @@ export default function CanvasPage() {
         </div>
 
         {/* Stories Grid */}
-        
 
         {/* Share Your Story CTA */}
         <motion.div
@@ -174,21 +174,19 @@ export default function CanvasPage() {
             Your experiences can inspire current and future board members. Share
             your journey, lessons, and memories on Canvas.
           </p>
-          <motion.button
-            className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 10px 30px rgba(196, 30, 58, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="cursor-pointer rounded-3xl p-2">
-            <button>WRITE YOUR STORY</button>
-            </div>
-            
-          </motion.button>
+          <Link to="/contact" className="inline-block">
+            <motion.div
+              className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 30px rgba(196, 30, 58, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              WRITE YOUR STORY
+            </motion.div>
+          </Link>
         </motion.div>
-
       </motion.div>
     </div>
   );
