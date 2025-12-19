@@ -61,14 +61,26 @@ export default function Footer() {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             <Link to="/publications">
-              <motion.button
-                className="bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-8 py-4 rounded-xl text-lg flex items-center gap-2 shadow-lg hover:shadow-2xl transition-all"
-                whileHover={{ scale: 1.05 }}
+              <motion.div
+                role="button"
+                className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center hover:shadow-lg "
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Our Publications
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+                <span className="inline-flex items-center gap-2">
+                  Our Publications
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </span>
+              </motion.div>
             </Link>
           </motion.div>
         </div>

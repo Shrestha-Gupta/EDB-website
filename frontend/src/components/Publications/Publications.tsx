@@ -172,11 +172,12 @@ export default function Publications() {
           transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
         >
           <Link to="/publications">
-            <motion.button
-              className="inline-flex items-center gap-2 px-8 py-3 bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            <motion.div
+              role="button"
+              className="bg-transparent text-brand-red font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center border-2 border-transparent hover:border-brand-red hover:bg-linear-to-r hover:from-brand-red hover:to-brand-red hover:text-white shadow-lg transition-all"
               whileHover={{
-                scale: 1.08,
-                boxShadow: "0 20px 40px rgba(249, 115, 22, 0.4)",
+                scale: 1.05,
+                boxShadow: "0 10px 30px rgba(196, 30, 58, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
               initial={{ scale: 0.8 }}
@@ -184,18 +185,20 @@ export default function Publications() {
               viewport={{ once: true }}
               transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
             >
-              View All Publications
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <ArrowRight className="w-5 h-5" />
-              </motion.div>
-            </motion.button>
+              <span className="inline-flex items-center gap-2">
+                View All Publications
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
+              </span>
+            </motion.div>
           </Link>
         </motion.div>
       </div>
