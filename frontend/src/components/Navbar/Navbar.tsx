@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { prefetchRoute } from "../../utils/prefetchRoutes";
 
 const SpotlightButton = () => {
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -46,7 +47,7 @@ const SpotlightButton = () => {
       <motion.button
         whileTap={{ scale: 0.985 }}
         ref={btnRef}
-        className="relative overflow-hidden rounded-full bg-linear-to-r from-white-100 to-white-100 px-10 py-2.5 text-sm font-bold text-black border-1 border-orange-700  hover:border-orange-700 cursor-pointer"
+        className="relative overflow-hidden rounded-full bg-linear-to-r from-white-100 to-white-100 px-10 py-2.5 text-sm font-bold text-black border border-orange-700 hover:border-orange-700 cursor-pointer"
       >
         <span className="pointer-events-none relative z-10 uppercase tracking-wider">
           Contact Us
@@ -235,6 +236,9 @@ export default function Navbar() {
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
+              loading="lazy"
+              width={120}
+              height={40}
               className="h-8 md:h-10 object-contain"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
@@ -252,7 +256,7 @@ export default function Navbar() {
           {/* Middle: Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-2 flex-1 justify-center">
             {navLinks.slice(0, 7).map((link) => (
-              <Link key={link.name} to={link.path}>
+              <Link key={link.name} to={link.path} onMouseEnter={() => prefetchRoute(link.path)} onFocus={() => prefetchRoute(link.path)}>
                 <motion.div
                   className={`relative px-4 py-2 rounded-md font-medium text-sm tracking-wide transition-all duration-300 overflow-hidden group ${
                     isActive(link.path) ? "text-orange-500" : "text-gray-700"

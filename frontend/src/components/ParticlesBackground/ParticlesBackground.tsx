@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
@@ -8,6 +8,16 @@ export default function ParticlesBackground() {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     });
+  }, []);
+
+  const [isSmall, setIsSmall] = useState<boolean>(false);
+
+  useEffect(() => {
+    const check = () =>
+      setIsSmall(typeof window !== "undefined" && window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   const options = useMemo<ISourceOptions>(
@@ -25,8 +35,8 @@ export default function ParticlesBackground() {
       interactivity: {
         events: {
           onHover: {
-            enable: true,
-            mode: "grab",
+            enable: !isSmall,
+            mode: isSmall ? undefined : "grab",
           },
           resize: {
             enable: true,
@@ -48,13 +58,13 @@ export default function ParticlesBackground() {
         links: {
           color: "#FF8C42",
           distance: 150,
-          enable: true,
-          opacity: 0.12,
+          enable: !isSmall,
+          opacity: isSmall ? 0.06 : 0.12,
           width: 1,
         },
         move: {
           enable: true,
-          speed: 1,
+          speed: isSmall ? 0.6 : 1,
           direction: "none",
           random: false,
           straight: false,
@@ -66,21 +76,21 @@ export default function ParticlesBackground() {
           density: {
             enable: true,
           },
-          value: 40,
+          value: isSmall ? 18 : 40,
         },
         opacity: {
-          value: { min: 0.05, max: 0.18 },
+          value: { min: isSmall ? 0.02 : 0.05, max: isSmall ? 0.12 : 0.18 },
         },
         shape: {
           type: "circle",
         },
         size: {
-          value: { min: 1, max: 3 },
+          value: { min: 1, max: isSmall ? 2 : 3 },
         },
       },
       detectRetina: true,
     }),
-    []
+    [isSmall]
   );
 
   return (

@@ -77,7 +77,7 @@ export default function CanvasPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-cyan via-brand-teal to-brand-gold bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-cyan via-brand-teal to-brand-gold bg-clip-text text-transparent mb-6">
             Canvas
           </h1>
           <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
@@ -93,7 +93,7 @@ export default function CanvasPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <p className="text-2xl md:text-3xl font-serif italic text-brand-black mb-4">
+          <p className="text-lg sm:text-2xl md:text-3xl font-serif italic text-brand-black mb-4">
             "The Editorial Board wasn't just a club—it was a movement that
             transformed students into storytellers, thinkers, and
             change-makers."
@@ -174,13 +174,10 @@ export default function CanvasPage() {
             Your experiences can inspire current and future board members. Share
             your journey, lessons, and memories on Canvas.
           </p>
-          <Link to="/contact" className="inline-block">
+          <Link to="/contact" className="w-full sm:inline-block sm:w-auto">
             <motion.div
-              className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 30px rgba(196, 30, 58, 0.3)",
-              }}
+              className="w-full sm:w-auto bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center md:hover:shadow-lg"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               WRITE YOUR STORY

@@ -24,7 +24,7 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <motion.div
-      className="relative grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-2xl max-w-6xl mx-auto bg-white items-stretch h-128 md:h-128"
+      className="relative grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-none max-w-6xl mx-auto bg-white items-stretch h-auto md:h-128"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -32,7 +32,7 @@ export default function TestimonialCard({
     >
       {/* Left: Image Section */}
       <motion.div
-        className="relative h-128 md:h-128 overflow-hidden bg-orange-50"
+        className="relative h-56 md:h-128 overflow-hidden bg-orange-50"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -42,6 +42,7 @@ export default function TestimonialCard({
           <img
             src={image}
             alt={imageTitle || "Testimonial"}
+            loading="lazy"
             className="w-full h-full object-cover object-center"
           />
         ) : (
@@ -76,7 +77,7 @@ export default function TestimonialCard({
 
             {imageSubtitle && (
               <motion.h3
-                className="text-xl md:text-2xl font-extrabold leading-tight drop-shadow-lg"
+                className="text-lg md:text-2xl font-extrabold leading-tight"
                 style={{ color: "rgba(255,255,255,0.90)" }}
                 initial={{ opacity: 0, y: 6 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +101,7 @@ export default function TestimonialCard({
       >
         {/* Quote Mark */}
         <motion.div
-          className="text-orange-400/40 text-8xl font-serif leading-none mb-4"
+          className="text-orange-400/40 text-6xl md:text-8xl font-serif leading-none mb-4"
           initial={{ scale: 0, rotate: -180 }}
           whileInView={{ scale: 1, rotate: 0 }}
           viewport={{ once: true }}
@@ -140,6 +141,7 @@ export default function TestimonialCard({
                 <img
                   src={personAvatar}
                   alt={personName}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               ) : (

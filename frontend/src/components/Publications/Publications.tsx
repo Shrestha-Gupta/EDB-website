@@ -72,7 +72,7 @@ export default function Publications() {
           {publications.map((pub, index) => (
             <motion.div
               key={pub.id}
-              className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+              className="group relative bg-white rounded-xl overflow-hidden shadow-md md:shadow-lg md:hover:shadow-2xl transition-all duration-500"
               initial={{ opacity: 0, y: 60, rotateX: 15 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -81,16 +81,25 @@ export default function Publications() {
                 delay: index * 0.2,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              whileHover={{ y: -12, scale: 1.02 }}
+              whileHover={{ y: -8, scale: 1.01 }}
             >
               {/* Cover Image */}
               <div className="relative h-80 overflow-hidden">
                 <motion.img
                   src={pub.coverImage}
+                  srcSet={`${pub.coverImage.replace(
+                    "/upload/",
+                    "/upload/w_600/"
+                  )} 600w, ${pub.coverImage.replace(
+                    "/upload/",
+                    "/upload/w_900/"
+                  )} 900w, ${pub.coverImage} 1200w`}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
                   alt={pub.title}
                   className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.15, rotate: 2 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  whileHover={{ scale: 1.08, rotate: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 />
                 <motion.div
                   className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"
@@ -188,7 +197,11 @@ export default function Publications() {
               <span className="inline-flex items-center gap-2">
                 View All Publications
                 <motion.div
-                  animate={{ x: [0, 5, 0] }}
+                  animate={
+                    typeof window !== "undefined" && window.innerWidth > 640
+                      ? { x: [0, 5, 0] }
+                      : undefined
+                  }
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,

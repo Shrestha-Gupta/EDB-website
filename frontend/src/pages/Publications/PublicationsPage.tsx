@@ -58,487 +58,566 @@ const newsletters = [
       "https://drive.google.com/file/d/1rX0ZzGDEuG4OnCKS8kqDHjRBB2mpv3RU/view?usp=drive_link",
   },
   {
-  id: 4,
-  title: "TIRESIA - Volume 15, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032938/Screenshot_2025-12-18_at_10.10.18_AM_haj0al.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1xtO0CAKjzEjXmhdyseaX01BiKVYom5q8/view?usp=drive_link",
-},
-{
-  id: 5,
-  title: "TIRESIA - Volume 15, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032942/Screenshot_2025-12-18_at_10.10.38_AM_wrsht8.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1OXR8Qtk1ORsyBSwNZsV5fPIgNCRXW97u/view?usp=drive_link",
-},
-{
-  id: 6,
-  title: "TIRESIA - Volume 15, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032949/Screenshot_2025-12-18_at_10.10.58_AM_ovdi7l.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1dmlw4e7MSwr9SCxdQ-dQhcw5ss5Jm8sy/view?usp=drive_link",
-},
-{
-  id: 7,
-  title: "TIRESIA - Volume 14, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033474/Screenshot_2025-12-18_at_10.19.58_AM_pzawat.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1vYEEZkZpRzg9Kjj213EvWRSc49iAJf04/view?usp=drive_link",
-},
-{
-  id: 8,
-  title: "TIRESIA - Volume 14, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033477/Screenshot_2025-12-18_at_10.19.46_AM_e60eg1.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1posMiq1Fmr7BVofn3nG82nAJhhMvcUZE/view?usp=drive_link",
-},
-{
-  id: 9,
-  title: "TIRESIA - Volume 13, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033193/Screenshot_2025-12-18_at_10.16.07_AM_qegbnp.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1x52kyAKQS19JxvKaHTJ2JsRQokI_aXej/view?usp=drive_link",
-},
-{
-  id: 10,
-  title: "TIRESIA - Volume 13, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033205/Screenshot_2025-12-18_at_10.15.38_AM_rp7ei1.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1_LlQ8k4iDNn9CPr3PE63wBXpSIm_kMtC/view?usp=drive_link",
-},
-{
-  id: 11,
-  title: "TIRESIA - Volume 12, Issue 4",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034189/Screenshot_2025-12-18_at_10.32.08_AM_nueutk.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1RJ3dG1REChv07YpDuciBzXZtY8OUA1OY/view?usp=drive_link",
-},
-{
-  id: 12,
-  title: "TIRESIA - Volume 12, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034179/Screenshot_2025-12-18_at_10.31.59_AM_q2utna.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1DoSQTuFEUjRFBZApThxsafVyKxDdYhaY/view?usp=drive_link",
-},
-{
-  id: 13,
-  title: "TIRESIA - Volume 12, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034185/Screenshot_2025-12-18_at_10.31.48_AM_vr9lwz.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1ojvtXLbxiXE9qEk0dpaAcYNwBUmEtbTn/view?usp=drive_link",
-},
-{
-  id: 14,
-  title: "TIRESIA - Volume 12, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034190/Screenshot_2025-12-18_at_10.31.34_AM_vypj0j.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/10-pXNUt5BqDCnft1G97T_N1AtvWpmabp/view?usp=drive_link",
-},
-{
-  id: 15,
-  title: "TIRESIA - Volume 11, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034552/Screenshot_2025-12-18_at_10.38.57_AM_srctbq.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
-},
-{
-  id: 16,
-  title: "TIRESIA - Volume 11, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034554/Screenshot_2025-12-18_at_10.38.43_AM_eudx7u.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1d_e2M401eADThtLR3X89uvOEF0MHWTnz/view?usp=drive_link",
-},
-{
-  id: 17,
-  title: "TIRESIA - Volume 11, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034556/Screenshot_2025-12-18_at_10.38.29_AM_soizmu.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1EWpYmbL0OBQ1506ow2NaZt9i89kINxh3/view?usp=drive_link",
-},
-{
-  id: 18,
-  title: "TIRESIA - Volume 10, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035201/Screenshot_2025-12-18_at_10.48.57_AM_anftkk.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
-},
-{
-  id: 19,
-  title: "TIRESIA - Volume 10, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035230/Screenshot_2025-12-18_at_10.48.42_AM_nhjavj.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/14v1bDnUGs1Cc_lh8hX8pl1djTLKUny1m/view?usp=drive_link",
-},
-{
-  id: 20,
-  title: "TIRESIA - Volume 10, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035248/Screenshot_2025-12-18_at_10.48.30_AM_mip9wm.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1AFHr_exCP6N6pnpHxcKG2jTDSkgZsvQP/view?usp=drive_link",
-},
-{
-  id: 21,
-  title: "TIRESIA - Volume 9, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980311/Screenshot_2025-12-17_at_7.34.12_PM_c0m7nd.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1AIhUb_Ldu1AEwb2sXcjdSfzS9M8cC6Pv/view?usp=drive_link",
-},
-{
-  id: 22,
-  title: "TIRESIA - Volume 9, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980310/Screenshot_2025-12-17_at_7.33.57_PM_eaefie.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1J_gMEvH4nwM5qvV7p4XtyN38R6udX2hh/view?usp=drive_link",
-},
-
-{
-  id: 23,
-  title: "TIRESIA - Volume 8, Issue 5",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035737/Screenshot_2025-12-18_at_10.56.57_AM_ajmzmr.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/19g7bARaEw6Xpbz3NVr-zFVps7hO0aP4j/view?usp=drive_link",
-},
-{
-  id: 24,
-  title: "TIRESIA - Volume 8, Issue 4",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035734/Screenshot_2025-12-18_at_10.56.43_AM_lz58xh.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1kTEqh9RYXa38ZrM--4syxsHgHW5LgfEV/view?usp=drive_link",
-},
-{
-  id: 25,
-  title: "TIRESIA - Volume 8, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035720/Screenshot_2025-12-18_at_10.56.23_AM_ocqhqh.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1Q6nRpuU6dUw03KSz6G3XxyV32fjybyO0/view?usp=drive_link",
-},
-{
-  id: 26,
-  title: "TIRESIA - Volume 8, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035679/Screenshot_2025-12-18_at_10.56.06_AM_dmom9x.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1_EoY-LWLp3FDAlV8vU8zg8AQy-3uP4DD/view?usp=drive_link",
-},
-{
-  id: 27,
-  title: "TIRESIA - Volume 8, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035668/Screenshot_2025-12-18_at_10.55.49_AM_rgcocl.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1u5elip-KEdQACmH-bxZCBhT_rYwvlvKC/view?usp=drive_link",
-},
-{
-  id: 28,
-  title: "TIRESIA - Volume 7, Issue 5",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037025/Screenshot_2025-12-18_at_11.19.39_AM_woit4s.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1sEdQq18aYyyH6Gdg_8VYRhLftWGgNtYe/view?usp=drive_link",
-},
-{
-  id: 29,
-  title: "TIRESIA - Volume 7, Issue 4",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037047/Screenshot_2025-12-18_at_11.19.26_AM_lmknmq.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1TXGQPUuQ-VA8rQ5jpG3G68Hm7BmUBGyW/view?usp=drive_link",
-  },
-{
-  id: 30,
-  title: "TIRESIA - Volume 7, Issue 3",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037092/Screenshot_2025-12-18_at_11.19.14_AM_n3vfds.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1dVAckX2xryBWNiQfw9MvFk4x_tRudOPB/view?usp=drive_link",
-  },
-{
-  id: 31,
-  title: "TIRESIA - Volume 7, Issue 2",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037146/Screenshot_2025-12-18_at_11.18.58_AM_scxpit.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1H_EgiciH7Uc4cSnHMUCfaJSiPoHHdcLA/view?usp=drive_link",
-  },
-{
-  id: 32,
-  title: "TIRESIA - Volume 7, Issue 1",
-  type: "NEWSLETTER",
-  year: "2025",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037240/Screenshot_2025-12-18_at_11.18.45_AM_skbwkp.png",
-  description:
-    "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-  pages: 145,
-  contributors: 30,
-  downloadUrl: "https://drive.google.com/file/d/1YIhV_gdGMZZjGJ_kmzVoTkO_d1kV4XVA/view?usp=drive_link",
+    id: 4,
+    title: "TIRESIA - Volume 15, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032938/Screenshot_2025-12-18_at_10.10.18_AM_haj0al.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1xtO0CAKjzEjXmhdyseaX01BiKVYom5q8/view?usp=drive_link",
   },
   {
-  id: 33,
-  title: "TIRESIA - Volume 6, Issue 7",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980123/Screenshot_2025-12-17_at_7.27.48_PM_ctzhki.png",
-  description:
-    "Exploring creative expression through student-led narratives, artwork, and academic reflections.",
-  pages: 138,
-  contributors: 28,
-  downloadUrl: "https://drive.google.com/file/d/18sCQlcgSFnKp6KyipPqb1kcZ2O8oysGo/view?usp=drive_link",
-},
-{
-  id: 34,
-  title: "TIRESIA - Volume 6, Issue 6",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.34_PM_h7eeir.png",
-  description:
-    "A blend of cultural commentary, poetry, and thought-provoking essays by emerging voices.",
-  pages: 132,
-  contributors: 27,
-  downloadUrl: "https://drive.google.com/file/d/1KcXpAM3ko91iM9bXKNU7AZSgk1fRRMKY/view?usp=drive_link",
-},
-{
-  id: 35,
-  title: "TIRESIA - Volume 6, Issue 5",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.17_PM_mqjlln.png",
-  description:
-    "This issue highlights innovation, literature, and student perspectives on modern academia.",
-  pages: 129,
-  contributors: 26,
-  downloadUrl: "https://drive.google.com/file/d/1iqa6g4_FYZxaZZcWaAG99KoPCZHpg7w0/view?usp=drive_link",
-},
-{
-  id: 36,
-  title: "TIRESIA - Volume 6, Issue 4",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.04_PM_yqvdmb.png",
-  description:
-    "An artistic compilation featuring poetry, short prose, and interdisciplinary ideas.",
-  pages: 124,
-  contributors: 25,
-  downloadUrl: "https://drive.google.com/file/d/1NBD6WXu-nTLDW24Qto_YIvzrSobQeJ4n/view?usp=drive_link",
-},
-{
-  id: 37,
-  title: "TIRESIA - Volume 6, Issue 3",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.27_PM_c1rhna.png",
-  description:
-    "Capturing campus life, social reflections, and creative storytelling.",
-  pages: 120,
-  contributors: 24,
-  downloadUrl: "https://drive.google.com/file/d/1hQyP3a6ZhvQWl7-D01KZP4YniiN_qBon/view?usp=drive_link",
-},
-{
-  id: 38,
-  title: "TIRESIA - Volume 6, Issue 2",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.07_PM_pb0aum.png",
-  description:
-    "A thoughtful collection of student opinions, literature, and visual expression.",
-  pages: 116,
-  contributors: 23,
-  downloadUrl: "https://drive.google.com/file/d/1Qu3HrYgE1bP_dKpZcwexvrZRuwV8Xu2a/view?usp=drive_link",
-},
-{
-  id: 39,
-  title: "TIRESIA - Volume 6, Issue 1",
-  type: "NEWSLETTER",
-  year: "2024",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980125/Screenshot_2025-12-17_at_7.25.44_PM_pjo4pi.png",
-  description:
-    "The opening issue of Volume 6, setting the tone with diverse academic and creative works.",
-  pages: 110,
-  contributors: 22,
-  downloadUrl: "https://drive.google.com/file/d/1hrwLZ-ORcgnfmVq3Ttgw8kVV_ufcVZwv/view?usp=drive_link",
-},
-{
-  id: 40,
-  title: "TIRESIA - Volume 5, Issue 6",
-  type: "NEWSLETTER",
-  year: "2023",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037587/Screenshot_2025-12-18_at_11.28.47_AM_fdsk78.png",
-  description:
-    "A reflective edition featuring literary depth and evolving student perspectives.",
-  pages: 105,
-  contributors: 21,
-  downloadUrl: "https://drive.google.com/file/d/10wXVGsNzVFKxUtWgC6ytnwltWB1o_3Qw/view?usp=drive_link",
-},
-{
-  id: 41,
-  title: "TIRESIA - Volume 5, Issue 5",
-  type: "NEWSLETTER",
-  year: "2023",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037585/Screenshot_2025-12-18_at_11.28.36_AM_qwwmnk.png",
-  description:
-    "Showcasing campus creativity through essays, poems, and design pieces.",
-  pages: 100,
-  contributors: 20,
-  downloadUrl: "https://drive.google.com/file/d/1h2qHw2jQh_w8zEPAeIVqn_iSUBNDaxb2/view?usp=drive_link",
-},
-{
-  id: 42,
-  title: "TIRESIA - Volume 5, Issue 4",
-  type: "NEWSLETTER",
-  year: "2023",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037560/Screenshot_2025-12-18_at_11.28.14_AM_bsjwqs.png",
-  description:
-    "An engaging mix of intellectual discourse and artistic exploration.",
-  pages: 96,
-  contributors: 19,
-  downloadUrl: "https://drive.google.com/file/d/1BxgBP6DwFGE2Td3wzfnd5TMrGrGs1FiQ/view?usp=drive_link",
-},
-{
-  id: 43,
-  title: "TIRESIA - Volume 5, Issue 3",
-  type: "NEWSLETTER",
-  year: "2023",
-  coverImage: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037550/Screenshot_2025-12-18_at_11.27.59_AM_wjw7vi.png",
-  description:
-    "Continuing the legacy of TIRESIA with powerful voices and meaningful narratives.",
-  pages: 92,
-  contributors: 18,
-  downloadUrl: "https://drive.google.com/file/d/1WjWNnTENUdQ-OIoTEYH4Mk14wRjoQNC2/view?usp=drive_link",
-}
+    id: 5,
+    title: "TIRESIA - Volume 15, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032942/Screenshot_2025-12-18_at_10.10.38_AM_wrsht8.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1OXR8Qtk1ORsyBSwNZsV5fPIgNCRXW97u/view?usp=drive_link",
+  },
+  {
+    id: 6,
+    title: "TIRESIA - Volume 15, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766032949/Screenshot_2025-12-18_at_10.10.58_AM_ovdi7l.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1dmlw4e7MSwr9SCxdQ-dQhcw5ss5Jm8sy/view?usp=drive_link",
+  },
+  {
+    id: 7,
+    title: "TIRESIA - Volume 14, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033474/Screenshot_2025-12-18_at_10.19.58_AM_pzawat.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1vYEEZkZpRzg9Kjj213EvWRSc49iAJf04/view?usp=drive_link",
+  },
+  {
+    id: 8,
+    title: "TIRESIA - Volume 14, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033477/Screenshot_2025-12-18_at_10.19.46_AM_e60eg1.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1posMiq1Fmr7BVofn3nG82nAJhhMvcUZE/view?usp=drive_link",
+  },
+  {
+    id: 9,
+    title: "TIRESIA - Volume 13, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033193/Screenshot_2025-12-18_at_10.16.07_AM_qegbnp.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1x52kyAKQS19JxvKaHTJ2JsRQokI_aXej/view?usp=drive_link",
+  },
+  {
+    id: 10,
+    title: "TIRESIA - Volume 13, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766033205/Screenshot_2025-12-18_at_10.15.38_AM_rp7ei1.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1_LlQ8k4iDNn9CPr3PE63wBXpSIm_kMtC/view?usp=drive_link",
+  },
+  {
+    id: 11,
+    title: "TIRESIA - Volume 12, Issue 4",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034189/Screenshot_2025-12-18_at_10.32.08_AM_nueutk.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1RJ3dG1REChv07YpDuciBzXZtY8OUA1OY/view?usp=drive_link",
+  },
+  {
+    id: 12,
+    title: "TIRESIA - Volume 12, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034179/Screenshot_2025-12-18_at_10.31.59_AM_q2utna.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1DoSQTuFEUjRFBZApThxsafVyKxDdYhaY/view?usp=drive_link",
+  },
+  {
+    id: 13,
+    title: "TIRESIA - Volume 12, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034185/Screenshot_2025-12-18_at_10.31.48_AM_vr9lwz.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1ojvtXLbxiXE9qEk0dpaAcYNwBUmEtbTn/view?usp=drive_link",
+  },
+  {
+    id: 14,
+    title: "TIRESIA - Volume 12, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034190/Screenshot_2025-12-18_at_10.31.34_AM_vypj0j.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/10-pXNUt5BqDCnft1G97T_N1AtvWpmabp/view?usp=drive_link",
+  },
+  {
+    id: 15,
+    title: "TIRESIA - Volume 11, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034552/Screenshot_2025-12-18_at_10.38.57_AM_srctbq.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
+  },
+  {
+    id: 16,
+    title: "TIRESIA - Volume 11, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034554/Screenshot_2025-12-18_at_10.38.43_AM_eudx7u.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1d_e2M401eADThtLR3X89uvOEF0MHWTnz/view?usp=drive_link",
+  },
+  {
+    id: 17,
+    title: "TIRESIA - Volume 11, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766034556/Screenshot_2025-12-18_at_10.38.29_AM_soizmu.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1EWpYmbL0OBQ1506ow2NaZt9i89kINxh3/view?usp=drive_link",
+  },
+  {
+    id: 18,
+    title: "TIRESIA - Volume 10, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035201/Screenshot_2025-12-18_at_10.48.57_AM_anftkk.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1eN5qcybitsxgeYRedl1jVfstcZYDxen3/view?usp=drive_link",
+  },
+  {
+    id: 19,
+    title: "TIRESIA - Volume 10, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035230/Screenshot_2025-12-18_at_10.48.42_AM_nhjavj.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/14v1bDnUGs1Cc_lh8hX8pl1djTLKUny1m/view?usp=drive_link",
+  },
+  {
+    id: 20,
+    title: "TIRESIA - Volume 10, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035248/Screenshot_2025-12-18_at_10.48.30_AM_mip9wm.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1AFHr_exCP6N6pnpHxcKG2jTDSkgZsvQP/view?usp=drive_link",
+  },
+  {
+    id: 21,
+    title: "TIRESIA - Volume 9, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980311/Screenshot_2025-12-17_at_7.34.12_PM_c0m7nd.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1AIhUb_Ldu1AEwb2sXcjdSfzS9M8cC6Pv/view?usp=drive_link",
+  },
+  {
+    id: 22,
+    title: "TIRESIA - Volume 9, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980310/Screenshot_2025-12-17_at_7.33.57_PM_eaefie.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1J_gMEvH4nwM5qvV7p4XtyN38R6udX2hh/view?usp=drive_link",
+  },
 
+  {
+    id: 23,
+    title: "TIRESIA - Volume 8, Issue 5",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035737/Screenshot_2025-12-18_at_10.56.57_AM_ajmzmr.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/19g7bARaEw6Xpbz3NVr-zFVps7hO0aP4j/view?usp=drive_link",
+  },
+  {
+    id: 24,
+    title: "TIRESIA - Volume 8, Issue 4",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035734/Screenshot_2025-12-18_at_10.56.43_AM_lz58xh.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1kTEqh9RYXa38ZrM--4syxsHgHW5LgfEV/view?usp=drive_link",
+  },
+  {
+    id: 25,
+    title: "TIRESIA - Volume 8, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035720/Screenshot_2025-12-18_at_10.56.23_AM_ocqhqh.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Q6nRpuU6dUw03KSz6G3XxyV32fjybyO0/view?usp=drive_link",
+  },
+  {
+    id: 26,
+    title: "TIRESIA - Volume 8, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035679/Screenshot_2025-12-18_at_10.56.06_AM_dmom9x.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1_EoY-LWLp3FDAlV8vU8zg8AQy-3uP4DD/view?usp=drive_link",
+  },
+  {
+    id: 27,
+    title: "TIRESIA - Volume 8, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766035668/Screenshot_2025-12-18_at_10.55.49_AM_rgcocl.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1u5elip-KEdQACmH-bxZCBhT_rYwvlvKC/view?usp=drive_link",
+  },
+  {
+    id: 28,
+    title: "TIRESIA - Volume 7, Issue 5",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037025/Screenshot_2025-12-18_at_11.19.39_AM_woit4s.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1sEdQq18aYyyH6Gdg_8VYRhLftWGgNtYe/view?usp=drive_link",
+  },
+  {
+    id: 29,
+    title: "TIRESIA - Volume 7, Issue 4",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037047/Screenshot_2025-12-18_at_11.19.26_AM_lmknmq.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1TXGQPUuQ-VA8rQ5jpG3G68Hm7BmUBGyW/view?usp=drive_link",
+  },
+  {
+    id: 30,
+    title: "TIRESIA - Volume 7, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037092/Screenshot_2025-12-18_at_11.19.14_AM_n3vfds.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1dVAckX2xryBWNiQfw9MvFk4x_tRudOPB/view?usp=drive_link",
+  },
+  {
+    id: 31,
+    title: "TIRESIA - Volume 7, Issue 2",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037146/Screenshot_2025-12-18_at_11.18.58_AM_scxpit.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1H_EgiciH7Uc4cSnHMUCfaJSiPoHHdcLA/view?usp=drive_link",
+  },
+  {
+    id: 32,
+    title: "TIRESIA - Volume 7, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037240/Screenshot_2025-12-18_at_11.18.45_AM_skbwkp.png",
+    description:
+      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
+    pages: 145,
+    contributors: 30,
+    downloadUrl:
+      "https://drive.google.com/file/d/1YIhV_gdGMZZjGJ_kmzVoTkO_d1kV4XVA/view?usp=drive_link",
+  },
+  {
+    id: 33,
+    title: "TIRESIA - Volume 6, Issue 7",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980123/Screenshot_2025-12-17_at_7.27.48_PM_ctzhki.png",
+    description:
+      "Exploring creative expression through student-led narratives, artwork, and academic reflections.",
+    pages: 138,
+    contributors: 28,
+    downloadUrl:
+      "https://drive.google.com/file/d/18sCQlcgSFnKp6KyipPqb1kcZ2O8oysGo/view?usp=drive_link",
+  },
+  {
+    id: 34,
+    title: "TIRESIA - Volume 6, Issue 6",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.34_PM_h7eeir.png",
+    description:
+      "A blend of cultural commentary, poetry, and thought-provoking essays by emerging voices.",
+    pages: 132,
+    contributors: 27,
+    downloadUrl:
+      "https://drive.google.com/file/d/1KcXpAM3ko91iM9bXKNU7AZSgk1fRRMKY/view?usp=drive_link",
+  },
+  {
+    id: 35,
+    title: "TIRESIA - Volume 6, Issue 5",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.17_PM_mqjlln.png",
+    description:
+      "This issue highlights innovation, literature, and student perspectives on modern academia.",
+    pages: 129,
+    contributors: 26,
+    downloadUrl:
+      "https://drive.google.com/file/d/1iqa6g4_FYZxaZZcWaAG99KoPCZHpg7w0/view?usp=drive_link",
+  },
+  {
+    id: 36,
+    title: "TIRESIA - Volume 6, Issue 4",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.27.04_PM_yqvdmb.png",
+    description:
+      "An artistic compilation featuring poetry, short prose, and interdisciplinary ideas.",
+    pages: 124,
+    contributors: 25,
+    downloadUrl:
+      "https://drive.google.com/file/d/1NBD6WXu-nTLDW24Qto_YIvzrSobQeJ4n/view?usp=drive_link",
+  },
+  {
+    id: 37,
+    title: "TIRESIA - Volume 6, Issue 3",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.27_PM_c1rhna.png",
+    description:
+      "Capturing campus life, social reflections, and creative storytelling.",
+    pages: 120,
+    contributors: 24,
+    downloadUrl:
+      "https://drive.google.com/file/d/1hQyP3a6ZhvQWl7-D01KZP4YniiN_qBon/view?usp=drive_link",
+  },
+  {
+    id: 38,
+    title: "TIRESIA - Volume 6, Issue 2",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980124/Screenshot_2025-12-17_at_7.26.07_PM_pb0aum.png",
+    description:
+      "A thoughtful collection of student opinions, literature, and visual expression.",
+    pages: 116,
+    contributors: 23,
+    downloadUrl:
+      "https://drive.google.com/file/d/1Qu3HrYgE1bP_dKpZcwexvrZRuwV8Xu2a/view?usp=drive_link",
+  },
+  {
+    id: 39,
+    title: "TIRESIA - Volume 6, Issue 1",
+    type: "NEWSLETTER",
+    year: "2024",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765980125/Screenshot_2025-12-17_at_7.25.44_PM_pjo4pi.png",
+    description:
+      "The opening issue of Volume 6, setting the tone with diverse academic and creative works.",
+    pages: 110,
+    contributors: 22,
+    downloadUrl:
+      "https://drive.google.com/file/d/1hrwLZ-ORcgnfmVq3Ttgw8kVV_ufcVZwv/view?usp=drive_link",
+  },
+  {
+    id: 40,
+    title: "TIRESIA - Volume 5, Issue 6",
+    type: "NEWSLETTER",
+    year: "2023",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037587/Screenshot_2025-12-18_at_11.28.47_AM_fdsk78.png",
+    description:
+      "A reflective edition featuring literary depth and evolving student perspectives.",
+    pages: 105,
+    contributors: 21,
+    downloadUrl:
+      "https://drive.google.com/file/d/10wXVGsNzVFKxUtWgC6ytnwltWB1o_3Qw/view?usp=drive_link",
+  },
+  {
+    id: 41,
+    title: "TIRESIA - Volume 5, Issue 5",
+    type: "NEWSLETTER",
+    year: "2023",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037585/Screenshot_2025-12-18_at_11.28.36_AM_qwwmnk.png",
+    description:
+      "Showcasing campus creativity through essays, poems, and design pieces.",
+    pages: 100,
+    contributors: 20,
+    downloadUrl:
+      "https://drive.google.com/file/d/1h2qHw2jQh_w8zEPAeIVqn_iSUBNDaxb2/view?usp=drive_link",
+  },
+  {
+    id: 42,
+    title: "TIRESIA - Volume 5, Issue 4",
+    type: "NEWSLETTER",
+    year: "2023",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037560/Screenshot_2025-12-18_at_11.28.14_AM_bsjwqs.png",
+    description:
+      "An engaging mix of intellectual discourse and artistic exploration.",
+    pages: 96,
+    contributors: 19,
+    downloadUrl:
+      "https://drive.google.com/file/d/1BxgBP6DwFGE2Td3wzfnd5TMrGrGs1FiQ/view?usp=drive_link",
+  },
+  {
+    id: 43,
+    title: "TIRESIA - Volume 5, Issue 3",
+    type: "NEWSLETTER",
+    year: "2023",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1766037550/Screenshot_2025-12-18_at_11.27.59_AM_wjw7vi.png",
+    description:
+      "Continuing the legacy of TIRESIA with powerful voices and meaningful narratives.",
+    pages: 92,
+    contributors: 18,
+    downloadUrl:
+      "https://drive.google.com/file/d/1WjWNnTENUdQ-OIoTEYH4Mk14wRjoQNC2/view?usp=drive_link",
+  },
 ];
 
 const magazines = [
@@ -650,6 +729,17 @@ export default function PublicationsPage() {
   const publications = getPublications();
   const latestIssue = newsletters[currentLatestIndex];
 
+  // Pagination / progressive loading to improve mobile performance
+  const [visibleCount, setVisibleCount] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth < 640 ? 6 : 12;
+    }
+    return 8;
+  });
+
+  const loadMore = () =>
+    setVisibleCount((v) => Math.min(publications.length, v + 8));
+
   const handlePrevLatest = () => {
     setCurrentLatestIndex((prev) =>
       prev === 0 ? newsletters.length - 1 : prev - 1
@@ -742,9 +832,9 @@ export default function PublicationsPage() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
-                  whileHover={{ 
-                    scale: 1.005, 
-                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" 
+                  whileHover={{
+                    scale: 1.005,
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
                   }}
                   transition={{ duration: 0.4 }}
                   className="grid md:grid-cols-2 gap-8 p-8"
@@ -872,18 +962,15 @@ export default function PublicationsPage() {
         </div>
 
         {/* Grid */}
-        <motion.div
-          layout
-          className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16"
-        >
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
           <AnimatePresence>
-            {publications.map((pub) => (
+            {publications.slice(0, visibleCount).map((pub) => (
               <motion.div
                 key={pub.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                exit={{ opacity: 0 }}
                 className="group cursor-pointer"
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
@@ -898,8 +985,17 @@ export default function PublicationsPage() {
                   >
                     <img
                       src={pub.coverImage}
+                      srcSet={`${pub.coverImage.replace(
+                        "/upload/",
+                        "/upload/w_600/"
+                      )} 600w, ${pub.coverImage.replace(
+                        "/upload/",
+                        "/upload/w_900/"
+                      )} 900w, ${pub.coverImage} 1200w`}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
                       alt={pub.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover will-change-transform group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 right-3 bg-orange-500 text-white px-3 py-1 rounded-full font-bold text-xs shadow-md">
                       {pub.type === "ANNUAL MAGAZINE"
@@ -948,7 +1044,32 @@ export default function PublicationsPage() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
+
+        {/* Load More / Fewer */}
+        <div className="text-center mb-12">
+          {visibleCount < publications.length ? (
+            <button
+              onClick={loadMore}
+              className="px-8 py-3 rounded-full font-bold bg-linear-to-r from-orange-500 to-orange-600 text-white hover:shadow-md transition-all"
+            >
+              Load more
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                setVisibleCount(
+                  typeof window !== "undefined" && window.innerWidth < 640
+                    ? 6
+                    : 12
+                )
+              }
+              className="px-8 py-3 rounded-full font-bold bg-white text-gray-700 border border-gray-200 hover:border-orange-500 transition-all"
+            >
+              Show less
+            </button>
+          )}
+        </div>
 
         {/* PDF Viewer */}
         {selectedPdf && (

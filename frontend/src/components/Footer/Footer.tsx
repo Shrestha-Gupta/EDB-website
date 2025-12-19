@@ -15,6 +15,9 @@ export default function Footer() {
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
+              loading="lazy"
+              width={160}
+              height={80}
               className="h-16 md:h-20 object-contain"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -60,10 +63,10 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <Link to="/publications">
+            <Link to="/publications" className="hidden md:inline-block">
               <motion.div
                 role="button"
-                className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center hover:shadow-lg "
+                className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center hover:shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -99,6 +102,25 @@ export default function Footer() {
             creati'w'ity
           </h2>
         </motion.div>
+
+        {/* Mobile CTA: show after big statement only on small screens */}
+        <div className="max-w-7xl mx-auto px-6 md:hidden mt-8">
+          <div className="text-center">
+            <Link to="/publications" className="w-full inline-block">
+              <motion.div
+                role="button"
+                className="w-full bg-transparent text-brand-red font-bold py-4 px-6 text-lg rounded-3xl cursor-pointer inline-block text-center hover:border-brand-red hover:bg-linear-to-r hover:from-brand-red hover:to-brand-red hover:text-white transition-all shadow-none"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="inline-flex items-center justify-center gap-2 w-full">
+                  Our Publications
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              </motion.div>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Links Grid */}
