@@ -791,13 +791,17 @@ export default function PublicationsPage() {
           <div className="flex justify-center mb-8">
             <motion.div
               className="inline-block bg-orange-50 border-2 border-orange-500 text-orange-700 px-6 py-2.5 rounded-xl font-bold text-lg tracking-wider shadow-lg"
-              animate={{
-                boxShadow: [
-                  "0 0 0px rgba(249, 115, 22, 0)",
-                  "0 0 15px rgba(249, 115, 22, 0.3)",
-                  "0 0 0px rgba(249, 115, 22, 0)",
-                ],
-              }}
+              animate={
+                typeof window !== "undefined" && window.innerWidth > 640
+                  ? {
+                      boxShadow: [
+                        "0 0 0px rgba(249, 115, 22, 0)",
+                        "0 0 15px rgba(249, 115, 22, 0.3)",
+                        "0 0 0px rgba(249, 115, 22, 0)",
+                      ],
+                    }
+                  : undefined
+              }
               transition={{ duration: 2, repeat: Infinity }}
             >
               LATEST ISSUE
@@ -808,36 +812,48 @@ export default function PublicationsPage() {
             {/* Arrows with Hover Effects */}
             <motion.button
               onClick={handlePrevLatest}
-              whileHover={{ scale: 1.1, backgroundColor: "#ea580c" }}
+              whileHover={
+                typeof window !== "undefined" && window.innerWidth > 640
+                  ? { scale: 1.1, backgroundColor: "#ea580c" }
+                  : undefined
+              }
               whileTap={{ scale: 0.9 }}
-              className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl transition-colors cursor-pointer"
+              className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full md:shadow-xl transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-6 h-6" />
             </motion.button>
 
             <motion.button
               onClick={handleNextLatest}
-              whileHover={{ scale: 1.1, backgroundColor: "#ea580c" }}
+              whileHover={
+                typeof window !== "undefined" && window.innerWidth > 640
+                  ? { scale: 1.1, backgroundColor: "#ea580c" }
+                  : undefined
+              }
               whileTap={{ scale: 0.9 }}
-              className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-xl transition-colors cursor-pointer"
+              className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full md:shadow-xl transition-colors cursor-pointer"
             >
               <ChevronRight className="w-6 h-6" />
             </motion.button>
 
             {/* Main Card */}
-            <div className="relative overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl bg-white shadow-none md:shadow-2xl">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentLatestIndex}
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
-                  whileHover={{
-                    scale: 1.005,
-                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                  }}
+                  whileHover={
+                    typeof window !== "undefined" && window.innerWidth > 768
+                      ? {
+                          scale: 1.005,
+                          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                        }
+                      : undefined
+                  }
                   transition={{ duration: 0.4 }}
-                  className="grid md:grid-cols-2 gap-8 p-8"
+                  className="grid md:grid-cols-2 gap-8 p-8 transform-gpu md:hover:shadow-2xl md:hover:scale-[1.005]"
                 >
                   {/* Left: Image */}
                   <div className="relative h-100 md:h-auto">

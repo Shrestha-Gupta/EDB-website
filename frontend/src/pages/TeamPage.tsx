@@ -1,56 +1,258 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 // Ensure these paths match your project structure
-import TeamCard from '../components/TeamCard/TeamCard';
-import ParticlesBackground from '../components/ParticlesBackground/ParticlesBackground';
+import TeamCard from "../components/TeamCard/TeamCard";
+import ParticlesBackground from "../components/ParticlesBackground/ParticlesBackground";
 
 // --- DATA ARRAYS ---
 const finalYearTeam = [
-  { id: 1, name: 'Aadrika Barnwal', department: 'Information Technology', image: '' },
-  { id: 2, name: 'Aastha Singh', department: 'Civil Engineering', image: '' },
-  { id: 3, name: 'Harshit Pandey', department: 'Mechanical Engineering', image: '' },
-  { id: 4, name: 'Jayant Singh', department: 'Electronics and Communication Engineering', image: '' },
-  { id: 5, name: 'Jyoti Singh', department: 'Bachelor of Pharmacy', image: '' },
-  { id: 6, name: 'Nandini Mishra', department: 'Civil Engineering', image: '' },
-  { id: 7, name: 'Shivam Pal', department: 'Computer Science & Engineering', image: '' },
-  { id: 8, name: 'Shivam Rai', department: 'Computer Science & Engineering', image: '' },
-  { id: 9, name: 'Vishal Kotak', department: 'Information Technology', image: '' },
-  { id: 10, name: 'Vishwadeep Singh', department: 'Computer Science & Engineering', image: '' },
-  { id: 11, name: 'Vivek Mani Tripathy', department: 'Information Technology', image: '' }
+  {
+    id: 1,
+    name: "Aadrika Barnwal",
+    department: "Information Technology",
+    image: "",
+  },
+  { id: 2, name: "Aastha Singh", department: "Civil Engineering", image: "" },
+  {
+    id: 3,
+    name: "Harshit Pandey",
+    department: "Mechanical Engineering",
+    image: "",
+  },
+  {
+    id: 4,
+    name: "Jayant Singh",
+    department: "Electronics and Communication Engineering",
+    image: "",
+  },
+  { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "" },
+  { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "" },
+  {
+    id: 7,
+    name: "Shivam Pal",
+    department: "Computer Science & Engineering",
+    image: "",
+  },
+  {
+    id: 8,
+    name: "Shivam Rai",
+    department: "Computer Science & Engineering",
+    image: "",
+  },
+  {
+    id: 9,
+    name: "Vishal Kotak",
+    department: "Information Technology",
+    image: "",
+  },
+  {
+    id: 10,
+    name: "Vishwadeep Singh",
+    department: "Computer Science & Engineering",
+    image: "",
+  },
+  {
+    id: 11,
+    name: "Vivek Mani Tripathy",
+    department: "Information Technology",
+    image: "",
+  },
 ];
 
 const preFinalTeam = [
-  { id: 1, name: 'Aditi Sharma', department: 'Electronics and Communication Engineering', image: '' },
-  { id: 2, name: 'Alok Kumar', department: 'Electronics and Communication Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916386/IMG-20250104-WA0012_-_Alok_kumar_dfczes.jpg' },
-  { id: 3, name: 'Ashmi Singh', department: 'Electrical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0004_-_ASHMI_SINGH_dp8an0.jpg' },
-  { id: 4, name: 'Divyansh Singh Rathore', department: 'Electronics and Communication Engineering', image: '' },
-  { id: 5, name: 'Gaurav Vishwakarma', department: 'Electronics and Communication Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20250301-WA0024_-_GAURAV_VISHWAKARMA_vep5e1.jpg' },
-  { id: 6, name: 'Himanshu Mishra', department: 'Chemical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916434/Hm_-_Himanshu_mishra_wz4y3q.png' },
-  { id: 7, name: 'Jagriti Singh', department: 'Civil Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916387/IMG-20241228-WA0024_-_Jagriti_Thakur_mydoe1.jpg' },
-  { id: 8, name: 'Pragya Kumari', department: 'Electrical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641916/WhatsApp_Image_2025-12-13_at_21.34.40_ahne8s.jpg' },
-  { id: 9, name: 'Pranav Mishra', department: 'Information Technology', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622863/IMG0250725_205903_WhatsApp_-_Pranav_Mishra_moxnqf.jpg' },
-  { id: 10, name: 'Shatakshi Srivastava', department: 'Electronics and Communication Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765917159/WhatsApp_Image_2025-11-29_at_3.27.53_PM_-_Shatakshi_Srivastava_xyyyxa.jpg' },
-  { id: 11, name: 'Shreshtha Gupta', department: 'Electronics and Communication Engineering', image: '' },
-  { id: 12, name: 'Vaishnavi Rai', department: 'Civil Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0000_-_Vaishnavi_Rai_jez32z.jpg' },
-  { id: 13, name: 'Vinayak Yadav', department: 'Information Technology', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916386/IMG_20251126_185549_011_-_VINAYAK_YADAV_ehfish.webp' },
-  { id: 14, name: 'Yashvardhan Ojha', department: 'Computer Science and Engineering', image: '' }
+  {
+    id: 1,
+    name: "Aditi Sharma",
+    department: "Electronics and Communication Engineering",
+    image: "",
+  },
+  {
+    id: 2,
+    name: "Alok Kumar",
+    department: "Electronics and Communication Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916386/IMG-20250104-WA0012_-_Alok_kumar_dfczes.jpg",
+  },
+  {
+    id: 3,
+    name: "Ashmi Singh",
+    department: "Electrical Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0004_-_ASHMI_SINGH_dp8an0.jpg",
+  },
+  {
+    id: 4,
+    name: "Divyansh Singh Rathore",
+    department: "Electronics and Communication Engineering",
+    image: "",
+  },
+  {
+    id: 5,
+    name: "Gaurav Vishwakarma",
+    department: "Electronics and Communication Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20250301-WA0024_-_GAURAV_VISHWAKARMA_vep5e1.jpg",
+  },
+  {
+    id: 6,
+    name: "Himanshu Mishra",
+    department: "Chemical Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916434/Hm_-_Himanshu_mishra_wz4y3q.png",
+  },
+  {
+    id: 7,
+    name: "Jagriti Singh",
+    department: "Civil Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916387/IMG-20241228-WA0024_-_Jagriti_Thakur_mydoe1.jpg",
+  },
+  {
+    id: 8,
+    name: "Pragya Kumari",
+    department: "Electrical Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641916/WhatsApp_Image_2025-12-13_at_21.34.40_ahne8s.jpg",
+  },
+  {
+    id: 9,
+    name: "Pranav Mishra",
+    department: "Information Technology",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622863/IMG0250725_205903_WhatsApp_-_Pranav_Mishra_moxnqf.jpg",
+  },
+  {
+    id: 10,
+    name: "Shatakshi Srivastava",
+    department: "Electronics and Communication Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765917159/WhatsApp_Image_2025-11-29_at_3.27.53_PM_-_Shatakshi_Srivastava_xyyyxa.jpg",
+  },
+  {
+    id: 11,
+    name: "Shreshtha Gupta",
+    department: "Electronics and Communication Engineering",
+    image: "",
+  },
+  {
+    id: 12,
+    name: "Vaishnavi Rai",
+    department: "Civil Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765622862/IMG-20251211-WA0000_-_Vaishnavi_Rai_jez32z.jpg",
+  },
+  {
+    id: 13,
+    name: "Vinayak Yadav",
+    department: "Information Technology",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916386/IMG_20251126_185549_011_-_VINAYAK_YADAV_ehfish.webp",
+  },
+  {
+    id: 14,
+    name: "Yashvardhan Ojha",
+    department: "Computer Science and Engineering",
+    image: "",
+  },
 ];
 
 const sophomoreTeam = [
-  { id: 1, name: 'Aditi Mishra', department: 'Electronics and Communication Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646713/IMG_20251028_064513492_2_-_Akansha_Mishra_tmbqyz.jpg' },
-  { id: 2, name: 'Anurag Banerjee', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646717/1000071523_-_Anurag_Banerjee_vsb06m.jpg' },
-  { id: 3, name: 'Anushka Shukla', department: 'Civil Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648279/1000140304_-_Anushka_Shukla_leluen.jpg' },
-  { id: 4, name: 'Arpit Tripathi', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641690/1000070315-removebg-preview_-_Arpit_Tripathi_lovf7l.png' },
-  { id: 5, name: 'Gaurav', department: 'Electrical Engineering', image: '' },
-  { id: 6, name: 'Kaustubh Nigam', department: 'Information Technology', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621857/20250625_133952_-_Kaustubh_Nigam_p5yl7v.jpg' },
-  { id: 7, name: 'Mayank Sharma', department: 'Civil Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916451/inbound5258959913854647297_2_-_Mayank_Sharma_cvimcl.jpg' },
-  { id: 8, name: 'Ojashwani Singh Chauhan', department: 'Mechanical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641689/Screenshot_20251213_164042_Gallery_-_ojashwani_singh_cb9jdj.jpg' },
-  { id: 9, name: 'Prathit Mishra', department: 'Electrical Engineering', image: '' },
-  { id: 10, name: 'Pratyaditya Singh', department: 'Electrical Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765785418/9610jk_-_Pratyaditya_Singh_qmwnbv.jpg' },
-  { id: 11, name: 'Ritesh Yadav', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg' },
-  { id: 12, name: 'Shambhavi', department: 'Information Technology', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648259/IMG-20250724-WA0018_-_Shambhavi_wd2pe4.jpg' },
-  { id: 13, name: 'Shlok', department: 'Computer Science and Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg' },
-  { id: 14, name: 'Shivam Gupta', department: 'Electronics and Communication Engineering', image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png' },
-  { id: 15, name: 'Tushit Shaurya', department: 'Electrical Engineering', image: '' },
+  {
+    id: 1,
+    name: "Aditi Mishra",
+    department: "Electronics and Communication Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646713/IMG_20251028_064513492_2_-_Akansha_Mishra_tmbqyz.jpg",
+  },
+  {
+    id: 2,
+    name: "Anurag Banerjee",
+    department: "Computer Science and Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646717/1000071523_-_Anurag_Banerjee_vsb06m.jpg",
+  },
+  {
+    id: 3,
+    name: "Anushka Shukla",
+    department: "Civil Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648279/1000140304_-_Anushka_Shukla_leluen.jpg",
+  },
+  {
+    id: 4,
+    name: "Arpit Tripathi",
+    department: "Computer Science and Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641690/1000070315-removebg-preview_-_Arpit_Tripathi_lovf7l.png",
+  },
+  { id: 5, name: "Gaurav", department: "Electrical Engineering", image: "" },
+  {
+    id: 6,
+    name: "Kaustubh Nigam",
+    department: "Information Technology",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621857/20250625_133952_-_Kaustubh_Nigam_p5yl7v.jpg",
+  },
+  {
+    id: 7,
+    name: "Mayank Sharma",
+    department: "Civil Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765916451/inbound5258959913854647297_2_-_Mayank_Sharma_cvimcl.jpg",
+  },
+  {
+    id: 8,
+    name: "Ojashwani Singh Chauhan",
+    department: "Mechanical Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641689/Screenshot_20251213_164042_Gallery_-_ojashwani_singh_cb9jdj.jpg",
+  },
+  {
+    id: 9,
+    name: "Prathit Mishra",
+    department: "Electrical Engineering",
+    image: "",
+  },
+  {
+    id: 10,
+    name: "Pratyaditya Singh",
+    department: "Electrical Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765785418/9610jk_-_Pratyaditya_Singh_qmwnbv.jpg",
+  },
+  {
+    id: 11,
+    name: "Ritesh Yadav",
+    department: "Computer Science and Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621946/ritesh_f7iw3x.jpg",
+  },
+  {
+    id: 12,
+    name: "Shambhavi",
+    department: "Information Technology",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765648259/IMG-20250724-WA0018_-_Shambhavi_wd2pe4.jpg",
+  },
+  {
+    id: 13,
+    name: "Shlok",
+    department: "Computer Science and Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg",
+  },
+  {
+    id: 14,
+    name: "Shivam Gupta",
+    department: "Electronics and Communication Engineering",
+    image:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png",
+  },
+  {
+    id: 15,
+    name: "Tushit Shaurya",
+    department: "Electrical Engineering",
+    image: "",
+  },
 ];
 
 // --- ANIMATION VARIANTS ---
@@ -59,42 +261,43 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { type: "spring" as const, stiffness: 50, damping: 15 }
-  }
+    transition: { type: "spring" as const, stiffness: 50, damping: 15 },
+  },
 };
 
 // --- COMPONENT ---
 
 export default function TeamPage() {
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 100 
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - offset
+      const offset = 100;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - offset;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     }
-  }
+  };
 
   return (
     <div className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background: Orange/Gold Gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-white via-orange-50/30 to-amber-100/20" />
-      
+
       {/* Particles */}
       <div className="absolute inset-0 pointer-events-none">
         <ParticlesBackground />
@@ -129,19 +332,27 @@ export default function TeamPage() {
         >
           {/* Final Year: Deep Burnt Orange (Replaced Red) */}
           <motion.button
-            onClick={() => scrollToSection('final-year')}
-            className="bg-orange-800 hover:bg-orange-900 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-800"
-            whileHover={{ scale: 1.05, y: -2 }}
+            onClick={() => scrollToSection("final-year")}
+            className="bg-orange-800 hover:bg-orange-900 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-800 transform-gpu md:hover:-translate-y-1"
+            whileHover={
+              typeof window !== "undefined" && window.innerWidth > 640
+                ? { scale: 1.05, y: -2 }
+                : undefined
+            }
             whileTap={{ scale: 0.95 }}
           >
             Final Year
           </motion.button>
-          
+
           {/* Pre-Final Year: Bright Sunset Orange */}
           <motion.button
-            onClick={() => scrollToSection('pre-final')}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-600"
-            whileHover={{ scale: 1.05, y: -2 }}
+            onClick={() => scrollToSection("pre-final")}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-600 transform-gpu md:hover:-translate-y-1"
+            whileHover={
+              typeof window !== "undefined" && window.innerWidth > 640
+                ? { scale: 1.05, y: -2 }
+                : undefined
+            }
             whileTap={{ scale: 0.95 }}
           >
             Pre-Final Year
@@ -149,9 +360,13 @@ export default function TeamPage() {
 
           {/* Sophomore: White with Orange Accent */}
           <motion.button
-            onClick={() => scrollToSection('sophomore')}
-            className="bg-white border-2 border-orange-900 text-black hover:bg-orange-50 font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg shadow-lg transition-all duration-300 focus:outline-none"
-            whileHover={{ scale: 1.05, y: -2 }}
+            onClick={() => scrollToSection("sophomore")}
+            className="bg-white border-2 border-orange-900 text-black hover:bg-orange-50 font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none transform-gpu md:hover:-translate-y-1"
+            whileHover={
+              typeof window !== "undefined" && window.innerWidth > 640
+                ? { scale: 1.05, y: -2 }
+                : undefined
+            }
             whileTap={{ scale: 0.95 }}
           >
             Sophomore

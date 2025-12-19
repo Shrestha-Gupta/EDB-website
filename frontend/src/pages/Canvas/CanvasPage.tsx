@@ -3,63 +3,6 @@ import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import TestimonialCard from "../../components/Canvas/TestimonialCard";
 
-const canvasStories = [
-  {
-    id: 1,
-    author: "Priya Sharma",
-    batch: "2016-2020",
-    title: "My Journey from Campus to Publishing House",
-    excerpt:
-      "The Editorial Board was where I discovered my passion for storytelling. The late-night editing sessions, passionate debates about literature, and the camaraderie shaped who I am today...",
-    date: "2 weeks ago",
-    likes: 124,
-    color: "brand-red",
-  },
-  {
-    id: 2,
-    author: "Rajesh Kumar",
-    batch: "2012-2016",
-    title: "Lessons in Leadership and Creativity",
-    excerpt:
-      "Leading the editorial board taught me more than any classroom ever could. From managing deadlines to fostering creativity in others, these experiences became the foundation of my career in journalism...",
-    date: "1 month ago",
-    likes: 98,
-    color: "brand-orange",
-  },
-  {
-    id: 3,
-    author: "Anjali Verma",
-    batch: "2008-2012",
-    title: "The Power of Words and Community",
-    excerpt:
-      "What started as a student organization became a lifelong community. The friendships, the mentorship, and the creative freedom we enjoyed continue to inspire my work in content strategy...",
-    date: "3 months ago",
-    likes: 156,
-    color: "brand-cyan",
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const storyVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
-
 export default function CanvasPage() {
   return (
     <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6 relative">
