@@ -55,3 +55,14 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: #FBBF24;
 }
+
+/* Animated gradient used as subtle divider */
+@keyframes fadeGradient {
+  0% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 0.85; transform: translateY(-2px); }
+  100% { opacity: 0.35; transform: translateY(0); }
+}
+
+.animate-fadeGradient {
+  animation: fadeGradient 6s ease-in-out infinite;
+}
