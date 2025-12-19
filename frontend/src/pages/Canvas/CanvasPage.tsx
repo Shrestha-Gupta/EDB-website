@@ -116,7 +116,7 @@ export default function CanvasPage() {
 
           <div className="space-y-12">
             <TestimonialCard
-              imageTitle="THE EDITORIAL BOARD"
+              imageTitle=""
               imageSubtitle="Where creativity meets journalism"
               image="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765646717/1000071523_-_Anurag_Banerjee_vsb06m.jpg"
               quote="The Editorial Board transformed my perspective on storytelling. It wasn't just about writing articles—it was about understanding the power of words to create change, inspire action, and build communities. Every meeting felt like a masterclass in creative thinking."

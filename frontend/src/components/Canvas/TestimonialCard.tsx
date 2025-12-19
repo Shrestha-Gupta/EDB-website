@@ -24,7 +24,7 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <motion.div
-      className="grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-2xl max-w-6xl mx-auto bg-white border-2 border-orange-100"
+      className="relative grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-2xl max-w-6xl mx-auto bg-white items-stretch h-128 md:h-128"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -32,17 +32,17 @@ export default function TestimonialCard({
     >
       {/* Left: Image Section */}
       <motion.div
-        className="relative h-80 md:h-auto overflow-hidden bg-orange-50"
+        className="relative h-128 md:h-128 overflow-hidden bg-orange-50"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
       >
         {image ? (
           <img
             src={image}
             alt={imageTitle || "Testimonial"}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         ) : (
           <div className="w-full h-full bg-linear-to-br from-orange-500 to-amber-600 flex items-center justify-center">
@@ -53,7 +53,7 @@ export default function TestimonialCard({
         {/* Overlay Text */}
         {(imageTitle || imageSubtitle) && (
           <motion.div
-            className="absolute left-0 right-0 bottom-0 p-6 md:p-8 bg-black/60 md:bg-black/30 backdrop-blur-sm rounded-bl-3xl rounded-br-3xl overflow-hidden"
+            className="absolute left-0 right-0 bottom-0 p-6 md:p-8 bg-black/60 md:bg-black/25 backdrop-blur-none rounded-bl-3xl rounded-t-md rounded-br-3xl overflow-hidden"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -76,7 +76,8 @@ export default function TestimonialCard({
 
             {imageSubtitle && (
               <motion.h3
-                className="text-xl md:text-2xl font-extrabold text-white leading-tight drop-shadow-lg"
+                className="text-xl md:text-2xl font-extrabold leading-tight drop-shadow-lg"
+                style={{ color: "rgba(255,255,255,0.90)" }}
                 initial={{ opacity: 0, y: 6 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -91,11 +92,11 @@ export default function TestimonialCard({
 
       {/* Right: Quote Section */}
       <motion.div
-        className="relative bg-linear-to-br from-orange-50 via-amber-50 to-orange-100 p-8 md:p-12 flex flex-col justify-between min-h-80"
+        className="relative bg-linear-to-br from-orange-50 via-amber-50 to-orange-100 p-8 md:p-12 flex flex-col justify-between h-128"
         initial={{ opacity: 0, x: 30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
       >
         {/* Quote Mark */}
         <motion.div
@@ -110,11 +111,11 @@ export default function TestimonialCard({
 
         {/* Quote Text */}
         <motion.blockquote
-          className="text-gray-800 text-xl md:text-2xl font-light leading-relaxed mb-8 flex-1 italic"
+          className="text-gray-800 text-lg md:text-xl font-light leading-relaxed mb-6 flex-1 italic"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          transition={{ delay: 0.55, duration: 0.5 }}
         >
           {quote}
         </motion.blockquote>
