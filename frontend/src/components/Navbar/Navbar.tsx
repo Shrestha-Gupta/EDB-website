@@ -240,9 +240,10 @@ export default function Navbar() {
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
             />
             <motion.img
-              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765566120/alba_tq7bj1.png"
+              src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
               alt="The Editorial Board"
-              className="h-6 md:h-8 object-contain hidden sm:block font-serif tracking-tight"
+              className="h-6 md:h-8 object-contain hidden sm:block mix-blend-normal"
+              style={{ backgroundColor: "transparent" }}
               whileHover={{ scale: 1.08 }}
               transition={{ duration: 0.3 }}
             />

@@ -158,98 +158,7 @@ export default function CanvasPage() {
         </div>
 
         {/* Stories Grid */}
-        <motion.div
-          className="space-y-8 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {canvasStories.map((story) => (
-            <motion.article
-              key={story.id}
-              variants={storyVariants}
-              className="group"
-            >
-              <div className="bg-brand-white border-4 border-brand-gold hover:border-brand-red transition-all duration-300 overflow-hidden shadow-lg">
-                <div className="p-8">
-                  {/* Author Info */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                      <div
-                        className={`w-16 h-16 rounded-full bg-${story.color} flex items-center justify-center text-white text-2xl font-bold`}
-                      >
-                        {story.author.charAt(0)}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-brand-black group-hover:text-brand-red transition-colors">
-                          {story.author}
-                        </h3>
-                        <p className="text-brand-black/60">{story.batch}</p>
-                      </div>
-                    </div>
-                    <span className="text-brand-black/50 text-sm">
-                      {story.date}
-                    </span>
-                  </div>
-
-                  {/* Story Content */}
-                  <h2 className="text-3xl font-serif font-bold text-brand-black mb-4 group-hover:text-brand-red transition-colors">
-                    {story.title}
-                  </h2>
-                  <p className="text-lg text-brand-black/70 mb-6 leading-relaxed">
-                    {story.excerpt}
-                  </p>
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between pt-6 border-t border-brand-gold/30">
-                    <div className="flex gap-6 items-center">
-                      <motion.button
-                        className="flex items-center gap-2 text-brand-red hover:text-brand-red"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                        </svg>
-                        <span className="font-semibold">{story.likes}</span>
-                      </motion.button>
-                      <motion.button
-                        className="flex items-center gap-2 text-brand-cyan hover:text-brand-teal"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                          />
-                        </svg>
-                        <span className="font-semibold">Comment</span>
-                      </motion.button>
-                    </div>
-                    <motion.button
-                      className="text-brand-black hover:text-brand-orange font-bold"
-                      whileHover={{ x: 5 }}
-                    >
-                      Read More →
-                    </motion.button>
-                  </div>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
+        
 
         {/* Share Your Story CTA */}
         <motion.div
@@ -266,52 +175,20 @@ export default function CanvasPage() {
             your journey, lessons, and memories on Canvas.
           </p>
           <motion.button
-            className="bg-linear-to-r from-brand-red to-brand-red text-white font-bold py-4 px-12 text-lg"
+            className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 30px rgba(196, 30, 58, 0.3)",
             }}
             whileTap={{ scale: 0.95 }}
           >
-            WRITE YOUR STORY
+            <div className="cursor-pointer rounded-3xl p-2">
+            <button>WRITE YOUR STORY</button>
+            </div>
+            
           </motion.button>
         </motion.div>
 
-        {/* Guidelines */}
-        <motion.div
-          className="mt-12 bg-brand-cyan/10 border-4 border-brand-cyan p-10"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <h3 className="text-2xl font-serif font-bold text-brand-cyan mb-4">
-            Submission Guidelines
-          </h3>
-          <ul className="space-y-3 text-brand-black/70">
-            <li className="flex items-start gap-3">
-              <span className="text-brand-cyan font-bold text-xl">•</span>
-              <span>
-                Share authentic experiences from your time with The Editorial
-                Board
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-brand-cyan font-bold text-xl">•</span>
-              <span>Stories should be 500-1500 words</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-brand-cyan font-bold text-xl">•</span>
-              <span>
-                Focus on lessons learned, challenges overcome, or memorable
-                moments
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-brand-cyan font-bold text-xl">•</span>
-              <span>All submissions are reviewed before publishing</span>
-            </li>
-          </ul>
-        </motion.div>
       </motion.div>
     </div>
   );
