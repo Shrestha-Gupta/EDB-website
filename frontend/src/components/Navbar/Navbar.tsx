@@ -229,7 +229,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="w-full px-6 py-3">
+      <div className="w-full py-3">
         <div className="flex justify-between items-center gap-8">
           {/* Left: Logo and Brand Name */}
           <Link to="/" className="flex items-center gap-0 group shrink-0">
@@ -239,14 +239,14 @@ export default function Navbar() {
               loading="lazy"
               width={120}
               height={40}
-              className="h-8 md:h-10 object-contain mr-1"
+              className="h-8 md:h-10 object-contain"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
             />
             <motion.img
               src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
               alt="The Editorial Board"
-              className="h-6 md:h-8 object-contain block mix-blend-normal"
+              className="h-6 md:h-8 object-contain block mix-blend-normal -ml-8"
               style={{ backgroundColor: "transparent" }}
               whileHover={{ scale: 1.08 }}
               transition={{ duration: 0.3 }}

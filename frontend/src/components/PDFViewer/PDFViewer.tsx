@@ -19,6 +19,7 @@ export default function PDFViewer({ pdfUrl, onClose, title }: PDFViewerProps) {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [scale, setScale] = useState<number>(1.0);
   const [loading, setLoading] = useState<boolean>(true);
+  const [useGoogleViewer, setUseGoogleViewer] = useState<boolean>(false);
 
   // Check if it's a Google Drive link
   const isGoogleDrive = pdfUrl.includes("drive.google.com");
@@ -31,7 +32,8 @@ export default function PDFViewer({ pdfUrl, onClose, title }: PDFViewerProps) {
         return `https://drive.google.com/file/d/${fileId}/preview`;
       }
     }
-    return url;
+    // Fallback to Google Docs Viewer for other external URLs
+    return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
   };
 
   const embedUrl = getEmbedUrl(pdfUrl);
@@ -42,8 +44,9 @@ export default function PDFViewer({ pdfUrl, onClose, title }: PDFViewerProps) {
   }
 
   function onDocumentLoadError(error: Error): void {
-    console.error("Error loading PDF:", error);
+    console.warn("PDF Load Error, switching to Google Viewer:", error);
     setLoading(false);
+    setUseGoogleViewer(true);
   }
 
   const goToPrevPage = () => {
@@ -121,7 +124,7 @@ export default function PDFViewer({ pdfUrl, onClose, title }: PDFViewerProps) {
 
             {/* PDF Content */}
             <div className="flex-1 overflow-hidden bg-gray-100 min-h-0">
-              {isGoogleDrive ? (
+              {isGoogleDrive || useGoogleViewer ? (
                 <iframe
                   src={embedUrl}
                   className="w-full h-full border-0"

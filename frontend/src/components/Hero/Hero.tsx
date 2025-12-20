@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Hero() {
   return (
     <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 relative overflow-hidden -mt-20 pt-20">
@@ -23,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* 3. Main Content */}
-      <div className="text-center max-w-5xl mx-auto relative z-10 pt-20 md:pt-0">
+      <div className="text-center max-w-5xl mx-auto relative z-10 pt-10 md:pt-0">
         {/* Sanskrit Text */}
         <div className="inline-block mb-6 relative">
           <p
@@ -71,14 +73,16 @@ export default function Hero() {
         </p>
 
         {/* Optional CTA Button */}
-        <button
-          className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1"
-          style={{
-            animation: "fadeInUp 1.0s ease-out 1.4s both",
-          }}
-        >
-          Read Latest Issue
-        </button>
+        <Link to="/publications">
+          <button
+            className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+            style={{
+              animation: "fadeInUp 1.0s ease-out 1.4s both",
+            }}
+          >
+            Read Latest Issue
+          </button>
+        </Link>
       </div>
 
       {/* 4. CSS Keyframes */}
