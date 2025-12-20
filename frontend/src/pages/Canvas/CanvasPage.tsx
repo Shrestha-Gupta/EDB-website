@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import TestimonialCard from "../../components/Canvas/TestimonialCard";
+import PageHero from "../../components/PageHero/PageHero";
 
 export default function CanvasPage() {
   return (
@@ -14,20 +15,12 @@ export default function CanvasPage() {
         transition={{ duration: 0.8 }}
       >
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-cyan via-brand-teal to-brand-gold bg-clip-text text-transparent mb-6">
-            Canvas
-          </h1>
-          <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
-            A space for alumni and board members to share their experiences,
-            reflections, and wisdom with the community.
-          </p>
-        </motion.div>
+        {/* Header */}
+        <PageHero 
+          title="Canvas" 
+          subtitle="Reflections"
+          description="A space for alumni and board members to share their experiences, reflections, and wisdom with the community."
+        />
 
         {/* Featured Quote */}
         <motion.div

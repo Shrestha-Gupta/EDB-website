@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 // Ensure these paths match your project structure
 import TeamCard from "../components/TeamCard/TeamCard";
 import ParticlesBackground from "../components/ParticlesBackground/ParticlesBackground";
+import PageHero from "../components/PageHero/PageHero";
 
 // --- DATA ARRAYS ---
 const finalYearTeam = [
@@ -310,18 +311,12 @@ export default function TeamPage() {
         transition={{ duration: 0.8 }}
       >
         {/* Header - Fixed: Using ONLY Orange/Amber shades (Removed Red) */}
-        <motion.div
-          className="text-center mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-orange-800 via-orange-600 to-amber-500 bg-clip-text text-transparent mb-4 sm:mb-6 tracking-tight leading-tight">
-            Our Team
-          </h1>
-          {/* Decorative Line - Fixed Gradient */}
-          <div className="w-24 h-1 bg-linear-to-r from-orange-800 via-orange-600 to-amber-500 mx-auto rounded-full" />
-        </motion.div>
+        {/* Header */}
+        <PageHero 
+          title="Our Team" 
+          subtitle="The Editorial Board"
+          description="A group of passionate individuals dedicated to the art of expression and the power of words."
+        />
 
         {/* Navigation Buttons - Fixed: Orange Theme Only */}
         <motion.div

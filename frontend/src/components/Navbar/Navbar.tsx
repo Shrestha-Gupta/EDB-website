@@ -232,21 +232,21 @@ export default function Navbar() {
       <div className="w-full px-6 py-3">
         <div className="flex justify-between items-center gap-8">
           {/* Left: Logo and Brand Name */}
-          <Link to="/" className="flex items-center gap-2 group shrink-0">
+          <Link to="/" className="flex items-center gap-0 group shrink-0">
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
               loading="lazy"
               width={120}
               height={40}
-              className="h-8 md:h-10 object-contain"
+              className="h-8 md:h-10 object-contain mr-1"
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
             />
             <motion.img
               src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
               alt="The Editorial Board"
-              className="h-6 md:h-8 object-contain hidden sm:block mix-blend-normal"
+              className="h-6 md:h-8 object-contain block mix-blend-normal"
               style={{ backgroundColor: "transparent" }}
               whileHover={{ scale: 1.08 }}
               transition={{ duration: 0.3 }}

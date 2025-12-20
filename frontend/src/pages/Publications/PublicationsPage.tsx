@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground.tsx";
 import PDFViewer from "../../components/PDFViewer/PDFViewer.tsx";
+import PageHero from "../../components/PageHero/PageHero.tsx";
 
 type TabType = "all" | "newsletter" | "magazine";
 
@@ -766,20 +767,12 @@ export default function PublicationsPage() {
         transition={{ duration: 0.8 }}
       >
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-red-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent mb-6">
-            Publications
-          </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Discover our collection of literary works, journals, and
-            anthologies.
-          </p>
-        </motion.div>
+        {/* Header */}
+        <PageHero 
+          title="Publications" 
+          subtitle="Literary Works"
+          description="Discover our collection of literary works, journals, and anthologies."
+        />
 
         {/* Latest Issue Carousel */}
         <motion.div

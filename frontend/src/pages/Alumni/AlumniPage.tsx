@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
+import PageHero from '../../components/PageHero/PageHero'
 
 const batches = [
   { year: '2020-2024', members: 42, achievements: 'Published 3 anthologies, 12 awards', icon: Award },
@@ -92,22 +93,6 @@ const itemVariants = {
 
 export default function AlumniPage() {
   const [selectedBatch, setSelectedBatch] = useState<string>('2020-2024')
-  const [displayedText, setDisplayedText] = useState('')
-  const fullText = 'Alumni & Legacy'
-  
-  useEffect(() => {
-    let currentIndex = 0
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setDisplayedText(fullText.slice(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 100)
-    
-    return () => clearInterval(typingInterval)
-  }, [])
 
   return (
     <div className="bg-white min-h-screen relative overflow-hidden">
@@ -116,81 +101,14 @@ export default function AlumniPage() {
         <ParticlesBackground />
       </div>
 
-      {/* Hero Section with Image */}
-      <motion.div 
-        className="relative h-[60vh] md:h-[70vh] overflow-hidden group"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <motion.img 
-            src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765643612/atal_r2cyx8.jpg"
-            alt="Alumni"
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-          {/* Overlay: Warm Sunset Gradient (Softer) */}
-          <div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/50 to-orange-800/30" />
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center px-6">
-          <motion.div
-            className="text-center max-w-4xl"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <h1 
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tight leading-tight"
-              style={{ 
-                textShadow: '0 4px 20px rgba(0,0,0,0.9), 0 0 30px rgba(251, 146, 60, 0.3)' // Lighter orange shadow
-              }}
-            >
-              <span style={{ color: '#ffffff' }}>{displayedText}</span>
-              {/* Softer orange cursor */}
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                className="inline-block w-1 h-16 sm:h-20 md:h-24 lg:h-28 bg-orange-400 ml-2 align-middle"
-              />
-            </h1>
-            {/* Softer gradient line */}
-            <div className="w-32 h-1 bg-linear-to-r from-orange-500 via-amber-300 to-orange-500 mx-auto mb-6 rounded-full" />
-            <p 
-              className="text-xl sm:text-2xl md:text-3xl text-gray-100 mb-8 font-light"
-              style={{ 
-                textShadow: '0 2px 10px rgba(0,0,0,0.8)'
-              }}
-            >
-              Celebrating the legacy and achievements of our distinguished alumni.
-            </p>
-            {/* Softer button colors */}
-            <motion.button
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-orange-400/30 focus:outline-none border-2 border-orange-500"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Join Alumni Network
-            </motion.button>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-white/50 rounded-full" />
-          </div>
-        </motion.div>
-      </motion.div>
+      {/* Hero Section */}
+      <div className="pt-24 px-6">
+        <PageHero 
+            title="Alumni & Legacy" 
+            subtitle="Our History"
+            description="Celebrating the legacy and achievements of our distinguished alumni."
+        />
+      </div>
 
       <motion.div
         className="max-w-7xl mx-auto px-6 relative z-10"

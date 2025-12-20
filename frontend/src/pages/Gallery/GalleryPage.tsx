@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
+import PageHero from '../../components/PageHero/PageHero'
 
 const galleryCategories = ['All', 'Events', 'Campus', 'Workshops', 'Celebrations']
 
@@ -54,19 +55,12 @@ export default function GalleryPage() {
         transition={{ duration: 0.8 }}
       >
         {/* Header */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h1 className="text-6xl md:text-7xl font-serif font-bold bg-linear-to-r from-brand-gold via-brand-orange to-brand-red bg-clip-text text-transparent mb-6">
-            Gallery
-          </h1>
-          <p className="text-xl text-brand-black/70 max-w-3xl mx-auto">
-            Capturing moments of creativity, collaboration, and celebration at The Editorial Board.
-          </p>
-        </motion.div>
+        {/* Header */}
+        <PageHero 
+          title="Gallery" 
+          subtitle="Captured Moments"
+          description="Capturing moments of creativity, collaboration, and celebration at The Editorial Board."
+        />
 
         {/* Category Filter */}
         <motion.div

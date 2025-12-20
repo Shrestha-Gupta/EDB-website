@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import ParticlesBackground from "../ParticlesBackground/ParticlesBackground";
+import PageHero from "../PageHero/PageHero";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -105,17 +106,11 @@ export default function Contact() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4">
-            Get in touch
-          </h1>
-          <div className="w-28 h-1 bg-linear-to-r from-amber-400 via-yellow-300 to-amber-400 mx-auto rounded-full opacity-90" />
-        </motion.div>
+        {/* Section Header */}
+        <PageHero 
+          title="Get in touch" 
+          subtitle="Contact Us"
+        />
 
         {/* Contact Container */}
         <div className="grid lg:grid-cols-5 gap-8 bg-transparent rounded-3xl overflow-hidden">
