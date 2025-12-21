@@ -95,14 +95,14 @@ export default function AlumniPage() {
   const [selectedBatch, setSelectedBatch] = useState<string>('2020-2024')
 
   return (
-    <div className="bg-white min-h-screen relative overflow-hidden">
-      {/* Background Particles - fixed to allow clicking */}
-      <div className="absolute inset-0 pointer-events-none">
-        <ParticlesBackground />
-      </div>
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+      <ParticlesBackground />
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Hero Section */}
-      <div className="pt-24 px-6">
+      <div className="px-6">
         <PageHero 
             title="Alumni & Legacy" 
             subtitle="Our History"

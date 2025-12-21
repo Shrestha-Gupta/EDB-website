@@ -754,11 +754,12 @@ export default function PublicationsPage() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-24 pb-20 px-6 relative overflow-hidden">
-      {/* Background Particles (Pointer events none so you can click buttons) */}
-      <div className="absolute inset-0 pointer-events-none">
-        <ParticlesBackground />
-      </div>
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+      <ParticlesBackground />
+      
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
         className="max-w-7xl mx-auto relative z-10"

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
-    <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 relative overflow-hidden -mt-20 pt-20">
+    <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 relative overflow-hidden -mt-20 md:pt-0">
       {/* 1. Background: Pattern + Gradient Tint */}
       <div className="absolute inset-0 z-0 pointer-events-none -top-20">
         {/* INCREASED DOT SIZE: Changed 1px to 3px and spacing to 30px */}
@@ -25,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* 3. Main Content */}
-      <div className="text-center max-w-5xl mx-auto relative z-10 pt-10 md:pt-0">
+      <div className="text-center max-w-5xl mx-auto relative z-10 md:pt-0">
         {/* Sanskrit Text */}
         <div className="inline-block mb-6 relative">
           <p

@@ -5,6 +5,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import 'swiper/swiper-bundle.css'
 import PDFViewer from '../components/PDFViewer/PDFViewer'
 import PageHero from '../components/PageHero/PageHero'
+import ParticlesBackground from '../components/ParticlesBackground/ParticlesBackground'
 
 interface MagazineIssue {
   id: number
@@ -40,8 +41,12 @@ export default function MagazineIssues() {
   const [selectedIssue, setSelectedIssue] = useState<MagazineIssue | null>(null)
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+      <ParticlesBackground />
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         {/* Header */}
         <PageHero 

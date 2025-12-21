@@ -295,14 +295,12 @@ export default function TeamPage() {
   };
 
   return (
-    <div className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background: Orange/Gold Gradient */}
-      <div className="absolute inset-0 bg-linear-to-br from-white via-orange-50/30 to-amber-100/20" />
-
-      {/* Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        <ParticlesBackground />
-      </div>
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+      <ParticlesBackground />
+      
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
         className="relative z-10 max-w-7xl mx-auto"

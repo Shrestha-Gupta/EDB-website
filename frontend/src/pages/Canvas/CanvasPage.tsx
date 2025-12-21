@@ -6,8 +6,11 @@ import PageHero from "../../components/PageHero/PageHero";
 
 export default function CanvasPage() {
   return (
-    <div className="bg-brand-white min-h-screen pt-24 pb-20 px-6 relative">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
       <motion.div
         className="max-w-5xl mx-auto"
         initial={{ opacity: 0 }}
