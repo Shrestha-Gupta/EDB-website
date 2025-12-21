@@ -94,7 +94,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="min-h-screen relative py-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Warm light background gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-stone-50 via-orange-50/30 to-amber-50/20" />

@@ -43,7 +43,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative bg-white py-24 px-6 overflow-hidden"
+      className="relative bg-white px-6 overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
