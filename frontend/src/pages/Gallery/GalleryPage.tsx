@@ -7,26 +7,6 @@ import galleryData from '../../data/galleryData.json'
 const galleryCategories = galleryData.categories
 const images = galleryData.images
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08
-    }
-  }
-}
-
-const imageVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5
-    }
-  }
-}
 
 export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
@@ -84,62 +64,45 @@ export default function GalleryPage() {
           ))}
         </motion.div>
 
-        {/* Gallery Grid */}
+        {/* Gallery Grid - Pinterest Style Masonry */}
         <motion.div
-          className="grid md:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          key={selectedCategory}
+          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6"
+          layout
         >
           {filteredImages.map((image) => (
             <motion.div
               key={image.id}
-              variants={imageVariants}
-              className="group cursor-pointer"
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5 }}
+              className="break-inside-avoid mb-6 relative group w-full"
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-stone-200/60 hover:border-amber-200">
-                {/* Image */}
-                <div className="aspect-square relative overflow-hidden">
-                  <motion.img 
-                    src={image.imageUrl} 
-                    alt={image.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  />
+              <div className="relative overflow-hidden rounded-3xl bg-gray-200">
+                <img
+                  src={image.imageUrl}
+                  alt={image.title}
+                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                
+                {/* Pinterest-like Overlay */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6">
+
                   
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-
-                  {/* Title Overlay */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 p-6 transform"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-xl mb-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                        {image.title}
-                      </h3>
-                      <div className="h-1 w-12 bg-linear-to-r from-amber-500 to-orange-500 rounded-full mb-2 transform origin-left group-hover:scale-x-150 transition-transform duration-300" />
-                      <p className="text-white font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                        View Details →
-                      </p>
-                    </div>
-                  </motion.div>
-
-                  {/* Shimmer Effect on Hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                  />
+                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-white font-bold text-lg mb-1 drop-shadow-md">
+                      {image.title}
+                    </h3>
+                    <p className="text-white/80 text-xs font-medium uppercase tracking-wider backdrop-blur-sm bg-black/20 text-center inline-block px-2 py-1 rounded-md">
+                      {image.category}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Subtle sheen effect */}
+                <div className="absolute inset-0 pointer-events-none bg-linear-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </motion.div>
           ))}
