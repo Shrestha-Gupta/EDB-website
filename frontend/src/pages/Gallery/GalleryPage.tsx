@@ -2,20 +2,10 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
+import galleryData from '../../data/galleryData.json'
 
-const galleryCategories = ['All', 'Events', 'Campus', 'Workshops', 'Celebrations']
-
-const images = [
-  { id: 1, category: 'Events', title: 'Literary Festival 2024', color: 'from-brand-red to-brand-red' },
-  { id: 2, category: 'Campus', title: 'Editorial Board Office', color: 'from-brand-orange to-brand-gold' },
-  { id: 3, category: 'Workshops', title: 'Creative Writing Workshop', color: 'from-brand-gold to-brand-yellow' },
-  { id: 4, category: 'Celebrations', title: 'Book Launch Ceremony', color: 'from-brand-cyan to-brand-teal' },
-  { id: 5, category: 'Events', title: 'Poetry Slam Night', color: 'from-brand-red to-brand-orange' },
-  { id: 6, category: 'Campus', title: 'Reading Corner', color: 'from-brand-teal to-brand-cyan' },
-  { id: 7, category: 'Workshops', title: 'Photography Session', color: 'from-brand-gold to-brand-orange' },
-  { id: 8, category: 'Celebrations', title: 'Annual Awards', color: 'from-brand-red to-brand-gold' },
-  { id: 9, category: 'Events', title: 'Guest Lecture Series', color: 'from-brand-cyan to-brand-gold' }
-]
+const galleryCategories = galleryData.categories
+const images = galleryData.images
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,31 +54,36 @@ export default function GalleryPage() {
 
         {/* Category Filter */}
         <motion.div
-          className="flex gap-4 justify-center mb-12 flex-wrap"
+          className="flex flex-wrap gap-3 justify-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           {galleryCategories.map((category) => (
-            <motion.button
+            <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 font-bold border-2 transition-all ${
-                selectedCategory === category
-                  ? 'bg-linear-to-r from-brand-orange to-brand-gold text-white border-transparent'
-                  : 'border-brand-gold text-brand-black hover:border-brand-orange'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className={`
+                px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 relative overflow-hidden group
+                ${selectedCategory === category
+                  ? 'text-white shadow-lg shadow-amber-900/20'
+                  : 'text-stone-600 hover:text-amber-700 bg-white border border-stone-200'}
+              `}
             >
-              {category}
-            </motion.button>
+              {selectedCategory === category && (
+                <motion.div
+                  layoutId="activeCategory"
+                  className="absolute inset-0 bg-linear-to-r from-amber-600 to-orange-600"
+                />
+              )}
+              <span className="relative z-10">{category.toUpperCase()}</span>
+            </button>
           ))}
         </motion.div>
 
         {/* Gallery Grid */}
         <motion.div
-          className="grid md:grid-cols-3 gap-6"
+          className="grid md:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -99,39 +94,48 @@ export default function GalleryPage() {
               key={image.id}
               variants={imageVariants}
               className="group cursor-pointer"
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <div className="relative overflow-hidden shadow-xl border-4 border-brand-gold hover:border-brand-red transition-all duration-300">
-                {/* Image Placeholder */}
-                <div className={`aspect-square bg-linear-to-br ${image.color} relative overflow-hidden`}>
-                  <motion.div
-                    className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+              <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-stone-200/60 hover:border-amber-200">
+                {/* Image */}
+                <div className="aspect-square relative overflow-hidden">
+                  <motion.img 
+                    src={image.imageUrl} 
+                    alt={image.title}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                   />
                   
-                  {/* Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div
-                      className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
-                      whileHover={{ scale: 1.2, rotate: 180 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </motion.div>
-                  </div>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
                   {/* Title Overlay */}
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6"
-                    initial={{ y: 100 }}
-                    whileHover={{ y: 0 }}
-                    transition={{ duration: 0.3 }}
+                    className="absolute bottom-0 left-0 right-0 p-6 transform"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.4 }}
                   >
-                    <h3 className="text-white font-bold text-lg">{image.title}</h3>
-                    <p className="text-white/80 text-sm">{image.category}</p>
+                    <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-300">
+                      <h3 className="text-white font-bold text-xl mb-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                        {image.title}
+                      </h3>
+                      <div className="h-1 w-12 bg-linear-to-r from-amber-500 to-orange-500 rounded-full mb-2 transform origin-left group-hover:scale-x-150 transition-transform duration-300" />
+                      <p className="text-white font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        View Details →
+                      </p>
+                    </div>
                   </motion.div>
+
+                  {/* Shimmer Effect on Hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                  />
                 </div>
               </div>
             </motion.div>
