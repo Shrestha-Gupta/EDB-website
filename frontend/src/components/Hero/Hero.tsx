@@ -52,7 +52,7 @@ export default function Hero() {
 
         {/* Main Heading 2 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight"
           style={{
             animation:
               "slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both",
