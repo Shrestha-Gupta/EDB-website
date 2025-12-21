@@ -232,7 +232,7 @@ export default function Navbar() {
       <div className="w-full py-3">
         <div className="flex justify-between items-center gap-8">
           {/* Left: Logo and Brand Name */}
-          <Link to="/" className="flex items-center gap-0 group shrink-0">
+          <Link to="/" className="flex items-center -ml-5 gap-0 group shrink-0">
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
