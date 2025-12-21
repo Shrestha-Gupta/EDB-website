@@ -88,14 +88,14 @@ export default function GalleryPage() {
                 />
                 
                 {/* Pinterest-like Overlay */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 text-white">
 
                   
                   <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <h3 className="text-white font-bold text-lg mb-1 drop-shadow-md">
                       {image.title}
                     </h3>
-                    <p className="text-white/80 text-xs font-medium uppercase tracking-wider backdrop-blur-sm bg-black/20 text-center inline-block px-2 py-1 rounded-md">
+                    <p className="text-white text-xs font-medium uppercase tracking-wider backdrop-blur-sm bg-black/20 text-center inline-block px-2 py-1 rounded-md">
                       {image.category}
                     </p>
                   </div>
@@ -110,7 +110,7 @@ export default function GalleryPage() {
 
         {/* Upload CTA */}
         <motion.div
-          className="mt-20 bg-linear-to-r from-brand-orange/10 to-brand-gold/10 border-4 border-brand-orange p-12 text-center"
+          className="mt-20 bg-linear-to-r from-brand-orange/10 to-brand-gold/10 border-4 border-brand-orange p-12 text-center text-black"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -122,7 +122,7 @@ export default function GalleryPage() {
             Have photos from our events? Share them with the community!
           </p>
           <motion.button
-            className="bg-linear-to-r from-brand-orange to-brand-gold text-white font-bold py-4 px-10 text-lg"
+            className="bg-linear-to-r from-brand-orange to-brand-gold text-black font-bold py-4 px-10 text-lg rounded-full"
             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(255, 140, 66, 0.3)' }}
             whileTap={{ scale: 0.95 }}
           >
