@@ -82,7 +82,7 @@ export default function GalleryPage() {
               <div className="relative overflow-hidden rounded-3xl bg-gray-200">
                 <img
                   src={image.imageUrl}
-                  alt={image.title}
+                  alt={image.category}
                   className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
@@ -92,9 +92,6 @@ export default function GalleryPage() {
 
                   
                   <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-white font-bold text-lg mb-1 drop-shadow-md">
-                      {image.title}
-                    </h3>
                     <p className="text-white text-xs font-medium uppercase tracking-wider backdrop-blur-sm bg-black/20 text-center inline-block px-2 py-1 rounded-md">
                       {image.category}
                     </p>

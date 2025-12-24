@@ -4,71 +4,126 @@
     {
       "id": 1,
       "category": "Events",
-      "title": "Literary Festival 2024",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337328/IMG_20251220_200510_t5lcs9.jpg",
       "color": "from-slate-600 to-slate-700"
     },
     {
       "id": 2,
       "category": "Campus",
-      "title": "Editorial Board Office",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337328/IMG_20251220_200554_dhe3ht.jpg",
       "color": "from-stone-500 to-stone-600"
     },
     {
       "id": 3,
       "category": "Events",
-      "title": "Creative Writing Workshop",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337327/IMG_20251220_200452_yfeijy.jpg",
       "color": "from-amber-700 to-amber-800"
     },
     {
       "id": 4,
       "category": "Celebrations",
-      "title": "Book Launch Ceremony",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337327/IMG_20251220_200439_pwxjsa.jpg",
       "color": "from-teal-700 to-teal-800"
     },
     {
       "id": 5,
       "category": "Events",
-      "title": "Poetry Slam Night",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337325/IMG_20251220_200403_nv8nno.jpg",
       "color": "from-rose-700 to-rose-800"
     },
     {
       "id": 6,
       "category": "Campus",
-      "title": "Reading Corner",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337323/IMG_20251220_200338_dbreqt.jpg",
       "color": "from-cyan-700 to-cyan-800"
     },
     {
       "id": 7,
       "category": "Events",
-      "title": "Photography Session",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337316/IMG-20251220-WA0005_zrnbbd.jpg",
       "color": "from-orange-700 to-orange-800"
     },
     {
       "id": 8,
       "category": "Celebrations",
-      "title": "Annual Awards",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337326/IMG_20251220_200422_x5hbai.jpg",
       "color": "from-emerald-700 to-emerald-800"
     },
     {
       "id": 9,
       "category": "Events",
-      "title": "Guest Lecture Series",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337316/IMG-20251220-WA0009_ftfv7a.jpg"
     },
     {
       "id": 10,
       "category": "Events",
-      "title": "New test",
-      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337328/IMG_20251220_200510_t5lcs9.jpg",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337322/IMG_20251220_200259_ffbinh.jpg",
       "color": "from-gray-600 to-gray-700"
+    },
+    {
+      "id": 11,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337321/IMG_20251220_200241_mo2r3n.jpg"
+    },
+    {
+      "id": 12,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766560405/IMG_20251224_124137_igxy8h.jpg",
+      "color": "from-indigo-700 to-indigo-800"
+    },
+    {
+      "id": 13,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337320/IMG_20251220_200223_azidfm.jpg",
+      "color": "from-purple-700 to-purple-800"
+    },
+    {
+      "id": 14,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0011_iefbbr.jpg",
+      "color": "from-blue-700 to-blue-800"
+    },
+    {
+      "id": 15,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0012_c9e6wr.jpg",
+      "color": "from-pink-700 to-pink-800"
+    },
+    {
+      "id": 16,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0004_emyqqa.jpg",
+      "color": "from-violet-700 to-violet-800"
+    },
+    {
+      "id": 17,
+      "category": "Celebrations",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337316/IMG-20251220-WA0010_uwtf5w.jpg",
+      "color": "from-fuchsia-700 to-fuchsia-800"
+    },
+    {
+      "id": 18,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0008_gkrfuw.jpg",
+      "color": "from-slate-600 to-slate-700"
+    },
+    {
+      "id": 19,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0002_gpeb3x.jpg",
+      "color": "from-amber-700 to-amber-800"
+    },
+    {
+      "id": 20,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337318/IMG-20251220-WA0003_r9dgzs.jpg",
+      "color": "from-indigo-700 to-indigo-800"
+    },
+    {
+      "id": 21,
+      "category": "Events",
+      "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766337316/IMG-20251220-WA0007_w7agrc.jpg",
+      "color": "from-purple-700 to-purple-800"
     }
   ]
 }
