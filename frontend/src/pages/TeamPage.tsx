@@ -252,7 +252,7 @@ const sophomoreTeam = [
     id: 15,
     name: "Tushit Shaurya",
     department: "Electrical Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766607748/WhatsApp_Image_2025-12-25_at_1.44.58_AM_flck7n.jpg",
   },
 ];
 
