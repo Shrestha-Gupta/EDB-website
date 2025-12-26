@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Calendar, MapPin, ArrowRight, Star } from 'lucide-react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
@@ -16,7 +17,8 @@ const events = [
     description: 'Our flagship event celebrating literature, culture, and art. Three days of grand symposiums, celebrity panels, and cultural evenings.',
     status: 'upcoming',
     location: 'Main Auditorium',
-    theme: 'from-amber-700 to-orange-600'
+    theme: 'from-amber-700 to-orange-600',
+    image: 'https://images.unsplash.com/photo-1544928147-79a794764d68?q=80&w=1000&auto=format&fit=crop'
   },
   {
     id: 2,
@@ -29,7 +31,8 @@ const events = [
     description: 'Meaning "Sunrise" - a morning workshop dedicated to awakening your inner writer. Fiction and non-fiction techniques with renowned authors.',
     status: 'upcoming',
     location: 'Seminar Hall 1',
-    theme: 'from-orange-500 to-amber-500'
+    theme: 'from-orange-500 to-amber-500',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop'
   },
   {
     id: 3,
@@ -42,7 +45,8 @@ const events = [
     description: 'Celebrating eloquence. An open mic and slam poetry competition where words weave magic. Open to all departments.',
     status: 'registration-open',
     location: 'Open Air Theatre',
-    theme: 'from-yellow-600 to-amber-600'
+    theme: 'from-yellow-600 to-amber-600',
+    image: 'https://images.unsplash.com/photo-1470472304068-4398a9cafab0?q=80&w=1000&auto=format&fit=crop'
   },
   {
     id: 4,
@@ -55,7 +59,8 @@ const events = [
     description: 'A classic parliamentary debate fostering critical thinking and public speaking excellence among students.',
     status: 'past',
     location: 'Senate Hall',
-    theme: 'from-stone-600 to-stone-800'
+    theme: 'from-stone-600 to-stone-800',
+    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop'
   },
   {
     id: 5,
@@ -68,7 +73,8 @@ const events = [
     description: 'The traditional board photoshoot. A day of bonding, styling, and capturing the faces behind the words.',
     status: 'upcoming',
     location: 'Campus Garden',
-    theme: 'from-amber-600 to-yellow-500'
+    theme: 'from-amber-600 to-yellow-500',
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop'
   }
 ]
 
@@ -178,24 +184,27 @@ export default function EventsPage() {
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-amber-900/10 transition-all duration-500 border border-stone-100 flex flex-col md:flex-row relative">
                   
-                  {/* Left: Date & Visual Spine */}
-                  <div className={`
-                    md:w-64 p-8 flex flex-col justify-center items-center text-white relative overflow-hidden
-                    bg-linear-to-br ${event.theme}
-                  `}>
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
+                  {/* Left: Image */ }
+                  <div className="md:w-72 relative overflow-hidden h-64 md:h-auto">
+                    <div className={`absolute inset-0 bg-linear-to-br ${event.theme} opacity-20 mix-blend-overlay z-10`} />
+                    <img
+                      src={event.image || 'https://images.unsplash.com/photo-1544928147-79a794764d68?q=80&w=1000'}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
                     
-                    <div className="relative z-10 text-center transform group-hover:scale-110 transition-transform duration-500">
-                      <span className="block text-xl font-medium opacity-90 tracking-widest">{event.month}</span>
-                      <span className="block text-7xl font-serif font-bold leading-none my-1">{event.day}</span>
-                      <span className="block text-sm opacity-80">{event.date.split(',')[1]}</span>
+                    {/* Badge */}
+                    <div className="absolute top-4 left-4 z-20">
+                      <div className="inline-flex items-center gap-1 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg text-amber-900 border border-amber-100">
+                        <Star className="w-3 h-3 text-amber-600" /> {event.type}
+                      </div>
                     </div>
 
-                    <div className="absolute bottom-6 left-0 right-0 text-center">
-                      <div className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        <Star className="w-3 h-3" /> {event.type}
-                      </div>
+                    {/* Simple Date Overlay - Bottom Left */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/80 to-transparent z-20 text-white">
+                         <div className="bg-amber-600/90 w-fit px-3 py-1 rounded text-sm font-bold shadow-lg backdrop-blur-sm">
+                            {event.month} {event.day}
+                         </div>
                     </div>
                   </div>
 
@@ -258,31 +267,28 @@ export default function EventsPage() {
 
         {/* --- Call to Action --- */}
         <motion.div 
-          className="mt-24 text-center relative overflow-hidden rounded-3xl"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="mt-24 bg-linear-to-br from-brand-red/10 to-brand-orange/10 border-4 border-brand-red p-12 text-center"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="absolute inset-0 bg-linear-to-r from-amber-700 to-orange-700 opacity-90"></div>
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-          
-          <div className="relative z-10 py-20 px-6">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-              Propose an Event
-            </h2>
-            <p className="text-amber-100 text-xl max-w-2xl mx-auto mb-10 font-light">
-              Do you have a vision for a literary workshop or a cultural phenomenon? 
-              <br />We provide the platform, you provide the creativity.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-amber-800 font-bold py-4 px-12 rounded-full shadow-2xl hover:shadow-orange-900/20 text-lg transition-all"
-            >
-              Submit Proposal
-            </motion.button>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
+            Propose an Event
+          </h2>
+          <p className="text-xl text-brand-black/70 max-w-2xl mx-auto mb-10">
+            Do you have a vision for a literary workshop or a cultural phenomenon? 
+            <br />We provide the platform, you provide the creativity.
+          </p>
+            <Link to="/contact" className="w-full sm:w-auto inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer text-center md:hover:shadow-lg shadow-2xl hover:shadow-orange-900/20 transition-all"
+              >
+                Submit Proposal
+              </motion.button>
+            </Link>
         </motion.div>
 
         {/* Footer spacing */}

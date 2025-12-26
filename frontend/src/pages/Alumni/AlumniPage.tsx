@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe } from 'lucide-react'
 // Ensure this path is correct
@@ -291,58 +292,53 @@ export default function AlumniPage() {
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               {/* Softer primary button */}
-              <motion.button
-                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl text-lg shadow-lg transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Share Your Story
-              </motion.button>
+              <Link to="/contact">
+                <motion.button
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl text-lg shadow-lg transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Share Your Story
+                </motion.button>
+              </Link>
               {/* Softer secondary button border and text */}
-              <motion.button
-                className="bg-white text-orange-600 border-2 border-orange-100 hover:border-orange-400 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Read Stories
-              </motion.button>
+              <Link to="/canvas">
+                <motion.button
+                  className="bg-white text-orange-600 border-2 border-orange-100 hover:border-orange-400 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Read Stories
+                </motion.button>
+              </Link>
             </div>
           </div>
         </motion.div>
 
         {/* Stay Connected */}
         <motion.div
-          // Softer gradient background
-          className="my-16 bg-linear-to-br from-orange-700 via-orange-500 to-amber-500 rounded-3xl p-12 text-center text-white shadow-2xl"
+          className="my-16 bg-linear-to-br from-brand-red/10 to-brand-orange/10 border-4 border-brand-red p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <Users className="w-16 h-16 mx-auto mb-6 text-white/90" />
-          <h2 className="text-4xl sm:text-5xl font-serif font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold bg-linear-to-r from-brand-red to-brand-orange bg-clip-text text-transparent mb-6">
             Stay Connected
           </h2>
-          <div className="w-24 h-1 bg-white/50 mx-auto mb-6 rounded-full" />
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-brand-black/70 mb-8 max-w-2xl mx-auto">
             Join our alumni network and stay updated with the latest news, events, and opportunities.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            {/* Softer text color */}
-            <motion.button
-              className="bg-white text-orange-600 hover:bg-orange-50 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 shadow-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Join Network
-            </motion.button>
-            <motion.button
-              className="border-2 border-white/80 text-white bg-transparent hover:bg-white/10 font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Alumni
-            </motion.button>
+            <Link to="/contact" className="w-full sm:w-auto inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer text-center md:hover:shadow-lg shadow-2xl hover:shadow-orange-900/20 transition-all"
+              >
+                Join Network
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </motion.div>

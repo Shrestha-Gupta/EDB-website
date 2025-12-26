@@ -96,7 +96,7 @@ export default function MagazineIssues() {
                   whileHover={{ y: -10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-96 bg-linear-to-br from-gray-800 to-gray-900 group">
+                  <div className="relative h-64 bg-linear-to-br from-gray-800 to-gray-900 group">
                     <img
                       src={issue.coverImage}
                       alt={issue.title}
