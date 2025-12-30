@@ -185,7 +185,7 @@ const sophomoreTeam = [
     image:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641690/1000070315-removebg-preview_-_Arpit_Tripathi_lovf7l.png",
   },
-  { id: 5, name: "Gaurav", department: "Electrical Engineering", image: "" },
+  { id: 5, name: "Gaurav", department: "Electrical Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767116368/WhatsApp_Image_2025-12-27_at_10.11.07_AM_hnonbt.jpg" },
   {
     id: 6,
     name: "Kaustubh Nigam",
@@ -211,7 +211,7 @@ const sophomoreTeam = [
     id: 9,
     name: "Prathit Mishra",
     department: "Electrical Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767116519/WhatsApp_Image_2025-12-27_at_3.09.25_PM_ctrqdq.jpg",
   },
   {
     id: 10,

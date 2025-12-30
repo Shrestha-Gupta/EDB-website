@@ -13,7 +13,7 @@ import ParticlesBackground from "../../components/ParticlesBackground/ParticlesB
 import PDFViewer from "../../components/PDFViewer/PDFViewer.tsx";
 import PageHero from "../../components/PageHero/PageHero.tsx";
 
-type TabType = "all" | "newsletter" | "magazine";
+type TabType = "all" | "newsletter" | "magazine" | "yogpath";
 
 const newsletters = [
   {
@@ -708,7 +708,24 @@ const magazines = [
   },
 ];
 
-const allPublications = [...newsletters, ...magazines];
+const yogpath = [
+  {
+    id: 200,
+    title: "Yogpath - Issue 1",
+    type: "YOGPATH",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767115992/Screenshot_2025-12-30_225717_rynnvr.png",
+    description:
+      "Yogpath publication featuring insights on yoga, wellness, and spiritual practices.",
+    pages: 80,
+    contributors: 20,
+    downloadUrl:
+      "https://drive.google.com/file/d/1NIYR-v7ruE2WItnDAKRyeQ4I48Gx2ZOm/view?usp=drive_link",
+  },
+];
+
+const allPublications = [...newsletters, ...magazines, ...yogpath];
 
 export default function PublicationsPage() {
   const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
@@ -722,6 +739,8 @@ export default function PublicationsPage() {
         return newsletters;
       case "magazine":
         return magazines;
+      case "yogpath":
+        return yogpath;
       default:
         return allPublications;
     }
@@ -968,6 +987,16 @@ export default function PublicationsPage() {
             }`}
           >
             Annual Magazine
+          </button>
+          <button
+            onClick={() => setActiveTab("yogpath")}
+            className={`cursor-pointer px-8 py-3 rounded-full font-bold transition-all duration-300 border-2 ${
+              activeTab === "yogpath"
+                ? "bg-orange-500 text-white border-orange-500 shadow-lg scale-105"
+                : "bg-white text-gray-700 border-gray-200 hover:border-orange-500 hover:text-orange-500"
+            }`}
+          >
+            Yogpath
           </button>
         </div>
 
