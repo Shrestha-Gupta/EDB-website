@@ -165,55 +165,7 @@ export default function AlumniPage() {
           </div>
         </motion.div>
 
-        {/* Batch Timeline */}
-        <motion.div
-          className="py-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="text-center mb-12">
-            {/* Softer text gradient */}
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
-              Batch Archives
-            </h2>
-            {/* Softer line gradient */}
-            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {batches.map((batch) => {
-              const Icon = batch.icon
-              return (
-                <motion.div
-                  key={batch.year}
-                  // Softer selected state and lighter hover border
-                  className={`relative overflow-hidden rounded-3xl p-6 cursor-pointer transition-all duration-300 ${
-                    selectedBatch === batch.year
-                      ? 'bg-linear-to-br from-orange-500 to-amber-400 text-white shadow-xl shadow-orange-400/20'
-                      : 'bg-white border border-gray-100 hover:border-orange-200 shadow-md hover:shadow-lg'
-                  }`}
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedBatch(batch.year)}
-                >
-                  <div className="relative z-10 text-center">
-                    {/* Softer unselected icon color */}
-                    <Icon className={`w-10 h-10 mx-auto mb-3 ${selectedBatch === batch.year ? 'text-white' : 'text-orange-500'}`} />
-                    <div className={`text-2xl font-bold mb-2 ${selectedBatch === batch.year ? 'text-white' : 'text-gray-900'}`}>
-                      {batch.year}
-                    </div>
-                    <div className={`mb-3 font-semibold ${selectedBatch === batch.year ? 'text-white/90' : 'text-gray-600'}`}>
-                      {batch.members} Members
-                    </div>
-                    <p className={`text-sm ${selectedBatch === batch.year ? 'text-white/80' : 'text-gray-500'}`}>
-                      {batch.achievements}
-                    </p>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
-        </motion.div>
+
 
         {/* Gallery Section */}
         <motion.div
@@ -285,77 +237,7 @@ export default function AlumniPage() {
           </div>
         </motion.div>
 
-        {/* Featured Alumni */}
-        <motion.div
-          className="py-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <div className="text-center mb-12">
-            {/* Softer text gradient */}
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
-              Featured Alumni
-            </h2>
-            {/* Softer line gradient */}
-            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto mb-4 rounded-full" />
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Meet the accomplished individuals who have made significant contributions in their respective fields
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredAlumni.map((alumni) => (
-              <motion.div
-                key={alumni.id}
-                variants={itemVariants}
-                className="group h-full"
-              >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
-                  {/* Profile Image Area - Lighter gradient placeholder */}
-                  <div className="relative h-64 bg-linear-to-br from-amber-100 to-orange-50 overflow-hidden flex items-center justify-center">
-                    {alumni.image ? (
-                      <img src={alumni.image} alt={alumni.name} className="w-full h-full object-cover" />
-                    ) : (
-                      // Softer text color for placeholder
-                      <div className="w-24 h-24 bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-orange-500 text-4xl font-serif font-bold border-4 border-white">
-                        {alumni.name.charAt(0)}
-                      </div>
-                    )}
-                    {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
 
-                  {/* Profile Content */}
-                  <div className="p-6 flex flex-col grow">
-                    {/* Softer hover color */}
-                    <h3 className="text-xl font-serif font-bold text-gray-900 mb-1 group-hover:text-orange-600 transition-colors">
-                      {alumni.name}
-                    </h3>
-                    {/* Softer batch color */}
-                    <p className="text-sm text-orange-500 font-bold mb-3">{alumni.batch}</p>
-                    
-                    <div className="mb-4 grow">
-                        <p className="text-sm text-gray-800 font-semibold">{alumni.currentPosition}</p>
-                        <p className="text-xs text-gray-500 mb-2">{alumni.company}</p>
-                        <p className="text-sm text-gray-600 italic">"{alumni.achievement}"</p>
-                    </div>
-                    
-                    {/* Social Links - Softer hover color */}
-                    <div className="flex gap-4 pt-4 border-t border-gray-100 mt-auto">
-                      <a href={alumni.linkedin} className="text-gray-400 hover:text-orange-500 transition-colors">
-                        <Linkedin className="w-5 h-5" />
-                      </a>
-                      <a href={alumni.website} className="text-gray-400 hover:text-orange-500 transition-colors">
-                        <Globe className="w-5 h-5" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Alumni Canvas Section */}
         <motion.div
