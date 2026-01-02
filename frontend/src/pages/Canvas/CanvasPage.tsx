@@ -64,7 +64,7 @@ export default function CanvasPage() {
                 organizationName={testimonial.organizationName}
                 personName={testimonial.personName}
                 personTitle={testimonial.personTitle}
-                
+                personAvatar={testimonial.personAvatar}
               />
             ))}
           </div>

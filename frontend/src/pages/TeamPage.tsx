@@ -10,23 +10,23 @@ const finalYearTeam = [
     id: 1,
     name: "Aadrika Barnwal",
     department: "Information Technology",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372705/2A6A5189_bg3hwo.jpg",
   },
-  { id: 2, name: "Aastha Singh", department: "Civil Engineering", image: "" },
+  { id: 2, name: "Aastha Singh", department: "Civil Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5128_nl5u4l.jpg" },
   {
     id: 3,
     name: "Harshit Pandey",
     department: "Mechanical Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5192_pmqy9w.jpg",
   },
   {
     id: 4,
     name: "Jayant Singh",
     department: "Electronics and Communication Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg",
   },
   { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "" },
-  { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "" },
+  { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg" },
   {
     id: 7,
     name: "Shivam Pal",
@@ -37,7 +37,7 @@ const finalYearTeam = [
     id: 8,
     name: "Shivam Rai",
     department: "Computer Science & Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372709/2A6A5209_eux6u9.jpg",
   },
   {
     id: 9,
@@ -49,13 +49,13 @@ const finalYearTeam = [
     id: 10,
     name: "Vishwadeep Singh",
     department: "Computer Science & Engineering",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371886/2A6A5072_kntb2c.jpg",
   },
   {
     id: 11,
     name: "Vivek Mani Tripathy",
     department: "Information Technology",
-    image: "",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg",
   },
 ];
 
@@ -351,10 +351,10 @@ export default function TeamPage() {
             Pre-Final Year
           </motion.button>
 
-          {/* Sophomore: White with Orange Accent */}
+          {/* Sophomore: Yellowish Background */}
           <motion.button
             onClick={() => scrollToSection("sophomore")}
-            className="bg-white border-2 border-orange-900 text-black hover:bg-orange-50 font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none transform-gpu md:hover:-translate-y-1"
+            className="bg-amber-300 hover:bg-amber-400 text-black font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-amber-400 transform-gpu md:hover:-translate-y-1"
             whileHover={
               typeof window !== "undefined" && window.innerWidth > 640
                 ? { scale: 1.05, y: -2 }

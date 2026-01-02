@@ -1,0 +1,52 @@
+{
+  "logos": [
+    {
+      "id": 1,
+      "name": "Aadrika Barnwal",
+      "department": "Information Technology",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372705/2A6A5189_bg3hwo.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Aastha Singh",
+      "department": "Civil Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5128_nl5u4l.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Harshit Pandey",
+      "department": "Mechanical Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5192_pmqy9w.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Jayant Singh",
+      "department": "Electronics and Communication Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Nandini Mishra",
+      "department": "Civil Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Shivam Rai",
+      "department": "Computer Science & Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372709/2A6A5209_eux6u9.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Vishwadeep Singh",
+      "department": "Computer Science & Engineering",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371886/2A6A5072_kntb2c.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Vivek Mani Tripathy",
+      "department": "Information Technology",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg"
+    }
+  ]
+}
