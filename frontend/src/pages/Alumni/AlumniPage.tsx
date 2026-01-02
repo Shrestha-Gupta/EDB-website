@@ -1,68 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Award, BookOpen, Users, TrendingUp, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
 
-const batches = [
-  { year: '2020-2024', members: 42, achievements: 'Published 3 anthologies, 12 awards', icon: Award },
-  { year: '2016-2020', members: 38, achievements: 'Founded digital magazine, national recognition', icon: BookOpen },
-  { year: '2012-2016', members: 35, achievements: 'First inter-college festival, 8 publications', icon: Users },
-  { year: '2008-2012', members: 40, achievements: 'Established editorial board legacy', icon: TrendingUp }
-]
 
-const featuredAlumni = [
-  {
-    id: 1,
-    name: 'Dr. Priya Sharma',
-    batch: '2016-2020',
-    role: 'Published Author & Professor',
-    achievement: 'Published 3 novels, teaches Creative Writing at Delhi University',
-    currentPosition: 'Professor of Creative Writing',
-    company: 'Delhi University',
-    image: '',
-    linkedin: '#',
-    website: '#'
-  },
-  {
-    id: 2,
-    name: 'Rajesh Kumar',
-    batch: '2012-2016',
-    role: 'Journalist & Editor',
-    achievement: 'Chief Editor at The Times of India, Lucknow Edition',
-    currentPosition: 'Chief Editor',
-    company: 'The Times of India',
-    image: '',
-    linkedin: '#',
-    website: '#'
-  },
-  {
-    id: 3,
-    name: 'Anjali Verma',
-    batch: '2008-2012',
-    role: 'Digital Content Strategist',
-    achievement: 'Leading content strategy for Fortune 500 companies',
-    currentPosition: 'Content Strategist',
-    company: 'Fortune 500',
-    image: '',
-    linkedin: '#',
-    website: '#'
-  },
-  {
-    id: 4,
-    name: 'Amit Patel',
-    batch: '2020-2024',
-    role: 'Tech Writer & Blogger',
-    achievement: 'Leading tech blog with 1M+ monthly readers',
-    currentPosition: 'Founder & Writer',
-    company: 'TechInsights Blog',
-    image: '',
-    linkedin: '#',
-    website: '#'
-  }
-]
+
+
 
 const stats = [
   { label: 'Total Alumni', value: '500+', icon: Users },
@@ -79,29 +25,10 @@ const alumniGallery = [
   { year: '2017', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2017_rjglwn.jpg' }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6
-    }
-  }
-}
 
 export default function AlumniPage() {
-  const [selectedBatch, setSelectedBatch] = useState<string>('2020-2024')
+
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
 
   const handlePrevPhoto = () => {
