@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import TiltedCard from "../TiltedCard/TiltedCard";
 
 interface TeamCardProps {
   name: string;
@@ -16,32 +17,33 @@ export default function TeamCard({ name, department, image }: TeamCardProps) {
       {/* Image Container */}
       <div className="relative pt-8 pb-4 px-6 flex justify-center">
         {/* Ring Gradient - Sunset Theme */}
-        <div className="relative w-32 h-32 rounded-full p-1 bg-linear-to-br from-amber-300 to-orange-700 shadow-lg">
-          <div className="w-full h-full rounded-full overflow-hidden bg-gray-50 border-4 border-white">
+        {/* Tilted Card Image */}
+        <div className="relative w-32 h-32 z-10">
             {image ? (
-              <img
-                src={image}
-                alt={name}
-                loading="lazy"
-                srcSet={`${image.replace(
-                  "/upload/",
-                  "/upload/w_240/"
-                )} 240w, ${image.replace(
-                  "/upload/",
-                  "/upload/w_480/"
-                )} 480w, ${image.replace("/upload/", "/upload/w_720/")} 720w`}
-                sizes="(max-width: 640px) 120px, 240px"
-                className="w-full h-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-110"
+              <TiltedCard
+                imageSrc={image}
+                altText={name}
+                containerHeight="128px"
+                containerWidth="128px"
+                imageHeight="128px"
+                imageWidth="128px"
+                rotateAmplitude={12}
+                scaleOnHover={1.15}
+                showMobileWarning={false}
+                showTooltip={false}
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="absolute inset-0 rounded-[15px] ring-1 ring-black/10 mix-blend-multiply" />
+                }
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
+              <div className="w-full h-full rounded-[15px] flex items-center justify-center bg-gray-100 text-gray-400 border-2 border-dashed border-gray-300">
                 <User size={48} />
               </div>
             )}
-          </div>
-
+            
           {/* Decorative Badge Icon - Deep Orange */}
-          <div className="absolute bottom-0 right-0 bg-orange-600 text-white p-1.5 rounded-full shadow-md border-2 border-white">
+           <div className="absolute -bottom-2 -right-2 bg-orange-600 text-white p-1.5 rounded-full shadow-md border-2 border-white z-20 pointer-events-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"
