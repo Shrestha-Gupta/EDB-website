@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe } from 'lucide-react'
+import { Award, BookOpen, Users, TrendingUp, MessageSquare, Linkedin, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
@@ -71,6 +71,14 @@ const stats = [
   { label: 'Success Stories', value: '200+', icon: TrendingUp }
 ]
 
+const alumniGallery = [
+  { year: '2021', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363842/2021_tm6cpm.jpg' },
+  { year: '2020', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363843/2020_hn5bqf.jpg' },
+  { year: '2019', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363842/2019_w1gtu9.jpg' },
+  { year: '2018', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2018_drwlg2.jpg' },
+  { year: '2017', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2017_rjglwn.jpg' }
+]
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -94,6 +102,15 @@ const itemVariants = {
 
 export default function AlumniPage() {
   const [selectedBatch, setSelectedBatch] = useState<string>('2020-2024')
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+
+  const handlePrevPhoto = () => {
+    setCurrentPhotoIndex((prev) => (prev === 0 ? alumniGallery.length - 1 : prev - 1))
+  }
+
+  const handleNextPhoto = () => {
+    setCurrentPhotoIndex((prev) => (prev === alumniGallery.length - 1 ? 0 : prev + 1))
+  }
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
@@ -195,6 +212,76 @@ export default function AlumniPage() {
                 </motion.div>
               )
             })}
+          </div>
+        </motion.div>
+
+        {/* Gallery Section */}
+        <motion.div
+           className="py-16"
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8 }}
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
+              Legacy in Frames
+            </h2>
+            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
+          </div>
+
+          <div className="relative max-w-5xl mx-auto px-4">
+            {/* Arrows */}
+             <button
+              onClick={handlePrevPhoto}
+              className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={handleNextPhoto}
+               className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <div className="relative overflow-hidden rounded-3xl bg-black shadow-2xl aspect-video group">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentPhotoIndex}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0"
+                  >
+                    <img 
+                        src={alumniGallery[currentPhotoIndex].image} 
+                        alt={`Batch of ${alumniGallery[currentPhotoIndex].year}`}
+                        className="w-full h-full object-contain"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                    <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 className="text-4xl font-serif font-bold mb-2 text-white" style={{ color: 'white' }}>{alumniGallery[currentPhotoIndex].year}</h3>
+                        <p className="text-white text-lg font-medium" style={{ color: 'white' }}>Batch Memories</p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+            </div>
+             {/* Dots */}
+             <div className="flex justify-center gap-2 mt-6">
+              {alumniGallery.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPhotoIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentPhotoIndex === index
+                      ? "bg-orange-500 w-8"
+                      : "bg-gray-300 hover:bg-orange-300"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
