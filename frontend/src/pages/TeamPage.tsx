@@ -25,7 +25,9 @@ const finalYearTeam = [
     department: "Electronics and Communication Engineering",
     image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg",
   },
+  
   { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg" },
+
   { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg" },
   {
     id: 7,
@@ -152,7 +154,7 @@ const preFinalTeam = [
     id: 14,
     name: "Yashvardhan Ojha",
     department: "Computer Science and Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767465299/WhatsApp_Image_2026-01-03_at_11.53.22_PM_plemc6.jpg",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767465590/WhatsApp_Image_2026-01-03_at_11.53.22_PM_1_ai1p7f.jpg",
   },
 ];
 

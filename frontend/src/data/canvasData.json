@@ -58,7 +58,7 @@
   "organizationName": "The Editorial Board",
   "personName": "Jyoti Singh",
   "personTitle": "Final Year Member • Bachelor of Pharmacy",
-  "personAvatar": ""
+  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg"
 },
 {
   "id": 6,
@@ -80,7 +80,7 @@
   "organizationName": "The Editorial Board",
   "personName": "Shivam Pal",
   "personTitle": "Final Year Member • Computer Science & Engineering",
-  "personAvatar": ""
+  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.32.22_PM_isgbme.jpg"
 },
 {
   "id": 8,
@@ -92,17 +92,6 @@
   "personName": "Shivam Rai",
   "personTitle": "Final Year Member • Computer Science & Engineering",
   "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372709/2A6A5209_eux6u9.jpg"
-},
-{
-  "id": 9,
-  "imageTitle": "CONSISTENCY & CREATIVITY",
-  "imageSubtitle": "Words backed by effort",
-  "image": "https://picsum.photos/seed/vishal/1200/800",
-  "quote": "The Editorial Board taught me that creativity thrives on consistency. Writing regularly, reviewing critically, and learning collaboratively made this journey truly enriching.",
-  "organizationName": "The Editorial Board",
-  "personName": "Vishal Kotak",
-  "personTitle": "Final Year Member • Information Technology",
-  "personAvatar": ""
 },
 {
   "id": 10,
