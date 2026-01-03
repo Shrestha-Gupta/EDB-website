@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '../../hooks/useDevicePerformance';
 
 export default function Hero() {
+  const isMobile = useIsMobile();
+  
   return (
     <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 relative overflow-hidden -mt-18 md:pt-0">
       {/* 1. Background: Pattern + Gradient Tint */}
@@ -12,27 +15,31 @@ export default function Hero() {
         <div className="absolute inset-0 bg-linear-to-b from-orange-50/60 via-white/90 to-white"></div>
       </div>
 
-      {/* 2. Background Logo with Pop-out Animation */}
+      {/* 2. Background Logo with Pop-out Animation - simplified on mobile */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0">
         <img
           src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
           alt="Background Logo"
-          className="w-75 h-75 md:w-150 md:h-150 object-contain opacity-0"
+          loading="eager"
+          className="w-75 h-75 md:w-150 md:h-150 object-contain will-change-transform"
           style={{
-            animation: "popOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+            opacity: 0.08,
+            animation: isMobile ? "none" : "popOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
           }}
         />
       </div>
 
       {/* 3. Main Content */}
       <div className="text-center max-w-5xl mx-auto relative z-10 md:pt-0">
-        {/* Sanskrit Text */}
+        {/* Sanskrit Text - disable blinking cursor on mobile */}
         <div className="inline-block mb-6 relative">
           <p
-            className="text-orange-600 text-lg md:text-2xl font-serif font-semibold overflow-hidden whitespace-nowrap border-r-4 border-orange-400 pr-1"
+            className="text-orange-600 text-lg md:text-2xl font-serif font-semibold overflow-hidden whitespace-nowrap pr-1"
             style={{
-              animation:
-                "typeWriter 3s steps(30) 0.5s both, blinkCursor 0.75s step-end infinite",
+              borderRight: isMobile ? 'none' : '4px solid #fb923c',
+              animation: isMobile 
+                ? "none" 
+                : "typeWriter 3s steps(30) 0.5s both, blinkCursor 0.75s step-end infinite",
             }}
           >
             योगः कर्मसु कौशलम्
@@ -41,10 +48,11 @@ export default function Hero() {
 
         {/* Main Heading 1 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight will-change-transform"
           style={{
-            animation:
-              "slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both",
+            animation: isMobile
+              ? "fadeIn 0.5s ease-out forwards"
+              : "slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both",
           }}
         >
           Where Words
@@ -52,10 +60,11 @@ export default function Hero() {
 
         {/* Main Heading 2 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight will-change-transform"
           style={{
-            animation:
-              "slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both",
+            animation: isMobile
+              ? "fadeIn 0.5s ease-out 0.2s forwards"
+              : "slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both",
           }}
         >
           Find Their Voice
@@ -65,7 +74,9 @@ export default function Hero() {
         <p
           className="text-lg md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light"
           style={{
-            animation: "fadeInUp 1.0s ease-out 1.2s both",
+            animation: isMobile
+              ? "fadeIn 0.5s ease-out 0.3s forwards"
+              : "fadeInUp 1.0s ease-out 1.2s both",
           }}
         >
           A literary journal celebrating creativity, culture, and scholarly
@@ -75,9 +86,11 @@ export default function Hero() {
         {/* Optional CTA Button */}
         <Link to="/publications">
           <button
-            className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+            className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform active:scale-95 md:hover:-translate-y-1 cursor-pointer"
             style={{
-              animation: "fadeInUp 1.0s ease-out 1.4s both",
+              animation: isMobile
+                ? "fadeIn 0.5s ease-out 0.4s forwards"
+                : "fadeInUp 1.0s ease-out 1.4s both",
             }}
           >
             Read Latest Issue
@@ -85,7 +98,7 @@ export default function Hero() {
         </Link>
       </div>
 
-      {/* 4. CSS Keyframes */}
+      {/* 4. CSS Keyframes - optimized for performance */}
       <style>{`
         @keyframes popOut {
           0% { transform: scale(0.5); opacity: 0; }
@@ -110,6 +123,10 @@ export default function Hero() {
         @keyframes fadeInUp {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
         }
       `}</style>
     </section>

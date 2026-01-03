@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import TeamCard from "../components/TeamCard/TeamCard";
 import ParticlesBackground from "../components/ParticlesBackground/ParticlesBackground";
 import PageHero from "../components/PageHero/PageHero";
+import { useIsMobile } from "../hooks/useDevicePerformance";
 
 // --- DATA ARRAYS ---
 const finalYearTeam = [
@@ -264,23 +265,46 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring" as const, stiffness: 50, damping: 15 },
+    transition: { duration: 0.3 },
+  },
+};
+
+// Simplified variants for mobile
+const mobileContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.3 },
+  },
+};
+
+const mobileCardVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.2 },
   },
 };
 
 // --- COMPONENT ---
 
 export default function TeamPage() {
+  const isMobile = useIsMobile();
+  
+  // Use simplified variants on mobile
+  const activeContainerVariants = isMobile ? mobileContainerVariants : containerVariants;
+  const activeCardVariants = isMobile ? mobileCardVariants : cardVariants;
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -291,7 +315,7 @@ export default function TeamPage() {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: isMobile ? "auto" : "smooth",
       });
     }
   };
@@ -306,9 +330,9 @@ export default function TeamPage() {
 
       <motion.div
         className="relative z-10 max-w-7xl mx-auto"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: isMobile ? 0.3 : 0.8 }}
       >
         {/* Header - Fixed: Using ONLY Orange/Amber shades (Removed Red) */}
         {/* Header */}
@@ -321,51 +345,33 @@ export default function TeamPage() {
         {/* Navigation Buttons - Fixed: Orange Theme Only */}
         <motion.div
           className="flex justify-center gap-4 mb-12 flex-wrap"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           {/* Final Year: Deep Burnt Orange (Replaced Red) */}
-          <motion.button
+          <button
             onClick={() => scrollToSection("final-year")}
-            className="bg-orange-800 hover:bg-orange-900 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-800 transform-gpu md:hover:-translate-y-1"
-            whileHover={
-              typeof window !== "undefined" && window.innerWidth > 640
-                ? { scale: 1.05, y: -2 }
-                : undefined
-            }
-            whileTap={{ scale: 0.95 }}
+            className="bg-orange-800 hover:bg-orange-900 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-200 focus:outline-none border-2 border-orange-800 active:scale-95 md:hover:-translate-y-1"
           >
             Final Year
-          </motion.button>
+          </button>
 
           {/* Pre-Final Year: Bright Sunset Orange */}
-          <motion.button
+          <button
             onClick={() => scrollToSection("pre-final")}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-orange-600 transform-gpu md:hover:-translate-y-1"
-            whileHover={
-              typeof window !== "undefined" && window.innerWidth > 640
-                ? { scale: 1.05, y: -2 }
-                : undefined
-            }
-            whileTap={{ scale: 0.95 }}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-200 focus:outline-none border-2 border-orange-600 active:scale-95 md:hover:-translate-y-1"
           >
             Pre-Final Year
-          </motion.button>
+          </button>
 
           {/* Sophomore: Yellowish Background */}
-          <motion.button
+          <button
             onClick={() => scrollToSection("sophomore")}
-            className="bg-amber-300 hover:bg-amber-400 text-black font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-300 focus:outline-none border-2 border-amber-400 transform-gpu md:hover:-translate-y-1"
-            whileHover={
-              typeof window !== "undefined" && window.innerWidth > 640
-                ? { scale: 1.05, y: -2 }
-                : undefined
-            }
-            whileTap={{ scale: 0.95 }}
+            className="bg-amber-300 hover:bg-amber-400 text-black font-serif font-bold py-3 px-8 rounded-xl text-base sm:text-lg md:shadow-lg transition-all duration-200 focus:outline-none border-2 border-amber-400 active:scale-95 md:hover:-translate-y-1"
           >
             Sophomore
-          </motion.button>
+          </button>
         </motion.div>
 
         {/* FINAL YEAR SECTION */}
@@ -373,8 +379,8 @@ export default function TeamPage() {
           id="final-year"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          viewport={{ once: true, margin: "-50px" }}
+          variants={activeContainerVariants}
           className="mb-14"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
@@ -382,7 +388,7 @@ export default function TeamPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8">
             {finalYearTeam.map((member) => (
-              <motion.div key={member.id} variants={cardVariants}>
+              <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard
                   name={member.name}
                   department={member.department}
@@ -399,8 +405,8 @@ export default function TeamPage() {
           id="pre-final"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          viewport={{ once: true, margin: "-50px" }}
+          variants={activeContainerVariants}
           className="mb-14"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
@@ -408,7 +414,7 @@ export default function TeamPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {preFinalTeam.map((member) => (
-              <motion.div key={member.id} variants={cardVariants}>
+              <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard
                   name={member.name}
                   department={member.department}
@@ -425,8 +431,8 @@ export default function TeamPage() {
           id="sophomore"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
+          viewport={{ once: true, margin: "-50px" }}
+          variants={activeContainerVariants}
           className="mb-8"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
@@ -434,7 +440,7 @@ export default function TeamPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {sophomoreTeam.map((member) => (
-              <motion.div key={member.id} variants={cardVariants}>
+              <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard
                   name={member.name}
                   department={member.department}

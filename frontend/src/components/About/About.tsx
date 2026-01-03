@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, Users, Award, Sparkles, Target, Heart } from "lucide-react";
+import { useIsMobile } from "../../hooks/useDevicePerformance";
 
 const stats = [
   { number: "60+", label: "Years of Excellence", icon: Award },
@@ -40,6 +41,8 @@ const features = [
 ];
 
 export default function About() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="about"
@@ -54,42 +57,24 @@ export default function About() {
         {/* Header */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: isMobile ? 0.4 : 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div
-            className="inline-block mb-4"
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring", stiffness: 150 }}
-          >
+          <div className="inline-block mb-4">
             <div className="w-16 h-1 bg-linear-to-r from-orange-500 to-amber-500 rounded-full mx-auto"></div>
-          </motion.div>
-          <motion.h2
-            className="text-5xl md:text-6xl font-serif font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          </div>
+          <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">
             <span className="bg-linear-to-r from-gray-900 via-orange-800 to-amber-700 bg-clip-text text-transparent">
               About The Editorial Board
             </span>
-          </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             A premier literary journal at Madan Mohan Malaviya University of
             Technology, dedicated to nurturing creativity, fostering
             intellectual discourse, and celebrating the power of words.
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Stats Grid */}
@@ -100,47 +85,26 @@ export default function About() {
               <motion.div
                 key={index}
                 className="relative group"
-                initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "-30px" }}
                 transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
+                  duration: isMobile ? 0.3 : 0.6,
+                  delay: isMobile ? 0 : index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={{ y: -8, scale: 1.05 }}
               >
-                <motion.div
-                  className="bg-white rounded-2xl p-6 text-center shadow-lg border border-orange-100 h-full"
-                  whileHover={{
-                    boxShadow: "0 20px 40px rgba(249, 115, 22, 0.2)",
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    className="inline-block p-3 bg-linear-to-r from-orange-500 to-amber-500 rounded-xl mb-4"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
+                <div className="bg-white rounded-2xl p-6 text-center shadow-lg border border-orange-100 h-full md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300">
+                  <div className="inline-block p-3 bg-linear-to-r from-orange-500 to-amber-500 rounded-xl mb-4">
                     <Icon className="w-6 h-6 text-white" />
-                  </motion.div>
-                  <motion.h3
-                    className="text-4xl font-bold text-gray-900 mb-2"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: index * 0.1 + 0.3,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                  >
+                  </div>
+                  <h3 className="text-4xl font-bold text-gray-900 mb-2">
                     {stat.number}
-                  </motion.h3>
+                  </h3>
                   <p className="text-sm text-gray-600 font-medium">
                     {stat.label}
                   </p>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
@@ -154,63 +118,35 @@ export default function About() {
               <motion.div
                 key={index}
                 className="group relative"
-                initial={{
-                  opacity: 0,
-                  x: index % 2 === 0 ? -50 : 50,
-                  rotateY: 10,
-                }}
-                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ opacity: 0, x: isMobile ? 0 : (index % 2 === 0 ? -30 : 30) }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  duration: 0.8,
-                  delay: index * 0.15,
+                  duration: isMobile ? 0.3 : 0.6,
+                  delay: isMobile ? 0 : index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={{ y: -5 }}
               >
-                <motion.div
-                  className="relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 overflow-hidden h-full"
-                  whileHover={{
-                    boxShadow: "0 25px 50px rgba(249, 115, 22, 0.15)",
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Gradient Background on Hover */}
-                  <motion.div
-                    className={`absolute inset-0 bg-linear-to-br ${feature.color} opacity-0 group-hover:opacity-5`}
-                    transition={{ duration: 0.4 }}
+                <div className="relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 overflow-hidden h-full md:hover:shadow-xl md:hover:-translate-y-1 transition-all duration-300">
+                  {/* Gradient Background on Hover - desktop only */}
+                  <div
+                    className={`absolute inset-0 bg-linear-to-br ${feature.color} opacity-0 md:group-hover:opacity-5 transition-opacity duration-400`}
                   />
 
                   <div className="relative z-10">
-                    <motion.div
-                      className="flex items-center gap-4 mb-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 + 0.2, duration: 0.5 }}
-                    >
-                      <motion.div
-                        className={`p-3 rounded-xl bg-linear-to-br ${feature.color}`}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`p-3 rounded-xl bg-linear-to-br ${feature.color}`}>
                         <Icon className="w-6 h-6 text-white" />
-                      </motion.div>
+                      </div>
                       <h3 className="text-2xl font-bold text-gray-900">
                         {feature.title}
                       </h3>
-                    </motion.div>
-                    <motion.p
-                      className="text-gray-600 leading-relaxed"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
-                    >
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
                       {feature.description}
-                    </motion.p>
+                    </p>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
@@ -219,48 +155,25 @@ export default function About() {
         {/* Mission Statement */}
         <motion.div
           className="mt-20 text-center"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: isMobile ? 0.4 : 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div
-            className="max-w-4xl mx-auto bg-linear-to-br from-orange-50 to-amber-50 rounded-3xl p-10 md:p-12 border border-orange-100 shadow-xl relative overflow-hidden"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className="absolute -top-10 -right-10 w-40 h-40 bg-orange-300/20 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.2, 1], rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div
-              className="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-300/20 rounded-full blur-3xl"
-              animate={{ scale: [1.2, 1, 1.2], rotate: -360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.p
-              className="text-2xl md:text-3xl font-serif text-gray-800 leading-relaxed italic relative z-10"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+          <div className="max-w-4xl mx-auto bg-linear-to-br from-orange-50 to-amber-50 rounded-3xl p-10 md:p-12 border border-orange-100 shadow-xl relative overflow-hidden">
+            {/* Static decorative elements instead of animated ones */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-300/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-300/20 rounded-full blur-3xl" />
+            <p className="text-2xl md:text-3xl font-serif text-gray-800 leading-relaxed italic relative z-10">
               "We believe every story deserves to be told, every voice deserves
               to be heard, and every word has the power to inspire change."
-            </motion.p>
-            <motion.div
-              className="mt-6 flex items-center justify-center gap-2"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-2">
               <div className="w-12 h-1 bg-linear-to-r from-orange-500 to-amber-500 rounded-full"></div>
               <Sparkles className="w-5 h-5 text-orange-500" />
               <div className="w-12 h-1 bg-linear-to-r from-amber-500 to-orange-500 rounded-full"></div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

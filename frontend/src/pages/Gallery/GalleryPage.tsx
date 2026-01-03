@@ -3,6 +3,7 @@ import { useState } from 'react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
 import galleryData from '../../data/galleryData.json'
+import { useIsMobile } from '../../hooks/useDevicePerformance'
 
 const galleryCategories = galleryData.categories
 const images = galleryData.images
@@ -10,6 +11,7 @@ const images = galleryData.images
 
 export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const isMobile = useIsMobile()
 
   const filteredImages = selectedCategory === 'All'
     ? images
@@ -25,7 +27,7 @@ export default function GalleryPage() {
         className="max-w-7xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: isMobile ? 0.3 : 0.8 }}
       >
         {/* Header */}
         {/* Header */}
@@ -67,23 +69,23 @@ export default function GalleryPage() {
         {/* Gallery Grid - Pinterest Style Masonry */}
         <motion.div
           className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6"
-          layout
+          layout={!isMobile}
         >
           {filteredImages.map((image) => (
             <motion.div
               key={image.id}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5 }}
+              layout={!isMobile}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: isMobile ? 0.2 : 0.5 }}
               className="break-inside-avoid mb-6 relative group w-full"
             >
               <div className="relative overflow-hidden rounded-3xl bg-gray-200">
                 <img
                   src={image.imageUrl}
                   alt={image.category}
-                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-auto object-cover md:transform md:transition-transform md:duration-700 md:group-hover:scale-110"
                   loading="lazy"
                 />
                 

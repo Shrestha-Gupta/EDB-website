@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useDevicePerformance } from "../../hooks/useDevicePerformance";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -7,75 +8,82 @@ interface SplashScreenProps {
 
 export default function SplashScreen({ onComplete }: SplashScreenProps) {
   const [progress, setProgress] = useState(0);
+  const { shouldReduceAnimations } = useDevicePerformance();
 
   useEffect(() => {
-    // Simulate loading progress
+    // Faster loading on mobile to reduce time spent on animated splash
+    const incrementAmount = shouldReduceAnimations ? 5 : 2;
+    const intervalTime = shouldReduceAnimations ? 20 : 30;
+    
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 500);
+          setTimeout(onComplete, shouldReduceAnimations ? 200 : 500);
           return 100;
         }
-        return prev + 2;
+        return prev + incrementAmount;
       });
-    }, 30);
+    }, intervalTime);
 
     return () => clearInterval(interval);
-  }, [onComplete]);
+  }, [onComplete, shouldReduceAnimations]);
+
+  // Generate particles only once, and fewer on mobile
+  const particles = useMemo(() => {
+    const count = shouldReduceAnimations ? 6 : 20;
+    return [...Array(count)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: 2 + Math.random() * 2,
+      delay: Math.random() * 2,
+    }));
+  }, [shouldReduceAnimations]);
 
   return (
     <motion.div
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-linear-to-br from-[#FFF8F0] via-[#FFF5EB] to-[#FFEFD5]"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      transition={{ duration: shouldReduceAnimations ? 0.3 : 0.8, ease: "easeInOut" }}
     >
       <div className="relative z-10 flex flex-col items-center gap-8">
-        {/* Logo with heartbeat animation */}
+        {/* Logo with heartbeat animation - simplified on mobile */}
         <motion.div
           className="flex flex-col items-center gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: shouldReduceAnimations ? 0.3 : 0.8 }}
         >
           <motion.img
             src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
             alt="The Editorial Board"
-            className="h-40 md:h-48 object-contain"
-            animate={{
+            className="h-40 md:h-48 object-contain will-change-transform"
+            animate={shouldReduceAnimations ? {} : {
               scale: [1, 1.08, 1],
             }}
-            transition={{
+            transition={shouldReduceAnimations ? {} : {
               duration: 1.5,
               repeat: Infinity,
               ease: [0.4, 0, 0.6, 1],
             }}
           />
 
-          {/* Beckoning Creativity text */}
+          {/* Beckoning Creativity text - simplified animation on mobile */}
           <motion.h2
             className="text-3xl md:text-4xl font-serif text-transparent bg-clip-text bg-linear-to-r from-orange-600 via-amber-500 to-orange-600 font-bold tracking-wide"
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
               y: 0,
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
             }}
             transition={{
-              opacity: { delay: 0.5, duration: 0.8 },
-              y: { delay: 0.5, duration: 0.8 },
-              backgroundPosition: {
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            }}
-            style={{
-              backgroundSize: "200% 200%",
+              opacity: { delay: 0.3, duration: shouldReduceAnimations ? 0.3 : 0.8 },
+              y: { delay: 0.3, duration: shouldReduceAnimations ? 0.3 : 0.8 },
             }}
           >
-            Beckoning Creati‘wit’y
+            Beckoning Creati'wit'y
           </motion.h2>
         </motion.div>
 
@@ -84,12 +92,12 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           className="w-64 h-1 bg-orange-100 rounded-full overflow-hidden mt-8"
           initial={{ opacity: 0, width: 0 }}
           animate={{ opacity: 1, width: 256 }}
-          transition={{ delay: 1, duration: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.3 }}
         >
           <motion.div
             className="h-full bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 rounded-full"
             style={{ width: `${progress}%` }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.1 }}
           />
         </motion.div>
 
@@ -98,20 +106,20 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           className="text-orange-600 text-sm font-medium tracking-wider"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
+          transition={{ delay: 0.6, duration: 0.3 }}
         >
           {progress}%
         </motion.p>
       </div>
 
-      {/* Floating particles effect */}
-      {[...Array(20)].map((_, i) => (
+      {/* Floating particles effect - reduced count and simplified on mobile */}
+      {!shouldReduceAnimations && particles.map((particle) => (
         <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-orange-400/30 rounded-full"
+          key={particle.id}
+          className="absolute w-1 h-1 bg-orange-400/30 rounded-full will-change-transform"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: particle.left,
+            top: particle.top,
           }}
           animate={{
             y: [0, -30, 0],
@@ -119,13 +127,23 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             scale: [0, 1.5, 0],
           }}
           transition={{
-            duration: 2 + Math.random() * 2,
+            duration: particle.duration,
             repeat: Infinity,
-            delay: Math.random() * 2,
+            delay: particle.delay,
             ease: "easeInOut",
           }}
         />
       ))}
+      
+      {/* Static decorative dots for mobile instead of animated particles */}
+      {shouldReduceAnimations && (
+        <>
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-orange-300/20 rounded-full" />
+          <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-amber-300/20 rounded-full" />
+          <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-orange-200/20 rounded-full" />
+          <div className="absolute bottom-1/3 right-1/3 w-1.5 h-1.5 bg-amber-200/20 rounded-full" />
+        </>
+      )}
     </motion.div>
   );
 }

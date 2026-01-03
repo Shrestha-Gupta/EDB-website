@@ -1,7 +1,8 @@
-
-import { useRef, useState, type ReactNode, type MouseEvent } from 'react';
+import { useRef, useState, type ReactNode, type MouseEvent, memo } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useIsMobile } from '../../hooks/useDevicePerformance';
 
+// Optimized spring values - lighter for better performance
 const springValues = {
   damping: 30,
   stiffness: 100,
@@ -24,7 +25,7 @@ interface TiltedCardProps {
   displayOverlayContent?: boolean;
 }
 
-export default function TiltedCard({
+function TiltedCardComponent({
   imageSrc,
   altText = 'Tilted card image',
   captionText = '',
@@ -34,12 +35,15 @@ export default function TiltedCard({
   imageWidth = '300px',
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
-  showMobileWarning = true,
+  showMobileWarning = false, // Default to false - no need to show warning
   showTooltip = true,
   overlayContent = null,
   displayOverlayContent = false
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
+  
+  // Only create motion values if not on mobile
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useSpring(useMotionValue(0), springValues);
@@ -54,8 +58,9 @@ export default function TiltedCard({
 
   const [lastY, setLastY] = useState(0);
 
+  // Simplified mouse handler - only for desktop
   function handleMouse(e: MouseEvent<HTMLElement>) {
-    if (!ref.current) return;
+    if (isMobile || !ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
     const offsetX = e.clientX - rect.left - rect.width / 2;
@@ -76,11 +81,13 @@ export default function TiltedCard({
   }
 
   function handleMouseEnter() {
+    if (isMobile) return;
     scale.set(scaleOnHover);
     opacity.set(1);
   }
 
   function handleMouseLeave() {
+    if (isMobile) return;
     opacity.set(0);
     scale.set(1);
     rotateX.set(0);
@@ -88,6 +95,40 @@ export default function TiltedCard({
     rotateFigcaption.set(0);
   }
 
+  // Render simplified static image for mobile
+  if (isMobile) {
+    return (
+      <figure
+        className="relative w-full h-full flex flex-col items-center justify-center"
+        style={{
+          height: containerHeight,
+          width: containerWidth
+        }}
+      >
+        <div
+          className="relative"
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        >
+          <img
+            src={imageSrc}
+            alt={altText}
+            loading="lazy"
+            className="absolute top-0 left-0 object-cover rounded-[15px] w-full h-full"
+          />
+          {displayOverlayContent && overlayContent && (
+            <div className="absolute top-0 left-0 z-[2]">
+              {overlayContent}
+            </div>
+          )}
+        </div>
+      </figure>
+    );
+  }
+
+  // Full animated version for desktop
   return (
     <figure
       ref={ref}
@@ -107,7 +148,7 @@ export default function TiltedCard({
       )}
 
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className="relative [transform-style:preserve-3d] will-change-transform"
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -119,6 +160,7 @@ export default function TiltedCard({
         <motion.img
           src={imageSrc}
           alt={altText}
+          loading="lazy"
           className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
           style={{
             width: imageWidth,
@@ -149,3 +191,7 @@ export default function TiltedCard({
     </figure>
   );
 }
+
+// Memoize to prevent unnecessary re-renders
+const TiltedCard = memo(TiltedCardComponent);
+export default TiltedCard;

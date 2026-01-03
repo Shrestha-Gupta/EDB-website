@@ -1,14 +1,21 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, memo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import { useDevicePerformance } from "../../hooks/useDevicePerformance";
 
-export default function ParticlesBackground() {
+function ParticlesBackgroundComponent() {
+  const [engineReady, setEngineReady] = useState(false);
+  const { isMobile, shouldReduceAnimations, isLowEndDevice } = useDevicePerformance();
+
   useEffect(() => {
+    // Don't load particles engine on low-end devices
+    if (isLowEndDevice && isMobile) return;
+    
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    });
-  }, []);
+    }).then(() => setEngineReady(true));
+  }, [isLowEndDevice, isMobile]);
 
   const [isSmall, setIsSmall] = useState<boolean>(false);
 
@@ -31,12 +38,14 @@ export default function ParticlesBackground() {
         enable: false,
         zIndex: 0,
       },
-      fpsLimit: 120,
+      // Much lower FPS for mobile - Chrome mobile struggles with high FPS
+      fpsLimit: shouldReduceAnimations ? 30 : (isSmall ? 45 : 60),
       interactivity: {
         events: {
+          // Disable all interactivity on mobile for performance
           onHover: {
-            enable: !isSmall,
-            mode: isSmall ? undefined : "grab",
+            enable: !shouldReduceAnimations && !isSmall,
+            mode: "grab",
           },
           resize: {
             enable: true,
@@ -44,9 +53,9 @@ export default function ParticlesBackground() {
         },
         modes: {
           grab: {
-            distance: 140,
+            distance: 100,
             links: {
-              opacity: 0.3,
+              opacity: 0.2,
             },
           },
         },
@@ -57,14 +66,16 @@ export default function ParticlesBackground() {
         },
         links: {
           color: "#FF8C42",
-          distance: 150,
-          enable: !isSmall,
-          opacity: isSmall ? 0.06 : 0.12,
+          distance: shouldReduceAnimations ? 100 : 150,
+          // Disable links on mobile - major performance saver
+          enable: !shouldReduceAnimations && !isSmall,
+          opacity: 0.1,
           width: 1,
         },
         move: {
           enable: true,
-          speed: isSmall ? 0.6 : 1,
+          // Much slower movement on mobile
+          speed: shouldReduceAnimations ? 0.3 : (isSmall ? 0.5 : 0.8),
           direction: "none",
           random: false,
           straight: false,
@@ -75,29 +86,60 @@ export default function ParticlesBackground() {
         number: {
           density: {
             enable: true,
+            // Larger area per particle = fewer particles
+            width: shouldReduceAnimations ? 400 : 200,
+            height: shouldReduceAnimations ? 400 : 200,
           },
-          value: isSmall ? 18 : 40,
+          // Drastically reduced particle count for mobile
+          value: shouldReduceAnimations ? 8 : (isSmall ? 12 : 30),
         },
         opacity: {
-          value: { min: isSmall ? 0.02 : 0.05, max: isSmall ? 0.12 : 0.18 },
+          value: { min: 0.03, max: shouldReduceAnimations ? 0.1 : 0.15 },
+          // Disable opacity animation on mobile
+          animation: {
+            enable: !shouldReduceAnimations,
+            speed: 0.5,
+            sync: false,
+          },
         },
         shape: {
           type: "circle",
         },
         size: {
-          value: { min: 1, max: isSmall ? 2 : 3 },
+          value: { min: 1, max: shouldReduceAnimations ? 2 : 3 },
+          // Disable size animation on mobile
+          animation: {
+            enable: false,
+          },
         },
       },
-      detectRetina: true,
+      detectRetina: !shouldReduceAnimations,
+      // Pause when not visible for performance
+      pauseOnBlur: true,
+      pauseOnOutsideViewport: true,
     }),
-    [isSmall]
+    [isSmall, shouldReduceAnimations]
   );
+
+  // Don't render particles at all on low-end mobile devices
+  if (isLowEndDevice && isMobile) {
+    return null;
+  }
+
+  // Wait for engine to be ready
+  if (!engineReady) {
+    return null;
+  }
 
   return (
     <Particles
       id="tsparticles"
       options={options}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none will-change-transform"
     />
   );
 }
+
+// Memoize to prevent unnecessary re-renders
+const ParticlesBackground = memo(ParticlesBackgroundComponent);
+export default ParticlesBackground;
