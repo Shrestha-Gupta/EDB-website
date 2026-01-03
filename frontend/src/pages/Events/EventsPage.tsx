@@ -18,7 +18,7 @@ const events = [
     status: 'upcoming',
     location: 'Main Auditorium',
     theme: 'from-amber-700 to-orange-600',
-    image: 'https://images.unsplash.com/photo-1544928147-79a794764d68?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767466801/WhatsApp_Image_2026-01-04_at_12.29.33_AM_cobho3.jpg'
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const events = [
     status: 'registration-open',
     location: 'Open Air Theatre',
     theme: 'from-yellow-600 to-amber-600',
-    image: 'https://images.unsplash.com/photo-1470472304068-4398a9cafab0?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767466802/WhatsApp_Image_2026-01-04_at_12.26.42_AM_muatti.jpg'
   },
   {
     id: 4,

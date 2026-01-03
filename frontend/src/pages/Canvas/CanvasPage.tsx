@@ -26,21 +26,6 @@ export default function CanvasPage() {
           description="A space for alumni and board members to share their experiences, reflections, and wisdom with the community."
         />
 
-        {/* Featured Quote */}
-        <motion.div
-          className="mb-16 bg-linear-to-br from-brand-gold/20 to-brand-orange/20 border-l-8 border-brand-gold p-10"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <p className="text-lg sm:text-2xl md:text-3xl font-serif italic text-brand-black mb-4">
-            "{canvasData.featuredQuote.text}"
-          </p>
-          <p className="text-brand-orange font-bold">
-            — {canvasData.featuredQuote.author}, {canvasData.featuredQuote.role}
-          </p>
-        </motion.div>
-
         {/* Featured Testimonials Section */}
         <div className="mb-20">
           <motion.h2
