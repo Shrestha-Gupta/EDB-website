@@ -21,6 +21,7 @@ export default function Footer() {
               width={160}
               height={80}
               className="h-16 md:h-20 object-contain"
+              style={{ backgroundImage: "none", backgroundColor: "transparent" }}
               initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
               whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
               viewport={{ once: true }}

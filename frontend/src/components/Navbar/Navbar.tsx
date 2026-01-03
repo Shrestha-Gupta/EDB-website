@@ -234,12 +234,13 @@ export default function Navbar() {
           {/* Left: Logo and Brand Name */}
           <Link to="/" className="flex items-center -ml-5 gap-0 group shrink-0">
             <motion.img
-              src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
+              src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1767477184/The_Editorial_Board_Logo..1.0_qrha0w.png"
               alt="The Editorial Board"
               loading="lazy"
               width={120}
               height={40}
               className="h-8 md:h-10 object-contain"
+              style={{ backgroundImage: "none", backgroundColor: "transparent" }}
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
             />
