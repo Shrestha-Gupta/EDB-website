@@ -99,7 +99,7 @@ export default function Footer() {
           <h2 className="text-4xl md:text-8xl lg:text-9xl font-black uppercase leading-none bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
             Beckoning
             <br />
-            creati'w'ity
+            creati'wit'y
           </h2>
         </motion.div>
 
