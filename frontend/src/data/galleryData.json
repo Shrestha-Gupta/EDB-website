@@ -124,6 +124,43 @@
       "category": "Events",
       "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1766768747/IMG_20251226_223125_citivi.jpg",
       "color": "from-purple-700 to-purple-800"
-    }
+    },
+    {
+  "id": 22,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451378/image-Picsart-AiImageEnhancer_wuzlg0.png",
+  "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 23,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451376/Screenshot_20260103_003551_YouTube_cpat3k.jpg",
+  "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 24,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451375/Screenshot_20260103_003213_YouTube_wr7pko.jpg",
+  "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 25,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451375/Screenshot_20260103_003604_YouTube_l9eow3.jpg",
+  "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 26,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451375/Screenshot_2026-01-03_000605_dadxvx.png",
+  "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 27,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451374/Screenshot_20260103_003514_YouTube_btej4d.jpg",
+  "color": "from-indigo-700 to-indigo-800"
+}
+
   ]
 }
