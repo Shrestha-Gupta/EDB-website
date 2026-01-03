@@ -47,7 +47,7 @@ export default function TestimonialCard({
           />
         ) : (
           <div className="w-full h-full bg-linear-to-br from-orange-500 to-amber-600 flex items-center justify-center">
-            <div className="text-white text-6xl font-bold opacity-20">EDB</div>
+            <div className="text-white text-4xl font-bold opacity-20 text-center px-4">The Editorial Board</div>
           </div>
         )}
 

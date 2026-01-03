@@ -5,116 +5,115 @@
     "role": "Founding Member (1995-1999)"
   },
   "testimonials": [
-   {
-  "id": 1,
-  "imageTitle": "",
-  "imageSubtitle": "Where ideas find direction",
-  "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767374052/Stone-Circle_xr7kaf.webp",
-  "quote": "Being a part of The Editorial Board refined my clarity of thought and expression. It taught me how to structure ideas, communicate responsibly, and create content that truly resonates with readers beyond the page.",
-  "organizationName": "The Editorial Board",
-  "personName": "Aadrika Barnwal",
-  "personTitle": "Final Year Member • Information Technology",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372705/2A6A5189_bg3hwo.jpg"
-},
-{
-  "id": 2,
-  "imageTitle": "CREATIVE EXCELLENCE",
-  "imageSubtitle": "Learning beyond academics",
-  "image": "https://picsum.photos/seed/aastha/1200/800",
-  "quote": "EDB became a space where I learned confidence through words. From brainstorming to final drafts, every experience strengthened my voice and taught me how storytelling can influence, inform, and inspire change.",
-  "organizationName": "The Editorial Board",
-  "personName": "Aastha Singh",
-  "personTitle": "Final Year Member • Civil Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5128_nl5u4l.jpg"
-},
-{
-  "id": 3,
-  "imageTitle": "THOUGHT & DISCIPLINE",
-  "imageSubtitle": "Words with purpose",
-  "image": "https://picsum.photos/seed/harshit/1200/800",
-  "quote": "My journey with The Editorial Board trained me to think critically and write responsibly. It wasn’t just about content creation, but about understanding the impact of well-researched and ethical journalism.",
-  "organizationName": "The Editorial Board",
-  "personName": "Harshit Pandey",
-  "personTitle": "Final Year Member • Mechanical Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5192_pmqy9w.jpg"
-},
-{
-  "id": 4,
-  "imageTitle": "COMMUNITY VOICES",
-  "imageSubtitle": "Collaboration and creativity",
-  "image": "https://picsum.photos/seed/jayant/1200/800",
-  "quote": "EDB helped me grow as a communicator and collaborator. The exposure to diverse perspectives and teamwork sharpened my ability to present ideas clearly and creatively across different platforms.",
-  "organizationName": "The Editorial Board",
-  "personName": "Jayant Singh",
-  "personTitle": "Final Year Member • Electronics & Communication Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg"
-},
-{
-  "id": 5,
-  "imageTitle": "EXPRESSION & IMPACT",
-  "imageSubtitle": "Stories that connect",
-  "image": "https://picsum.photos/seed/jyoti/1200/800",
-  "quote": "The Editorial Board gave me a creative outlet alongside academics. It strengthened my confidence, improved my articulation, and taught me how thoughtful writing can leave a lasting impact.",
-  "organizationName": "The Editorial Board",
-  "personName": "Jyoti Singh",
-  "personTitle": "Final Year Member • Bachelor of Pharmacy",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg"
-},
-{
-  "id": 6,
-  "imageTitle": "LEARNING THROUGH WRITING",
-  "imageSubtitle": "Growth with every draft",
-  "image": "https://picsum.photos/seed/nandini/1200/800",
-  "quote": "My time at EDB shaped my approach to writing and analysis. I learned consistency, discipline, and how meaningful content emerges from patience and perspective.",
-  "organizationName": "The Editorial Board",
-  "personName": "Nandini Mishra",
-  "personTitle": "Final Year Member • Civil Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg"
-},
-{
-  "id": 7,
-  "imageTitle": "TECH & THOUGHT",
-  "imageSubtitle": "Balancing logic with language",
-  "image": "https://picsum.photos/seed/shivampal/1200/800",
-  "quote": "Being part of EDB helped me balance technical learning with creative expression. It improved my communication skills and taught me the value of clarity in both writing and thinking.",
-  "organizationName": "The Editorial Board",
-  "personName": "Shivam Pal",
-  "personTitle": "Final Year Member • Computer Science & Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.32.22_PM_isgbme.jpg"
-},
-{
-  "id": 8,
-  "imageTitle": "VOICE & VISION",
-  "imageSubtitle": "Ideas that evolve",
-  "image": "https://picsum.photos/seed/shivamrai/1200/800",
-  "quote": "EDB was a place where my ideas matured. Constructive feedback, deadlines, and collaboration taught me how to turn rough thoughts into refined narratives.",
-  "organizationName": "The Editorial Board",
-  "personName": "Shivam Rai",
-  "personTitle": "Final Year Member • Computer Science & Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372709/2A6A5209_eux6u9.jpg"
-},
-{
-  "id": 10,
-  "imageTitle": "TECHNICAL MINDS, CREATIVE SOULS",
-  "imageSubtitle": "Expression beyond code",
-  "image": "https://picsum.photos/seed/vishwadeep/1200/800",
-  "quote": "EDB helped me express ideas beyond screens and code. It enhanced my writing, broadened my outlook, and showed me the importance of responsible communication in every domain.",
-  "organizationName": "The Editorial Board",
-  "personName": "Vishwadeep Singh",
-  "personTitle": "Final Year Member • Computer Science & Engineering",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371886/2A6A5072_kntb2c.jpg"
-},
-{
-  "id": 11,
-  "imageTitle": "JOURNEY OF GROWTH",
-  "imageSubtitle": "Confidence through communication",
-  "image": "https://picsum.photos/seed/vivek/1200/800",
-  "quote": "My experience at The Editorial Board strengthened my confidence and articulation. It taught me how meaningful content can influence people and how structured thinking shapes powerful writing.",
-  "organizationName": "The Editorial Board",
-  "personName": "Vivek Mani Tripathy",
-  "personTitle": "Final Year Member • Information Technology",
-  "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg"
-}
-
+    {
+      "id": 1,
+      "imageTitle": "",
+      "imageSubtitle": "Where ideas find direction",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767374052/Stone-Circle_xr7kaf.webp",
+      "quote": "Being a part of The Editorial Board refined my clarity of thought and expression. It taught me how to structure ideas, communicate responsibly, and create content that truly resonates with readers beyond the page.",
+      "organizationName": "The Editorial Board",
+      "personName": "Aadrika Barnwal",
+      "personTitle": "Final Year Member • Information Technology",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372705/2A6A5189_bg3hwo.jpg"
+    },
+    {
+      "id": 2,
+      "imageTitle": "CREATIVE EXCELLENCE",
+      "imageSubtitle": "Learning beyond academics",
+      "image": "https://picsum.photos/seed/aastha/1200/800",
+      "quote": "The Editorial Board became a space where I learned confidence through words. From brainstorming to final drafts, every experience strengthened my voice and taught me how storytelling can influence, inform, and inspire change.",
+      "organizationName": "The Editorial Board",
+      "personName": "Aastha Singh",
+      "personTitle": "Final Year Member • Civil Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5128_nl5u4l.jpg"
+    },
+    {
+      "id": 3,
+      "imageTitle": "THOUGHT & DISCIPLINE",
+      "imageSubtitle": "Words with purpose",
+      "image": "https://picsum.photos/seed/harshit/1200/800",
+      "quote": "My journey with The Editorial Board trained me to think critically and write responsibly. It wasn’t just about content creation, but about understanding the impact of well-researched and ethical journalism.",
+      "organizationName": "The Editorial Board",
+      "personName": "Harshit Pandey",
+      "personTitle": "Final Year Member • Mechanical Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5192_pmqy9w.jpg"
+    },
+    {
+      "id": 4,
+      "imageTitle": "COMMUNITY VOICES",
+      "imageSubtitle": "Collaboration and creativity",
+      "image": "https://picsum.photos/seed/jayant/1200/800",
+      "quote": "The Editorial Board helped me grow as a communicator and collaborator. The exposure to diverse perspectives and teamwork sharpened my ability to present ideas clearly and creatively across different platforms.",
+      "organizationName": "The Editorial Board",
+      "personName": "Jayant Singh",
+      "personTitle": "Final Year Member • Electronics & Communication Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg"
+    },
+    {
+      "id": 5,
+      "imageTitle": "EXPRESSION & IMPACT",
+      "imageSubtitle": "Stories that connect",
+      "image": "https://picsum.photos/seed/jyoti/1200/800",
+      "quote": "The Editorial Board gave me a creative outlet alongside academics. It strengthened my confidence, improved my articulation, and taught me how thoughtful writing can leave a lasting impact.",
+      "organizationName": "The Editorial Board",
+      "personName": "Jyoti Singh",
+      "personTitle": "Final Year Member • Bachelor of Pharmacy",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg"
+    },
+    {
+      "id": 6,
+      "imageTitle": "LEARNING THROUGH WRITING",
+      "imageSubtitle": "Growth with every draft",
+      "image": "https://picsum.photos/seed/nandini/1200/800",
+      "quote": "My time at The Editorial Board shaped my approach to writing and analysis. I learned consistency, discipline, and how meaningful content emerges from patience and perspective.",
+      "organizationName": "The Editorial Board",
+      "personName": "Nandini Mishra",
+      "personTitle": "Final Year Member • Civil Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg"
+    },
+    {
+      "id": 7,
+      "imageTitle": "TECH & THOUGHT",
+      "imageSubtitle": "Balancing logic with language",
+      "image": "https://picsum.photos/seed/shivampal/1200/800",
+      "quote": "Being part of The Editorial Board helped me balance technical learning with creative expression. It improved my communication skills and taught me the value of clarity in both writing and thinking.",
+      "organizationName": "The Editorial Board",
+      "personName": "Shivam Pal",
+      "personTitle": "Final Year Member • Computer Science & Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.32.22_PM_isgbme.jpg"
+    },
+    {
+      "id": 8,
+      "imageTitle": "VOICE & VISION",
+      "imageSubtitle": "Ideas that evolve",
+      "image": "https://picsum.photos/seed/shivamrai/1200/800",
+      "quote": "The Editorial Board was a place where my ideas matured. Constructive feedback, deadlines, and collaboration taught me how to turn rough thoughts into refined narratives.",
+      "organizationName": "The Editorial Board",
+      "personName": "Shivam Rai",
+      "personTitle": "Final Year Member • Computer Science & Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372709/2A6A5209_eux6u9.jpg"
+    },
+    {
+      "id": 10,
+      "imageTitle": "TECHNICAL MINDS, CREATIVE SOULS",
+      "imageSubtitle": "Expression beyond code",
+      "image": "https://picsum.photos/seed/vishwadeep/1200/800",
+      "quote": "The Editorial Board helped me express ideas beyond screens and code. It enhanced my writing, broadened my outlook, and showed me the importance of responsible communication in every domain.",
+      "organizationName": "The Editorial Board",
+      "personName": "Vishwadeep Singh",
+      "personTitle": "Final Year Member • Computer Science & Engineering",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371886/2A6A5072_kntb2c.jpg"
+    },
+    {
+      "id": 11,
+      "imageTitle": "JOURNEY OF GROWTH",
+      "imageSubtitle": "Confidence through communication",
+      "image": "https://picsum.photos/seed/vivek/1200/800",
+      "quote": "My experience at The Editorial Board strengthened my confidence and articulation. It taught me how meaningful content can influence people and how structured thinking shapes powerful writing.",
+      "organizationName": "The Editorial Board",
+      "personName": "Vivek Mani Tripathy",
+      "personTitle": "Final Year Member • Information Technology",
+      "personAvatar": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg"
+    }
   ]
 }
