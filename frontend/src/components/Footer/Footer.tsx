@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useIsMobile } from "../../hooks/useDevicePerformance";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const isMobile = useIsMobile();
 
   return (
     <footer className="bg-linear-to-br from-orange-50 via-amber-50 to-orange-100 text-gray-900 overflow-hidden">
@@ -22,10 +20,10 @@ export default function Footer() {
               height={80}
               className="h-16 md:h-20 object-contain"
               style={{ backgroundImage: "none", backgroundColor: "transparent" }}
-              initial={isMobile ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
-              whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: isMobile ? 0.2 : 0.6 }}
+              transition={{ duration: 0.5 }}
             />
             <div>
               <motion.img

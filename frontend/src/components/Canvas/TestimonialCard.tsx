@@ -24,7 +24,7 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <motion.div
-      className="relative grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-none max-w-6xl mx-auto bg-white items-stretch h-auto md:h-128"
+      className="relative grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl shadow-none max-w-6xl mx-auto bg-white items-stretch h-auto md:h-128 will-change-transform"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}

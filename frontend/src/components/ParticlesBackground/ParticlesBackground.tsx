@@ -87,11 +87,11 @@ function ParticlesBackgroundComponent() {
           density: {
             enable: true,
             // Larger area per particle = fewer particles
-            width: shouldReduceAnimations ? 400 : (isSmall ? 200 : 400),
-            height: shouldReduceAnimations ? 400 : (isSmall ? 200 : 400),
+            width: shouldReduceAnimations ? 400 : (isSmall ? 200 : 800),
+            height: shouldReduceAnimations ? 400 : (isSmall ? 200 : 800),
           },
           // Drastically reduced particle count for mobile
-          value: shouldReduceAnimations ? 8 : (isSmall ? 12 : 15),
+          value: shouldReduceAnimations ? 8 : (isSmall ? 12 : 8),
         },
         opacity: {
           value: { min: 0.03, max: shouldReduceAnimations ? 0.1 : 0.15 },
