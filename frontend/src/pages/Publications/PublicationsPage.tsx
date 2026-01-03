@@ -18,6 +18,20 @@ type TabType = "all" | "newsletter" | "magazine" | "yogpath";
 const newsletters = [
   {
     id: 1,
+    title: "TIRESIA - Volume 17, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767423428/Screenshot_2026-01-03_at_12.21.54_PM_vfrzi5.png",
+    description:
+      "The November Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
+    pages: 150,
+    contributors: 35,
+    downloadUrl:
+      "https://drive.google.com/file/d/1oZDIzwdc4LG8jU6UV3NCG4NRC21RvheB/view?usp=drive_link",
+  },
+  {
+    id: 1,
     title: "TIRESIA - Volume 16, Issue 3",
     type: "NEWSLETTER",
     year: "2025",
