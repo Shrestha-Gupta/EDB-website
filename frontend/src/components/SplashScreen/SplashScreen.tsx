@@ -78,7 +78,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             className="h-full bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 rounded-full"
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             onAnimationComplete={() => setTimeout(onComplete, 200)}
           />
         </motion.div>
