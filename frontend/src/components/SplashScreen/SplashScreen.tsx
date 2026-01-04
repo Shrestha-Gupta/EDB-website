@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useDevicePerformance } from "../../hooks/useDevicePerformance";
 
 interface SplashScreenProps {
@@ -7,27 +7,7 @@ interface SplashScreenProps {
 }
 
 export default function SplashScreen({ onComplete }: SplashScreenProps) {
-  const [progress, setProgress] = useState(0);
   const { shouldReduceAnimations } = useDevicePerformance();
-
-  useEffect(() => {
-    // Faster loading on mobile to reduce time spent on animated splash
-    const incrementAmount = shouldReduceAnimations ? 5 : 2;
-    const intervalTime = shouldReduceAnimations ? 20 : 30;
-    
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(onComplete, shouldReduceAnimations ? 200 : 500);
-          return 100;
-        }
-        return prev + incrementAmount;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(interval);
-  }, [onComplete, shouldReduceAnimations]);
 
   // Generate particles only once, and fewer on mobile
   const particles = useMemo(() => {
@@ -96,20 +76,12 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         >
           <motion.div
             className="h-full bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 rounded-full"
-            style={{ width: `${progress}%` }}
-            transition={{ duration: 0.1 }}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
+            onAnimationComplete={() => setTimeout(onComplete, 200)}
           />
         </motion.div>
-
-        {/* Loading percentage */}
-        <motion.p
-          className="text-orange-600 text-sm font-medium tracking-wider"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.3 }}
-        >
-          {progress}%
-        </motion.p>
       </div>
 
       {/* Floating particles effect - reduced count and simplified on mobile */}

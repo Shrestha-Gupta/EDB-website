@@ -43,18 +43,6 @@ const publications = [
     downloadUrl:
       "https://drive.google.com/file/d/122oPKlmRyZJibPxUAig4UzrbfFrDe3eP/view?usp=drive_link",
   },
-  {
-    id: 4,
-    title: "TIRESIA - Volume 16, Issue 1",
-    type: "NEWSLETTER",
-    year: "2025",
-    coverImage:
-      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_ffabep.jpg",
-    description:
-      "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-    downloadUrl:
-      "https://drive.google.com/file/d/1rX0ZzGDEuG4OnCKS8kqDHjRBB2mpv3RU/view?usp=drive_link",
-  },
 ];
 
 export default function Publications() {
