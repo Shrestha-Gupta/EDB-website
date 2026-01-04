@@ -7,6 +7,20 @@ import PDFViewer from "../PDFViewer/PDFViewer";
 const publications = [
   {
     id: 1,
+    title: "TIRESIA - Volume 17, Issue 1",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767423428/Screenshot_2026-01-03_at_12.21.54_PM_vfrzi5.png",
+    description:
+      "The November Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
+    pages: 150,
+    contributors: 35,
+    downloadUrl:
+      "https://drive.google.com/file/d/1oZDIzwdc4LG8jU6UV3NCG4NRC21RvheB/view?usp=drive_link",
+  },
+  {
+    id: 2,
     title: "TIRESIA - Volume 16, Issue 3",
     type: "NEWSLETTER",
     year: "2025",
@@ -14,11 +28,11 @@ const publications = [
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_2_gjepmx.jpg",
     description:
       "The June Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
-    pdfUrl:
+    downloadUrl:
       "https://drive.google.com/file/d/1zVre8DDBha64ZGsHTC7TkfMCT3nRqWm6/view?usp=drive_link",
   },
   {
-    id: 2,
+    id: 3,
     title: "TIRESIA - Volume 16, Issue 2",
     type: "NEWSLETTER",
     year: "2025",
@@ -26,11 +40,11 @@ const publications = [
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_1_wzbldy.jpg",
     description:
       "The May Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
-    pdfUrl:
+    downloadUrl:
       "https://drive.google.com/file/d/122oPKlmRyZJibPxUAig4UzrbfFrDe3eP/view?usp=drive_link",
   },
   {
-    id: 3,
+    id: 4,
     title: "TIRESIA - Volume 16, Issue 1",
     type: "NEWSLETTER",
     year: "2025",
@@ -38,7 +52,7 @@ const publications = [
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_ffabep.jpg",
     description:
       "A celebration of diverse voices and perspectives. This edition features student poetry, faculty essays, and multimedia content.",
-    pdfUrl:
+    downloadUrl:
       "https://drive.google.com/file/d/1rX0ZzGDEuG4OnCKS8kqDHjRBB2mpv3RU/view?usp=drive_link",
   },
 ];
@@ -106,7 +120,7 @@ export default function Publications() {
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4 p-4 transform translate-y-4 group-hover:translate-y-0 active:translate-y-0 motion-reduce:transition-none">
                   <motion.button
                     onClick={() =>
-                      setSelectedPdf({ url: pub.pdfUrl, title: pub.title })
+                      setSelectedPdf({ url: pub.downloadUrl, title: pub.title })
                     }
                     className="bg-white text-gray-900 px-6 py-2 rounded-full font-bold flex items-center gap-2 hover:bg-orange-50 transition-colors transform hover:scale-105 active:scale-95 cursor-pointer"
                     whileHover={{ scale: 1.05 }}
@@ -116,7 +130,7 @@ export default function Publications() {
                   </motion.button>
 
                   <motion.a
-                    href={pub.pdfUrl}
+                    href={pub.downloadUrl}
                     download
                     target="_blank"
                     rel="noopener noreferrer"
@@ -160,7 +174,7 @@ export default function Publications() {
                 <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                   <button
                     onClick={() =>
-                      setSelectedPdf({ url: pub.pdfUrl, title: pub.title })
+                      setSelectedPdf({ url: pub.downloadUrl, title: pub.title })
                     }
                     className="text-orange-600 font-bold text-sm flex items-center gap-1 group/btn"
                   >

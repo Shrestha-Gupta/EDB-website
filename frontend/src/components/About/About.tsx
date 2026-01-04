@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { BookOpen, Users, Award, Sparkles, Target, Heart } from "lucide-react";
+import { BookOpen, Users, Award, Globe, Target, Heart, Sparkles } from "lucide-react";
 import { useIsMobile } from "../../hooks/useDevicePerformance";
 
 const stats = [
   { number: "60+", label: "Years of Excellence", icon: Award },
   { number: "100+", label: "Published Works", icon: BookOpen },
   { number: "100+", label: "Contributors", icon: Users },
-  { number: "10K+", label: "Readers Worldwide", icon: Sparkles },
+  { number: "10K+", label: "Readers Worldwide", icon: Globe },
 ];
 
 const features = [
