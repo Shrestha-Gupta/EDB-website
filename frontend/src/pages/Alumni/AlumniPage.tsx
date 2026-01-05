@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Award, BookOpen, Users, TrendingUp, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
@@ -30,6 +30,15 @@ const alumniGallery = [
 export default function AlumniPage() {
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const galleryRef = useRef<HTMLDivElement>(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"]
+  })
+  
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.85])
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3])
 
   const handlePrevPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev === 0 ? alumniGallery.length - 1 : prev - 1))
@@ -91,85 +100,130 @@ export default function AlumniPage() {
             })}
           </div>
         </motion.div>
+      </motion.div>
 
+      {/* Gallery Section - Full Width */}
+      <motion.div
+        ref={galleryRef}
+        className="py-8 sm:py-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="text-center mb-6 sm:mb-12 px-4 sm:px-6">
+          <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
+            Legacy in Frames
+          </h2>
+          <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
+        </div>
 
-
-        {/* Gallery Section */}
-        <motion.div
-           className="py-16"
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8 }}
+        <motion.div 
+          className="relative w-full"
+          style={{ scale, opacity }}
         >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-serif font-bold bg-linear-to-r from-orange-700 via-orange-500 to-amber-400 bg-clip-text text-transparent mb-4">
-              Legacy in Frames
-            </h2>
-            <div className="w-24 h-1 bg-linear-to-r from-orange-500 via-amber-400 to-orange-500 mx-auto rounded-full" />
-          </div>
+          {/* Arrows */}
+          <button
+            onClick={handlePrevPhoto}
+            className="absolute left-2 sm:left-8 lg:left-16 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-2 sm:p-4 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+          </button>
+          <button
+            onClick={handleNextPhoto}
+            className="absolute right-2 sm:right-8 lg:right-16 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-2 sm:p-4 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+          </button>
 
-          <div className="relative max-w-5xl mx-auto px-4">
-            {/* Arrows */}
-             <button
-              onClick={handlePrevPhoto}
-              className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={handleNextPhoto}
-               className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            <div className="relative overflow-hidden rounded-3xl bg-black shadow-2xl aspect-video group">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentPhotoIndex}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0"
-                  >
-                    <img 
-                        src={alumniGallery[currentPhotoIndex].image} 
-                        alt={`Batch of ${alumniGallery[currentPhotoIndex].year}`}
-                        className="w-full h-full object-contain"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                    <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-4xl font-serif font-bold mb-2 text-white" style={{ color: 'white' }}>{alumniGallery[currentPhotoIndex].year}</h3>
-                        <p className="text-white text-lg font-medium" style={{ color: 'white' }}>Batch Memories</p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+          {/* Full-width image container */}
+          <div className="relative overflow-hidden bg-black shadow-2xl aspect-video sm:aspect-21/9 lg:aspect-2.5/1 group">
+            {/* Logo watermark */}
+            <div className="absolute top-2 right-2 sm:top-6 sm:right-6 z-10">
+              <img 
+                src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
+                alt="The Editorial Board"
+                className="w-10 h-10 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain opacity-90"
+              />
             </div>
-             {/* Dots */}
-             <div className="flex justify-center gap-2 mt-6">
-              {alumniGallery.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPhotoIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentPhotoIndex === index
-                      ? "bg-orange-500 w-8"
-                      : "bg-gray-300 hover:bg-orange-300"
-                  }`}
+            
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPhotoIndex}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <img 
+                  src={alumniGallery[currentPhotoIndex].image} 
+                  alt={`Batch of ${alumniGallery[currentPhotoIndex].year}`}
+                  className="w-full h-full object-cover"
                 />
-              ))}
-            </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
+                
+                {/* Year and text overlay */}
+                <motion.div 
+                  className="absolute bottom-0 left-0 right-0 p-4 sm:p-10 lg:p-16"
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  <h3 
+                    className="text-4xl sm:text-7xl lg:text-8xl font-serif font-bold mb-1 sm:mb-2"
+                    style={{ 
+                      color: '#ffffff', 
+                      textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7)',
+                      WebkitTextStroke: '1px rgba(255,255,255,0.3)'
+                    }}
+                  >
+                    {alumniGallery[currentPhotoIndex].year}
+                  </h3>
+                  <p 
+                    className="text-base sm:text-xl lg:text-2xl font-medium tracking-wide"
+                    style={{ 
+                      color: '#ffffff', 
+                      textShadow: '1px 1px 4px rgba(0,0,0,0.9)' 
+                    }}
+                  >
+                    Batch Memories
+                  </p>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
+          {/* Dots */}
+          <div className="flex justify-center gap-2 sm:gap-3 mt-4 sm:mt-8">
+            {alumniGallery.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPhotoIndex(index)}
+                className={`h-2 sm:h-3 rounded-full transition-all duration-300 ${
+                  currentPhotoIndex === index
+                    ? "bg-orange-500 w-8 sm:w-10"
+                    : "bg-gray-300 hover:bg-orange-300 w-2 sm:w-3"
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
+      </motion.div>
 
-
-
+      {/* Rest of content */}
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         {/* Alumni Canvas Section */}
         <motion.div
           // Very subtle background tint and border
-          className="py-16 my-16 bg-linear-to-br from-amber-50/50 to-orange-50/50 rounded-3xl border border-orange-50"
+          className="py-10 sm:py-16 my-8 sm:my-16 bg-linear-to-br from-amber-50/50 to-orange-50/50 rounded-3xl border border-orange-50"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

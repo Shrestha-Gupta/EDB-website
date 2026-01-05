@@ -8,28 +8,28 @@ export default function Footer() {
   return (
     <footer className="bg-linear-to-br from-orange-50 via-amber-50 to-orange-100 text-gray-900 overflow-hidden">
       {/* Main Hero Section */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
           {/* Logo + Tagline */}
-          <div className="flex items-start gap-6">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 w-full lg:w-auto">
             <motion.img
               src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
               alt="The Editorial Board"
               loading="lazy"
               width={160}
               height={80}
-              className="h-16 md:h-20 object-contain"
+              className="h-14 sm:h-16 md:h-20 object-contain"
               style={{ backgroundImage: "none", backgroundColor: "transparent" }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             />
-            <div>
+            <div className="flex-1">
               <motion.img
                 src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
                 alt="The Editorial Board"
-                className="h-8 md:h-10 object-contain"
+                className="h-6 sm:h-8 md:h-10 object-contain"
                 style={{ backgroundColor: "transparent" }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -37,14 +37,7 @@ export default function Footer() {
                 transition={{ delay: 0.2, duration: 0.6 }}
               />
               <motion.p
-                className="text-3xl md:text-4xl font-bold bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              ></motion.p>
-              <motion.p
-                className="text-gray-700 mt-4 max-w-xl leading-relaxed"
+                className="text-gray-700 mt-2 sm:mt-3 lg:mt-4 max-w-xl text-sm sm:text-base leading-relaxed"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -63,17 +56,18 @@ export default function Footer() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.6 }}
+            className="hidden lg:block shrink-0"
           >
-            <Link to="/publications" className="hidden md:inline-block">
+            <Link to="/publications">
               <motion.div
                 role="button"
-                className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer inline-block text-center hover:shadow-lg"
-                whileHover={{ scale: 1.1 }}
+                className="bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-3 px-8 lg:py-4 lg:px-12 text-base lg:text-lg rounded-3xl cursor-pointer inline-block text-center hover:shadow-lg"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="inline-flex items-center gap-2">
                   Our Publications
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
                 </span>
               </motion.div>
             </Link>
@@ -88,7 +82,7 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-8xl lg:text-9xl font-black uppercase leading-none bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black uppercase leading-none bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
             Beckoning
             <br />
             creati'wit'y
@@ -96,35 +90,33 @@ export default function Footer() {
         </motion.div>
 
         {/* Mobile CTA: show after big statement only on small screens */}
-        <div className="max-w-7xl mx-auto px-6 md:hidden mt-8">
-          <div className="text-center">
-            <Link to="/publications" className="w-full inline-block">
-              <motion.div
-                role="button"
-                className="w-full bg-transparent text-brand-red font-bold py-4 px-6 text-lg rounded-3xl cursor-pointer inline-block text-center hover:border-brand-red hover:bg-linear-to-r hover:from-brand-red hover:to-brand-red hover:text-white transition-all shadow-none"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="inline-flex items-center justify-center gap-2 w-full">
-                  Our Publications
-                  <ArrowRight className="w-5 h-5" />
-                </span>
-              </motion.div>
-            </Link>
-          </div>
+        <div className="lg:hidden mt-6 sm:mt-8">
+          <Link to="/publications" className="inline-block">
+            <motion.div
+              role="button"
+              className="bg-transparent text-brand-red font-bold py-3 px-6 text-base rounded-3xl cursor-pointer inline-block text-center hover:bg-brand-red hover:text-white transition-all"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="inline-flex items-center gap-2">
+                Our Publications
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+            </motion.div>
+          </Link>
         </div>
       </div>
 
       {/* Links Grid */}
       <div className="border-t border-orange-200">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-10 lg:mb-12">
             {/* Quick Links */}
             <div>
-              <h4 className="text-lg font-bold mb-4 text-orange-600">
+              <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-orange-600">
                 Quick Links
               </h4>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-1.5 sm:space-y-2 text-sm">
                 <li>
                   <Link
                     to="/"
@@ -162,10 +154,10 @@ export default function Footer() {
 
             {/* Community */}
             <div>
-              <h4 className="text-lg font-bold mb-4 text-orange-600">
+              <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-orange-600">
                 Community
               </h4>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-1.5 sm:space-y-2 text-sm">
                 <li>
                   <Link
                     to="/alumni"
@@ -202,8 +194,8 @@ export default function Footer() {
             </div>
 
             {/* About */}
-            <div>
-              <h4 className="text-lg font-bold mb-4 text-orange-600">About</h4>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-orange-600">About</h4>
               <p className="text-gray-700 text-sm leading-relaxed">
                 A literary journal celebrating creativity, culture, and
                 scholarly discourse at MMMUT.
@@ -211,20 +203,20 @@ export default function Footer() {
             </div>
 
             {/* Social Links */}
-            <div>
-              <h4 className="text-lg font-bold mb-4 text-orange-600">
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-orange-600">
                 Follow Us
               </h4>
-              <div className="flex gap-4">
+              <div className="flex gap-3 sm:gap-4">
                 <a
                   href="https://www.facebook.com/edboard.mmmut"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-orange-500 transition-all text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
+                  className="w-9 h-9 sm:w-10 sm:h-10 bg-orange-500 transition-all text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -235,11 +227,11 @@ export default function Footer() {
                   href="https://www.instagram.com/the_editorial_board/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-orange-500 transition-all text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
+                  className="w-9 h-9 sm:w-10 sm:h-10 bg-orange-500 transition-all text-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg active:scale-95"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -251,11 +243,11 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-orange-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-700 text-sm">
+          <div className="border-t border-orange-200 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+            <p className="text-gray-700 text-xs sm:text-sm text-center sm:text-left">
               © {currentYear} The Editorial Board, MMMUT. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm mt-4 md:mt-0">
+            <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm">
               <a
                 href="#"
                 className="text-gray-700 hover:text-orange-600 transition-colors"
