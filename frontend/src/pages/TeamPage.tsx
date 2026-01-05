@@ -165,7 +165,7 @@ const sophomoreTeam = [
     name: "Aditi Mishra",
     department: "Electronics and Communication Engineering",
     image:
-      "https://res.cloudinary.com/dzqtx9kms/image/upload/v1767534632/IMG_20260101_163549653_HDR_2_jjju7p.jpg",
+      "https://res.cloudinary.com/dzqtx9kms/image/upload/v1767550537/IMG_20260101_163549653_HDR_2_jjju7p_uxbyxr.jpg",
   },
   {
     id: 2,
