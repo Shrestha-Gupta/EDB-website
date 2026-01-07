@@ -16,7 +16,6 @@
     "@types/multer": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
-    "edb-monorepo": "file:..",
     "express": "^4.22.1",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.11",

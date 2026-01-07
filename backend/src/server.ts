@@ -177,9 +177,11 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Start server if not running in Vercel (or if run directly)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 export default app;
