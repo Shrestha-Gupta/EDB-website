@@ -22,7 +22,10 @@ const alumniGallery = [
   { year: '2020', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363843/2020_hn5bqf.jpg' },
   { year: '2019', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363842/2019_w1gtu9.jpg' },
   { year: '2018', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2018_drwlg2.jpg' },
-  { year: '2017', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2017_rjglwn.jpg' }
+  { year: '2017', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363841/2017_rjglwn.jpg' },
+  { year: '2016', image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767765140/WhatsApp_Image_2026-01-07_at_9.15.56_AM_vwajx7.jpg' },
+  { year: '2015', image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767765140/WhatsApp_Image_2026-01-07_at_9.16.12_AM_v7kyc3.jpg' },
+  { year: '2014', image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767765141/WhatsApp_Image_2026-01-07_at_9.16.04_AM_tq0d7z.jpg' }
 ]
 
 

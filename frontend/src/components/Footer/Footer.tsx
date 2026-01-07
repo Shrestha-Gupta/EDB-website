@@ -90,11 +90,11 @@ export default function Footer() {
         </motion.div>
 
         {/* Mobile CTA: show after big statement only on small screens */}
-        <div className="lg:hidden mt-6 sm:mt-8">
+        <div className="lg:hidden mt-4">
           <Link to="/publications" className="inline-block">
             <motion.div
               role="button"
-              className="bg-transparent text-brand-red font-bold py-3 px-6 text-base rounded-3xl cursor-pointer inline-block text-center hover:bg-brand-red hover:text-white transition-all"
+              className="bg-transparent text-brand-red font-bold py-3 pr-6 text-base rounded-3xl cursor-pointer inline-block text-center hover:bg-brand-red hover:text-white transition-all"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
             >
