@@ -160,7 +160,7 @@ export default function Contact() {
                           Email us
                         </p>
                         <p className="font-medium text-gray-900">
-                          editorial@mmmut.ac.in
+                          literaryedb@mmmut.ac.in
                         </p>
                       </div>
                     </div>
