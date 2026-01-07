@@ -162,7 +162,14 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
       to: process.env.SMTP_EMAIL,
       replyTo: email,
       subject: `Contact Form: ${subject}`,
-      attachments: attachments,
+      attachments: [
+        ...attachments,
+        {
+          filename: 'logo.png',
+          path: logoUrl,
+          cid: 'logo@editorialboard'
+        }
+      ],
       html: `
         <!DOCTYPE html>
         <html>
@@ -189,7 +196,7 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
           <body>
             <div class="container">
               <div class="header">
-                <img src="${logoUrl}" alt="The Editorial Board" class="logo" />
+                <img src="cid:logo@editorialboard" alt="The Editorial Board" class="logo" />
                 <h1>📧 New Contact Form Submission</h1>
                 <p class="badge">The Editorial Board - MMMUT</p>
               </div>
@@ -232,6 +239,13 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
       from: `"The Editorial Board" <${process.env.SMTP_EMAIL}>`,
       to: email,
       subject: `Thank you for contacting The Editorial Board - ${subject}`,
+      attachments: [
+        {
+          filename: 'logo.png',
+          path: logoUrl,
+          cid: 'logo@editorialboard'
+        }
+      ],
       html: `
         <!DOCTYPE html>
         <html>
@@ -258,7 +272,7 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
           <body>
             <div class="container">
               <div class="header">
-                <img src="${logoUrl}" alt="The Editorial Board" class="logo" />
+                <img src="cid:logo@editorialboard" alt="The Editorial Board" class="logo" />
                 <h1>✅ Message Received Successfully</h1>
                 <p>The Editorial Board - MMMUT</p>
               </div>
