@@ -62,7 +62,7 @@ export default function Contact() {
 
       // NOTE: Do not set Content-Type header manually when using FormData;
       // the browser sets it automatically with the boundary.
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch("https://edb-website-7oxz.vercel.app/api/contact", {
         method: "POST",
         body: data,
       });
