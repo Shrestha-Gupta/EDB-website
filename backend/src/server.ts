@@ -315,8 +315,24 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
     };
 
     // Send both emails
-    await transporter.sendMail(adminMailOptions);
-    await transporter.sendMail(confirmationMailOptions);
+    try {
+      console.log(`Sending admin notification to: ${process.env.SMTP_EMAIL}`);
+      const adminResult = await transporter.sendMail(adminMailOptions);
+      console.log('Admin email sent successfully:', adminResult.messageId);
+    } catch (adminError) {
+      console.error('Failed to send admin notification:', adminError);
+      throw new Error('Failed to send admin notification');
+    }
+
+    try {
+      console.log(`Sending confirmation email to: ${email}`);
+      const confirmationResult = await transporter.sendMail(confirmationMailOptions);
+      console.log('Confirmation email sent successfully:', confirmationResult.messageId);
+    } catch (confirmError) {
+      console.error('Failed to send confirmation email:', confirmError);
+      // Don't throw here - admin email already sent, just log the error
+      console.warn('WARNING: Confirmation email failed but admin email was sent');
+    }
 
     res.status(200).json({ 
       success: true, 
