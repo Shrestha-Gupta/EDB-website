@@ -1,21 +1,10 @@
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
-import { Award, BookOpen, Users, TrendingUp, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react'
+import { MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
-
-
-
-
-
-const stats = [
-  { label: 'Total Alumni', value: '500+', icon: Users },
-  { label: 'Publications', value: '150+', icon: BookOpen },
-  { label: 'Awards Won', value: '75+', icon: Award },
-  { label: 'Success Stories', value: '200+', icon: TrendingUp }
-]
 
 const alumniGallery = [
   { year: '2021', image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1767363842/2021_tm6cpm.jpg' },
@@ -73,35 +62,35 @@ export default function AlumniPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Stats Section */}
+        {/* Quote Section */}
         <motion.div
-          className="py-16 -mt-20 relative z-20"
+          className="py-16 -mt-10 relative z-20"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              return (
-                <motion.div
-                  key={stat.label}
-                  // Lighter border
-                  className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 sm:p-8 text-center shadow-xl border border-orange-50"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  style={{ transitionDelay: `${index * 0.1}s` }}
-                >
-                  {/* Softer icon color */}
-                  <Icon className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-3 text-orange-500" />
-                  <div className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                  <p className="text-sm sm:text-base text-gray-500 font-medium">{stat.label}</p>
-                </motion.div>
-              )
-            })}
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-start gap-6">
+              {/* Vertical black bar */}
+              <div className="w-1.5 bg-gray-900 self-stretch min-h-[80px] rounded-full" />
+              <div>
+                <p className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-gray-700 leading-relaxed mb-4">
+                  "Crafted in Alba's bold strokes, preserved in Papyrus's ancient elegance, our alumni's voices echo through every draft, every edition, and every story yet to be told."
+                </p>
+                
+              </div>
+            </div>
           </div>
+        </motion.div>
+
+        {/* Description Section */}
+        <motion.div
+          className="pb-12 relative z-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          
         </motion.div>
       </motion.div>
 
