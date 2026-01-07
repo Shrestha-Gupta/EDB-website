@@ -153,11 +153,14 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
       });
     }
 
-    // Email content
-    const mailOptions = {
+    // Logo URL (using a hosted logo or inline base64)
+    const logoUrl = 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1734033092/logo-with-text_yljhx1.png';
+
+    // ADMIN NOTIFICATION EMAIL (to Editorial Board)
+    const adminMailOptions = {
       from: `"${name}" <${process.env.SMTP_EMAIL}>`,
-      to: process.env.SMTP_EMAIL, // Send to your own email
-      replyTo: email, // Allow replying to sender
+      to: process.env.SMTP_EMAIL,
+      replyTo: email,
       subject: `Contact Form: ${subject}`,
       attachments: attachments,
       html: `
@@ -165,23 +168,30 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
         <html>
           <head>
             <style>
-              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-              .header { background: linear-gradient(135deg, #FF8C42 0%, #FFD700 100%); color: white; padding: 30px; border-radius: 10px 10px 0 0; }
-              .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
-              .field { margin-bottom: 20px; }
-              .label { font-weight: bold; color: #FF8C42; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
-              .value { margin-top: 5px; padding: 10px; background: white; border-left: 3px solid #FF8C42; word-break: break-word; }
-              .attachment-info { margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 3px solid #FFD700; border-radius: 4px; }
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
+              .container { max-width: 650px; margin: 40px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+              .header { background: linear-gradient(135deg, #FF8C42 0%, #FFD700 100%); color: white; padding: 40px 30px; text-align: center; }
+              .logo { max-width: 180px; height: auto; margin-bottom: 20px; }
+              .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+              .header p { margin: 10px 0 0 0; opacity: 0.95; font-size: 16px; }
+              .content { background: #ffffff; padding: 40px 30px; }
+              .field { margin-bottom: 24px; }
+              .label { font-weight: 700; color: #FF8C42; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; margin-bottom: 8px; }
+              .value { padding: 14px; background: #f9f9f9; border-left: 4px solid #FF8C42; word-break: break-word; font-size: 15px; color: #333; border-radius: 4px; }
+              .value a { color: #FF8C42; text-decoration: none; font-weight: 600; }
+              .attachment-info { margin-top: 24px; padding: 18px; background: #fff8e1; border-left: 4px solid #FFD700; border-radius: 6px; }
               .attachment-info p { margin: 5px 0; font-size: 14px; color: #856404; }
-              .footer { margin-top: 30px; padding-top: 20px; border-top: 2px solid #ddd; font-size: 12px; color: #666; text-align: center; }
+              .footer { background: #f9f9f9; padding: 24px 30px; border-top: 3px solid #FF8C42; text-align: center; }
+              .footer p { margin: 8px 0; font-size: 13px; color: #666; }
+              .badge { display: inline-block; background: rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px; font-size: 14px; margin-top: 10px; }
             </style>
           </head>
           <body>
             <div class="container">
               <div class="header">
-                <h1 style="margin: 0; font-size: 24px;">📧 New Message Received</h1>
-                <p style="margin: 10px 0 0 0; opacity: 0.9;">The Editorial Board - MMMUT</p>
+                <img src="${logoUrl}" alt="The Editorial Board" class="logo" />
+                <h1>📧 New Contact Form Submission</h1>
+                <p class="badge">The Editorial Board - MMMUT</p>
               </div>
               <div class="content">
                 <div class="field">
@@ -189,8 +199,8 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
                   <div class="value">${name}</div>
                 </div>
                 <div class="field">
-                  <div class="label">Email</div>
-                  <div class="value"><a href="mailto:${email}" style="color: #FF8C42; text-decoration: none;">${email}</a></div>
+                  <div class="label">Email Address</div>
+                  <div class="value"><a href="mailto:${email}">${email}</a></div>
                 </div>
                 <div class="field">
                   <div class="label">Subject</div>
@@ -206,10 +216,10 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
                   <p>${attachments[0].filename}</p>
                 </div>
                 ` : ''}
-                <div class="footer">
-                  <p>This email was sent from the Editorial Board contact form</p>
-                  <p>To reply, simply respond to this email or contact the sender directly</p>
-                </div>
+              </div>
+              <div class="footer">
+                <p><strong>This email was sent from The Editorial Board contact form</strong></p>
+                <p>To reply, simply respond to this email or contact the sender directly at ${email}</p>
               </div>
             </div>
           </body>
@@ -217,12 +227,86 @@ app.post('/api/contact', upload.single('image'), async (req, res) => {
       `,
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    // CONFIRMATION EMAIL (to the sender)
+    const confirmationMailOptions = {
+      from: `"The Editorial Board" <${process.env.SMTP_EMAIL}>`,
+      to: email,
+      subject: `Thank you for contacting The Editorial Board - ${subject}`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
+              .container { max-width: 650px; margin: 40px auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+              .header { background: linear-gradient(135deg, #FF8C42 0%, #FFD700 100%); color: white; padding: 40px 30px; text-align: center; }
+              .logo { max-width: 180px; height: auto; margin-bottom: 20px; }
+              .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+              .header p { margin: 10px 0 0 0; opacity: 0.95; font-size: 16px; }
+              .content { background: #ffffff; padding: 40px 30px; }
+              .greeting { font-size: 18px; color: #333; margin-bottom: 20px; font-weight: 600; }
+              .message-box { background: #f9f9f9; padding: 20px; border-left: 4px solid #FF8C42; border-radius: 6px; margin: 24px 0; }
+              .message-box p { margin: 8px 0; line-height: 1.8; }
+              .highlight { color: #FF8C42; font-weight: 600; }
+              .footer { background: #f9f9f9; padding: 24px 30px; border-top: 3px solid #FF8C42; text-align: center; }
+              .footer p { margin: 8px 0; font-size: 13px; color: #666; }
+              .social-links { margin-top: 16px; }
+              .social-links a { display: inline-block; margin: 0 8px; color: #FF8C42; text-decoration: none; font-size: 13px; }
+              .checkmark { font-size: 48px; color: #4CAF50; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <img src="${logoUrl}" alt="The Editorial Board" class="logo" />
+                <h1>✅ Message Received Successfully</h1>
+                <p>The Editorial Board - MMMUT</p>
+              </div>
+              <div class="content">
+                <p class="greeting">Dear ${name},</p>
+                
+                <div class="message-box">
+                  <p>Thank you for reaching out to <span class="highlight">The Editorial Board</span>!</p>
+                  <p>We have successfully received your message regarding "<strong>${subject}</strong>" and our team will review it shortly.</p>
+                  <p>We typically respond within <strong>24-48 hours</strong>. If your inquiry is urgent, please feel free to reach out to us directly at <a href="mailto:literaryedb@mmmut.ac.in" style="color: #FF8C42;">literaryedb@mmmut.ac.in</a>.</p>
+                </div>
+
+                <p style="margin-top: 24px; color: #666; font-size: 14px;"><strong>Your Message Summary:</strong></p>
+                <div style="background: #f9f9f9; padding: 16px; border-radius: 6px; margin-top: 12px;">
+                  <p style="margin: 4px 0; font-size: 14px;"><strong>Subject:</strong> ${subject}</p>
+                  <p style="margin: 4px 0; font-size: 14px;"><strong>Message:</strong> ${message.substring(0, 150)}${message.length > 150 ? '...' : ''}</p>
+                </div>
+
+                <p style="margin-top: 28px; color: #666; line-height: 1.8;">
+                  We appreciate your interest and look forward to connecting with you.
+                </p>
+                
+                <p style="margin-top: 20px; color: #666;">
+                  Best regards,<br>
+                  <strong style="color: #FF8C42;">The Editorial Board Team</strong><br>
+                  MMMUT Gorakhpur
+                </p>
+              </div>
+              <div class="footer">
+                <p><strong>The Editorial Board</strong> | MMMUT Gorakhpur</p>
+                <p>📧 literaryedb@mmmut.ac.in | 🌐 <a href="https://www.theeditorialboard.in" style="color: #FF8C42;">www.theeditorialboard.in</a></p>
+                <p style="margin-top: 16px; font-size: 12px; color: #999;">
+                  This is an automated confirmation email. Please do not reply to this message.
+                </p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+    };
+
+    // Send both emails
+    await transporter.sendMail(adminMailOptions);
+    await transporter.sendMail(confirmationMailOptions);
 
     res.status(200).json({ 
       success: true, 
-      message: 'Message sent successfully!' 
+      message: 'Message sent successfully! Check your email for confirmation.' 
     });
 
   } catch (error) {
