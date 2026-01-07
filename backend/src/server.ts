@@ -5,7 +5,27 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 
-dotenv.config();
+// Load environment variables
+import fs from 'fs';
+
+const envLocalPath = path.resolve(__dirname, '../.env.local');
+const envPath = path.resolve(__dirname, '../.env');
+
+console.log(`Attempting to load env from: ${envLocalPath}`);
+if (fs.existsSync(envLocalPath)) {
+  dotenv.config({ path: envLocalPath });
+  console.log('Loaded .env.local');
+} else {
+  console.log('.env.local not found');
+}
+
+console.log(`Attempting to load env from: ${envPath}`);
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+  console.log('Loaded .env');
+} else {
+  console.log('.env not found');
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -35,24 +55,51 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configure nodemailer transport
+// Configure nodemailer transport
+const smtpHost = process.env.SMTP_HOST;
+const smtpPort = process.env.SMTP_PORT;
+const smtpEmail = process.env.SMTP_EMAIL;
+const smtpPassword = process.env.SMTP_PASSWORD;
+
+// Debug log to show partial password for verification
+if (smtpPassword) {
+  console.log(`SMTP Config Loaded: Host=${smtpHost}, Port=${smtpPort}, Email=${smtpEmail}, Pwd=${smtpPassword.substring(0, 3)}***`);
+}
+
+if (!smtpHost || !smtpPort || !smtpEmail || !smtpPassword) {
+  const missing = [];
+  if (!smtpHost) missing.push("SMTP_HOST");
+  if (!smtpPort) missing.push("SMTP_PORT");
+  if (!smtpEmail) missing.push("SMTP_EMAIL");
+  if (!smtpPassword) missing.push("SMTP_PASSWORD");
+  
+  const errorMsg = `CRITICAL ERROR: Missing SMTP Environment Variables: ${missing.join(", ")}. Please check your .env or .env.local file. Current PWD: ${process.cwd()}`;
+  console.error(errorMsg);
+  throw new Error(errorMsg);
+}
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
+  host: smtpHost,
+  port: Number(smtpPort),
   secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.SMTP_EMAIL,
-    pass: process.env.SMTP_PASSWORD,
+    user: smtpEmail,
+    pass: smtpPassword,
   },
 });
 
 // Verify transporter configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('SMTP connection error:', error);
-  } else {
-    console.log('SMTP server is ready to send emails');
-  }
-});
+try {
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('SMTP connection error:', error);
+    } else {
+      console.log('SMTP server is ready to send emails');
+    }
+  });
+} catch (err) {
+  console.error("Transporter verification crashed", err);
+}
 
 // Routes
 
@@ -62,6 +109,16 @@ app.get("/", (req, res) => {
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
+});
+
+app.get("/api/env-check", (req, res) => {
+  res.json({
+    smtpHostConfigured: !!process.env.SMTP_HOST,
+    smtpPortConfigured: !!process.env.SMTP_PORT,
+    smtpEmailConfigured: !!process.env.SMTP_EMAIL,
+    smtpPasswordConfigured: !!process.env.SMTP_PASSWORD,
+    smtpHostValue: process.env.SMTP_HOST || "MISSING",
+  });
 });
 
 // Contact form endpoint

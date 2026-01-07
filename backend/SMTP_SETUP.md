@@ -112,10 +112,23 @@ npm start
 ## Security Notes
 
 ⚠️ **Important**: 
-- Never commit the .env file to version control
-- The .env file is already in .gitignore
-- For production, use environment variables from your hosting provider
-- Consider using OAuth2 for Gmail instead of app passwords for better security
+- Never commit the .env file to version control (it is ignored by git).
+- For local development, create a `.env` or `.env.local` file with your credentials.
+- **For Vercel Deployment**: You MUST manually add these environment variables in your Vercel Project Settings (Settings > Environment Variables).
+  - `SMTP_HOST`: `smtp.gmail.com`
+  - `SMTP_PORT`: `587`
+  - `SMTP_EMAIL`: `your-email@gmail.com`
+  - `SMTP_PASSWORD`: `your-app-password`
+
+## Debugging
+
+If you are experiencing issues (like `ECONNREFUSED 127.0.0.1`), it means the `SMTP_HOST` is not being read correctly.
+
+1. **Check the Logs**: The server now logs loaded environment variables on startup (passwords are masked).
+2. **Use the Debug Endpoint**: 
+   - Visit `/api/env-check` (e.g., `http://localhost:5000/api/env-check` or `https://your-app.vercel.app/api/env-check`).
+   - It will return `true` or `false` for each variable configuration.
+3. **Vercel**: If it works locally but fails on Vercel, you forgot to add the Environment Variables in the Vercel Dashboard.
 
 ## Dependencies
 
