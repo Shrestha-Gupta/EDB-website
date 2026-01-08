@@ -186,7 +186,7 @@ const sophomoreTeam = [
     name: "Arpit Tripathi",
     department: "Computer Science and Engineering",
     image:
-      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641690/1000070315-removebg-preview_-_Arpit_Tripathi_lovf7l.png",
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767868182/WhatsApp_Image_2026-01-08_at_15.58.59_jnrwef.jpg",
   },
   { id: 5, name: "Gaurav", department: "Electrical Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767116368/WhatsApp_Image_2025-12-27_at_10.11.07_AM_hnonbt.jpg" },
   {
