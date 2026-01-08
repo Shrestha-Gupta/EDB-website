@@ -143,7 +143,7 @@ export default function Contact() {
                           Phone
                         </p>
                         <p className="font-medium text-gray-900">
-                          +91 123 456 7890
+                          +91 9696148767
                         </p>
                       </div>
                     </div>
