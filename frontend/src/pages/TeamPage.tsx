@@ -18,23 +18,23 @@ const finalYearTeam = [
     id: 3,
     name: "Harshit Pandey",
     department: "Mechanical Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371883/2A6A5192_pmqy9w.jpg",
+    image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900465/Harshit_Pandey_jf1xpd.jpg",
   },
   {
     id: 4,
     name: "Jayant Singh",
     department: "Electronics and Communication Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg",
+    image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900466/IMG_20250726_101013_-_Jayant_Singh_y73nax.jpg",
   },
   
-  { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg" },
+  { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900467/Jyoti_Singh_cstmeu.jpg" },
 
   { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg" },
   {
     id: 7,
     name: "Shivam Pal",
     department: "Computer Science & Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.32.22_PM_isgbme.jpg",
+    image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900467/Photo_1_khmeh5.png",
   },
   {
     id: 8,
