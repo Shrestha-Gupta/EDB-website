@@ -160,6 +160,18 @@
   "category": "Events",
   "imageUrl": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767451374/Screenshot_20260103_003514_YouTube_btej4d.jpg",
   "color": "from-indigo-700 to-indigo-800"
+},
+{
+  "id": 28,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767902911/IMG_4132_ks3s8s.jpg",
+  "color": "from-orange-700 to-orange-800"
+},
+{
+  "id": 29,
+  "category": "Events",
+  "imageUrl": "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767902912/IMG_4096_be6pzk.jpg",
+  "color": "from-teal-700 to-teal-800"
 }
 
   ]

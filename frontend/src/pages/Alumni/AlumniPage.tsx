@@ -75,7 +75,7 @@ export default function AlumniPage() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-start gap-6">
               {/* Vertical black bar */}
-              <div className="w-1.5 bg-gray-900 self-stretch min-h-[80px] rounded-full" />
+              <div className="w-4.5 bg-gray-900 self-stretch min-h-[80px] rounded-full" />
               <div>
                 <p className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-gray-700 leading-relaxed mb-4">
                   "Crafted in Alba's bold strokes, preserved in Papyrus's ancient elegance, our alumni's voices echo through every draft, every edition, and every story yet to be told."
