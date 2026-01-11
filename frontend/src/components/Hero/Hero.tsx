@@ -40,7 +40,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
         {/* Sanskrit Text - disable blinking cursor on mobile */}
         <div className="inline-block mb-6 relative">
           <p
-            className="text-orange-600 text-lg md:text-2xl font-serif font-semibold overflow-hidden whitespace-nowrap pr-1"
+            className="text-orange-600 text-lg md:text-4xl font-serif font-semibold overflow-hidden whitespace-nowrap pr-1"
             style={{
               borderRight: isMobile ? 'none' : '4px solid #fb923c',
               animation: isMobile 
