@@ -216,13 +216,12 @@ const munApplicationSchema = new Schema<IMunApplication>(
 );
 
 // Pre-save hook to generate delegateId
-munApplicationSchema.pre('save', async function(next) {
+munApplicationSchema.pre('save', async function() {
   if (!this.delegateId) {
     const year = new Date().getFullYear().toString().slice(-2);
     const count = await mongoose.model('MunApplication').countDocuments();
     this.delegateId = `MUN${year}${String(count + 1).padStart(4, '0')}`;
   }
-  next();
 });
 
 // Ensure one application per user per event
