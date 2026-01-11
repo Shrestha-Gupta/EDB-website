@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import SplashScreen from "./components/SplashScreen/SplashScreen";
 import HomePage from "./pages/HomePage";
+import { AuthProvider } from "./context/AuthContext";
 
 const TeamPage = lazy(() => import("./pages/TeamPage"));
 const EventsPage = lazy(() => import("./pages/Events/EventsPage"));
@@ -21,6 +22,18 @@ const AlumniPage = lazy(() => import("./pages/Alumni/AlumniPage"));
 const GalleryPage = lazy(() => import("./pages/Gallery/GalleryPage"));
 const CanvasPage = lazy(() => import("./pages/Canvas/CanvasPage"));
 const MagazineIssues = lazy(() => import("./pages/MagazineIssues"));
+const ArunodayLivePage = lazy(() => import("./pages/ArunodayLive/ArunodayLivePage"));
+
+// MUN Pages
+const MunPage = lazy(() => import("./pages/MUN/MunPage"));
+const MunLoginPage = lazy(() => import("./pages/MUN/MunLoginPage"));
+const MunRegisterPage = lazy(() => import("./pages/MUN/MunRegisterPage"));
+const MunCompleteProfilePage = lazy(() => import("./pages/MUN/MunCompleteProfilePage"));
+const MunDashboardPage = lazy(() => import("./pages/MUN/MunDashboardPage"));
+const MunApplyPage = lazy(() => import("./pages/MUN/MunApplyPage"));
+const MunAdminPage = lazy(() => import("./pages/MUN/MunAdminPage"));
+
+import { RegistrationPopup } from "./components/RegistrationPopup";
 import "./App.css";
 
 function ScrollToTop() {
@@ -78,9 +91,24 @@ class ErrorBoundary extends Component<
 function App() {
   // Disable splash screen by default to avoid blank screen issues
   const [showSplash, setShowSplash] = useState<boolean>(true);
+  const [showRegistration, setShowRegistration] = useState<boolean>(false);
+
+  // Show registration popup after splash screen closes (only once per session)
+  useEffect(() => {
+    if (!showSplash) {
+      const hasSeenPopup = sessionStorage.getItem('arunoday26_popup_shown');
+      if (!hasSeenPopup) {
+        const timer = setTimeout(() => {
+          setShowRegistration(true);
+          sessionStorage.setItem('arunoday26_popup_shown', 'true');
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [showSplash]);
 
   return (
-    <>
+    <AuthProvider>
       {showSplash && (
         <AnimatePresence>
           <SplashScreen onComplete={() => setShowSplash(false)} />
@@ -102,7 +130,7 @@ function App() {
               >
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage onOpenRegistration={() => setShowRegistration(true)} />} />
                     <Route path="/team" element={<TeamPage />} />
                     <Route path="/events" element={<EventsPage />} />
                     <Route
@@ -114,15 +142,31 @@ function App() {
                     <Route path="/gallery" element={<GalleryPage />} />
                     <Route path="/canvas" element={<CanvasPage />} />
                     <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/arunoday-live" element={<ArunodayLivePage />} />
+                    
+                    {/* MUN Routes */}
+                    <Route path="/mun" element={<MunPage />} />
+                    <Route path="/mun/login" element={<MunLoginPage />} />
+                    <Route path="/mun/register" element={<MunRegisterPage />} />
+                    <Route path="/mun/complete-profile" element={<MunCompleteProfilePage />} />
+                    <Route path="/mun/dashboard" element={<MunDashboardPage />} />
+                    <Route path="/mun/apply/:eventId" element={<MunApplyPage />} />
+                    <Route path="/mun/admin" element={<MunAdminPage />} />
                   </Routes>
                 </AnimatePresence>
               </Suspense>
             </main>
             <Footer />
           </div>
+          
+          {/* Global Registration Popup */}
+          <RegistrationPopup 
+            isOpen={showRegistration} 
+            onClose={() => setShowRegistration(false)} 
+          />
         </ErrorBoundary>
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 

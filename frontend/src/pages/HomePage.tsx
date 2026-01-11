@@ -15,10 +15,14 @@ const containerVariants = {
   },
 };
 
-export default function HomePage() {
+interface HomePageProps {
+  onOpenRegistration?: () => void;
+}
+
+export default function HomePage({ onOpenRegistration }: HomePageProps) {
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      <Hero />
+      <Hero onOpenRegistration={onOpenRegistration} />
       <About />
       <Publications />
       <Contact />

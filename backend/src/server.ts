@@ -4,6 +4,14 @@ import dotenv from "dotenv";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
+import cookieParser from "cookie-parser";
+
+// Import routes
+import authRoutes from "./routes/auth";
+import munRoutes from "./routes/mun";
+
+// Import database connection
+import connectDB from "./config/database";
 
 // Load environment variables
 import fs from 'fs';
@@ -48,11 +56,15 @@ const upload = multer({
 // Middleware
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174', 'https://www.theeditorialboard.in', 'https://www.theeditorialboard.in/'],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Connect to MongoDB
+connectDB();
 
 // Configure nodemailer transport
 // Configure nodemailer transport
@@ -120,6 +132,10 @@ app.get("/api/env-check", (req, res) => {
     smtpHostValue: process.env.SMTP_HOST || "MISSING",
   });
 });
+
+// Auth and MUN routes
+app.use("/api/auth", authRoutes);
+app.use("/api/mun", munRoutes);
 
 // Contact form endpoint
 app.post('/api/contact', upload.single('image'), async (req, res) => {
