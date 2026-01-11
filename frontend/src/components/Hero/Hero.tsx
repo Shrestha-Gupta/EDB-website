@@ -104,19 +104,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
           discourse at Madan Mohan Malaviya University of Technology.
         </p>
 
-        {/* Optional CTA Button */}
-        <Link to="/publications">
-          <button
-            className="bg-orange-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all duration-300 transform active:scale-95 md:hover:-translate-y-1 cursor-pointer"
-            style={{
-              animation: isMobile
-                ? "fadeIn 0.5s ease-out 0.4s forwards"
-                : "fadeInUp 1.0s ease-out 1.4s both",
-            }}
-          >
-            Read Latest Issue
-          </button>
-        </Link>
+        
       </div>
 
       {/* 4. CSS Keyframes - optimized for performance */}
