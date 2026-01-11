@@ -308,7 +308,7 @@ export default function Navbar() {
             <motion.img
               src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
               alt="The Editorial Board"
-              className="h-5 sm:h-6 md:h-7 lg:h-8 object-contain mix-blend-normal -ml-6 sm:-ml-7 md:-ml-8 hidden sm:block"
+              className="h-4 sm:h-6 md:h-7 lg:h-8 object-contain mix-blend-normal -ml-5 sm:-ml-7 md:-ml-8"
               style={{ backgroundColor: "transparent" }}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
