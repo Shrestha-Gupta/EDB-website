@@ -54,7 +54,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
 
         {/* Main Heading 1 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] 3xl:text-[11rem] font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight will-change-transform"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight will-change-transform"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out forwards"
@@ -66,7 +66,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
 
         {/* Main Heading 2 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight will-change-transform"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl 2xl:text-8xl 3xl:text-9xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight will-change-transform"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out 0.2s forwards"
