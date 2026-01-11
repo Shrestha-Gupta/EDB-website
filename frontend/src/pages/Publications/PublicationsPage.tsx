@@ -31,20 +31,6 @@ const newsletters = [
       "https://drive.google.com/file/d/1oZDIzwdc4LG8jU6UV3NCG4NRC21RvheB/view?usp=drive_link",
   },
   {
-    id: 2,
-    title: "TIRESIA - Volume 16, Issue 3",
-    type: "NEWSLETTER",
-    year: "2025",
-    coverImage:
-      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_2_gjepmx.jpg",
-    description:
-      "The June Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
-    pages: 150,
-    contributors: 35,
-    downloadUrl:
-      "https://drive.google.com/file/d/1zVre8DDBha64ZGsHTC7TkfMCT3nRqWm6/view?usp=drive_link",
-  },
-  {
     id: 100,
     title: "Malvika - Annual Magazine 2025",
     type: "ANNUAL MAGAZINE",
@@ -58,6 +44,21 @@ const newsletters = [
     downloadUrl:
       "https://drive.google.com/file/d/1otl11ABJgRuG6QPzY0h4wXKWibV0wFkG/view?usp=drive_link",
   },
+  {
+    id: 2,
+    title: "TIRESIA - Volume 16, Issue 3",
+    type: "NEWSLETTER",
+    year: "2025",
+    coverImage:
+      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_2_gjepmx.jpg",
+    description:
+      "The June Issue of TIRESIA brings you a collection of thought-provoking articles, creative pieces, and insights from our university community.",
+    pages: 150,
+    contributors: 35,
+    downloadUrl:
+      "https://drive.google.com/file/d/1zVre8DDBha64ZGsHTC7TkfMCT3nRqWm6/view?usp=drive_link",
+  },
+  
   {
     id: 3,
     title: "TIRESIA - Volume 16, Issue 2",
