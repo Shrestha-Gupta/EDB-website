@@ -41,7 +41,7 @@ const ArunodayCTA = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 backdrop-blur-sm border border-amber-300/50 rounded-full mb-6"
+              className="inline-flex items-center px-4 bg-amber-100 backdrop-blur-sm border border-amber-300/50 rounded-full mb-6"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
@@ -84,7 +84,7 @@ const ArunodayCTA = () => {
             >
               <Link
                 to="/arunoday-live"
-                className="inline-flex items-center gap-2 px-8 py-4 text-black hover:shadow-lg font-bold text-lg rounded-full hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 text-black hover:shadow-lg font-bold text-lg rounded-full hover:scale-115 transition-all duration-300"
               >
                 <span>Learn more</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

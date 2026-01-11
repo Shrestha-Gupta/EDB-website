@@ -533,7 +533,7 @@ const MunAdminDashboard = () => {
                         </div>
                         <div className="flex gap-2 ml-auto">
                           <StatusBadge status={app.status} />
-                          <StatusBadge status={app.paymentStatus} type="payment" />
+                          <StatusBadge status={app.paymentStatus} />
                           {app.allotmentLocked && (
                             <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">🔒 Locked</span>
                           )}

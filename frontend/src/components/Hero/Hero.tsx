@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+
 import { useIsMobile } from '../../hooks/useDevicePerformance';
 
 interface HeroProps {
   onOpenRegistration?: () => void;
 }
 
-export default function Hero({ onOpenRegistration }: HeroProps) {
+export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroProps) {
   const isMobile = useIsMobile();
   
   return (
@@ -34,7 +34,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
       </div>
 
       {/* 3. Main Content */}
-      <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 md:pt-0 flex flex-col items-center">
+      <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 pt-24 md:pt-16 flex flex-col items-center">
   
 
         {/* Sanskrit Text - disable blinking cursor on mobile */}
