@@ -34,7 +34,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
       </div>
 
       {/* 3. Main Content */}
-      <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 md:pt-16 flex flex-col items-center">
+      <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 md:pt-20 flex flex-col items-center">
   
 
         {/* Sanskrit Text - disable blinking cursor on mobile */}

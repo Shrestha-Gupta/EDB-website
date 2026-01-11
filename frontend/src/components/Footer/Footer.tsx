@@ -29,7 +29,7 @@ export default function Footer() {
               <motion.img
                 src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
                 alt="The Editorial Board"
-                className="h-6 sm:h-8 md:h-10 object-contain"
+                className="h-6 sm:h-8 md:h-10 object-contain brightness-0"
                 style={{ backgroundColor: "transparent" }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
