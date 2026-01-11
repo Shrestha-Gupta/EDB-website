@@ -25,7 +25,7 @@ const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
           onClick={onClose}
         >
           <motion.div
-            className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl w-full max-w-md overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/20"
+            className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl w-full max-w-md 2xl:max-w-lg overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/20"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}

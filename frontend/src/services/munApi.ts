@@ -23,6 +23,7 @@ export interface MunEvent {
 
 export interface MunApplication {
   _id: string;
+  delegateId: string;
   user: {
     _id: string;
     name: string;
@@ -38,6 +39,7 @@ export interface MunApplication {
     startDate: string;
     endDate: string;
     venue: string;
+    registrationDeadline: string;
   };
   // New preference fields
   preferredCommittee: 'UNHRC' | 'IP';
@@ -49,14 +51,33 @@ export interface MunApplication {
   whyJoin: string;
   // Legacy field
   committeePreferences: string[];
+  // Status fields
   status: 'pending' | 'approved' | 'rejected' | 'allotted';
+  paymentStatus: 'pending' | 'verified' | 'failed';
+  allotmentStatus: 'pending' | 'allotted' | 'reassigned';
+  // Allotment details
   allottedCommittee: string | null;
   allottedCountry: string | null;
   allottedAgenda: string | null;
+  allottedRole: string | null;
+  committeeRoom: string | null;
+  reportingTime: string | null;
+  reportingDate: string | null;
+  // Position paper
   positionPaperUrl: string | null;
   positionPaperSubmittedAt: string | null;
+  positionPaperStatus: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
   positionPaperRemarks: string;
+  positionPaperDeadline: string | null;
+  positionPaperAdminRemarks: string;
+  // Final confirmation
+  finalConfirmation: boolean;
+  finalConfirmationAt: string | null;
+  // Admin & misc
   adminNotes: string;
+  editRequestPending: boolean;
+  editRequestMessage: string;
+  allotmentLocked: boolean;
   createdAt: string;
 }
 
@@ -217,4 +238,106 @@ export const updateApplicationStatus = async (
 export const getAllUsers = async (): Promise<MunUser[]> => {
   const data = await apiCall('/api/mun/admin/users');
   return data.users;
+};
+
+// NEW API FUNCTIONS
+
+// Get detailed profile data for a specific application
+export const getMyProfile = async (applicationId: string): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/my-profile/${applicationId}`);
+  return data.application;
+};
+
+// Request profile edit
+export const requestProfileEdit = async (applicationId: string, message: string): Promise<void> => {
+  await apiCall(`/api/mun/request-edit/${applicationId}`, {
+    method: 'POST',
+    body: JSON.stringify({ message }),
+  });
+};
+
+// Submit final confirmation
+export const submitFinalConfirmation = async (applicationId: string): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/final-confirmation/${applicationId}`, {
+    method: 'POST',
+  });
+  return data.application;
+};
+
+// Admin: Lock/unlock allotment
+export const lockAllotment = async (applicationId: string, lock: boolean): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/admin/applications/${applicationId}/lock-allotment`, {
+    method: 'PUT',
+    body: JSON.stringify({ lock }),
+  });
+  return data.application;
+};
+
+// Admin: Update payment status
+export const updatePaymentStatus = async (
+  applicationId: string,
+  paymentStatus: 'pending' | 'verified' | 'failed'
+): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/admin/applications/${applicationId}/payment-status`, {
+    method: 'PUT',
+    body: JSON.stringify({ paymentStatus }),
+  });
+  return data.application;
+};
+
+// Admin: Update position paper status
+export const updatePositionPaperStatus = async (
+  applicationId: string,
+  status: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested',
+  remarks?: string
+): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/admin/applications/${applicationId}/position-paper-status`, {
+    method: 'PUT',
+    body: JSON.stringify({ status, remarks }),
+  });
+  return data.application;
+};
+
+// Admin: Handle edit request
+export const handleEditRequest = async (
+  applicationId: string,
+  approved: boolean,
+  adminResponse?: string
+): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/admin/applications/${applicationId}/handle-edit-request`, {
+    method: 'PUT',
+    body: JSON.stringify({ approved, adminResponse }),
+  });
+  return data.application;
+};
+
+// Admin: Bulk lock allotments
+export const bulkLockAllotments = async (eventId: string, lock: boolean): Promise<{ modifiedCount: number }> => {
+  const data = await apiCall('/api/mun/admin/bulk-lock-allotments', {
+    method: 'POST',
+    body: JSON.stringify({ eventId, lock }),
+  });
+  return data;
+};
+
+// Enhanced allot application with more fields
+export const allotApplicationEnhanced = async (
+  applicationId: string,
+  allotment: {
+    committee: string;
+    country: string;
+    agenda: string;
+    role?: string;
+    committeeRoom?: string;
+    reportingTime?: string;
+    reportingDate?: string;
+    positionPaperDeadline?: string;
+    notes?: string;
+  }
+): Promise<MunApplication> => {
+  const data = await apiCall(`/api/mun/admin/applications/${applicationId}/allot`, {
+    method: 'PUT',
+    body: JSON.stringify(allotment),
+  });
+  return data.application;
 };

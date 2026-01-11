@@ -147,13 +147,13 @@ const MunAdminPage = () => {
   }
 
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
 
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="max-w-7xl mx-auto relative z-10"
+        className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >

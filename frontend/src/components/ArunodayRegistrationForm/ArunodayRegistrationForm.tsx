@@ -24,11 +24,17 @@ const ArunodayRegistrationForm = () => {
     teamLeaderEmail: "",
     teamLeaderRollNumber: "",
     teamLeaderBranch: "",
-    teamMembers: [{ name: "", rollNumber: "", branch: "" }],
+    teamMembers: [
+      { name: "", rollNumber: "", branch: "" },
+      { name: "", rollNumber: "", branch: "" },
+      { name: "", rollNumber: "", branch: "" },
+      { name: "", rollNumber: "", branch: "" },
+    ],
     preferredLanguage: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -43,35 +49,43 @@ const ArunodayRegistrationForm = () => {
     });
   };
 
-  const addTeamMember = () => {
-    if (formData.teamMembers.length < 5) {
-      setFormData((prev) => ({
-        ...prev,
-        teamMembers: [...prev.teamMembers, { name: "", rollNumber: "", branch: "" }],
-      }));
-    }
-  };
-
-  const removeTeamMember = (index: number) => {
-    if (formData.teamMembers.length > 1) {
-      setFormData((prev) => ({
-        ...prev,
-        teamMembers: prev.teamMembers.filter((_, i) => i !== index),
-      }));
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      // Simulate API call - replace with actual backend endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submitted:", formData);
+      // Call actual backend API for Arunoday registration
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      
+      const response = await fetch(`${API_URL}/api/arunoday/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          teamName: formData.teamName,
+          teamLeaderName: formData.teamLeaderName,
+          teamLeaderEmail: formData.teamLeaderEmail,
+          teamLeaderRollNumber: formData.teamLeaderRollNumber,
+          teamLeaderBranch: formData.teamLeaderBranch,
+          teamMembers: formData.teamMembers.filter(m => m.name && m.rollNumber && m.branch),
+          preferredLanguage: formData.preferredLanguage,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      console.log("Form submitted:", data);
       setSubmitStatus("success");
-    } catch {
+      setErrorMessage("");
+    } catch (error) {
+      console.error("Registration error:", error);
       setSubmitStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,10 +98,16 @@ const ArunodayRegistrationForm = () => {
       teamLeaderEmail: "",
       teamLeaderRollNumber: "",
       teamLeaderBranch: "",
-      teamMembers: [{ name: "", rollNumber: "", branch: "" }],
+      teamMembers: [
+        { name: "", rollNumber: "", branch: "" },
+        { name: "", rollNumber: "", branch: "" },
+        { name: "", rollNumber: "", branch: "" },
+        { name: "", rollNumber: "", branch: "" },
+      ],
       preferredLanguage: "",
     });
     setSubmitStatus("idle");
+    setErrorMessage("");
   };
 
   const inputClasses = "w-full px-4 py-3 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-colors";
@@ -239,22 +259,13 @@ const ArunodayRegistrationForm = () => {
 
         {/* Team Members Section */}
         <div className="border-t border-stone-200 pt-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6">
             <h3 className="text-xl font-serif font-bold text-stone-900 flex items-center gap-2">
-              <span className="text-2xl">👥</span> Team Members
+              <span className="text-2xl">👥</span> Team Members (4 Members)
             </h3>
-            {formData.teamMembers.length < 5 && (
-              <button
-                type="button"
-                onClick={addTeamMember}
-                className="flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors font-medium text-sm"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                Add Member
-              </button>
-            )}
+            <p className="text-stone-500 text-sm mt-2">
+              Please enter details for all 4 team members
+            </p>
           </div>
           
           <div className="space-y-6">
@@ -265,21 +276,10 @@ const ArunodayRegistrationForm = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-stone-50 rounded-xl p-6 border border-stone-200 relative"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <span className="text-sm font-medium text-amber-600">
                     Member {index + 1}
                   </span>
-                  {formData.teamMembers.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeTeamMember(index)}
-                      className="text-red-500 hover:text-red-700 transition-colors p-1"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
-                    </button>
-                  )}
                 </div>
                 
                 <div className="grid md:grid-cols-3 gap-4">
@@ -328,10 +328,6 @@ const ArunodayRegistrationForm = () => {
               </motion.div>
             ))}
           </div>
-          
-          <p className="text-stone-500 text-sm mt-3">
-            You can add up to 5 team members
-          </p>
         </div>
 
         {/* Preferred Language Section */}
@@ -390,7 +386,7 @@ const ArunodayRegistrationForm = () => {
               animate={{ opacity: 1 }}
               className="text-red-500 text-center text-sm mt-4"
             >
-              Something went wrong. Please try again.
+              {errorMessage || "Something went wrong. Please try again."}
             </motion.p>
           )}
         </div>

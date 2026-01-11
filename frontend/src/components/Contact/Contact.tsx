@@ -94,7 +94,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen relative py-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="min-h-screen relative py-6 px-4 sm:px-6 lg:px-8 2xl:px-12 overflow-hidden"
     >
       {/* Warm light background gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-stone-50 via-orange-50/30 to-amber-50/20" />
@@ -104,7 +104,7 @@ export default function Contact() {
         <ParticlesBackground />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-8xl mx-auto relative z-10">
         {/* Section Header */}
         {/* Section Header */}
         <PageHero 
@@ -113,7 +113,7 @@ export default function Contact() {
         />
 
         {/* Contact Container */}
-        <div className="grid lg:grid-cols-5 gap-8 bg-transparent rounded-3xl overflow-hidden">
+        <div className="grid lg:grid-cols-5 2xl:grid-cols-5 gap-8 2xl:gap-12 bg-transparent rounded-3xl overflow-hidden">
           {/* Left Panel - Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

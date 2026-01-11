@@ -32,6 +32,8 @@ const MunCompleteProfilePage = lazy(() => import("./pages/MUN/MunCompleteProfile
 const MunDashboardPage = lazy(() => import("./pages/MUN/MunDashboardPage"));
 const MunApplyPage = lazy(() => import("./pages/MUN/MunApplyPage"));
 const MunAdminPage = lazy(() => import("./pages/MUN/MunAdminPage"));
+const MunProfileDashboard = lazy(() => import("./pages/MUN/MunProfileDashboard"));
+const MunAdminDashboard = lazy(() => import("./pages/MUN/MunAdminDashboard"));
 
 import { RegistrationPopup } from "./components/RegistrationPopup";
 import "./App.css";
@@ -150,8 +152,10 @@ function App() {
                     <Route path="/mun/register" element={<MunRegisterPage />} />
                     <Route path="/mun/complete-profile" element={<MunCompleteProfilePage />} />
                     <Route path="/mun/dashboard" element={<MunDashboardPage />} />
+                    <Route path="/mun/profile" element={<MunProfileDashboard />} />
                     <Route path="/mun/apply/:eventId" element={<MunApplyPage />} />
                     <Route path="/mun/admin" element={<MunAdminPage />} />
+                    <Route path="/mun/admin-dashboard" element={<MunAdminDashboard />} />
                   </Routes>
                 </AnimatePresence>
               </Suspense>

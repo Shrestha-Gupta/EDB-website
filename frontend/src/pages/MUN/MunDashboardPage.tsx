@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { getMyApplications, uploadPositionPaper, type MunApplication } from '../../services/munApi';
+import { Link } from 'react-router-dom';
 
 const MunDashboardPage = () => {
   const { user, logout } = useAuth();
@@ -71,10 +72,10 @@ const MunDashboardPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'approved': return 'text-green-400';
-      case 'rejected': return 'text-red-400';
-      case 'pending': return 'text-yellow-400';
-      default: return 'text-gray-400';
+      case 'approved': return 'text-green-600';
+      case 'rejected': return 'text-red-600';
+      case 'pending': return 'text-amber-600';
+      default: return 'text-stone-500';
     }
   };
 
@@ -89,28 +90,39 @@ const MunDashboardPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading dashboard...</div>
+      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50/30 to-orange-50/20 flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-stone-700 text-lg">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-900 via-blue-900 to-gray-900 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50/30 to-orange-50/20 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex justify-between items-center mb-8"
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4"
         >
-          <h1 className="text-3xl font-bold text-white">MUN Dashboard</h1>
-          <button
-            onClick={logout}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-          >
-            Logout
-          </button>
+          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">MUN Dashboard</h1>
+          <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
+            <Link
+              to="/mun/profile"
+              className="flex-1 sm:flex-none px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-center text-sm sm:text-base font-medium"
+            >
+              🎫 Full Profile
+            </Link>
+            <button
+              onClick={logout}
+              className="flex-1 sm:flex-none px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm sm:text-base font-medium"
+            >
+              Logout
+            </button>
+          </div>
         </motion.div>
 
         {/* Section 1: Status */}
@@ -118,27 +130,27 @@ const MunDashboardPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20"
+          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
         >
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
             ✅ Status
           </h2>
           {currentApplication ? (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
               <span className="text-2xl">{getStatusIcon(currentApplication.status)}</span>
-              <div>
-                <p className={`text-lg font-medium ${getStatusColor(currentApplication.status)}`}>
+              <div className="flex-1 min-w-0">
+                <p className={`text-base sm:text-lg font-medium ${getStatusColor(currentApplication.status)}`}>
                   Application: {currentApplication.status.charAt(0).toUpperCase() + currentApplication.status.slice(1)}
                 </p>
                 {isAllotted ? (
-                  <p className="text-green-400">Country Allotted ✅</p>
+                  <p className="text-green-600 text-sm sm:text-base">Country Allotted ✅</p>
                 ) : (
-                  <p className="text-yellow-400">Awaiting allotment ⏳</p>
+                  <p className="text-amber-600 text-sm sm:text-base">Awaiting allotment ⏳</p>
                 )}
               </div>
             </div>
           ) : (
-            <p className="text-gray-400">No application submitted yet</p>
+            <p className="text-stone-500">No application submitted yet</p>
           )}
         </motion.div>
 
@@ -147,35 +159,35 @@ const MunDashboardPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20"
+          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
         >
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
             👤 My Profile
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Full Name</p>
-              <p className="text-white font-medium">{user?.name || 'N/A'}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">Full Name</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.name || 'N/A'}</p>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Email</p>
-              <p className="text-white font-medium">{user?.email || 'N/A'}</p>
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">Email</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.email || 'N/A'}</p>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Phone</p>
-              <p className="text-white font-medium">{user?.phone || 'N/A'}</p>
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">Phone</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.phone || 'N/A'}</p>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">College</p>
-              <p className="text-white font-medium">{user?.college || 'N/A'}</p>
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">College</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.college || 'N/A'}</p>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Branch</p>
-              <p className="text-white font-medium">{user?.branch || 'N/A'}</p>
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">Branch</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.branch || 'N/A'}</p>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">Year</p>
-              <p className="text-white font-medium">{user?.year || 'N/A'}</p>
+            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+              <p className="text-stone-500 text-xs sm:text-sm mb-1">Year</p>
+              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.year || 'N/A'}</p>
             </div>
           </div>
         </motion.div>
@@ -185,31 +197,31 @@ const MunDashboardPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20"
+          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
         >
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
             🌍 My Allotment
           </h2>
           {isAllotted ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-linear-to-br from-blue-600/30 to-blue-800/30 rounded-lg p-4 border border-blue-500/30">
-                <p className="text-blue-300 text-sm">Committee</p>
-                <p className="text-white font-bold text-lg">{currentApplication?.allottedCommittee}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-4 border border-blue-200">
+                <p className="text-blue-600 text-xs sm:text-sm mb-1">Committee</p>
+                <p className="text-blue-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCommittee}</p>
               </div>
-              <div className="bg-linear-to-br from-green-600/30 to-green-800/30 rounded-lg p-4 border border-green-500/30">
-                <p className="text-green-300 text-sm">Country</p>
-                <p className="text-white font-bold text-lg">{currentApplication?.allottedCountry}</p>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-4 border border-green-200">
+                <p className="text-green-600 text-xs sm:text-sm mb-1">Country</p>
+                <p className="text-green-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCountry}</p>
               </div>
-              <div className="bg-linear-to-br from-purple-600/30 to-purple-800/30 rounded-lg p-4 border border-purple-500/30">
-                <p className="text-purple-300 text-sm">Agenda</p>
-                <p className="text-white font-bold text-lg">{currentApplication?.allottedAgenda || 'TBA'}</p>
+              <div className="bg-gradient-to-br from-purple-50 to-violet-100 rounded-xl p-4 border border-purple-200 sm:col-span-2 lg:col-span-1">
+                <p className="text-purple-600 text-xs sm:text-sm mb-1">Agenda</p>
+                <p className="text-purple-900 font-bold text-base sm:text-lg">{currentApplication?.allottedAgenda || 'TBA'}</p>
               </div>
             </div>
           ) : (
-            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 text-center">
-              <span className="text-4xl mb-2 block">🔒</span>
-              <p className="text-yellow-400 font-medium">Awaiting allotment ⏳</p>
-              <p className="text-gray-400 text-sm mt-2">
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+              <span className="text-4xl mb-3 block">⏳</span>
+              <p className="text-amber-700 font-medium">Awaiting allotment</p>
+              <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
                 Your country and committee will appear here once allotted by the admin.
               </p>
             </div>
@@ -221,42 +233,42 @@ const MunDashboardPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6 border border-white/20"
+          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
         >
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
             📄 Position Paper Submission
           </h2>
           
           {!isAllotted ? (
-            <div className="bg-gray-500/10 border border-gray-500/30 rounded-lg p-6 text-center">
-              <span className="text-4xl mb-2 block">🔒</span>
-              <p className="text-gray-400 font-medium">Upload Disabled</p>
-              <p className="text-gray-500 text-sm mt-2">
+            <div className="bg-stone-100 border border-stone-200 rounded-xl p-6 text-center">
+              <span className="text-4xl mb-3 block">🔒</span>
+              <p className="text-stone-600 font-medium">Upload Disabled</p>
+              <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
                 You can upload your position paper after country allotment.
               </p>
             </div>
           ) : currentApplication?.positionPaperUrl ? (
-            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4">
                 <span className="text-2xl">✅</span>
-                <div>
-                  <p className="text-green-400 font-medium">Position Paper Submitted</p>
-                  <p className="text-gray-400 text-sm">
+                <div className="flex-1 min-w-0">
+                  <p className="text-green-700 font-medium">Position Paper Submitted</p>
+                  <p className="text-stone-500 text-sm">
                     Uploaded on: {currentApplication.positionPaperSubmittedAt ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString() : 'N/A'}
                   </p>
                 </div>
               </div>
               {currentApplication.positionPaperRemarks && (
-                <div className="mt-4 bg-white/5 rounded-lg p-4">
-                  <p className="text-gray-400 text-sm">Your Remarks:</p>
-                  <p className="text-white">{currentApplication.positionPaperRemarks}</p>
+                <div className="mt-4 bg-white rounded-xl p-3 sm:p-4 border border-green-100">
+                  <p className="text-stone-500 text-xs sm:text-sm mb-1">Your Remarks:</p>
+                  <p className="text-stone-700 text-sm sm:text-base">{currentApplication.positionPaperRemarks}</p>
                 </div>
               )}
               <a
                 href={currentApplication.positionPaperUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-sm sm:text-base"
               >
                 📥 View Uploaded Paper
               </a>
@@ -264,7 +276,7 @@ const MunDashboardPage = () => {
           ) : (
             <div className="space-y-4">
               {/* File Upload */}
-              <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-blue-500/50 transition-colors">
+              <div className="border-2 border-dashed border-stone-300 rounded-xl p-4 sm:p-6 text-center hover:border-amber-400 transition-colors bg-stone-50">
                 <input
                   type="file"
                   accept=".pdf"
@@ -276,37 +288,37 @@ const MunDashboardPage = () => {
                   htmlFor="position-paper-upload"
                   className="cursor-pointer block"
                 >
-                  <span className="text-4xl mb-2 block">📎</span>
-                  <p className="text-white font-medium">
+                  <span className="text-4xl mb-3 block">📎</span>
+                  <p className="text-stone-700 font-medium text-sm sm:text-base break-all">
                     {selectedFile ? selectedFile.name : 'Click to select PDF file'}
                   </p>
-                  <p className="text-gray-400 text-sm mt-1">PDF only, max 10MB</p>
+                  <p className="text-stone-500 text-xs sm:text-sm mt-2">PDF only, max 10MB</p>
                 </label>
               </div>
 
               {/* Remarks Textbox */}
               <div>
-                <label className="block text-gray-300 text-sm mb-2">
+                <label className="block text-stone-600 text-xs sm:text-sm mb-2">
                   Remarks (Optional)
                 </label>
                 <textarea
                   value={remarks}
                   onChange={(e) => setRemarks(e.target.value)}
                   placeholder="Add any remarks or notes about your position paper..."
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 resize-none"
+                  className="w-full px-3 sm:px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 resize-none text-sm sm:text-base"
                   rows={3}
                 />
               </div>
 
               {/* Error/Success Messages */}
               {uploadError && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
-                  <p className="text-red-400 text-sm">{uploadError}</p>
+                <div className="bg-red-50 border border-red-200 rounded-xl p-3">
+                  <p className="text-red-600 text-sm">{uploadError}</p>
                 </div>
               )}
               {uploadSuccess && (
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                  <p className="text-green-400 text-sm">{uploadSuccess}</p>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+                  <p className="text-green-600 text-sm">{uploadSuccess}</p>
                 </div>
               )}
 
@@ -314,10 +326,10 @@ const MunDashboardPage = () => {
               <button
                 onClick={handleUpload}
                 disabled={!selectedFile || uploading}
-                className={`w-full py-3 rounded-lg font-semibold transition-all ${
+                className={`w-full py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
                   selectedFile && !uploading
-                    ? 'bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
+                    : 'bg-stone-200 text-stone-400 cursor-not-allowed'
                 }`}
               >
                 {uploading ? 'Uploading...' : '📤 Submit Position Paper'}
@@ -332,27 +344,27 @@ const MunDashboardPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+            className="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200 shadow-lg"
           >
-            <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
               📋 Application History
             </h2>
             <div className="space-y-3">
               {applications.slice(1).map((app, index) => (
                 <div
                   key={app._id}
-                  className="bg-white/5 rounded-lg p-4 flex justify-between items-center"
+                  className="bg-stone-50 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4"
                 >
-                  <div>
-                    <p className="text-white font-medium">Application #{applications.length - index - 1}</p>
-                    <p className="text-gray-400 text-sm">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-stone-800 font-medium text-sm sm:text-base">Application #{applications.length - index - 1}</p>
+                    <p className="text-stone-500 text-xs sm:text-sm">
                       {new Date(app.createdAt).toLocaleDateString()}
                     </p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    app.status === 'approved' ? 'bg-green-500/20 text-green-400' :
-                    app.status === 'rejected' ? 'bg-red-500/20 text-red-400' :
-                    'bg-yellow-500/20 text-yellow-400'
+                  <span className={`px-3 py-1 rounded-full text-xs sm:text-sm shrink-0 ${
+                    app.status === 'approved' ? 'bg-green-100 text-green-700' :
+                    app.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                    'bg-amber-100 text-amber-700'
                   }`}>
                     {app.status}
                   </span>

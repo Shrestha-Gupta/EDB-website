@@ -65,6 +65,23 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const navLinks = [
     {
       name: "HOME",
@@ -268,42 +285,42 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-md"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-md"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="w-full py-3">
-        <div className="flex justify-between items-center gap-8">
+      <div className="w-full max-w-screen-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
+        <div className="flex justify-between items-center">
           {/* Left: Logo and Brand Name */}
-          <Link to="/" className="flex items-center -ml-5 gap-0 group shrink-0">
+          <Link to="/" className="flex items-center gap-0 group shrink-0 z-10">
             <motion.img
               src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1767477184/The_Editorial_Board_Logo..1.0_qrha0w.png"
               alt="The Editorial Board"
               loading="lazy"
               width={120}
               height={40}
-              className="h-8 md:h-10 object-contain"
+              className="h-8 sm:h-9 md:h-10 lg:h-10 object-contain"
               style={{ backgroundImage: "none", backgroundColor: "transparent" }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileHover={{ scale: 1.05, rotate: 3 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 400 }}
             />
             <motion.img
               src="https://res.cloudinary.com/dzqtx9kms/image/upload/v1766165427/alba_tq7bj1_kgsv3r.png"
               alt="The Editorial Board"
-              className="h-6 md:h-8 object-contain block mix-blend-normal -ml-8"
+              className="h-5 sm:h-6 md:h-7 lg:h-8 object-contain mix-blend-normal -ml-6 sm:-ml-7 md:-ml-8 hidden sm:block"
               style={{ backgroundColor: "transparent" }}
-              whileHover={{ scale: 1.08 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
           </Link>
 
           {/* Middle: Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-2 flex-1 justify-center">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center px-4">
             {navLinks.slice(0, 9).map((link) => (
               <Link key={link.name} to={link.path} onMouseEnter={() => prefetchRoute(link.path)} onFocus={() => prefetchRoute(link.path)}>
                 <motion.div
-                  className={`relative px-4 py-2 rounded-md font-medium text-sm tracking-wide transition-all duration-300 overflow-hidden group ${
+                  className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${
                     isActive(link.path) ? "text-orange-500" : "text-gray-700"
                   }`}
                   whileTap={{ scale: 0.95 }}
@@ -316,9 +333,9 @@ export default function Navbar() {
                     transition={{ duration: 0.3 }}
                   />
                   <motion.span
-                    className="relative z-10 uppercase tracking-wider text-xs inline-block group-hover:text-orange-500"
-                    initial={{ letterSpacing: "0.1em" }}
-                    whileHover={{ letterSpacing: "0.2em" }}
+                    className="relative z-10 uppercase tracking-wide xl:tracking-wider text-xs inline-block group-hover:text-orange-500"
+                    initial={{ letterSpacing: "0.05em" }}
+                    whileHover={{ letterSpacing: "0.1em" }}
                     transition={{ duration: 0.3 }}
                   >
                     {link.name}
@@ -329,16 +346,18 @@ export default function Navbar() {
           </div>
 
           {/* Right: Contact CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center shrink-0">
             <SpotlightButton />
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-gray-700 hover:text-orange-500 transition-colors"
-            whileTap={{ scale: 0.9, rotate: 90 }}
+            className="lg:hidden text-gray-700 hover:text-orange-500 transition-colors p-2 -mr-2 z-10"
+            whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
           >
             <motion.svg
               className="w-6 h-6"
@@ -370,45 +389,77 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              className="lg:hidden mt-4 pb-4 border-t border-gray-200"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex flex-col gap-2 mt-4">
-                {navLinks.map((link, index) => (
+            <>
+              {/* Backdrop overlay */}
+              <motion.div
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsOpen(false)}
+                style={{ top: '56px' }}
+              />
+              
+              {/* Mobile menu panel */}
+              <motion.div
+                className="lg:hidden fixed left-0 right-0 bg-white/98 backdrop-blur-lg border-t border-gray-100 shadow-xl max-h-[calc(100vh-56px)] overflow-y-auto"
+                style={{ top: '56px' }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <div className="px-4 py-4">
+                  {/* Mobile nav links grid */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {navLinks.map((link, index) => (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                      >
+                        <Link
+                          to={link.path}
+                          onClick={() => setIsOpen(false)}
+                          className={`flex items-center gap-2 p-3 rounded-xl transition-all duration-200 ${
+                            isActive(link.path)
+                              ? "text-orange-600 bg-orange-50 shadow-sm"
+                              : "text-gray-700 hover:text-orange-500 hover:bg-orange-50/50 active:bg-orange-100"
+                          }`}
+                        >
+                          <span className="w-5 h-5 flex-shrink-0">
+                            {link.icon}
+                          </span>
+                          <span className="text-sm font-medium truncate">
+                            {link.name.charAt(0) + link.name.slice(1).toLowerCase()}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  {/* Mobile CTA button */}
                   <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-4 pt-4 border-t border-gray-100"
                   >
                     <Link
-                      to={link.path}
+                      to="/contact"
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
-                        isActive(link.path)
-                          ? "text-orange-500 bg-orange-50"
-                          : "text-gray-700 hover:text-orange-500 hover:bg-orange-50"
-                      }`}
+                      className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
                     >
-                      <motion.span
-                        className="w-5 h-5"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                      >
-                        {link.icon}
-                      </motion.span>
-                      <span className="capitalize">
-                        {link.name.charAt(0) + link.name.slice(1).toLowerCase()}
-                      </span>
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      Contact Us
                     </Link>
                   </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

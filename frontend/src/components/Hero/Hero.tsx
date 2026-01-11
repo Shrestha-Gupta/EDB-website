@@ -9,7 +9,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
   const isMobile = useIsMobile();
   
   return (
-    <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 relative overflow-hidden -mt-18 md:pt-0">
+    <section className="bg-white min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8 2xl:px-12 relative overflow-hidden -mt-18 md:pt-0">
       {/* 1. Background: Pattern + Gradient Tint */}
       <div className="absolute inset-0 z-0 pointer-events-none -top-20">
         {/* INCREASED DOT SIZE: Changed 1px to 3px and spacing to 30px */}
@@ -25,7 +25,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
           src="https://res.cloudinary.com/dml0jlwlv/image/upload/v1765559411/The_Editorial_Board_Logo..1.0_cgrovj.png"
           alt="Background Logo"
           loading="eager"
-          className="w-75 h-75 md:w-150 md:h-150 object-contain will-change-transform"
+          className="w-75 h-75 md:w-150 md:h-150 2xl:w-200 2xl:h-200 object-contain will-change-transform"
           style={{
             opacity: 0.08,
             animation: isMobile ? "none" : "popOut 2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
@@ -34,7 +34,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
       </div>
 
       {/* 3. Main Content */}
-      <div className="text-center max-w-5xl mx-auto relative z-10 md:pt-0 flex flex-col items-center">
+      <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 md:pt-0 flex flex-col items-center">
         {/* Registrations Open Button */}
         <button
           onClick={onOpenRegistration}
@@ -69,7 +69,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
 
         {/* Main Heading 1 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight will-change-transform"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[10rem] 3xl:text-[11rem] font-serif font-bold bg-linear-to-r from-gray-900 via-gray-800 to-orange-900 bg-clip-text text-transparent mb-2 tracking-tight leading-tight will-change-transform"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out forwards"
@@ -81,7 +81,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
 
         {/* Main Heading 2 */}
         <h1
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight will-change-transform"
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold bg-linear-to-r from-orange-600 via-amber-500 to-orange-400 bg-clip-text text-transparent mb-8 italic pr-2 leading-tight will-change-transform"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out 0.2s forwards"
@@ -93,7 +93,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
 
         {/* Subtitle */}
         <p
-          className="text-lg md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-light"
+          className="text-lg md:text-2xl 2xl:text-3xl text-gray-600 mb-12 max-w-2xl 2xl:max-w-3xl mx-auto leading-relaxed font-light"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out 0.3s forwards"

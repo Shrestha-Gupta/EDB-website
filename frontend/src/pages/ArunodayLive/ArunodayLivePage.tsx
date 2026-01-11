@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArunodayRegistrationForm } from "../../components/ArunodayRegistrationForm";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 
@@ -7,13 +8,36 @@ const ArunodayLivePage = () => {
     document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const events = [
-    { name: "Dance Competition", time: "10:00 AM", venue: "Main Stage", icon: "💃" },
-    { name: "Music Night", time: "2:00 PM", venue: "Auditorium", icon: "🎵" },
-    { name: "Drama Performance", time: "4:00 PM", venue: "Open Theater", icon: "🎭" },
-    { name: "Art Exhibition", time: "11:00 AM", venue: "Gallery Hall", icon: "🎨" },
-    { name: "Poetry Slam", time: "3:00 PM", venue: "Literary Club", icon: "📝" },
-    { name: "Band Performance", time: "7:00 PM", venue: "Main Stage", icon: "🎸" },
+  // Main Events - All Arunoday events
+  const mainEvents = [
+    { name: "Arunoday Round 1", subtitle: "Rising Soon", eligibility: "First Year Only", status: "coming-soon", icon: "🌅", description: "The inaugural round of Arunoday - exclusively for first year students to showcase their talents." },
+    { name: "Model United Nations", subtitle: "Starting January 18, 2026", eligibility: "Open to All Years", status: "registrations-open", icon: "🇺🇳", description: "Step into the shoes of world leaders. Debate, negotiate, and make history.", link: "/mun/register" },
+    { name: "Dance Competition", time: "10:00 AM", venue: "Main Stage", icon: "💃", eligibility: "Open to All" },
+    { name: "Music Night", time: "2:00 PM", venue: "Auditorium", icon: "🎵", eligibility: "Open to All" },
+    { name: "Drama Performance", time: "4:00 PM", venue: "Open Theater", icon: "🎭", eligibility: "Open to All" },
+    { name: "Art Exhibition", time: "11:00 AM", venue: "Gallery Hall", icon: "🎨", eligibility: "Open to All" },
+    { name: "Poetry Slam", time: "3:00 PM", venue: "Literary Club", icon: "📝", eligibility: "Open to All" },
+    { name: "Band Performance", time: "7:00 PM", venue: "Main Stage", icon: "🎸", eligibility: "Open to All" },
+  ];
+
+  // Featured Events - Pralekh and Spandhan only
+  const featuredEvents = [
+    { 
+      name: "Pralekh", 
+      subtitle: "Newsletter Event",
+      icon: "📰", 
+      description: "The flagship newsletter competition where wordsmiths craft compelling stories and articles.",
+      eligibility: "Open to All",
+      highlights: ["Article Writing", "Editorial Design", "News Reporting"]
+    },
+    { 
+      name: "Spandhan", 
+      subtitle: "Cultural Extravaganza",
+      icon: "✨", 
+      description: "A vibrant celebration of arts and culture featuring diverse performances and exhibitions.",
+      eligibility: "Open to All",
+      highlights: ["Live Performances", "Art Showcase", "Cultural Exchange"]
+    },
   ];
 
   const highlights = [
@@ -24,7 +48,7 @@ const ArunodayLivePage = () => {
   ];
 
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}
@@ -32,7 +56,7 @@ const ArunodayLivePage = () => {
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="max-w-7xl mx-auto relative z-10"
+        className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -50,11 +74,11 @@ const ArunodayLivePage = () => {
             <span className="h-px w-12 bg-amber-700/40"></span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-8xl font-serif font-bold text-stone-900 mb-6 drop-shadow-sm">
+          <h1 className="text-6xl md:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold text-stone-900 mb-6 drop-shadow-sm">
             Arunoday'26<span className="text-amber-600">.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl 2xl:text-3xl text-stone-600 font-serif italic max-w-3xl 2xl:max-w-4xl mx-auto leading-relaxed">
             "Where creativity meets culture, and talents find their stage."
           </p>
         </motion.div>
@@ -120,7 +144,7 @@ const ArunodayLivePage = () => {
           </div>
         </section>
 
-        {/* Events Schedule */}
+        {/* Main Competitions - Arunoday Round 1 & MUN */}
         <section className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,16 +154,103 @@ const ArunodayLivePage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-4">
-              Featured{" "}
-              <span className="text-amber-600">Events</span>
+              Main <span className="text-amber-600">Competitions</span>
             </h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
-              A glimpse of the exciting events awaiting you at Arunoday'26
+              The flagship events of Arunoday'26 - Don't miss out!
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event, index) => (
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Arunoday Round 1 */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative p-8 bg-linear-to-br from-amber-50 to-orange-50 rounded-3xl border-2 border-amber-200 shadow-xl overflow-hidden"
+            >
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full animate-pulse">
+                  Coming Soon
+                </span>
+              </div>
+              <span className="text-6xl mb-4 block">🌅</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-stone-900 mb-2">
+                Arunoday Round 1
+              </h3>
+              <span className="text-amber-600 font-semibold text-lg">Rising Soon</span>
+              <div className="mt-4 mb-4">
+                <span className="inline-block px-4 py-2 bg-amber-100 border border-amber-300 text-amber-800 rounded-full text-sm font-medium">
+                  🎓 First Year Students Only
+                </span>
+              </div>
+              <p className="text-stone-600 leading-relaxed">
+                The inaugural round of Arunoday - exclusively for first year students to showcase their talents and kickstart their journey.
+              </p>
+              <button
+                disabled
+                className="mt-6 w-full px-6 py-3 bg-stone-300 text-stone-500 font-semibold rounded-full cursor-not-allowed"
+              >
+                Registrations Opening Soon
+              </button>
+            </motion.div>
+
+            {/* MUN */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative p-8 bg-linear-to-br from-blue-50 to-indigo-50 rounded-3xl border-2 border-blue-200 shadow-xl overflow-hidden"
+            >
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full">
+                  Registrations Open
+                </span>
+              </div>
+              <span className="text-6xl mb-4 block">🇺🇳</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-stone-900 mb-2">
+                Model United Nations
+              </h3>
+              <span className="text-blue-600 font-semibold text-lg">Starting January 18, 2026</span>
+              <div className="mt-4 mb-4">
+                <span className="inline-block px-4 py-2 bg-blue-100 border border-blue-300 text-blue-800 rounded-full text-sm font-medium">
+                  🌍 Open to All Years
+                </span>
+              </div>
+              <p className="text-stone-600 leading-relaxed">
+                Step into the shoes of world leaders. Debate global issues, negotiate with diplomacy, and make history at our MUN conference.
+              </p>
+              <Link
+                to="/mun/register"
+                className="mt-6 w-full px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-block text-center"
+              >
+                Register for MUN →
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Featured Events - Pralekh & Spandhan */}
+        <section className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-4">
+              Featured <span className="text-amber-600">Events</span>
+            </h2>
+            <p className="text-stone-600 max-w-2xl mx-auto">
+              Signature events that define the spirit of Arunoday
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {featuredEvents.map((event, index) => (
               <motion.div
                 key={event.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -147,29 +258,105 @@ const ArunodayLivePage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="p-6 bg-white rounded-2xl border border-stone-200 shadow-lg shadow-stone-200/50 hover:shadow-xl hover:border-amber-200 transition-all duration-300 group"
+                className="p-8 bg-white rounded-3xl border border-stone-200 shadow-xl hover:shadow-2xl hover:border-amber-200 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <span className="text-5xl">{event.icon}</span>
+                  <div>
+                    <h3 className="text-2xl font-bold text-stone-900">{event.name}</h3>
+                    <span className="text-amber-600 font-medium">{event.subtitle}</span>
+                  </div>
+                </div>
+                <p className="text-stone-600 mb-4 leading-relaxed">{event.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {event.highlights.map((highlight) => (
+                    <span key={highlight} className="px-3 py-1 bg-stone-100 text-stone-600 text-sm rounded-full">
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-stone-500 flex items-center gap-1">
+                    <span>👥</span> {event.eligibility}
+                  </span>
+                  <button
+                    onClick={scrollToForm}
+                    className="text-amber-600 font-semibold hover:text-amber-700 transition-colors"
+                  >
+                    Register →
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* All Events */}
+        <section className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-4">
+              All <span className="text-amber-600">Events</span>
+            </h2>
+            <p className="text-stone-600 max-w-2xl mx-auto">
+              Complete lineup of events at Arunoday'26
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {mainEvents.map((event, index) => (
+              <motion.div
+                key={event.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                className={`p-6 rounded-2xl border shadow-lg transition-all duration-300 group ${
+                  event.status === 'coming-soon' 
+                    ? 'bg-amber-50 border-amber-200 hover:border-amber-300' 
+                    : event.status === 'registrations-open'
+                    ? 'bg-blue-50 border-blue-200 hover:border-blue-300'
+                    : 'bg-white border-stone-200 hover:border-amber-200 hover:shadow-xl'
+                }`}
               >
                 <div className="flex items-start gap-4">
                   <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
                     {event.icon}
                   </span>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="text-xl font-bold text-stone-900 group-hover:text-amber-600 transition-colors">
                       {event.name}
                     </h3>
-                    <p className="text-stone-600 mt-1 flex items-center gap-2">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {event.time}
+                    {event.subtitle && (
+                      <p className="text-amber-600 font-medium text-sm">{event.subtitle}</p>
+                    )}
+                    {event.time && (
+                      <p className="text-stone-600 mt-1 flex items-center gap-2 text-sm">
+                        <span>🕐</span> {event.time}
+                      </p>
+                    )}
+                    {event.venue && (
+                      <p className="text-stone-500 text-sm flex items-center gap-2">
+                        <span>📍</span> {event.venue}
+                      </p>
+                    )}
+                    <p className="text-stone-500 text-xs mt-2 flex items-center gap-1">
+                      <span>👥</span> {event.eligibility}
                     </p>
-                    <p className="text-stone-500 text-sm mt-1 flex items-center gap-2">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {event.venue}
-                    </p>
+                    {event.link && (
+                      <Link
+                        to={event.link}
+                        className="inline-block mt-3 text-blue-600 font-medium text-sm hover:underline"
+                      >
+                        Register →
+                      </Link>
+                    )}
                   </div>
                 </div>
               </motion.div>

@@ -7,13 +7,13 @@ import canvasData from "../../data/canvasData.json";
 
 export default function CanvasPage() {
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-[radial-gradient(closest-side,rgba(251,191,36,0.15),transparent)] pointer-events-none translate-z-0" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-[radial-gradient(closest-side,rgba(253,186,116,0.15),transparent)] pointer-events-none translate-z-0" />
       <motion.div
-        className="max-w-5xl mx-auto will-change-transform"
+        className="max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto will-change-transform"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -33,7 +33,7 @@ export default function CanvasPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <p className="text-lg sm:text-2xl md:text-3xl font-serif italic text-brand-black mb-4">
+          <p className="text-lg sm:text-2xl md:text-3xl 2xl:text-4xl font-serif italic text-brand-black mb-4">
             "We are all apprentices in a craft where no one ever becomes a master."
           </p>
           <p className="text-brand-orange font-bold">

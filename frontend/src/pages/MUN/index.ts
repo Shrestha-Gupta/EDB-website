@@ -5,3 +5,5 @@ export { default as MunCompleteProfilePage } from "./MunCompleteProfilePage";
 export { default as MunDashboardPage } from "./MunDashboardPage";
 export { default as MunApplyPage } from "./MunApplyPage";
 export { default as MunAdminPage } from "./MunAdminPage";
+export { default as MunProfileDashboard } from "./MunProfileDashboard";
+export { default as MunAdminDashboard } from "./MunAdminDashboard";

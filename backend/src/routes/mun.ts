@@ -120,13 +120,96 @@ router.post('/apply', protect, profileComplete, async (req: AuthRequest, res: Re
 router.get('/my-applications', protect, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const applications = await MunApplication.find({ user: req.user!._id })
-      .populate('event', 'title startDate endDate venue')
+      .populate('event', 'title startDate endDate venue registrationDeadline')
       .sort({ createdAt: -1 });
 
     res.json({ applications });
   } catch (error: any) {
     console.error('Get applications error:', error);
     res.status(500).json({ message: error.message || 'Failed to fetch applications' });
+  }
+});
+
+// @route   GET /api/mun/my-profile/:applicationId
+// @desc    Get detailed profile/dashboard data for a specific application
+// @access  Private
+router.get('/my-profile/:applicationId', protect, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const application = await MunApplication.findOne({
+      _id: req.params.applicationId,
+      user: req.user!._id,
+    })
+      .populate('event', 'title startDate endDate venue registrationDeadline committees')
+      .populate('user', 'name email phone college branch year');
+
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    res.json({ application });
+  } catch (error: any) {
+    console.error('Get profile error:', error);
+    res.status(500).json({ message: error.message || 'Failed to fetch profile' });
+  }
+});
+
+// @route   POST /api/mun/request-edit/:applicationId
+// @desc    Request profile edit (sends request to admin)
+// @access  Private
+router.post('/request-edit/:applicationId', protect, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { message } = req.body;
+    const application = await MunApplication.findOne({
+      _id: req.params.applicationId,
+      user: req.user!._id,
+    });
+
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    application.editRequestPending = true;
+    application.editRequestMessage = message || 'User requested profile edit';
+    application.editRequestAt = new Date();
+    await application.save();
+
+    res.json({ message: 'Edit request submitted successfully' });
+  } catch (error: any) {
+    console.error('Edit request error:', error);
+    res.status(500).json({ message: error.message || 'Failed to submit edit request' });
+  }
+});
+
+// @route   POST /api/mun/final-confirmation/:applicationId
+// @desc    Submit final confirmation for attendance
+// @access  Private
+router.post('/final-confirmation/:applicationId', protect, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const application = await MunApplication.findOne({
+      _id: req.params.applicationId,
+      user: req.user!._id,
+    });
+
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    if (application.status !== 'allotted') {
+      res.status(400).json({ message: 'You can only confirm after allotment' });
+      return;
+    }
+
+    application.finalConfirmation = true;
+    application.finalConfirmationAt = new Date();
+    await application.save();
+
+    res.json({ message: 'Final confirmation submitted successfully', application });
+  } catch (error: any) {
+    console.error('Final confirmation error:', error);
+    res.status(500).json({ message: error.message || 'Failed to submit confirmation' });
   }
 });
 
@@ -154,6 +237,12 @@ router.post(
         return;
       }
 
+      // Check if deadline has passed
+      if (application.positionPaperDeadline && new Date() > application.positionPaperDeadline) {
+        res.status(400).json({ message: 'Position paper submission deadline has passed' });
+        return;
+      }
+
       if (!req.file) {
         res.status(400).json({ message: 'Please upload a PDF file' });
         return;
@@ -167,6 +256,7 @@ router.post(
       const base64Data = req.file.buffer.toString('base64');
       application.positionPaperUrl = `data:application/pdf;base64,${base64Data}`;
       application.positionPaperSubmittedAt = new Date();
+      application.positionPaperStatus = 'submitted';
       if (remarks) application.positionPaperRemarks = remarks;
 
       await application.save();
@@ -174,6 +264,7 @@ router.post(
       res.json({
         message: 'Position paper uploaded successfully',
         submittedAt: application.positionPaperSubmittedAt,
+        status: application.positionPaperStatus,
       });
     } catch (error: any) {
       console.error('Upload error:', error);
@@ -258,7 +349,17 @@ router.get('/admin/applications', protect, adminOnly, async (req: AuthRequest, r
 // @access  Admin only
 router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { committee, country, agenda, notes } = req.body;
+    const { 
+      committee, 
+      country, 
+      agenda, 
+      role, 
+      committeeRoom, 
+      reportingTime, 
+      reportingDate,
+      positionPaperDeadline,
+      notes 
+    } = req.body;
 
     const application = await MunApplication.findById(req.params.id);
     if (!application) {
@@ -266,10 +367,22 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
       return;
     }
 
+    // Check if allotment is locked
+    if (application.allotmentLocked) {
+      res.status(400).json({ message: 'Allotment is locked and cannot be modified' });
+      return;
+    }
+
     application.status = 'allotted';
+    application.allotmentStatus = application.allottedCountry ? 'reassigned' : 'allotted';
     application.allottedCommittee = committee;
     application.allottedCountry = country;
     application.allottedAgenda = agenda;
+    if (role) application.allottedRole = role;
+    if (committeeRoom) application.committeeRoom = committeeRoom;
+    if (reportingTime) application.reportingTime = reportingTime;
+    if (reportingDate) application.reportingDate = new Date(reportingDate);
+    if (positionPaperDeadline) application.positionPaperDeadline = new Date(positionPaperDeadline);
     if (notes) application.adminNotes = notes;
 
     await application.save();
@@ -278,6 +391,139 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
   } catch (error: any) {
     console.error('Allotment error:', error);
     res.status(500).json({ message: error.message || 'Allotment failed' });
+  }
+});
+
+// @route   PUT /api/mun/admin/applications/:id/lock-allotment
+// @desc    Lock/unlock allotment for an application
+// @access  Admin only
+router.put('/admin/applications/:id/lock-allotment', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { lock } = req.body;
+    const application = await MunApplication.findById(req.params.id);
+    
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    application.allotmentLocked = lock;
+    application.allotmentLockedAt = lock ? new Date() : null;
+    await application.save();
+
+    res.json({ message: `Allotment ${lock ? 'locked' : 'unlocked'}`, application });
+  } catch (error: any) {
+    console.error('Lock allotment error:', error);
+    res.status(500).json({ message: error.message || 'Failed to update lock status' });
+  }
+});
+
+// @route   PUT /api/mun/admin/applications/:id/payment-status
+// @desc    Update payment verification status
+// @access  Admin only
+router.put('/admin/applications/:id/payment-status', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { paymentStatus } = req.body;
+    
+    if (!['pending', 'verified', 'failed'].includes(paymentStatus)) {
+      res.status(400).json({ message: 'Invalid payment status' });
+      return;
+    }
+
+    const application = await MunApplication.findById(req.params.id);
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    application.paymentStatus = paymentStatus;
+    await application.save();
+
+    res.json({ message: `Payment ${paymentStatus}`, application });
+  } catch (error: any) {
+    console.error('Payment status error:', error);
+    res.status(500).json({ message: error.message || 'Failed to update payment status' });
+  }
+});
+
+// @route   PUT /api/mun/admin/applications/:id/position-paper-status
+// @desc    Update position paper review status
+// @access  Admin only
+router.put('/admin/applications/:id/position-paper-status', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { status, remarks } = req.body;
+    
+    if (!['not_submitted', 'submitted', 'under_review', 'approved', 'revision_requested'].includes(status)) {
+      res.status(400).json({ message: 'Invalid position paper status' });
+      return;
+    }
+
+    const application = await MunApplication.findById(req.params.id);
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    application.positionPaperStatus = status;
+    if (remarks) application.positionPaperAdminRemarks = remarks;
+    await application.save();
+
+    res.json({ message: 'Position paper status updated', application });
+  } catch (error: any) {
+    console.error('Position paper status error:', error);
+    res.status(500).json({ message: error.message || 'Failed to update status' });
+  }
+});
+
+// @route   PUT /api/mun/admin/applications/:id/handle-edit-request
+// @desc    Handle delegate's edit request
+// @access  Admin only
+router.put('/admin/applications/:id/handle-edit-request', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { approved, adminResponse } = req.body;
+    const application = await MunApplication.findById(req.params.id);
+    
+    if (!application) {
+      res.status(404).json({ message: 'Application not found' });
+      return;
+    }
+
+    application.editRequestPending = false;
+    if (adminResponse) application.adminNotes = (application.adminNotes || '') + '\n' + adminResponse;
+    await application.save();
+
+    res.json({ 
+      message: approved ? 'Edit request approved - delegate can now update profile' : 'Edit request handled', 
+      application 
+    });
+  } catch (error: any) {
+    console.error('Handle edit request error:', error);
+    res.status(500).json({ message: error.message || 'Failed to handle edit request' });
+  }
+});
+
+// @route   POST /api/mun/admin/bulk-lock-allotments
+// @desc    Lock all allotments for an event
+// @access  Admin only
+router.post('/admin/bulk-lock-allotments', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { eventId, lock } = req.body;
+    
+    const result = await MunApplication.updateMany(
+      { event: eventId, status: 'allotted' },
+      { 
+        allotmentLocked: lock, 
+        allotmentLockedAt: lock ? new Date() : null 
+      }
+    );
+
+    res.json({ 
+      message: `${result.modifiedCount} allotments ${lock ? 'locked' : 'unlocked'}`,
+      modifiedCount: result.modifiedCount 
+    });
+  } catch (error: any) {
+    console.error('Bulk lock error:', error);
+    res.status(500).json({ message: error.message || 'Failed to bulk lock allotments' });
   }
 });
 

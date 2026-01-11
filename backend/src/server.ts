@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 // Import routes
 import authRoutes from "./routes/auth";
 import munRoutes from "./routes/mun";
+import arunodayRoutes from "./routes/arunoday";
 
 // Import database connection
 import connectDB from "./config/database";
@@ -136,6 +137,7 @@ app.get("/api/env-check", (req, res) => {
 // Auth and MUN routes
 app.use("/api/auth", authRoutes);
 app.use("/api/mun", munRoutes);
+app.use("/api/arunoday", arunodayRoutes);
 
 // Contact form endpoint
 app.post('/api/contact', upload.single('image'), async (req, res) => {

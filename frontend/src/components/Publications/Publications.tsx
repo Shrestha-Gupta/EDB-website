@@ -52,12 +52,12 @@ export default function Publications() {
   } | null>(null);
 
   return (
-    <section className="my-12 px-6 relative overflow-hidden bg-white">
+    <section className="my-12 px-6 lg:px-8 2xl:px-12 relative overflow-hidden bg-white">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -73,17 +73,17 @@ export default function Publications() {
             </span>
             <span className="h-px w-8 bg-orange-500" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-gray-900 mb-6">
             Latest <span className="text-orange-600">Publications</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl 2xl:text-2xl text-gray-600 max-w-2xl 2xl:max-w-3xl mx-auto font-light leading-relaxed">
             Exploring ideas, stories, and creativity through our student-led
             journals and magazines.
           </p>
         </motion.div>
 
         {/* Publications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-10 mb-16">
           {publications.map((pub, index) => (
             <motion.div
               key={pub.id}

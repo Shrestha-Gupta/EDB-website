@@ -46,14 +46,14 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative bg-white px-6 overflow-hidden"
+      className="relative bg-white px-6 lg:px-8 2xl:px-12 overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#f97316_1px,transparent_1px),linear-gradient(to_bottom,#f97316_1px,transparent_1px)] bg-size-[4rem_4rem]"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -65,12 +65,12 @@ export default function About() {
           <div className="inline-block mb-4">
             <div className="w-16 h-1 bg-linear-to-r from-orange-500 to-amber-500 rounded-full mx-auto"></div>
           </div>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">
+          <h2 className="text-5xl md:text-6xl 2xl:text-7xl font-serif font-bold mb-6">
             <span className="bg-linear-to-r from-gray-900 via-orange-800 to-amber-700 bg-clip-text text-transparent">
               About The Editorial Board
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl 2xl:text-2xl text-gray-600 max-w-3xl 2xl:max-w-4xl mx-auto leading-relaxed">
             A premier literary journal at Madan Mohan Malaviya University of
             Technology, dedicated to nurturing creativity, fostering
             intellectual discourse, and celebrating the power of words.
@@ -78,7 +78,7 @@ export default function About() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 2xl:gap-8 mb-20">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -111,7 +111,7 @@ export default function About() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 2xl:gap-10">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -160,7 +160,7 @@ export default function About() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: isMobile ? 0.4 : 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="max-w-4xl mx-auto bg-linear-to-br from-orange-50 to-amber-50 rounded-3xl p-10 md:p-12 border border-orange-100 shadow-xl relative overflow-hidden">
+          <div className="max-w-4xl 2xl:max-w-5xl mx-auto bg-linear-to-br from-orange-50 to-amber-50 rounded-3xl p-10 md:p-12 2xl:p-16 border border-orange-100 shadow-xl relative overflow-hidden">
             {/* Static decorative elements instead of animated ones */}
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-300/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-amber-300/20 rounded-full blur-3xl" />

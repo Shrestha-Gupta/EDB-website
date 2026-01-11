@@ -321,7 +321,7 @@ export default function TeamPage() {
   };
 
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}
@@ -329,7 +329,7 @@ export default function TeamPage() {
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="relative z-10 max-w-7xl mx-auto"
+        className="relative z-10 max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: isMobile ? 0.3 : 0.8 }}
@@ -383,10 +383,10 @@ export default function TeamPage() {
           variants={activeContainerVariants}
           className="mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Final Year Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 2xl:gap-10">
             {finalYearTeam.map((member) => (
               <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard
@@ -409,10 +409,10 @@ export default function TeamPage() {
           variants={activeContainerVariants}
           className="mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Pre-Final Year Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6 sm:gap-8 2xl:gap-10">
             {preFinalTeam.map((member) => (
               <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard
@@ -435,10 +435,10 @@ export default function TeamPage() {
           variants={activeContainerVariants}
           className="mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-serif font-bold text-center mb-8 sm:mb-10 text-black tracking-tight">
             Sophomore Team
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 gap-6 sm:gap-8 2xl:gap-10">
             {sophomoreTeam.map((member) => (
               <motion.div key={member.id} variants={activeCardVariants}>
                 <TeamCard

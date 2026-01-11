@@ -144,3 +144,32 @@ img[loading="lazy"] {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
 }
+
+/* Large screen optimizations */
+@media (min-width: 1536px) {
+  /* 2xl breakpoint */
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1920px) {
+  /* 3xl breakpoint */
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 2560px) {
+  /* 4xl breakpoint */
+  html {
+    font-size: 20px;
+  }
+}
+
+/* Ensure content doesn't stretch too wide on ultra-wide screens */
+@media (min-width: 2560px) {
+  .max-w-screen-3xl {
+    max-width: 1920px;
+  }
+}

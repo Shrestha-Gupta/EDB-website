@@ -105,7 +105,7 @@ export default function EventsPage() {
     : events.filter(event => event.status === filter)
 
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}
@@ -113,7 +113,7 @@ export default function EventsPage() {
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="max-w-7xl mx-auto relative z-10"
+        className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto relative z-10"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -131,11 +131,11 @@ export default function EventsPage() {
             <span className="h-px w-12 bg-amber-700/40"></span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-8xl font-serif font-bold text-stone-900 mb-6 drop-shadow-sm">
+          <h1 className="text-6xl md:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold text-stone-900 mb-6 drop-shadow-sm">
             Events<span className="text-amber-600">.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl 2xl:text-3xl text-stone-600 font-serif italic max-w-3xl 2xl:max-w-4xl mx-auto leading-relaxed">
             "A curation of literary excellence, cultural festivities, and intellectual discourse."
           </p>
         </motion.div>

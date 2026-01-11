@@ -2,8 +2,16 @@
 
 * {
   font-family: 'Times New Roman', Times, serif;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Times New Roman', Times, serif;
+  min-height: 100vh;
+}
+
+/* Ensure proper viewport handling on all screen sizes */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }

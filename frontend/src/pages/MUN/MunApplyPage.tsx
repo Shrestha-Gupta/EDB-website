@@ -103,8 +103,8 @@ const MunApplyPage = () => {
         previousMunExperience: formData.previousMunExperience,
         whyJoin: formData.whyJoin,
       });
-      alert("Application submitted successfully!");
-      navigate("/mun/dashboard");
+      alert("Application submitted successfully! Redirecting to your profile dashboard...");
+      navigate("/mun/profile");
     } catch (err: any) {
       setError(err.message || "Application failed");
     } finally {
@@ -134,14 +134,14 @@ const MunApplyPage = () => {
   }
 
   return (
-    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 relative overflow-x-hidden font-sans text-stone-800">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <ParticlesBackground />
 
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="max-w-2xl mx-auto relative z-10"
+        className="max-w-2xl 2xl:max-w-3xl mx-auto relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

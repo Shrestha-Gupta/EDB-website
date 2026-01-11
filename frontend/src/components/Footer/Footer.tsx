@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-linear-to-br from-orange-50 via-amber-50 to-orange-100 text-gray-900 overflow-hidden">
       {/* Main Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
+      <div className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-8 sm:py-12 lg:py-16">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
           {/* Logo + Tagline */}
           <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 w-full lg:w-auto">
@@ -82,7 +82,7 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black uppercase leading-none bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] 3xl:text-[12rem] font-black uppercase leading-none bg-linear-to-r from-orange-600 via-amber-600 to-orange-700 bg-clip-text text-transparent">
             Beckoning
             <br />
             creati'wit'y
@@ -109,7 +109,7 @@ export default function Footer() {
 
       {/* Links Grid */}
       <div className="border-t border-orange-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-12">
+        <div className="max-w-7xl 2xl:max-w-8xl 3xl:max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 py-8 sm:py-10 lg:py-12">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-10 lg:mb-12">
             {/* Quick Links */}
             <div>
