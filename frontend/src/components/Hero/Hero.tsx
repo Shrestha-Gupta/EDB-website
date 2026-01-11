@@ -89,6 +89,27 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
           discourse at Madan Mohan Malaviya University of Technology, since 1967.
         </p>
 
+        {/* Read Latest Issue Button - Light Theme */}
+        <a
+          href="/publications"
+          className="inline-flex items-center gap-2 px-8 py-4 mb-5 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-lg rounded-full shadow-lg hover:bg-orange-50 hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out group"
+          style={{
+            animation: isMobile
+              ? "fadeIn 0.5s ease-out 0.4s forwards"
+              : "fadeInUp 1.0s ease-out 1.5s both",
+          }}
+        >
+          <span>Read Latest Issue</span>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
         
       </div>
 
