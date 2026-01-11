@@ -35,22 +35,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
 
       {/* 3. Main Content */}
       <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 md:pt-0 flex flex-col items-center">
-        {/* Registrations Open Button */}
-        <button
-          onClick={onOpenRegistration}
-          className="mb-4 px-6 py-2.5 bg-linear-to-r from-orange-500 via-amber-500 to-orange-600 text-white font-semibold rounded-full shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer animate-pulse hover:animate-none"
-          style={{
-            animation: isMobile
-              ? "fadeIn 0.5s ease-out forwards, pulse 2s ease-in-out infinite"
-              : "fadeInUp 1.0s ease-out 0.3s both",
-          }}
-        >
-          <span className="flex items-center gap-2">
-            <span className="text-lg">🎉</span>
-            <span>Registrations Open for Arunoday'26!</span>
-            <span className="text-lg">🎉</span>
-          </span>
-        </button>
+  
 
         {/* Sanskrit Text - disable blinking cursor on mobile */}
         <div className="inline-block mb-6 relative">
@@ -101,7 +86,7 @@ export default function Hero({ onOpenRegistration }: HeroProps) {
           }}
         >
           A literary journal celebrating creativity, culture, and scholarly
-          discourse at Madan Mohan Malaviya University of Technology.
+          discourse at Madan Mohan Malaviya University of Technology, since 1967.
         </p>
 
         

@@ -9,7 +9,7 @@ interface RegistrationPopupProps {
 const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
   const navigate = useNavigate();
 
-  const handleRegisterClick = () => {
+  const handleLearnMoreClick = () => {
     onClose();
     navigate("/arunoday-live");
   };
@@ -18,112 +18,126 @@ const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/40 backdrop-blur-md z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
+          {/* Glassmorphism Modal */}
           <motion.div
-            className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl w-full max-w-md 2xl:max-w-lg overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/20"
+            className="relative w-full max-w-md 2xl:max-w-lg overflow-hidden rounded-3xl"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="relative p-6 pb-4">
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              
-              <div className="text-center">
-                <motion.div
-                  className="inline-block mb-4"
-                  animate={{ rotate: [0, -10, 10, -10, 0] }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+            {/* Glassmorphism Background - More Transparent */}
+            <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-rose-500/10" />
+            <div className="absolute inset-0 border border-white/15 rounded-3xl" />
+            
+            {/* Decorative Glow Effects */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-amber-400/30 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-orange-400/30 rounded-full blur-3xl" />
+
+            {/* Content Container */}
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="relative p-8 pb-4">
+                <button
+                  onClick={onClose}
+                  className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full backdrop-blur-sm"
                 >
-                  <span className="text-6xl">🎉</span>
-                </motion.div>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
                 
+                <div className="text-center">
+                  {/* Animated Icon */}
+                  <motion.div
+                    className="inline-block mb-4"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                  >
+                    <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-amber-400/30 to-orange-500/30 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                      <span className="text-5xl">🌅</span>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-3 drop-shadow-lg">
+                      Arunoday'26<span className="text-amber-400">.</span>
+                    </h2>
+                    
+                    {/* Coming Soon Badge */}
+                    <motion.div
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full"
+                      animate={{ scale: [1, 1.03, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                      </span>
+                      <span className="text-amber-300 font-semibold text-sm tracking-wide uppercase">
+                        Rising Soon
+                      </span>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="px-8 pb-4">
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-center"
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-linear-to-r from-orange-400 via-amber-400 to-orange-500 mb-2">
-                    Arunoday'26
-                  </h2>
-                  <p className="text-gray-300 text-lg font-medium">
-                    Registrations Are Now Open!
+                  <p className="text-white/70 text-lg mb-6 font-light">
+                    The Annual Literary Festival of MMMUT is about to begin!
+                  </p>
+                  
+                  <p className="text-amber-300/90 text-sm font-medium">
+                    ✨ 3 Days of Unforgettable Experiences Await!
                   </p>
                 </motion.div>
               </div>
-            </div>
 
-            {/* Content */}
-            <div className="px-6 pb-4">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-center"
-              >
-                <p className="text-gray-400 mb-2">
-                  The Annual Cultural Festival of MMMUT
-                </p>
-                <div className="flex justify-center gap-4 my-4">
-                  <div className="text-center">
-                    <span className="text-2xl">🎭</span>
-                    <p className="text-xs text-gray-500 mt-1">Events</p>
-                  </div>
-                  <div className="text-center">
-                    <span className="text-2xl">🎵</span>
-                    <p className="text-xs text-gray-500 mt-1">Music</p>
-                  </div>
-                  <div className="text-center">
-                    <span className="text-2xl">💃</span>
-                    <p className="text-xs text-gray-500 mt-1">Dance</p>
-                  </div>
-                  <div className="text-center">
-                    <span className="text-2xl">🎨</span>
-                    <p className="text-xs text-gray-500 mt-1">Art</p>
-                  </div>
-                </div>
-                <p className="text-amber-400/80 text-sm font-medium">
-                  ✨ Join us for 3 days of unforgettable experiences!
-                </p>
-              </motion.div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="p-6 pt-2">
-              <motion.button
-                onClick={handleRegisterClick}
-                className="w-full py-4 bg-linear-to-r from-orange-500 via-amber-500 to-orange-600 text-white text-lg font-bold rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  Register Now
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
-              </motion.button>
-              
-              <button
-                onClick={onClose}
-                className="w-full mt-3 py-2 text-gray-400 hover:text-gray-300 text-sm transition-colors"
-              >
-                Maybe Later
-              </button>
+              {/* CTA Button */}
+              <div className="p-8 pt-4">
+                <motion.button
+                  onClick={handleLearnMoreClick}
+                  className="w-full py-4 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-400 text-white text-lg font-bold rounded-2xl shadow-lg shadow-amber-400/30 hover:shadow-amber-400/50 transition-all duration-300 backdrop-blur-sm"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Learn More
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </motion.button>
+                
+                <button
+                  onClick={onClose}
+                  className="w-full mt-4 py-2 text-white/50 hover:text-white/80 text-sm transition-colors font-medium"
+                >
+                  Remind Me Later
+                </button>
+              </div>
             </div>
           </motion.div>
         </motion.div>
