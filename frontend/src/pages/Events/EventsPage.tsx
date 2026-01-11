@@ -8,20 +8,6 @@ import ParticlesBackground from '../../components/ParticlesBackground/ParticlesB
 const events = [
   {
     id: 1,
-    title: 'Abhyudaya 2025',
-    subtitle: 'The Annual Literary Festival',
-    date: 'March 15-17, 2025',
-    day: '15',
-    month: 'MAR',
-    type: 'Festival',
-    description: 'Our flagship event celebrating literature, culture, and art. Three days of grand symposiums, celebrity panels, and cultural evenings.',
-    status: 'upcoming',
-    location: 'Main Auditorium',
-    theme: 'from-amber-700 to-orange-600',
-    image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767466801/WhatsApp_Image_2026-01-04_at_12.29.33_AM_cobho3.jpg'
-  },
-  {
-    id: 2,
     title: 'Arunoday',
     subtitle: 'Creative Writing Workshop',
     date: 'February 10, 2025',
@@ -32,7 +18,21 @@ const events = [
     status: 'upcoming',
     location: 'Seminar Hall 1',
     theme: 'from-orange-500 to-amber-500',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop'
+    image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1768167016/Screenshot_2026-01-12_030001_jvcpwj.png'
+  },
+  {
+    id: 2,
+    title: 'Abhyudaya 2025',
+    subtitle: 'The Annual Literary Festival',
+    date: 'March 15-17, 2025',
+    day: '15',
+    month: 'MAR',
+    type: 'Festival',
+    description: 'Our flagship event celebrating literature, culture, and art. Three days of grand symposiums, celebrity panels, and cultural evenings.',
+    status: 'upcoming',
+    location: 'Main Auditorium',
+    theme: 'from-amber-700 to-orange-600',
+    image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1768167902/Screenshot_2026-01-12_031442_s2uwpb.png'
   },
   {
     id: 3,
@@ -192,20 +192,6 @@ export default function EventsPage() {
                       alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    
-                    {/* Badge */}
-                    <div className="absolute top-4 left-4 z-20">
-                      <div className="inline-flex items-center gap-1 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg text-amber-900 border border-amber-100">
-                        <Star className="w-3 h-3 text-amber-600" /> {event.type}
-                      </div>
-                    </div>
-
-                    {/* Simple Date Overlay - Bottom Left */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/80 to-transparent z-20 text-white">
-                         <div className="bg-amber-600/90 w-fit px-3 py-1 rounded text-sm font-bold shadow-lg backdrop-blur-sm">
-                            {event.month} {event.day}
-                         </div>
-                    </div>
                   </div>
 
                   {/* Right: Content */}
@@ -235,10 +221,6 @@ export default function EventsPage() {
                       </p>
 
                       <div className="flex flex-wrap gap-6 text-sm text-stone-500 font-medium mb-8">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-amber-500" />
-                          {event.date}
-                        </div>
                         <div className="flex items-center gap-2">
                           <MapPin className="w-4 h-4 text-amber-500" />
                           {event.location}
