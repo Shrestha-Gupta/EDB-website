@@ -84,9 +84,9 @@ const ArunodayCTA = () => {
             >
               <Link
                 to="/arunoday-live"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-orange-300 text-white font-bold text-lg rounded-full shadow-lg shadow-amber-500/30 hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-4 text-black hover:shadow-lg font-bold text-lg rounded-full hover:scale-105 transition-all duration-300"
               >
-                <span>Learn More</span>
+                <span>Learn more</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
