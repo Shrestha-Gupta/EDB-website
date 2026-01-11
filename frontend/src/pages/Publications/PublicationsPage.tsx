@@ -32,7 +32,7 @@ const newsletters = [
   },
   {
     id: 100,
-    title: "Malvika - Annual Magazine 2025",
+    title: "Malvika - Annual University Magazine 2025",
     type: "ANNUAL MAGAZINE",
     year: "2025",
     coverImage:
@@ -653,7 +653,7 @@ const newsletters = [
 const magazines = [
   {
     id: 100,
-    title: "Malvika - Annual Magazine 2025",
+    title: "Malvika - Annual University Magazine 2025",
     type: "ANNUAL MAGAZINE",
     year: "2025",
     coverImage:
@@ -667,7 +667,7 @@ const magazines = [
   },
   {
     id: 101,
-    title: "Malvika - Annual Magazine 2023",
+    title: "Malvika - Annual University Magazine 2023",
     type: "ANNUAL MAGAZINE",
     year: "2023",
     coverImage:
@@ -681,7 +681,7 @@ const magazines = [
   },
   {
     id: 102,
-    title: "Malvika - Annual Magazine 2020",
+    title: "Malvika - Annual University Magazine 2020",
     type: "ANNUAL MAGAZINE",
     year: "2020",
     coverImage:
@@ -695,7 +695,7 @@ const magazines = [
   },
   {
     id: 103,
-    title: "Malvika - Annual Magazine 2019",
+    title: "Malvika - Annual University Magazine 2019",
     type: "ANNUAL MAGAZINE",
     year: "2019",
     coverImage:
@@ -709,7 +709,7 @@ const magazines = [
   },
   {
     id: 104,
-    title: "Malvika - Annual Magazine 2018",
+    title: "Malvika - Annual University Magazine 2018",
     type: "ANNUAL MAGAZINE",
     year: "2018",
     coverImage:
@@ -723,7 +723,7 @@ const magazines = [
   },
   {
     id: 105,
-    title: "Malvika - Annual Magazine 2017",
+    title: "Malvika - Annual University Magazine 2017",
     type: "ANNUAL MAGAZINE",
     year: "2017",
     coverImage:
@@ -1015,7 +1015,7 @@ export default function PublicationsPage() {
                 : "bg-white text-gray-700 border-gray-200 hover:border-orange-500 hover:text-orange-500"
             }`}
           >
-            Annual Magazine
+            Annual University Magazine
           </button>
           <button
             onClick={() => setActiveTab("yogpath")}
