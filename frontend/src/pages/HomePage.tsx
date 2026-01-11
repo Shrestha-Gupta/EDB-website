@@ -23,7 +23,7 @@ interface HomePageProps {
 // Arunoday Coming Soon CTA Section
 const ArunodayCTA = () => {
   return (
-    <section className="relative py-8 md:py-16 overflow-hidden">
+    <section className="relative py-4 md:py-16 overflow-hidden">
       {/* Content */}
       <div className="relative max-w-6xl mx-auto px-4 md:px-8">
         <motion.div

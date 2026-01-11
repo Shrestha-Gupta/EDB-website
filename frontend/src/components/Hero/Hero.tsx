@@ -9,7 +9,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
   const isMobile = useIsMobile();
   
   return (
-    <section className="bg-white min-h-[85vh] md:min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8 2xl:px-12 relative overflow-hidden -mt-18 md:pt-0">
+    <section className="bg-white min-h-[70vh] md:min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8 2xl:px-12 relative overflow-hidden -mt-10 md:pt-0">
       {/* 1. Background: Pattern + Gradient Tint */}
       <div className="absolute inset-0 z-0 pointer-events-none -top-20">
         {/* INCREASED DOT SIZE: Changed 1px to 3px and spacing to 30px */}
