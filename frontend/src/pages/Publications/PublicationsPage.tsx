@@ -934,7 +934,7 @@ export default function PublicationsPage() {
                             Release Date
                           </p>
                           <p className="font-semibold text-gray-800">
-                            May 2024
+                            {latestIssue.year}
                           </p>
                         </div>
                       </div>

@@ -56,13 +56,13 @@ const MunPage = () => {
         className="max-w-5xl mx-auto relative z-10 text-center px-4 py-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         {/* Coming Soon Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="flex items-center justify-center gap-3 text-amber-700 font-bold tracking-widest uppercase text-sm mb-8"
         >
           <span className="h-px w-12 bg-amber-700/40"></span>
@@ -73,9 +73,9 @@ const MunPage = () => {
         {/* Main Title */}
         <motion.h1 
           className="text-6xl md:text-8xl 2xl:text-9xl font-serif font-bold text-stone-900 mb-6 drop-shadow-sm"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
         >
           Model United<span className="text-amber-600">.</span>
           <br />
@@ -89,7 +89,7 @@ const MunPage = () => {
           className="text-xl md:text-2xl 2xl:text-3xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed mb-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           "Step into the shoes of world leaders. Debate. Negotiate. Make history."
         </motion.p>
@@ -98,16 +98,16 @@ const MunPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
           className="mb-16"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
             {timeUnits.map((unit, index) => (
               <motion.div
                 key={unit.label}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
                 className="relative group"
               >
                 {/* Glowing background */}
@@ -141,7 +141,7 @@ const MunPage = () => {
           className="flex justify-center gap-2 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
         >
           <div className="w-2 h-2 rounded-full bg-amber-400/60" />
           <div className="w-2 h-2 rounded-full bg-amber-500/80" />
@@ -150,9 +150,9 @@ const MunPage = () => {
 
         {/* Feature Text */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.3, delay: 0.45 }}
           className="space-y-4"
         >
           <p className="text-lg md:text-xl text-stone-600 max-w-2xl mx-auto">
