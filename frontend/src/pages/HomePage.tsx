@@ -71,7 +71,7 @@ const ArunodayCTA = () => {
               transition={{ delay: 0.4 }}
               className="text-stone-600 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light"
             >
-              The Annual Literary Festival of MMMUT
+              The Literary Extravaganza of MMMUT
             </motion.p>
           
             

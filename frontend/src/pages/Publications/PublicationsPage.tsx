@@ -20,7 +20,7 @@ const newsletters = [
     id: 1,
     title: "TIRESIA - Volume 17, Issue 1",
     type: "NEWSLETTER",
-    year: "2025",
+    year: "NOVEMBER, 2025",
     coverImage:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767423428/Screenshot_2026-01-03_at_12.21.54_PM_vfrzi5.png",
     description:
@@ -63,7 +63,7 @@ const newsletters = [
     id: 3,
     title: "TIRESIA - Volume 16, Issue 2",
     type: "NEWSLETTER",
-    year: "2025",
+    year: "2024",
     coverImage:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_1_wzbldy.jpg",
     description:
@@ -77,7 +77,7 @@ const newsletters = [
     id: 4,
     title: "TIRESIA - Volume 16, Issue 1",
     type: "NEWSLETTER",
-    year: "2025",
+    year: "2024",
     coverImage:
       "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765572664/WhatsApp_Image_2025-12-12_at_22.44.56_ffabep.jpg",
     description:

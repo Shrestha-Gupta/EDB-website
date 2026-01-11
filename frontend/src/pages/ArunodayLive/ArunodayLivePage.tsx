@@ -151,9 +151,6 @@ const ArunodayLivePage = () => {
           transition={{ duration: 0.3, delay: 0.45 }}
           className="space-y-4"
         >
-          <p className="text-lg md:text-xl text-stone-600 max-w-2xl mx-auto">
-            Get ready for three unforgettable days of music, dance, drama, art, and more.
-          </p>
           
           {/* Pulsing notification badge */}
           <motion.div

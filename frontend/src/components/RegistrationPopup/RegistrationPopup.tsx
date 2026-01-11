@@ -106,7 +106,7 @@ const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
                   className="text-center"
                 >
                   <p className="text-white/70 text-lg mb-6 font-light">
-                    The Annual Literary Festival of MMMUT is about to begin!
+                    The Literary Extravaganza of MMMUT is about to begin!
                   </p>
                   
                   <p className="text-amber-300/90 text-sm font-medium">
