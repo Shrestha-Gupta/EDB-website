@@ -83,7 +83,7 @@ export default function Publications() {
         </motion.div>
 
         {/* Publications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 2xl:gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {publications.map((pub, index) => (
             <motion.div
               key={pub.id}
