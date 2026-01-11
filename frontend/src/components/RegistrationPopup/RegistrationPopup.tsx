@@ -76,7 +76,7 @@ const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
                     transition={{ delay: 0.2 }}
                   >
                     <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-3 drop-shadow-lg">
-                      Arunoday'26<span className="text-amber-400">.</span>
+                      Arunoday '26<span className="text-amber-400">.</span>
                     </h2>
                     
                     {/* Coming Soon Badge */}

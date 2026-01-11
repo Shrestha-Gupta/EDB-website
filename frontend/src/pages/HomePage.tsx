@@ -60,7 +60,7 @@ const ArunodayCTA = () => {
               transition={{ delay: 0.3 }}
               className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-stone-900 mb-4"
             >
-              Arunoday'26<span className="text-amber-500">.</span>
+              Arunoday '26<span className="text-amber-500">.</span>
             </motion.h2>
             
             {/* Subtitle */}
