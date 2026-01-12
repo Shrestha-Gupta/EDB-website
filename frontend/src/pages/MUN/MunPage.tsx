@@ -1,12 +1,59 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
-import { useAuth } from "../../context/AuthContext";
+// import { useAuth } from "../../context/AuthContext";
 import { Calendar, MapPin, Users, Award, FileText, ArrowRight, Globe, Mic } from "lucide-react";
 
+// Countdown target date - January 18, 2026 at 00:00:00
+const TARGET_DATE = new Date("2026-01-18T00:00:00").getTime();
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 const MunPage = () => {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
+
+  // Countdown state
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const difference = TARGET_DATE - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const timeUnits = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ];
 
   const committees = [
     {
@@ -31,12 +78,14 @@ const MunPage = () => {
     { title: "Best Journalist", description: "Outstanding reporting", icon: "📰" },
   ];
 
+  /* COMMENTED OUT - Registration Steps (for when registrations go live)
   const steps = [
     { step: 1, title: "Login / Sign Up", description: "Create your account or login to get started" },
     { step: 2, title: "Complete Profile", description: "Fill in your delegate details and preferences" },
     { step: 3, title: "Apply for Committee", description: "Select your preferred committee and country" },
     { step: 4, title: "Get Confirmed", description: "Receive confirmation and prepare for MUN" },
   ];
+  */
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-x-hidden font-sans text-stone-800">
@@ -55,7 +104,27 @@ const MunPage = () => {
       >
         {/* Hero Section */}
         <div className="text-center mb-16">
-          {/* Live Badge */}
+          {/* Coming Soon Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center justify-center gap-3 mb-8"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-amber-100 border border-amber-300 rounded-full text-amber-700 font-medium"
+            >
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-600"></span>
+              </span>
+              Coming Soon
+            </motion.div>
+          </motion.div>
+
+          {/* OLD: Registrations Live Badge
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,6 +143,7 @@ const MunPage = () => {
               Registrations Live!
             </motion.div>
           </motion.div>
+          */}
 
           {/* Main Title */}
           <motion.h1
@@ -99,11 +169,41 @@ const MunPage = () => {
             "Step into the shoes of world leaders. Debate. Negotiate. Make history."
           </motion.p>
 
+          {/* Countdown Timer */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="mb-10"
+          >
+            <h2 className="text-xl font-medium text-stone-700 mb-6">
+              Registrations Opening In
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {timeUnits.map((unit, index) => (
+                <motion.div
+                  key={unit.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                  className="bg-white/90 backdrop-blur-sm border border-amber-200 rounded-2xl p-4 md:p-6 shadow-lg min-w-[80px] md:min-w-[100px]"
+                >
+                  <div className="text-3xl md:text-5xl font-bold bg-linear-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
+                    {String(unit.value).padStart(2, "0")}
+                  </div>
+                  <div className="text-xs md:text-sm text-stone-500 uppercase tracking-wider mt-1">
+                    {unit.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Event Info */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.15 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-6 text-stone-600 mb-8"
           >
             <div className="flex items-center gap-2">
@@ -120,7 +220,23 @@ const MunPage = () => {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* View Committees Button (only option when countdown is active) */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.35 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <a
+              href="#committees"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+            >
+              View Committees
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </motion.div>
+
+          {/* COMMENTED OUT - CTA Buttons (for when registrations go live)
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -141,9 +257,10 @@ const MunPage = () => {
               View Committees
             </a>
           </motion.div>
+          */}
         </div>
 
-        {/* Registration Steps */}
+        {/* COMMENTED OUT - Registration Steps (for when registrations go live)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -178,6 +295,7 @@ const MunPage = () => {
             ))}
           </div>
         </motion.div>
+        */}
 
         {/* Committees Section */}
         <motion.div
@@ -287,7 +405,7 @@ const MunPage = () => {
           </div>
         </motion.div>
 
-        {/* Final CTA */}
+        {/* COMMENTED OUT - Final CTA (for when registrations go live)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -307,6 +425,22 @@ const MunPage = () => {
             {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
             <ArrowRight className="w-6 h-6" />
           </Link>
+        </motion.div>
+        */}
+
+        {/* Stay Tuned CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
+          className="text-center"
+        >
+          <h3 className="text-2xl font-serif font-bold text-stone-900 mb-4">
+            Stay Tuned!
+          </h3>
+          <p className="text-stone-600 mb-6 max-w-2xl mx-auto">
+            Registrations will open soon. Follow us for updates and be ready to represent your nation.
+          </p>
         </motion.div>
 
         {/* Footer Note */}
