@@ -90,7 +90,7 @@ const MunDashboardPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50/30 to-orange-50/20 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 flex items-center justify-center px-4">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-4"></div>
           <p className="text-stone-700 text-lg">Loading dashboard...</p>
@@ -100,7 +100,7 @@ const MunDashboardPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50/30 to-orange-50/20 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -110,12 +110,6 @@ const MunDashboardPage = () => {
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">MUN Dashboard</h1>
           <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
-            <Link
-              to="/mun/profile"
-              className="flex-1 sm:flex-none px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-center text-sm sm:text-base font-medium"
-            >
-              🎫 Full Profile
-            </Link>
             <button
               onClick={logout}
               className="flex-1 sm:flex-none px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm sm:text-base font-medium"
@@ -150,7 +144,24 @@ const MunDashboardPage = () => {
               </div>
             </div>
           ) : (
-            <p className="text-stone-500">No application submitted yet</p>
+            <div className="text-center py-4">
+              {user?.preferredCommittee ? (
+                <>
+                  <p className="text-green-600 font-medium mb-2">✅ Preferences Submitted</p>
+                  <p className="text-stone-500 text-sm">Your MUN preferences have been saved. Please complete your application from the events page.</p>
+                </>
+              ) : (
+                <>
+                  <p className="text-stone-500 mb-4">No application submitted yet</p>
+                  <Link
+                    to="/mun/events"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg"
+                  >
+                    🚀 Apply for Committee
+                  </Link>
+                </>
+              )}
+            </div>
           )}
         </motion.div>
 
@@ -192,7 +203,59 @@ const MunDashboardPage = () => {
           </div>
         </motion.div>
 
-        {/* Section 3: My Allotment */}
+        {/* Section 3: MUN Preferences */}
+        {currentApplication && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
+          >
+            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
+              📋 MUN Preferences
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+                <p className="text-stone-500 text-xs sm:text-sm mb-1">Attended MUN Before?</p>
+                <p className="text-stone-900 font-medium text-sm sm:text-base">
+                  {currentApplication.hasAttendedMun ? '✅ Yes' : '❌ No'}
+                </p>
+              </div>
+              <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
+                <p className="text-stone-500 text-xs sm:text-sm mb-1">Preferred Committee</p>
+                <p className="text-stone-900 font-medium text-sm sm:text-base">
+                  {currentApplication.preferredCommittee === 'UNHRC' 
+                    ? '🌍 UNHRC' 
+                    : currentApplication.preferredCommittee === 'IP' 
+                    ? '📰 IP' 
+                    : 'N/A'}
+                </p>
+              </div>
+              <div className="bg-stone-50 rounded-xl p-3 sm:p-4 sm:col-span-2">
+                <p className="text-stone-500 text-xs sm:text-sm mb-1">Country Preferences</p>
+                <p className="text-stone-900 font-medium text-sm sm:text-base">
+                  {currentApplication.countryPreferences?.filter(c => c).length > 0 
+                    ? currentApplication.countryPreferences.filter(c => c).map((country, i) => (
+                        <span key={i} className="inline-block mr-2">
+                          {i + 1}. {country}
+                        </span>
+                      ))
+                    : 'None specified'}
+                </p>
+              </div>
+              {currentApplication.hasAttendedMun && currentApplication.previousMunExperience && (
+                <div className="bg-stone-50 rounded-xl p-3 sm:p-4 sm:col-span-2">
+                  <p className="text-stone-500 text-xs sm:text-sm mb-1">Previous MUN Experience</p>
+                  <p className="text-stone-900 font-medium text-sm sm:text-base whitespace-pre-wrap">
+                    {currentApplication.previousMunExperience}
+                  </p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Section 4: My Allotment */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -204,15 +267,15 @@ const MunDashboardPage = () => {
           </h2>
           {isAllotted ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-4 border border-blue-200">
+              <div className="bg-linear-to-br from-blue-50 to-indigo-100 rounded-xl p-4 border border-blue-200">
                 <p className="text-blue-600 text-xs sm:text-sm mb-1">Committee</p>
                 <p className="text-blue-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCommittee}</p>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-4 border border-green-200">
+              <div className="bg-linear-to-br from-green-50 to-emerald-100 rounded-xl p-4 border border-green-200">
                 <p className="text-green-600 text-xs sm:text-sm mb-1">Country</p>
                 <p className="text-green-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCountry}</p>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-violet-100 rounded-xl p-4 border border-purple-200 sm:col-span-2 lg:col-span-1">
+              <div className="bg-linear-to-br from-purple-50 to-violet-100 rounded-xl p-4 border border-purple-200 sm:col-span-2 lg:col-span-1">
                 <p className="text-purple-600 text-xs sm:text-sm mb-1">Agenda</p>
                 <p className="text-purple-900 font-bold text-base sm:text-lg">{currentApplication?.allottedAgenda || 'TBA'}</p>
               </div>
@@ -328,7 +391,7 @@ const MunDashboardPage = () => {
                 disabled={!selectedFile || uploading}
                 className={`w-full py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
                   selectedFile && !uploading
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
+                    ? 'bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
                     : 'bg-stone-200 text-stone-400 cursor-not-allowed'
                 }`}
               >

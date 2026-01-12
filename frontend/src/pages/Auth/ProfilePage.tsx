@@ -333,7 +333,6 @@ const ProfilePage = () => {
                   <option value="2nd Year">2nd Year</option>
                   <option value="3rd Year">3rd Year</option>
                   <option value="4th Year">4th Year</option>
-                  <option value="5th Year">5th Year</option>
                   <option value="Postgraduate">Postgraduate</option>
                   <option value="PhD">PhD</option>
                   <option value="Alumni">Alumni</option>

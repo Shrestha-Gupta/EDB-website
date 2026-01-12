@@ -30,6 +30,7 @@ const MunLoginPage = lazy(() => import("./pages/MUN/MunLoginPage"));
 const MunRegisterPage = lazy(() => import("./pages/MUN/MunRegisterPage"));
 const MunCompleteProfilePage = lazy(() => import("./pages/MUN/MunCompleteProfilePage"));
 const MunDashboardPage = lazy(() => import("./pages/MUN/MunDashboardPage"));
+const MunEventsPage = lazy(() => import("./pages/MUN/MunEventsPage"));
 const MunApplyPage = lazy(() => import("./pages/MUN/MunApplyPage"));
 const MunAdminPage = lazy(() => import("./pages/MUN/MunAdminPage"));
 const MunProfileDashboard = lazy(() => import("./pages/MUN/MunProfileDashboard"));
@@ -165,6 +166,7 @@ function App() {
                     <Route path="/mun/register" element={<MunRegisterPage />} />
                     <Route path="/mun/complete-profile" element={<MunCompleteProfilePage />} />
                     <Route path="/mun/dashboard" element={<MunDashboardPage />} />
+                    <Route path="/mun/events" element={<MunEventsPage />} />
                     <Route path="/mun/profile" element={<MunProfileDashboard />} />
                     <Route path="/mun/apply/:eventId" element={<MunApplyPage />} />
                     <Route path="/mun/admin" element={<MunAdminPage />} />

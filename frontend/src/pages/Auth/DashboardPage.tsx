@@ -504,18 +504,18 @@ const DashboardPage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="bg-linear-to-br from-stone-800 to-stone-900 rounded-2xl p-6 text-white shadow-xl"
+              className="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-200/50 shadow-xl"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-amber-400" />
+                  <Sparkles className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Arunoday 2026</h3>
-                  <p className="text-xs text-stone-400">Annual Literary Festival</p>
+                  <h3 className="font-semibold text-stone-900">Arunoday 2026</h3>
+                  <p className="text-xs text-stone-500">Annual Literary Festival</p>
                 </div>
               </div>
-              <p className="text-sm text-stone-300 mb-4">
+              <p className="text-sm text-stone-600 mb-4">
                 Register for our flagship events and showcase your literary talents!
               </p>
               <Link

@@ -2,16 +2,20 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
+import { ArunodayRegistrationForm } from "../../components/ArunodayRegistrationForm";
 import { Calendar, MapPin, Users, Trophy, Sparkles, ArrowRight } from "lucide-react";
 
 const ArunodayLivePage = () => {
+  const scrollToForm = () => {
+    document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   // Main Events - All Arunoday events
   const mainEvents = [
     { 
       name: "Model United Nations", 
       subtitle: "Diplomatic Excellence", 
       eligibility: "Open to All Years", 
-      status: "live", 
       icon: "🇺🇳", 
       description: "Step into the shoes of world leaders. Debate, negotiate, and make history.",
       link: "/mun"
@@ -20,7 +24,6 @@ const ArunodayLivePage = () => {
       name: "Pralekh", 
       subtitle: "Hindi Essay Writing", 
       eligibility: "Open to All Years", 
-      status: "live", 
       icon: "📝", 
       description: "Express your thoughts in the beautiful language of Hindi through compelling essays.",
       link: "/dashboard"
@@ -29,7 +32,6 @@ const ArunodayLivePage = () => {
       name: "Plotlines", 
       subtitle: "Creative Writing", 
       eligibility: "Open to All Years", 
-      status: "live", 
       icon: "✍️", 
       description: "Craft captivating stories and let your imagination run wild on paper.",
       link: "/dashboard"
@@ -38,7 +40,6 @@ const ArunodayLivePage = () => {
       name: "Open Mic", 
       subtitle: "Poetry & Performance", 
       eligibility: "Open to All Years", 
-      status: "live", 
       icon: "🎤", 
       description: "Take the stage and share your voice through poetry, spoken word, or performance.",
       link: "/dashboard"
@@ -115,7 +116,7 @@ const ArunodayLivePage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
-            className="flex flex-wrap justify-center gap-6 text-stone-600"
+            className="flex flex-wrap justify-center gap-6 text-stone-600 mb-8"
           >
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-amber-600" />
@@ -126,6 +127,18 @@ const ArunodayLivePage = () => {
               <span>MMMUT Campus</span>
             </div>
           </motion.div>
+
+          {/* CTA Button */}
+          <motion.button
+            onClick={scrollToForm}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+          >
+            Register Your Team
+            <ArrowRight className="w-5 h-5" />
+          </motion.button>
         </div>
 
         {/* Highlights */}
@@ -152,11 +165,12 @@ const ArunodayLivePage = () => {
           ))}
         </motion.div>
 
-        {/* Events Section */}
+        {/* Featured Events Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
+          className="mb-16"
         >
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4">
@@ -215,18 +229,29 @@ const ArunodayLivePage = () => {
           </div>
         </motion.div>
 
+        {/* Registration Form Section */}
+        <motion.div
+          id="registration-form"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="mb-16"
+        >
+          <ArunodayRegistrationForm />
+        </motion.div>
+
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.5 }}
-          className="mt-16 text-center"
+          className="text-center"
         >
-          <div className="bg-linear-to-br from-stone-800 to-stone-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
-            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4">
+          <div className="bg-linear-to-br from-amber-100 to-orange-100 rounded-3xl p-8 md:p-12 border border-amber-200/50 shadow-xl">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-stone-900">
               Ready to Showcase Your Talent?
             </h3>
-            <p className="text-stone-300 mb-6 max-w-2xl mx-auto">
+            <p className="text-stone-600 mb-6 max-w-2xl mx-auto">
               Don't miss this opportunity to be part of MMMUT's biggest literary and cultural celebration. 
               Register now and let your creativity shine!
             </p>
@@ -240,7 +265,7 @@ const ArunodayLivePage = () => {
               </Link>
               <Link
                 to="/mun"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/20"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-stone-800 hover:bg-stone-700 text-white font-semibold rounded-xl transition-colors"
               >
                 MUN Details
               </Link>

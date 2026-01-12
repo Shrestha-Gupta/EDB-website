@@ -75,13 +75,18 @@ const MunApplyPage = () => {
     e.preventDefault();
     setError("");
 
-    if (!formData.preferredCommittee) {
-      setError("Please select your preferred committee (UNHRC or IP)");
+    if (formData.hasAttendedMun === null) {
+      setError("Please indicate if you have attended MUN before");
       return;
     }
 
-    if (!formData.experienceLevel) {
-      setError("Please select your experience level");
+    if (!formData.countryPreferences[0]) {
+      setError("Please enter at least your 1st country preference");
+      return;
+    }
+
+    if (!formData.preferredCommittee) {
+      setError("Please select your preferred committee (UNHRC or IP)");
       return;
     }
 
@@ -103,8 +108,8 @@ const MunApplyPage = () => {
         previousMunExperience: formData.previousMunExperience,
         whyJoin: formData.whyJoin,
       });
-      alert("Application submitted successfully! Redirecting to your profile dashboard...");
-      navigate("/mun/profile");
+      alert("Application submitted successfully! Redirecting to your dashboard...");
+      navigate("/mun/dashboard");
     } catch (err: any) {
       setError(err.message || "Application failed");
     } finally {
@@ -183,6 +188,61 @@ const MunApplyPage = () => {
             </div>
           )}
 
+          {/* Has Attended MUN */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-stone-700 mb-3">
+              Have you attended any MUN before? <span className="text-red-500">*</span>
+            </label>
+            <div className="flex gap-4">
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, hasAttendedMun: true })}
+                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all font-semibold ${
+                  formData.hasAttendedMun === true
+                    ? 'border-amber-500 bg-amber-50 text-amber-700'
+                    : 'border-stone-300 hover:border-amber-300 text-stone-700'
+                }`}
+              >
+                ✅ Yes
+              </button>
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, hasAttendedMun: false, previousMunExperience: '' })}
+                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all font-semibold ${
+                  formData.hasAttendedMun === false
+                    ? 'border-amber-500 bg-amber-50 text-amber-700'
+                    : 'border-stone-300 hover:border-amber-300 text-stone-700'
+                }`}
+              >
+                ❌ No
+              </button>
+            </div>
+          </div>
+
+          {/* Country Preferences */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-stone-700 mb-3">
+              Country Preferences <span className="text-red-500">*</span>
+            </label>
+            <p className="text-xs text-stone-500 mb-3">Enter your top 3 country preferences in order</p>
+            {[0, 1, 2].map((index) => (
+              <input
+                key={index}
+                type="text"
+                value={formData.countryPreferences[index]}
+                onChange={(e) => {
+                  const newPrefs = [...formData.countryPreferences];
+                  newPrefs[index] = e.target.value;
+                  setFormData({ ...formData, countryPreferences: newPrefs });
+                }}
+                placeholder={
+                  index === 0 ? "1st Preference (e.g., India)" : index === 1 ? "2nd Preference" : "3rd Preference"
+                }
+                className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-3"
+              />
+            ))}
+          </div>
+
           {/* Preferred Committee */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-stone-700 mb-3">
@@ -216,105 +276,23 @@ const MunApplyPage = () => {
             </div>
           </div>
 
-          {/* Experience Level */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-stone-700 mb-3">
-              What is your MUN experience level? <span className="text-red-500">*</span>
-            </label>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { value: 'beginner', label: 'Beginner', desc: 'First time or very new' },
-                { value: 'intermediate', label: 'Intermediate', desc: '1-3 MUNs attended' },
-                { value: 'advanced', label: 'Advanced', desc: '4+ MUNs attended' },
-              ].map((level) => (
-                <button
-                  key={level.value}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, experienceLevel: level.value as any })}
-                  className={`p-3 rounded-lg border-2 transition-all text-center ${
-                    formData.experienceLevel === level.value
-                      ? 'border-amber-500 bg-amber-50'
-                      : 'border-stone-300 hover:border-amber-300'
-                  }`}
-                >
-                  <span className="font-semibold text-stone-900 text-sm">{level.label}</span>
-                  <p className="text-xs text-stone-500 mt-1">{level.desc}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Has Attended MUN */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-stone-700 mb-3">
-              Have you attended any MUN before? <span className="text-red-500">*</span>
-            </label>
-            <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, hasAttendedMun: true })}
-                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all font-semibold ${
-                  formData.hasAttendedMun === true
-                    ? 'border-amber-500 bg-amber-50 text-amber-700'
-                    : 'border-stone-300 hover:border-amber-300 text-stone-700'
-                }`}
-              >
-                ✅ Yes
-              </button>
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, hasAttendedMun: false, previousMunExperience: '' })}
-                className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all font-semibold ${
-                  formData.hasAttendedMun === false
-                    ? 'border-amber-500 bg-amber-50 text-amber-700'
-                    : 'border-stone-300 hover:border-amber-300 text-stone-700'
-                }`}
-              >
-                ❌ No
-              </button>
-            </div>
-          </div>
-
           {/* Previous Experience Details (shown only if hasAttendedMun) */}
           {formData.hasAttendedMun && (
             <div className="mb-6">
               <label className="block text-sm font-medium text-stone-700 mb-2">
-                Tell us about your MUN experience
-                <span className="text-stone-500 font-normal ml-2">(awards, committees, roles)</span>
+                Share your previous MUN experience
+                <span className="text-stone-500 font-normal ml-2">(optional)</span>
               </label>
+              <p className="text-xs text-stone-500 mb-2">Tell us about MUNs you've participated in, committees, awards, etc.</p>
               <textarea
                 value={formData.previousMunExperience}
                 onChange={(e) => setFormData({ ...formData, previousMunExperience: e.target.value })}
-                rows={3}
+                rows={4}
                 placeholder="E.g., Best Delegate at XYZ MUN 2024, Represented India in DISEC..."
                 className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all resize-none"
               />
             </div>
           )}
-
-          {/* Country Preferences */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-stone-700 mb-3">
-              Country Preferences
-              <span className="text-stone-500 font-normal ml-2">(optional, in order of preference)</span>
-            </label>
-            {[0, 1, 2].map((index) => (
-              <input
-                key={index}
-                type="text"
-                value={formData.countryPreferences[index]}
-                onChange={(e) => {
-                  const newPrefs = [...formData.countryPreferences];
-                  newPrefs[index] = e.target.value;
-                  setFormData({ ...formData, countryPreferences: newPrefs });
-                }}
-                placeholder={
-                  index === 0 ? "1st Preference (e.g., India)" : index === 1 ? "2nd Preference" : "3rd Preference"
-                }
-                className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-3"
-              />
-            ))}
-          </div>
 
           {/* Agenda Preferences */}
           <div className="mb-6">

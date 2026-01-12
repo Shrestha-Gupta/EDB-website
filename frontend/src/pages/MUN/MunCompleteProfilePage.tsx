@@ -67,7 +67,8 @@ const MunCompleteProfilePage = () => {
         previousMunExperience: formData.previousMunExperience,
       });
       
-      navigate("/mun/dashboard");
+      // Redirect to events page to select and apply for a committee
+      navigate("/mun/events");
     } catch (err: any) {
       setError(err.message || "Profile update failed");
     } finally {
@@ -194,7 +195,6 @@ const MunCompleteProfilePage = () => {
                     <option value="2nd">2nd Year</option>
                     <option value="3rd">3rd Year</option>
                     <option value="4th">4th Year</option>
-                    <option value="5th">5th Year</option>
                   </select>
                 </div>
               </div>
