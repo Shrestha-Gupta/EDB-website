@@ -32,7 +32,7 @@ const upload = multer({
 // @access  Private
 router.post('/register', protect, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { eventType, title, description } = req.body;
+    const { eventType, title, description, teamName, teamMembers } = req.body;
     const user = req.user;
 
     if (!user) {
@@ -69,7 +69,53 @@ router.post('/register', protect, async (req: AuthRequest, res: Response): Promi
       return;
     }
 
-    // Create registration
+    // For Pralekh, validate team registration
+    if (eventType === 'pralekh') {
+      if (!teamName || !teamName.trim()) {
+        res.status(400).json({ message: 'Team name is required for Pralekh registration' });
+        return;
+      }
+
+      if (!teamMembers || !Array.isArray(teamMembers) || teamMembers.length < 2 || teamMembers.length > 5) {
+        res.status(400).json({ message: 'Team must have 2 to 5 members (including team leader)' });
+        return;
+      }
+
+      // Validate each team member has required fields
+      for (let i = 0; i < teamMembers.length; i++) {
+        const member = teamMembers[i];
+        if (!member.name || !member.email || !member.phone || !member.college || !member.branch || !member.year) {
+          res.status(400).json({ message: `Please fill all details for team member ${i + 1}` });
+          return;
+        }
+      }
+
+      // Create team registration for Pralekh
+      const registration = await EventRegistration.create({
+        userId: user._id,
+        eventType,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        college: user.college,
+        branch: user.branch,
+        year: user.year,
+        isTeamRegistration: true,
+        teamName: teamName.trim(),
+        teamMembers,
+        title: title || '',
+        description: description || '',
+        registrationStatus: 'registered',
+      });
+
+      res.status(201).json({
+        message: 'Team registration successful!',
+        registration,
+      });
+      return;
+    }
+
+    // Create individual registration for other events
     const registration = await EventRegistration.create({
       userId: user._id,
       eventType,
@@ -79,6 +125,7 @@ router.post('/register', protect, async (req: AuthRequest, res: Response): Promi
       college: user.college,
       branch: user.branch,
       year: user.year,
+      isTeamRegistration: false,
       title: title || '',
       description: description || '',
       registrationStatus: 'registered',

@@ -7,7 +7,8 @@ import {
   getEventRegistration,
   eventInfo,
   type EventType,
-  type EventRegistration
+  type EventRegistration,
+  type TeamMember
 } from '../../services/eventsApi';
 import { 
   X, 
@@ -21,7 +22,10 @@ import {
   Phone,
   Building2,
   GraduationCap,
-  Calendar
+  Calendar,
+  Users,
+  Plus,
+  Trash2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -50,8 +54,28 @@ const EventRegistrationModal = ({
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  
+  // Team registration data (for Pralekh)
+  const [teamName, setTeamName] = useState('');
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
 
   const event = eventInfo[eventType];
+  const isPralekh = eventType === 'pralekh';
+
+  // Initialize team members with leader when modal opens
+  useEffect(() => {
+    if (isOpen && user && isPralekh) {
+      // Set team leader as first member
+      setTeamMembers([{
+        name: user.name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        college: user.college || '',
+        branch: user.branch || '',
+        year: user.year || '',
+      }]);
+    }
+  }, [isOpen, user, isPralekh]);
 
   // Check existing registration on open
   useEffect(() => {
@@ -91,11 +115,41 @@ const EventRegistrationModal = ({
       return;
     }
 
+    // For Pralekh, validate team registration
+    if (isPralekh) {
+      if (!teamName.trim()) {
+        setError('Please enter a team name');
+        return;
+      }
+      if (teamMembers.length < 2) {
+        setError('Team must have at least 2 members');
+        return;
+      }
+      if (teamMembers.length > 5) {
+        setError('Team can have maximum 5 members');
+        return;
+      }
+      // Validate all team members have required fields
+      for (let i = 0; i < teamMembers.length; i++) {
+        const member = teamMembers[i];
+        if (!member.name || !member.email || !member.phone || !member.college || !member.branch || !member.year) {
+          setError(`Please fill all details for ${i === 0 ? 'Team Leader' : `Member ${i + 1}`}`);
+          return;
+        }
+      }
+    }
+
     setIsLoading(true);
     setError('');
     
     try {
-      const data = await registerForEvent(eventType, title, description);
+      const data = await registerForEvent(
+        eventType, 
+        title, 
+        description,
+        isPralekh ? teamName : undefined,
+        isPralekh ? teamMembers : undefined
+      );
       setRegistration(data.registration);
       setStep('success');
       
@@ -156,7 +210,35 @@ const EventRegistrationModal = ({
     setTitle('');
     setDescription('');
     setFile(null);
+    setTeamName('');
+    setTeamMembers([]);
     onClose();
+  };
+
+  // Team member handlers
+  const addTeamMember = () => {
+    if (teamMembers.length < 5) {
+      setTeamMembers([...teamMembers, {
+        name: '',
+        email: '',
+        phone: '',
+        college: '',
+        branch: '',
+        year: '',
+      }]);
+    }
+  };
+
+  const removeTeamMember = (index: number) => {
+    if (index > 0 && teamMembers.length > 2) { // Can't remove leader and need minimum 2
+      setTeamMembers(teamMembers.filter((_, i) => i !== index));
+    }
+  };
+
+  const updateTeamMember = (index: number, field: keyof TeamMember, value: string) => {
+    const updated = [...teamMembers];
+    updated[index] = { ...updated[index], [field]: value };
+    setTeamMembers(updated);
   };
 
   if (!isOpen) return null;
@@ -240,40 +322,193 @@ const EventRegistrationModal = ({
                   </div>
                 )}
 
-                {/* Prefilled User Details */}
-                <div className="bg-stone-50 rounded-xl p-4 space-y-3">
-                  <h4 className="font-semibold text-stone-900 text-sm mb-3">Your Details</h4>
-                  
-                  <div className="flex items-center gap-3 text-sm">
-                    <User className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.name}</span>
+                {/* Team Registration for Pralekh */}
+                {isPralekh ? (
+                  <div className="space-y-4">
+                    {/* Team Info Banner */}
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+                      <Users className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-amber-800">Team Registration</p>
+                        <p className="text-sm text-amber-600">Pralekh requires a team of 2-5 members. You are the Team Leader.</p>
+                      </div>
+                    </div>
+
+                    {/* Team Name */}
+                    <div>
+                      <label className="block text-sm font-medium text-stone-700 mb-2">
+                        Team Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={teamName}
+                        onChange={(e) => setTeamName(e.target.value)}
+                        placeholder="Enter your team name"
+                        className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
+                      />
+                    </div>
+
+                    {/* Team Members */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-semibold text-stone-900 text-sm">
+                          Team Members ({teamMembers.length}/5)
+                        </h4>
+                        {teamMembers.length < 5 && (
+                          <button
+                            type="button"
+                            onClick={addTeamMember}
+                            className="flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700 font-medium"
+                          >
+                            <Plus className="w-4 h-4" />
+                            Add Member
+                          </button>
+                        )}
+                      </div>
+
+                      {teamMembers.map((member, index) => (
+                        <div key={index} className="bg-stone-50 rounded-xl p-4 space-y-3 relative">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-semibold text-stone-700">
+                              {index === 0 ? '👑 Team Leader (You)' : `Member ${index + 1}`}
+                            </span>
+                            {index > 0 && teamMembers.length > 2 && (
+                              <button
+                                type="button"
+                                onClick={() => removeTeamMember(index)}
+                                className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+
+                          {index === 0 ? (
+                            // Team leader info (read-only, from profile)
+                            <div className="grid grid-cols-2 gap-3 text-sm">
+                              <div className="flex items-center gap-2">
+                                <User className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700">{member.name}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Mail className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700 truncate">{member.email}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Phone className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700">{member.phone}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Building2 className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700 truncate">{member.college}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <GraduationCap className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700">{member.branch}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4 text-stone-400" />
+                                <span className="text-stone-700">{member.year}</span>
+                              </div>
+                            </div>
+                          ) : (
+                            // Editable member fields
+                            <div className="grid grid-cols-2 gap-3">
+                              <input
+                                type="text"
+                                value={member.name}
+                                onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
+                                placeholder="Full Name *"
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              />
+                              <input
+                                type="email"
+                                value={member.email}
+                                onChange={(e) => updateTeamMember(index, 'email', e.target.value)}
+                                placeholder="Email *"
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              />
+                              <input
+                                type="tel"
+                                value={member.phone}
+                                onChange={(e) => updateTeamMember(index, 'phone', e.target.value)}
+                                placeholder="Phone *"
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              />
+                              <input
+                                type="text"
+                                value={member.college}
+                                onChange={(e) => updateTeamMember(index, 'college', e.target.value)}
+                                placeholder="College *"
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              />
+                              <input
+                                type="text"
+                                value={member.branch}
+                                onChange={(e) => updateTeamMember(index, 'branch', e.target.value)}
+                                placeholder="Branch *"
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              />
+                              <select
+                                value={member.year}
+                                onChange={(e) => updateTeamMember(index, 'year', e.target.value)}
+                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                              >
+                                <option value="">Year *</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="5th Year">5th Year</option>
+                              </select>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+
+                      {teamMembers.length < 2 && (
+                        <p className="text-sm text-amber-600 text-center">
+                          Add at least one more member to complete your team
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <Mail className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.email}</span>
+                ) : (
+                  /* Individual Registration for other events */
+                  <div className="bg-stone-50 rounded-xl p-4 space-y-3">
+                    <h4 className="font-semibold text-stone-900 text-sm mb-3">Your Details</h4>
+                    
+                    <div className="flex items-center gap-3 text-sm">
+                      <User className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.name}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Mail className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.email}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Phone className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Building2 className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.college}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <GraduationCap className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.branch}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <Calendar className="w-4 h-4 text-stone-400" />
+                      <span className="text-stone-700">{user.year}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <Phone className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.phone}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <Building2 className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.college}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <GraduationCap className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.branch}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <Calendar className="w-4 h-4 text-stone-400" />
-                    <span className="text-stone-700">{user.year}</span>
-                  </div>
-                </div>
+                )}
 
                 {/* Register Button */}
                 <motion.button
                   onClick={handleRegister}
-                  disabled={isLoading}
+                  disabled={isLoading || (isPralekh && teamMembers.length < 2)}
                   className={`w-full py-4 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2`}
                   whileHover={{ scale: isLoading ? 1 : 1.02 }}
                   whileTap={{ scale: isLoading ? 1 : 0.98 }}
@@ -284,7 +519,7 @@ const EventRegistrationModal = ({
                       Registering...
                     </>
                   ) : (
-                    'Confirm Registration'
+                    isPralekh ? 'Register Team' : 'Confirm Registration'
                   )}
                 </motion.button>
               </div>
@@ -300,9 +535,14 @@ const EventRegistrationModal = ({
                 >
                   <Check className="w-10 h-10 text-green-500" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-stone-900 mb-2">Registration Successful!</h3>
+                <h3 className="text-xl font-bold text-stone-900 mb-2">
+                  {isPralekh ? 'Team Registration Successful!' : 'Registration Successful!'}
+                </h3>
                 <p className="text-stone-600">
-                  You have successfully registered for {event.name}.
+                  {isPralekh 
+                    ? `Your team "${teamName}" has been registered for ${event.name}.`
+                    : `You have successfully registered for ${event.name}.`
+                  }
                 </p>
                 <p className="text-sm text-stone-500 mt-2">
                   Opening submission window...
@@ -316,7 +556,9 @@ const EventRegistrationModal = ({
                 <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-500 shrink-0" />
                   <div>
-                    <p className="font-medium text-green-800">You are registered!</p>
+                    <p className="font-medium text-green-800">
+                      {registration?.teamName ? `Team "${registration.teamName}" is registered!` : 'You are registered!'}
+                    </p>
                     <p className="text-sm text-green-600">Now submit your work</p>
                   </div>
                 </div>
@@ -439,6 +681,18 @@ const EventRegistrationModal = ({
                     <span className="text-stone-500">Status:</span>
                     <span className="font-medium text-green-600 capitalize">{registration.registrationStatus}</span>
                   </div>
+                  {registration.teamName && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-stone-500">Team:</span>
+                      <span className="font-medium text-stone-700">{registration.teamName}</span>
+                    </div>
+                  )}
+                  {registration.teamMembers && registration.teamMembers.length > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-stone-500">Members:</span>
+                      <span className="font-medium text-stone-700">{registration.teamMembers.length} members</span>
+                    </div>
+                  )}
                   {registration.title && (
                     <div className="flex justify-between text-sm">
                       <span className="text-stone-500">Title:</span>

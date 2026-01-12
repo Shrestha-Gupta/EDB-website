@@ -5,6 +5,16 @@ const API_BASE_URL = import.meta.env.PROD
 
 export type EventType = 'pralekh' | 'plotlines' | 'openmic';
 
+// Team member interface for Pralekh
+export interface TeamMember {
+  name: string;
+  email: string;
+  phone: string;
+  college: string;
+  branch: string;
+  year: string;
+}
+
 export interface EventRegistration {
   _id: string;
   userId: string;
@@ -15,6 +25,10 @@ export interface EventRegistration {
   college: string;
   branch: string;
   year: string;
+  // Team fields (for Pralekh)
+  isTeamRegistration?: boolean;
+  teamName?: string;
+  teamMembers?: TeamMember[];
   title?: string;
   description?: string;
   submissionUrl?: string;
@@ -64,11 +78,13 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
 export const registerForEvent = async (
   eventType: EventType, 
   title?: string, 
-  description?: string
+  description?: string,
+  teamName?: string,
+  teamMembers?: TeamMember[]
 ): Promise<{ message: string; registration: EventRegistration }> => {
   return apiCall('/api/events/register', {
     method: 'POST',
-    body: JSON.stringify({ eventType, title, description }),
+    body: JSON.stringify({ eventType, title, description, teamName, teamMembers }),
   });
 };
 

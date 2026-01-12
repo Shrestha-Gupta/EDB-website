@@ -1,15 +1,29 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface IEventRegistration extends Document {
-  userId: mongoose.Types.ObjectId;
-  eventType: 'pralekh' | 'plotlines' | 'openmic';
-  // User details (prefilled from profile)
+// Team member interface for Pralekh
+export interface ITeamMember {
   name: string;
   email: string;
   phone: string;
   college: string;
   branch: string;
   year: string;
+}
+
+export interface IEventRegistration extends Document {
+  userId: mongoose.Types.ObjectId;
+  eventType: 'pralekh' | 'plotlines' | 'openmic';
+  // User details (prefilled from profile) - Team Leader for Pralekh
+  name: string;
+  email: string;
+  phone: string;
+  college: string;
+  branch: string;
+  year: string;
+  // Team fields (for Pralekh only)
+  isTeamRegistration?: boolean;
+  teamName?: string;
+  teamMembers?: ITeamMember[]; // 2-5 members including leader
   // Event specific fields
   title?: string; // For submission title
   description?: string; // Brief description of submission
@@ -70,6 +84,23 @@ const EventRegistrationSchema = new Schema<IEventRegistration>(
       required: [true, 'Year is required'],
       trim: true,
     },
+    // Team fields (for Pralekh only)
+    isTeamRegistration: {
+      type: Boolean,
+      default: false,
+    },
+    teamName: {
+      type: String,
+      trim: true,
+    },
+    teamMembers: [{
+      name: { type: String, trim: true },
+      email: { type: String, trim: true, lowercase: true },
+      phone: { type: String, trim: true },
+      college: { type: String, trim: true },
+      branch: { type: String, trim: true },
+      year: { type: String, trim: true },
+    }],
     // Event specific
     title: {
       type: String,
