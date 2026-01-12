@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { Calendar, MapPin, ArrowRight, Star } from 'lucide-react'
+import { MapPin, ArrowRight } from 'lucide-react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 
 // --- Data Configuration ---
