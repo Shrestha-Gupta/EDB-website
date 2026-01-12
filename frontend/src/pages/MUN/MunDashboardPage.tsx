@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { getMyApplications, uploadPositionPaper, type MunApplication } from '../../services/munApi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MunDashboardPage = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [applications, setApplications] = useState<MunApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -111,7 +112,10 @@ const MunDashboardPage = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">MUN Dashboard</h1>
           <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
             <button
-              onClick={logout}
+              onClick={() => {
+                logout();
+                navigate('/');
+              }}
               className="flex-1 sm:flex-none px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm sm:text-base font-medium"
             >
               Logout
