@@ -4,6 +4,7 @@ import Hero from "../components/Hero/Hero";
 import About from "../components/About/About";
 import Publications from "../components/Publications/Publications";
 import Contact from "../components/Contact/Contact";
+import SEO, { seoConfigs } from "../components/SEO/SEO";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -102,6 +103,7 @@ const ArunodayCTA = () => {
 export default function HomePage({ onOpenRegistration }: HomePageProps) {
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
+      <SEO {...seoConfigs.home} />
       <Hero onOpenRegistration={onOpenRegistration} />
       <ArunodayCTA />
       <About />

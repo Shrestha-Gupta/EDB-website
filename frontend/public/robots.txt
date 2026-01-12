@@ -1,0 +1,41 @@
+# Robots.txt for The Editorial Board - MMMUT
+# https://edb-mmmut.vercel.app
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /mun/admin
+Disallow: /mun/admin-dashboard
+
+# Allow specific crawlers with optimized settings
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://edb-mmmut.vercel.app/sitemap.xml
+
+# Preferred host
+Host: https://edb-mmmut.vercel.app

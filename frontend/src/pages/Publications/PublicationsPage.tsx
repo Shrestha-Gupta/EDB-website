@@ -12,6 +12,7 @@ import {
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground.tsx";
 import PDFViewer from "../../components/PDFViewer/PDFViewer.tsx";
 import PageHero from "../../components/PageHero/PageHero.tsx";
+import SEO, { seoConfigs } from "../../components/SEO/SEO";
 
 type TabType = "all" | "newsletter" | "magazine" | "yogpath";
 
@@ -803,6 +804,7 @@ export default function PublicationsPage() {
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
+      <SEO {...seoConfigs.publications} />
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}

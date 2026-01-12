@@ -5,6 +5,7 @@ import { MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react'
 // Ensure this path is correct
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
 import PageHero from '../../components/PageHero/PageHero'
+import SEO, { seoConfigs } from '../../components/SEO/SEO'
 
 const alumniGallery = [
   
@@ -45,6 +46,7 @@ export default function AlumniPage() {
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
+      <SEO {...seoConfigs.alumni} />
       <ParticlesBackground />
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />

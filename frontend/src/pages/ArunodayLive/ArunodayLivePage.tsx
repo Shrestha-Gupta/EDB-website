@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
+import SEO, { seoConfigs } from "../../components/SEO/SEO";
 
 const ArunodayLivePage = () => {
   // Target date: January 16, 2026 at 11:59 PM IST
@@ -45,6 +46,7 @@ const ArunodayLivePage = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen relative overflow-x-hidden font-sans text-stone-800 flex items-center justify-center">
+      <SEO {...seoConfigs.arunodayLive} />
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}

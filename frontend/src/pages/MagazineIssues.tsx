@@ -6,6 +6,7 @@ import 'swiper/swiper-bundle.css'
 import PDFViewer from '../components/PDFViewer/PDFViewer'
 import PageHero from '../components/PageHero/PageHero'
 import ParticlesBackground from '../components/ParticlesBackground/ParticlesBackground'
+import SEO, { seoConfigs } from '../components/SEO/SEO'
 
 interface MagazineIssue {
   id: number
@@ -42,6 +43,7 @@ export default function MagazineIssues() {
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
+      <SEO {...seoConfigs.magazine} />
       <ParticlesBackground />
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />

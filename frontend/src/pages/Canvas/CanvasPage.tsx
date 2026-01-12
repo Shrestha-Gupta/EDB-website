@@ -4,10 +4,12 @@ import ParticlesBackground from "../../components/ParticlesBackground/ParticlesB
 import TestimonialCard from "../../components/Canvas/TestimonialCard";
 import PageHero from "../../components/PageHero/PageHero";
 import canvasData from "../../data/canvasData.json";
+import SEO, { seoConfigs } from "../../components/SEO/SEO";
 
 export default function CanvasPage() {
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
+      <SEO {...seoConfigs.canvas} />
       <ParticlesBackground />
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-[radial-gradient(closest-side,rgba(251,191,36,0.15),transparent)] pointer-events-none translate-z-0" />

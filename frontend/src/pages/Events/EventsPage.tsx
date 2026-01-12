@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { MapPin, ArrowRight } from 'lucide-react'
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground'
+import SEO, { seoConfigs } from '../../components/SEO/SEO'
 
 // --- Data Configuration ---
 const events = [
@@ -106,6 +107,7 @@ export default function EventsPage() {
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
+      <SEO {...seoConfigs.events} />
       <ParticlesBackground />
       
       {/* Decorative Background Elements */}
