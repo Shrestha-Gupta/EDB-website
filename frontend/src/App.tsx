@@ -35,6 +35,12 @@ const MunAdminPage = lazy(() => import("./pages/MUN/MunAdminPage"));
 const MunProfileDashboard = lazy(() => import("./pages/MUN/MunProfileDashboard"));
 const MunAdminDashboard = lazy(() => import("./pages/MUN/MunAdminDashboard"));
 
+// Auth Pages
+const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
+const SignupPage = lazy(() => import("./pages/Auth/SignupPage"));
+const DashboardPage = lazy(() => import("./pages/Auth/DashboardPage"));
+const ProfilePage = lazy(() => import("./pages/Auth/ProfilePage"));
+
 import { RegistrationPopup } from "./components/RegistrationPopup";
 import "./App.css";
 
@@ -146,6 +152,12 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
+                    
+                    {/* Auth Routes */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
                     
                     {/* MUN Routes */}
                     <Route path="/mun" element={<MunPage />} />

@@ -5,18 +5,9 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 import cookieParser from "cookie-parser";
-
-// Import routes
-import authRoutes from "./routes/auth";
-import munRoutes from "./routes/mun";
-import arunodayRoutes from "./routes/arunoday";
-
-// Import database connection
-import connectDB from "./config/database";
-
-// Load environment variables
 import fs from 'fs';
 
+// Load environment variables FIRST before any other imports that need them
 const envLocalPath = path.resolve(__dirname, '../.env.local');
 const envPath = path.resolve(__dirname, '../.env');
 
@@ -35,6 +26,15 @@ if (fs.existsSync(envPath)) {
 } else {
   console.log('.env not found');
 }
+
+// Import routes AFTER dotenv is configured
+import authRoutes from "./routes/auth";
+import munRoutes from "./routes/mun";
+import arunodayRoutes from "./routes/arunoday";
+import eventsRoutes from "./routes/events";
+
+// Import database connection
+import connectDB from "./config/database";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -138,6 +138,7 @@ app.get("/api/env-check", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/mun", munRoutes);
 app.use("/api/arunoday", arunodayRoutes);
+app.use("/api/events", eventsRoutes);
 
 // Contact form endpoint
 app.post('/api/contact', upload.single('image'), async (req, res) => {

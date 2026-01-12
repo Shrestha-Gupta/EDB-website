@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { prefetchRoute } from "../../utils/prefetchRoutes";
+import { useAuth } from "../../context/AuthContext";
 
 const SpotlightButton = () => {
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -64,6 +65,7 @@ const SpotlightButton = () => {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, user } = useAuth();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -345,8 +347,36 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right: Contact CTA Button */}
-          <div className="hidden lg:flex items-center shrink-0">
+          {/* Right: Auth and Contact CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            {/* Auth Button */}
+            {isAuthenticated ? (
+              <Link to="/dashboard">
+                <motion.div
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-amber-500 to-orange-500 text-white font-medium text-sm shadow-md hover:shadow-lg transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">
+                    {user?.name?.charAt(0).toUpperCase() || "U"}
+                  </div>
+                  <span className="hidden xl:inline">Dashboard</span>
+                </motion.div>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <motion.div
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-amber-500 text-amber-600 font-medium text-sm hover:bg-amber-50 transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>Login</span>
+                </motion.div>
+              </Link>
+            )}
             <SpotlightButton />
           </div>
 
@@ -444,12 +474,38 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="mt-4 pt-4 border-t border-gray-100"
+                    className="mt-4 pt-4 border-t border-gray-100 space-y-3"
                   >
+                    {/* Auth Button for Mobile */}
+                    {isAuthenticated ? (
+                      <Link
+                        to="/dashboard"
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-linear-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
+                      >
+                        <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">
+                          {user?.name?.charAt(0).toUpperCase() || "U"}
+                        </div>
+                        Go to Dashboard
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/login"
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center justify-center gap-2 w-full py-3 px-6 border-2 border-amber-500 text-amber-600 font-semibold rounded-xl hover:bg-amber-50 transition-all duration-200 active:scale-[0.98]"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Login / Sign Up
+                      </Link>
+                    )}
+                    
+                    {/* Contact Button */}
                     <Link
                       to="/contact"
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-white border border-gray-200 text-gray-700 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

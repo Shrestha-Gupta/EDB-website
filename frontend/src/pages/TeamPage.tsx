@@ -25,7 +25,7 @@ const finalYearTeam = [
     id: 4,
     name: "Jayant Singh",
     department: "Electronics and Communication Engineering",
-    image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900466/IMG_20250726_101013_-_Jayant_Singh_y73nax.jpg",
+    image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1768228884/WhatsApp_Image_2026-01-12_at_20.08.39_zitbke.jpg",
   },
   
   { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900467/Jyoti_Singh_cstmeu.jpg" },
