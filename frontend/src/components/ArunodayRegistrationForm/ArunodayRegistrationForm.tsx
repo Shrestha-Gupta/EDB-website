@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { FaUsers, FaUserTie, FaLanguage, FaRocket, FaCheckCircle, FaRedoAlt } from "react-icons/fa";
+import { HiUserGroup, HiIdentification, HiAcademicCap, HiMail } from "react-icons/hi";
+import { MdGroups } from "react-icons/md";
 
 interface TeamMember {
   name: string;
@@ -25,7 +28,6 @@ const ArunodayRegistrationForm = () => {
     teamLeaderRollNumber: "",
     teamLeaderBranch: "",
     teamMembers: [
-      { name: "", rollNumber: "", branch: "" },
       { name: "", rollNumber: "", branch: "" },
       { name: "", rollNumber: "", branch: "" },
       { name: "", rollNumber: "", branch: "" },
@@ -102,7 +104,6 @@ const ArunodayRegistrationForm = () => {
         { name: "", rollNumber: "", branch: "" },
         { name: "", rollNumber: "", branch: "" },
         { name: "", rollNumber: "", branch: "" },
-        { name: "", rollNumber: "", branch: "" },
       ],
       preferredLanguage: "",
     });
@@ -124,9 +125,9 @@ const ArunodayRegistrationForm = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", delay: 0.2 }}
-          className="text-7xl mb-6"
+          className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center"
         >
-          ✅
+          <FaCheckCircle className="w-10 h-10 text-green-500" />
         </motion.div>
         <h3 className="text-3xl font-serif font-bold text-stone-900 mb-4">
           Registration Successful!
@@ -136,10 +137,11 @@ const ArunodayRegistrationForm = () => {
         </p>
         <motion.button
           onClick={resetForm}
-          className="px-8 py-3 bg-linear-to-r from-amber-600 to-orange-600 text-white font-bold rounded-full shadow-lg"
+          className="px-8 py-3 bg-linear-to-r from-amber-600 to-orange-600 text-white font-bold rounded-full shadow-lg flex items-center gap-2 mx-auto"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
+          <FaRedoAlt className="w-4 h-4" />
           Register Another Team
         </motion.button>
       </motion.div>
@@ -157,11 +159,11 @@ const ArunodayRegistrationForm = () => {
     >
       <div className="text-center mb-10">
         <motion.span
-          className="inline-block px-4 py-2 bg-amber-100 border border-amber-300 rounded-full text-amber-700 text-sm font-medium mb-4"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 border border-amber-300 rounded-full text-amber-700 text-sm font-medium mb-4"
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          📝 Team Registration
+          <HiUserGroup className="w-4 h-4" /> Team Registration
         </motion.span>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-3">
           Register Your Team
@@ -190,8 +192,11 @@ const ArunodayRegistrationForm = () => {
 
         {/* Team Leader Section */}
         <div className="border-t border-stone-200 pt-8">
-          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-2">
-            <span className="text-2xl">👤</span> Team Leader Details
+          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+              <FaUserTie className="w-5 h-5 text-amber-600" />
+            </span>
+            Team Leader Details
           </h3>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -260,11 +265,14 @@ const ArunodayRegistrationForm = () => {
         {/* Team Members Section */}
         <div className="border-t border-stone-200 pt-8">
           <div className="mb-6">
-            <h3 className="text-xl font-serif font-bold text-stone-900 flex items-center gap-2">
-              <span className="text-2xl">👥</span> Team Members (4 Members)
+            <h3 className="text-xl font-serif font-bold text-stone-900 flex items-center gap-3">
+              <span className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                <MdGroups className="w-6 h-6 text-blue-600" />
+              </span>
+              Team Members (3 Members)
             </h3>
-            <p className="text-stone-500 text-sm mt-2">
-              Please enter details for all 4 team members
+            <p className="text-stone-500 text-sm mt-2 ml-13">
+              Please enter details for all 3 team members
             </p>
           </div>
           
@@ -332,8 +340,11 @@ const ArunodayRegistrationForm = () => {
 
         {/* Preferred Language Section */}
         <div className="border-t border-stone-200 pt-8">
-          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-2">
-            <span className="text-2xl">🌐</span> Preferred Language
+          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-3">
+            <span className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+              <FaLanguage className="w-5 h-5 text-purple-600" />
+            </span>
+            Preferred Language
           </h3>
           
           <div>
@@ -375,7 +386,7 @@ const ArunodayRegistrationForm = () => {
             ) : (
               <span className="flex items-center justify-center gap-2">
                 Register Team for Arunoday'26
-                <span>🚀</span>
+                <FaRocket className="w-5 h-5" />
               </span>
             )}
           </motion.button>

@@ -5,25 +5,12 @@ import { useAuth } from "../../context/AuthContext";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import { EventRegistrationModal } from "../../components/EventRegistration";
 import { getMyEventRegistrations, eventInfo, type EventType, type EventRegistration } from "../../services/eventsApi";
-import { 
-  User, 
-  Mail, 
-  LogOut, 
-  Calendar, 
-  BookOpen, 
-  Users, 
-  ArrowRight,
-  Settings,
-  Bell,
-  FileText,
-  Sparkles,
-  Mic,
-  PenTool,
-  ScrollText,
-  Globe,
-  CheckCircle,
-  Clock
-} from "lucide-react";
+// React Icons - Modern icon library
+import { FiMail, FiLogOut, FiSettings, FiBell, FiArrowRight, FiFileText, FiClock, FiCheckCircle } from "react-icons/fi";
+import { HiOutlineCalendar, HiOutlineBookOpen, HiOutlineUserGroup, HiOutlineSparkles, HiOutlineGlobe, HiOutlineUser } from "react-icons/hi";
+import { BsPenFill, BsMicFill } from "react-icons/bs";
+import { RiQuillPenLine } from "react-icons/ri";
+import { BiParty } from "react-icons/bi";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -89,28 +76,28 @@ const DashboardPage = () => {
     {
       title: "Browse Events",
       description: "Explore upcoming literary events and workshops",
-      icon: Calendar,
+      icon: HiOutlineCalendar,
       link: "/events",
       color: "from-amber-500 to-orange-500",
     },
     {
       title: "Publications",
       description: "Read our latest magazines and articles",
-      icon: BookOpen,
+      icon: HiOutlineBookOpen,
       link: "/publications",
       color: "from-orange-500 to-red-500",
     },
     {
       title: "Canvas Gallery",
       description: "View creative works from our community",
-      icon: Sparkles,
+      icon: HiOutlineSparkles,
       link: "/canvas",
       color: "from-amber-400 to-amber-600",
     },
     {
       title: "Our Team",
       description: "Meet the editorial board members",
-      icon: Users,
+      icon: HiOutlineUserGroup,
       link: "/team",
       color: "from-stone-500 to-stone-700",
     },
@@ -163,7 +150,7 @@ const DashboardPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-stone-200 text-stone-600 hover:text-amber-600 hover:border-amber-300 transition-all shadow-sm"
               >
-                <Bell className="w-5 h-5" />
+                <FiBell className="w-5 h-5" />
               </motion.button>
               <Link to="/profile">
                 <motion.button
@@ -171,7 +158,7 @@ const DashboardPage = () => {
                   whileTap={{ scale: 0.95 }}
                   className="p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-stone-200 text-stone-600 hover:text-amber-600 hover:border-amber-300 transition-all shadow-sm"
                 >
-                  <Settings className="w-5 h-5" />
+                  <FiSettings className="w-5 h-5" />
                 </motion.button>
               </Link>
               <motion.button
@@ -180,7 +167,7 @@ const DashboardPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-all shadow-sm font-medium"
               >
-                <LogOut className="w-5 h-5" />
+                <FiLogOut className="w-5 h-5" />
                 <span className="hidden sm:inline">Logout</span>
               </motion.button>
             </div>
@@ -206,7 +193,7 @@ const DashboardPage = () => {
                     {user.name || "User"}
                   </h2>
                   <div className="flex items-center gap-2 text-stone-500 mt-1">
-                    <Mail className="w-4 h-4" />
+                    <FiMail className="w-4 h-4" />
                     <span className="text-sm md:text-base">{user.email}</span>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -250,7 +237,7 @@ const DashboardPage = () => {
                       <h4 className="font-semibold text-stone-900 mb-1">{action.title}</h4>
                       <p className="text-sm text-stone-500">{action.description}</p>
                       <div className="flex items-center text-amber-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        Explore <ArrowRight className="w-4 h-4 ml-1" />
+                        Explore <FiArrowRight className="w-4 h-4 ml-1" />
                       </div>
                     </motion.div>
                   </Link>
@@ -264,7 +251,9 @@ const DashboardPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
             >
-              <h3 className="text-lg font-semibold text-stone-900 mb-4">🎭 Arunoday 2026 Events</h3>
+              <h3 className="text-lg font-semibold text-stone-900 mb-4 flex items-center gap-2">
+                <BiParty className="w-5 h-5 text-amber-500" /> Arunoday 2026 Events
+              </h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {/* MUN Event Card */}
                 <Link to="/mun">
@@ -275,12 +264,12 @@ const DashboardPage = () => {
                   >
                     <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-stone-800 to-stone-900 rounded-bl-[60px] opacity-10" />
                     <div className="w-12 h-12 rounded-xl bg-linear-to-br from-stone-700 to-stone-900 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                      <Globe className="w-6 h-6" />
+                      <HiOutlineGlobe className="w-6 h-6" />
                     </div>
                     <h4 className="font-semibold text-stone-900 mb-1">MUN 2026</h4>
                     <p className="text-sm text-stone-500">Model United Nations</p>
                     <div className="flex items-center text-stone-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                      Register <ArrowRight className="w-4 h-4 ml-1" />
+                      Register <FiArrowRight className="w-4 h-4 ml-1" />
                     </div>
                   </motion.div>
                 </Link>
@@ -300,22 +289,22 @@ const DashboardPage = () => {
                         <div className="absolute top-3 right-3">
                           {reg.registrationStatus === 'submitted' ? (
                             <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <CheckCircle className="w-3 h-3" /> Submitted
+                              <FiCheckCircle className="w-3 h-3" /> Submitted
                             </span>
                           ) : (
                             <span className="flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">
-                              <Clock className="w-3 h-3" /> Registered
+                              <FiClock className="w-3 h-3" /> Registered
                             </span>
                           )}
                         </div>
                       )}
                       <div className="w-12 h-12 rounded-xl bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <ScrollText className="w-6 h-6" />
+                        <RiQuillPenLine className="w-6 h-6" />
                       </div>
                       <h4 className="font-semibold text-stone-900 mb-1">Pralekh</h4>
                       <p className="text-sm text-stone-500">Hindi Essay Writing</p>
                       <div className="flex items-center text-amber-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <ArrowRight className="w-4 h-4 ml-1" />
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
                       </div>
                     </motion.div>
                   );
@@ -336,22 +325,22 @@ const DashboardPage = () => {
                         <div className="absolute top-3 right-3">
                           {reg.registrationStatus === 'submitted' ? (
                             <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <CheckCircle className="w-3 h-3" /> Submitted
+                              <FiCheckCircle className="w-3 h-3" /> Submitted
                             </span>
                           ) : (
                             <span className="flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                              <Clock className="w-3 h-3" /> Registered
+                              <FiClock className="w-3 h-3" /> Registered
                             </span>
                           )}
                         </div>
                       )}
                       <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <PenTool className="w-6 h-6" />
+                        <BsPenFill className="w-5 h-5" />
                       </div>
                       <h4 className="font-semibold text-stone-900 mb-1">Plotlines</h4>
                       <p className="text-sm text-stone-500">Creative Writing</p>
                       <div className="flex items-center text-blue-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <ArrowRight className="w-4 h-4 ml-1" />
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
                       </div>
                     </motion.div>
                   );
@@ -372,22 +361,22 @@ const DashboardPage = () => {
                         <div className="absolute top-3 right-3">
                           {reg.registrationStatus === 'submitted' ? (
                             <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <CheckCircle className="w-3 h-3" /> Submitted
+                              <FiCheckCircle className="w-3 h-3" /> Submitted
                             </span>
                           ) : (
                             <span className="flex items-center gap-1 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                              <Clock className="w-3 h-3" /> Registered
+                              <FiClock className="w-3 h-3" /> Registered
                             </span>
                           )}
                         </div>
                       )}
                       <div className="w-12 h-12 rounded-xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <Mic className="w-6 h-6" />
+                        <BsMicFill className="w-5 h-5" />
                       </div>
                       <h4 className="font-semibold text-stone-900 mb-1">Open Mic</h4>
                       <p className="text-sm text-stone-500">Poetry & Performance</p>
                       <div className="flex items-center text-purple-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <ArrowRight className="w-4 h-4 ml-1" />
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
                       </div>
                     </motion.div>
                   );
@@ -407,7 +396,7 @@ const DashboardPage = () => {
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-stone-900">Recent Activity</h3>
-                <FileText className="w-5 h-5 text-stone-400" />
+                <FiFileText className="w-5 h-5 text-stone-400" />
               </div>
               <div className="space-y-4">
                 {recentActivities.map((activity, index) => (
@@ -435,7 +424,7 @@ const DashboardPage = () => {
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-                    <User className="w-5 h-5 text-amber-600" />
+                    <HiOutlineUser className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900">Complete Profile</h3>
@@ -488,9 +477,9 @@ const DashboardPage = () => {
                           </div>
                         </div>
                         {reg.registrationStatus === 'submitted' ? (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <FiCheckCircle className="w-5 h-5 text-green-500" />
                         ) : (
-                          <Clock className="w-5 h-5 text-amber-500" />
+                          <FiClock className="w-5 h-5 text-amber-500" />
                         )}
                       </div>
                     );
@@ -508,7 +497,7 @@ const DashboardPage = () => {
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-amber-600" />
+                  <HiOutlineSparkles className="w-5 h-5 text-amber-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-stone-900">Arunoday 2026</h3>
