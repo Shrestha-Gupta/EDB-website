@@ -78,7 +78,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
 
         {/* Subtitle */}
         <p
-          className="text-lg md:text-2xl 2xl:text-3xl text-gray-600 mb-12 max-w-2xl 2xl:max-w-3xl mx-auto leading-relaxed font-light"
+          className="text-lg md:text-2xl 2xl:text-3xl text-gray-600 mb-6 md:mb-12 max-w-2xl 2xl:max-w-3xl mx-auto leading-relaxed font-light"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out 0.3s forwards"
@@ -92,7 +92,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
         {/* Read Latest Issue Button - Light Theme */}
         <a
           href="/publications"
-          className="inline-flex items-center gap-2 px-8 py-4 mb-5 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-lg rounded-full shadow-lg hover:bg-orange-50 hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out group"
+          className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 mb-5 bg-white border-2 border-orange-500 text-orange-600 font-semibold text-base md:text-lg rounded-full shadow-lg hover:bg-orange-50 hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out group"
           style={{
             animation: isMobile
               ? "fadeIn 0.5s ease-out 0.4s forwards"
@@ -102,7 +102,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
           <span>Read Latest Issue</span>
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+            className="h-4 w-4 md:h-5 md:w-5 transform group-hover:translate-x-1 transition-transform duration-300" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"

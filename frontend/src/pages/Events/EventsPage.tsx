@@ -15,8 +15,8 @@ const events = [
     day: '10',
     month: 'FEB',
     type: 'Workshop',
-    description: 'Meaning "Sunrise" - a morning workshop dedicated to awakening your inner writer. Fiction and non-fiction techniques with renowned authors.',
-    status: 'upcoming',
+    description: 'When dawn breaks upon the realm of words, Arunoday \'26 unfolds, where narratives are spoken, shaped, and tested. Guided by The Editorial Board, language is treated as both craft and responsibility. Enter and witness the narrative being unveiled and carried forward.',
+    status: 'rising-soon',
     location: 'MPH',
     theme: 'from-orange-500 to-amber-500',
     image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1768167016/Screenshot_2026-01-12_030001_jvcpwj.png'
@@ -24,7 +24,7 @@ const events = [
   {
     id: 2,
     title: 'Abhyudaya 2025',
-    subtitle: 'The Annual Cultural Fest',
+    subtitle: 'Annual Art Culture and Literary Fest',
     date: 'March 15-17, 2025',
     day: '15',
     month: 'MAR',
@@ -44,7 +44,7 @@ const events = [
     month: 'JAN',
     type: 'Competition',
     description: 'Celebrating eloquence. An open mic and slam poetry competition where words weave magic. Open to all departments.',
-    status: 'registration-open',
+    status: 'past',
     location: 'Open Air Theatre',
     theme: 'from-yellow-600 to-amber-600',
     image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767466802/WhatsApp_Image_2026-01-04_at_12.26.42_AM_muatti.jpg'
@@ -149,7 +149,7 @@ export default function EventsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          {['all', 'upcoming', 'registration-open', 'past'].map((filterType) => (
+          {['all', 'upcoming', 'rising-soon', 'past'].map((filterType) => (
             <button
               key={filterType}
               onClick={() => setFilter(filterType)}
@@ -211,7 +211,7 @@ export default function EventsPage() {
                         <span className={`
                           hidden md:inline-flex px-3 py-1 rounded border text-xs font-bold uppercase tracking-wider
                           ${event.status === 'upcoming' ? 'border-amber-500 text-amber-700 bg-amber-50' : 
-                            event.status === 'registration-open' ? 'border-green-500 text-green-700 bg-green-50' : 
+                            event.status === 'rising-soon' ? 'border-orange-500 text-orange-700 bg-orange-50' : 
                             'border-stone-300 text-stone-500 bg-stone-100'}
                         `}>
                           {event.status.replace('-', ' ')}

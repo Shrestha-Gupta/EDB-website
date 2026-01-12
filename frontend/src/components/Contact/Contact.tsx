@@ -8,6 +8,8 @@ import {
   Upload,
   X,
   ArrowUpRight,
+  MessageCircle,
+  Linkedin,
 } from "lucide-react";
 import ParticlesBackground from "../ParticlesBackground/ParticlesBackground";
 import PageHero from "../PageHero/PageHero";
@@ -183,12 +185,56 @@ export default function Contact() {
                     </div>
                     <ArrowUpRight className="w-5 h-5 text-gray-400" />
                   </div>
+
+                  <a
+                    href="https://whatsapp.com/channel/0029VamUHA1LNSZzy9QRLG2r"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-green-50 rounded-lg border border-green-100">
+                        <MessageCircle className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
+                          WhatsApp Channel
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          The Editorial Board Channel
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/company/theeditorialboard/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <Linkedin className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
+                          LinkedIn
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          The Editorial Board
+                        </p>
+                      </div>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
+                  </a>
                 </div>
 
                 {/* Google Maps Embed */}
                 <div className="mt-6 rounded-xl overflow-hidden border border-orange-100 shadow-sm">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.328676844447!2d83.41270707549926!3d26.88168437666672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991469f99999999%3A0xc6f6f6f6f6f6f6f6!2sMadan%20Mohan%20Malaviya%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1702000000000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14235.59!2d83.4164!3d26.882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3991450c8a81c645%3A0x93ac5e8176f83895!2sMadan%20Mohan%20Malaviya%20University%20of%20Technology%2C%20Gorakhpur!5e0!3m2!1sen!2sin!4v1736687500000!5m2!1sen!2sin"
                     width="100%"
                     height="200"
                     style={{ border: 0 }}

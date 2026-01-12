@@ -98,14 +98,15 @@ function App() {
   // Show registration popup after splash screen closes (only once per session)
   useEffect(() => {
     if (!showSplash) {
-      const hasSeenPopup = sessionStorage.getItem('arunoday26_popup_shown');
-      if (!hasSeenPopup) {
+      // Temporarily disabled sessionStorage check for testing
+      // const hasSeenPopup = sessionStorage.getItem('arunoday26_popup_shown');
+      // if (!hasSeenPopup) {
         const timer = setTimeout(() => {
           setShowRegistration(true);
           sessionStorage.setItem('arunoday26_popup_shown', 'true');
         }, 1000);
         return () => clearTimeout(timer);
-      }
+      // }
     }
   }, [showSplash]);
 

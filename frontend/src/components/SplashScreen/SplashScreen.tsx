@@ -52,7 +52,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
 
           {/* Beckoning Creativity text - simplified animation on mobile */}
           <motion.h2
-            className="text-3xl md:text-4xl font-serif text-transparent bg-clip-text bg-linear-to-r from-orange-600 via-amber-500 to-orange-600 font-bold tracking-wide"
+            className="text-3xl md:text-4xl font-serif text-transparent bg-clip-text bg-linear-to-r from-orange-600 via-amber-500 to-orange-600 font-bold tracking-wide text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{
               opacity: 1,
