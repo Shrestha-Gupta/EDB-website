@@ -95,14 +95,14 @@ const RegistrationPopup = ({ isOpen, onClose }: RegistrationPopupProps) => {
               <div className="space-y-3">
                 <button
                   onClick={handleLearnMoreClick}
-                  className="w-full py-3 px-6 bg-stone-900 text-white text-sm font-semibold uppercase tracking-wider hover:bg-stone-800 transition-colors"
+                  className="w-full py-3 px-6 bg-stone-900 text-white text-sm font-semibold uppercase tracking-wider hover:bg-stone-800 transition-colors cursor-pointer"
                 >
                   Learn More
                 </button>
                 
                 <button
                   onClick={onClose}
-                  className="w-full py-2 text-stone-500 text-sm hover:text-stone-700 transition-colors"
+                  className="w-full py-2 text-stone-500 text-sm hover:text-stone-700 transition-colors cursor-pointer"
                 >
                   Not Now
                 </button>

@@ -1,66 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { prefetchRoute } from "../../utils/prefetchRoutes";
 import { useAuth } from "../../context/AuthContext";
-
-const SpotlightButton = () => {
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const spanRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const { width } = target.getBoundingClientRect();
-      const offset = e.offsetX;
-      const left = `${(offset / width) * 100}%`;
-
-      if (spanRef.current) {
-        spanRef.current.animate({ left }, { duration: 250, fill: "forwards" });
-      }
-    };
-
-    const handleMouseLeave = () => {
-      if (spanRef.current) {
-        spanRef.current.animate(
-          { left: "50%" },
-          { duration: 100, fill: "forwards" }
-        );
-      }
-    };
-
-    const btn = btnRef.current;
-    if (btn) {
-      btn.addEventListener("mousemove", handleMouseMove);
-      btn.addEventListener("mouseleave", handleMouseLeave);
-    }
-
-    return () => {
-      if (btn) {
-        btn.removeEventListener("mousemove", handleMouseMove);
-        btn.removeEventListener("mouseleave", handleMouseLeave);
-      }
-    };
-  }, []);
-
-  return (
-    <Link to="/contact">
-      <motion.button
-        whileTap={{ scale: 0.985 }}
-        ref={btnRef}
-        className="relative overflow-hidden rounded-full bg-linear-to-r from-white-100 to-white-100 px-10 py-2.5 text-sm font-bold text-black border border-orange-700 hover:border-orange-700 cursor-pointer"
-      >
-        <span className="pointer-events-none relative z-10 uppercase tracking-wider">
-          Contact Us
-        </span>
-        <span
-          ref={spanRef}
-          className="pointer-events-none absolute left-[50%] top-[50%] h-32 w-32 -translate-x-[50%] -translate-y-[50%] rounded-full bg-orange-300/30"
-        />
-      </motion.button>
-    </Link>
-  );
-};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -319,7 +261,7 @@ export default function Navbar() {
 
           {/* Middle: Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center px-4">
-            {navLinks.slice(0, 9).map((link) => (
+            {navLinks.slice(0, 10).map((link) => (
               <Link key={link.name} to={link.path} onMouseEnter={() => prefetchRoute(link.path)} onFocus={() => prefetchRoute(link.path)}>
                 <motion.div
                   className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${
@@ -347,9 +289,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right: Auth and Contact CTA Buttons */}
+          {/* Right: Auth Button Only */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
-            {/* Auth Button */}
             {isAuthenticated ? (
               <Link to="/dashboard">
                 <motion.div
@@ -377,7 +318,6 @@ export default function Navbar() {
                 </motion.div>
               </Link>
             )}
-            <SpotlightButton />
           </div>
 
           {/* Mobile Menu Button */}

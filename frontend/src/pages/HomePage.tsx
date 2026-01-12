@@ -56,7 +56,7 @@ const FeaturedEvents = () => {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-stone-100/50">
+    <section className="relative py-16 md:py-24 bg-stone-50">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Section Header */}
         <motion.div
@@ -64,19 +64,13 @@ const FeaturedEvents = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 border border-green-300 rounded-full text-green-700 font-medium text-sm mb-4">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
-            </span>
-            Registrations Live
-          </div>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-2">
             Featured Events
           </h2>
-          <p className="text-stone-600 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-amber-600 mb-6"></div>
+          <p className="text-stone-600 max-w-2xl">
             Register now and showcase your talents at MMMUT's premier literary and cultural fest
           </p>
         </motion.div>
@@ -86,24 +80,21 @@ const FeaturedEvents = () => {
           {events.map((event, index) => (
             <motion.div
               key={event.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="group relative"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group"
             >
-              <div className="absolute inset-0 bg-linear-to-br from-amber-400/20 to-orange-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-300" />
-              
-              <div className="relative bg-white border border-stone-200/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                <span className="text-4xl mb-4">{event.icon}</span>
-                <h3 className="text-lg font-bold text-stone-900 mb-1">{event.name}</h3>
-                <p className="text-amber-600 font-medium text-sm mb-3">{event.subtitle}</p>
-                <p className="text-stone-600 text-sm leading-relaxed mb-4 flex-grow">
+              <div className="border-t-4 border-amber-600 bg-white p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+                <h3 className="text-xl font-serif font-bold text-stone-900 mb-1">{event.name}</h3>
+                <p className="text-amber-600 font-medium text-sm mb-4 pb-4 border-b border-stone-100">{event.subtitle}</p>
+                <p className="text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
                   {event.description}
                 </p>
                 <Link
                   to={event.link}
-                  className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-semibold text-sm transition-colors"
+                  className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium text-sm transition-colors group-hover:gap-3"
                 >
                   Register Now
                   <ArrowRight className="w-4 h-4" />
@@ -119,11 +110,11 @@ const FeaturedEvents = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-10"
+          className="mt-12"
         >
           <Link
             to="/arunoday-live"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+            className="inline-flex items-center gap-2 px-8 py-3 border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white font-medium transition-colors"
           >
             View All Events
             <ArrowRight className="w-5 h-5" />

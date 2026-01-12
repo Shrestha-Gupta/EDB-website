@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaUsers, FaUserTie, FaLanguage, FaRocket, FaCheckCircle, FaRedoAlt } from "react-icons/fa";
-import { HiUserGroup, HiIdentification, HiAcademicCap, HiMail } from "react-icons/hi";
+import { FaUserTie, FaLanguage, FaCheckCircle, FaRedoAlt } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
 import { MdGroups } from "react-icons/md";
 
 interface TeamMember {
@@ -385,8 +385,7 @@ const ArunodayRegistrationForm = () => {
               </span>
             ) : (
               <span className="flex items-center justify-center gap-2">
-                Register Team for Arunoday'26
-                <FaRocket className="w-5 h-5" />
+                Register Team
               </span>
             )}
           </motion.button>
