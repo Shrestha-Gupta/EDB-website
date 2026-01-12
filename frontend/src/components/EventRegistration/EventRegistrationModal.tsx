@@ -10,6 +10,7 @@ import {
   type EventRegistration,
   type TeamMember
 } from '../../services/eventsApi';
+import { canRegisterForEvent, canSubmitForEvent } from '../../config/eventConfig';
 import { 
   X, 
   Upload, 
@@ -61,6 +62,8 @@ const EventRegistrationModal = ({
 
   const event = eventInfo[eventType];
   const isPralekh = eventType === 'pralekh';
+  const isRegistrationOpen = canRegisterForEvent(eventType);
+  const isSubmissionOpen = canSubmitForEvent(eventType);
 
   // Initialize team members with leader when modal opens
   useEffect(() => {
@@ -310,8 +313,27 @@ const EventRegistrationModal = ({
               </div>
             )}
 
+            {/* Registration Closed Notice */}
+            {step === 'register' && !isRegistrationOpen && (
+              <div className="text-center py-6">
+                <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <AlertCircle className="w-8 h-8 text-stone-500" />
+                </div>
+                <h3 className="text-lg font-semibold text-stone-900 mb-2">Registrations Closed</h3>
+                <p className="text-stone-600 mb-6">
+                  Registrations for {event.name} are currently closed. Stay tuned for updates.
+                </p>
+                <button
+                  onClick={handleClose}
+                  className="px-6 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold rounded-xl transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+
             {/* Registration Form */}
-            {step === 'register' && !isProfileIncomplete && user && (
+            {step === 'register' && isRegistrationOpen && !isProfileIncomplete && user && (
               <div className="space-y-6">
                 <p className="text-stone-600 text-sm">{event.description}</p>
 
@@ -553,13 +575,27 @@ const EventRegistrationModal = ({
             {/* Submission Form */}
             {step === 'submit' && (
               <div className="space-y-6">
-                <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-500 shrink-0" />
+                <div className={`border rounded-xl p-4 flex items-center gap-3 ${
+                  isSubmissionOpen 
+                    ? 'bg-green-50 border-green-200' 
+                    : 'bg-amber-50 border-amber-200'
+                }`}>
+                  <Check className={`w-5 h-5 shrink-0 ${
+                    isSubmissionOpen ? 'text-green-500' : 'text-amber-500'
+                  }`} />
                   <div>
-                    <p className="font-medium text-green-800">
+                    <p className={`font-medium ${
+                      isSubmissionOpen ? 'text-green-800' : 'text-amber-800'
+                    }`}>
                       {registration?.teamName ? `Team "${registration.teamName}" is registered!` : 'You are registered!'}
                     </p>
-                    <p className="text-sm text-green-600">Now submit your work</p>
+                    <p className={`text-sm ${
+                      isSubmissionOpen ? 'text-green-600' : 'text-amber-600'
+                    }`}>
+                      {isSubmissionOpen 
+                        ? 'Now submit your work' 
+                        : 'Submissions will open soon'}
+                    </p>
                   </div>
                 </div>
 
@@ -567,6 +603,16 @@ const EventRegistrationModal = ({
                   <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     {error}
+                  </div>
+                )}
+
+                {!isSubmissionOpen && (
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-sm flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <div>
+                      <p className="font-medium">Submissions are currently closed</p>
+                      <p className="text-xs mt-1">You can submit your work once submissions open. Check back later or visit your dashboard.</p>
+                    </div>
                   </div>
                 )}
 
@@ -580,7 +626,8 @@ const EventRegistrationModal = ({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter a title for your submission"
-                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
+                    disabled={!isSubmissionOpen}
+                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all disabled:bg-stone-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -594,7 +641,8 @@ const EventRegistrationModal = ({
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Add a brief description of your work"
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all resize-none"
+                    disabled={!isSubmissionOpen}
+                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all resize-none disabled:bg-stone-100 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -603,7 +651,7 @@ const EventRegistrationModal = ({
                   <label className="block text-sm font-medium text-stone-700 mb-2">
                     Upload PDF <span className="text-red-500">*</span>
                   </label>
-                  <label className="block cursor-pointer">
+                  <label className={`block ${isSubmissionOpen ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}>
                     <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${
                       file ? 'border-green-400 bg-green-50' : 'border-stone-300 hover:border-amber-400'
                     }`}>
@@ -629,35 +677,46 @@ const EventRegistrationModal = ({
                       type="file"
                       accept=".pdf"
                       onChange={handleFileChange}
+                      disabled={!isSubmissionOpen}
                       className="hidden"
                     />
                   </label>
                 </div>
 
                 {/* Submit Button */}
-                <motion.button
-                  onClick={handleSubmit}
-                  disabled={isLoading || !file}
-                  className={`w-full py-4 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2`}
-                  whileHover={{ scale: isLoading || !file ? 1 : 1.02 }}
-                  whileTap={{ scale: isLoading || !file ? 1 : 0.98 }}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Uploading...
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="w-5 h-5" />
-                      Submit
-                    </>
-                  )}
-                </motion.button>
-
-                <p className="text-xs text-stone-500 text-center">
-                  You can also submit later from your dashboard
-                </p>
+                {isSubmissionOpen ? (
+                  <>
+                    <motion.button
+                      onClick={handleSubmit}
+                      disabled={isLoading || !file}
+                      className={`w-full py-4 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2`}
+                      whileHover={{ scale: isLoading || !file ? 1 : 1.02 }}
+                      whileTap={{ scale: isLoading || !file ? 1 : 0.98 }}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-5 h-5" />
+                          Submit
+                        </>
+                      )}
+                    </motion.button>
+                    <p className="text-xs text-stone-500 text-center">
+                      You can also submit later from your dashboard
+                    </p>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleClose}
+                    className="w-full py-4 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl transition-colors"
+                  >
+                    Close
+                  </button>
+                )}
               </div>
             )}
 
