@@ -128,10 +128,10 @@ const MunPage = () => {
             className="flex flex-wrap justify-center gap-4"
           >
             <Link
-              to={isAuthenticated ? "/mun/dashboard" : "/mun/register"}
+              to={isAuthenticated ? "/mun/dashboard" : "/login"}
               className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
             >
-              {isAuthenticated ? "Go to Dashboard" : "Register Now"}
+              {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <a
@@ -301,10 +301,10 @@ const MunPage = () => {
             Join delegates from across the country and experience the thrill of diplomatic discourse
           </p>
           <Link
-            to={isAuthenticated ? "/mun/dashboard" : "/mun/register"}
+            to={isAuthenticated ? "/mun/dashboard" : "/login"}
             className="inline-flex items-center gap-2 px-10 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
           >
-            {isAuthenticated ? "Go to Dashboard" : "Register Now"}
+            {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
             <ArrowRight className="w-6 h-6" />
           </Link>
         </motion.div>

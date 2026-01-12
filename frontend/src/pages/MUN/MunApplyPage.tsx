@@ -45,7 +45,7 @@ const MunApplyPage = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/mun/login");
+      navigate("/login");
       return;
     }
 

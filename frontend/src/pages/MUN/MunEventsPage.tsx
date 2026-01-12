@@ -16,7 +16,7 @@ const MunEventsPage = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/mun/register");
+      navigate("/login");
       return;
     }
     
