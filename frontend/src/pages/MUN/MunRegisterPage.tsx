@@ -99,8 +99,8 @@ const MunRegisterPage = () => {
         previousMunExperience: formData.previousMunExperience,
       });
       
-      // Redirect to events page to select and apply for a committee
-      navigate("/mun/events");
+      // Redirect to dashboard after registration
+      navigate("/mun/dashboard");
     } catch (err: any) {
       setError(err.message || "Registration failed");
     } finally {

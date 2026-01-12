@@ -36,8 +36,16 @@ const MunEventsPage = () => {
       ]);
       setEvents(eventsData);
       setApplications(applicationsData);
+      
+      // If no active events, redirect to dashboard
+      if (eventsData.length === 0) {
+        navigate("/mun/dashboard");
+        return;
+      }
     } catch (error) {
       console.error("Failed to fetch data:", error);
+      // On error, redirect to dashboard
+      navigate("/mun/dashboard");
     } finally {
       setLoading(false);
     }

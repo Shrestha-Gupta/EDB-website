@@ -67,8 +67,8 @@ const MunCompleteProfilePage = () => {
         previousMunExperience: formData.previousMunExperience,
       });
       
-      // Redirect to events page to select and apply for a committee
-      navigate("/mun/events");
+      // Redirect to dashboard after completing profile
+      navigate("/mun/dashboard");
     } catch (err: any) {
       setError(err.message || "Profile update failed");
     } finally {
