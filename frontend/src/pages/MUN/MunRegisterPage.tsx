@@ -332,28 +332,6 @@ const MunRegisterPage = () => {
                 </div>
               </div>
 
-              {/* Country Preferences */}
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-3">
-                  Country Preferences <span className="text-red-500">*</span>
-                </label>
-                <p className="text-xs text-stone-500 mb-3">Enter your top 3 country preferences in order</p>
-                {[0, 1, 2].map((index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    value={formData.countryPreferences[index]}
-                    onChange={(e) => {
-                      const newPrefs = [...formData.countryPreferences];
-                      newPrefs[index] = e.target.value;
-                      setFormData({ ...formData, countryPreferences: newPrefs });
-                    }}
-                    placeholder={`${index + 1}${index === 0 ? 'st' : index === 1 ? 'nd' : 'rd'} Preference (e.g., India)`}
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-2"
-                  />
-                ))}
-              </div>
-
               {/* Preferred Committee */}
               <div>
                 <label className="block text-sm font-medium text-stone-700 mb-3">
@@ -386,6 +364,34 @@ const MunRegisterPage = () => {
                   </button>
                 </div>
               </div>
+
+              {/* Country Preferences - Only for UNHRC */}
+              {formData.preferredCommittee === 'UNHRC' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  <label className="block text-sm font-medium text-stone-700 mb-3">
+                    Country Preferences <span className="text-red-500">*</span>
+                  </label>
+                  <p className="text-xs text-stone-500 mb-3">Enter your top 3 country preferences in order</p>
+                  {[0, 1, 2].map((index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      value={formData.countryPreferences[index]}
+                      onChange={(e) => {
+                        const newPrefs = [...formData.countryPreferences];
+                        newPrefs[index] = e.target.value;
+                        setFormData({ ...formData, countryPreferences: newPrefs });
+                      }}
+                      placeholder={`${index + 1}${index === 0 ? 'st' : index === 1 ? 'nd' : 'rd'} Preference (e.g., India)`}
+                      className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-2"
+                    />
+                  ))}
+                </motion.div>
+              )}
 
               {/* Previous Experience Details - only shown if attended MUN before */}
               {formData.hasAttendedMun && (

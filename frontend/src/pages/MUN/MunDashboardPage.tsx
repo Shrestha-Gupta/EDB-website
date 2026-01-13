@@ -296,114 +296,116 @@ const MunDashboardPage = () => {
         </motion.div>
 
         {/* Section 4: Position Paper Submission */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-        >
-          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-            📄 Position Paper Submission
-          </h2>
-          
-          {!isAllotted ? (
-            <div className="bg-stone-100 border border-stone-200 rounded-xl p-6 text-center">
-              <span className="text-4xl mb-3 block">🔒</span>
-              <p className="text-stone-600 font-medium">Upload Disabled</p>
-              <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
-                You can upload your position paper after country allotment.
-              </p>
-            </div>
-          ) : currentApplication?.positionPaperUrl ? (
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4">
-                <span className="text-2xl">✅</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-green-700 font-medium">Position Paper Submitted</p>
-                  <p className="text-stone-500 text-sm">
-                    Uploaded on: {currentApplication.positionPaperSubmittedAt ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString() : 'N/A'}
-                  </p>
-                </div>
+        {currentApplication?.preferredCommittee === 'UNHRC' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
+          >
+            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
+              📄 Position Paper Submission
+            </h2>
+            
+            {!isAllotted ? (
+              <div className="bg-stone-100 border border-stone-200 rounded-xl p-6 text-center">
+                <span className="text-4xl mb-3 block">🔒</span>
+                <p className="text-stone-600 font-medium">Upload Disabled</p>
+                <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
+                  You can upload your position paper after country allotment.
+                </p>
               </div>
-              {currentApplication.positionPaperRemarks && (
-                <div className="mt-4 bg-white rounded-xl p-3 sm:p-4 border border-green-100">
-                  <p className="text-stone-500 text-xs sm:text-sm mb-1">Your Remarks:</p>
-                  <p className="text-stone-700 text-sm sm:text-base">{currentApplication.positionPaperRemarks}</p>
+            ) : currentApplication?.positionPaperUrl ? (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4">
+                  <span className="text-2xl">✅</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-green-700 font-medium">Position Paper Submitted</p>
+                    <p className="text-stone-500 text-sm">
+                      Uploaded on: {currentApplication.positionPaperSubmittedAt ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString() : 'N/A'}
+                    </p>
+                  </div>
                 </div>
-              )}
-              <a
-                href={currentApplication.positionPaperUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-sm sm:text-base"
-              >
-                📥 View Uploaded Paper
-              </a>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {/* File Upload */}
-              <div className="border-2 border-dashed border-stone-300 rounded-xl p-4 sm:p-6 text-center hover:border-amber-400 transition-colors bg-stone-50">
-                <input
-                  type="file"
-                  accept=".pdf"
-                  onChange={handleFileChange}
-                  className="hidden"
-                  id="position-paper-upload"
-                />
-                <label
-                  htmlFor="position-paper-upload"
-                  className="cursor-pointer block"
+                {currentApplication.positionPaperRemarks && (
+                  <div className="mt-4 bg-white rounded-xl p-3 sm:p-4 border border-green-100">
+                    <p className="text-stone-500 text-xs sm:text-sm mb-1">Your Remarks:</p>
+                    <p className="text-stone-700 text-sm sm:text-base">{currentApplication.positionPaperRemarks}</p>
+                  </div>
+                )}
+                <a
+                  href={currentApplication.positionPaperUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-sm sm:text-base"
                 >
-                  <span className="text-4xl mb-3 block">📎</span>
-                  <p className="text-stone-700 font-medium text-sm sm:text-base break-all">
-                    {selectedFile ? selectedFile.name : 'Click to select PDF file'}
-                  </p>
-                  <p className="text-stone-500 text-xs sm:text-sm mt-2">PDF only, max 10MB</p>
-                </label>
+                  📥 View Uploaded Paper
+                </a>
               </div>
+            ) : (
+              <div className="space-y-4">
+                {/* File Upload */}
+                <div className="border-2 border-dashed border-stone-300 rounded-xl p-4 sm:p-6 text-center hover:border-amber-400 transition-colors bg-stone-50">
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    id="position-paper-upload"
+                  />
+                  <label
+                    htmlFor="position-paper-upload"
+                    className="cursor-pointer block"
+                  >
+                    <span className="text-4xl mb-3 block">📎</span>
+                    <p className="text-stone-700 font-medium text-sm sm:text-base break-all">
+                      {selectedFile ? selectedFile.name : 'Click to select PDF file'}
+                    </p>
+                    <p className="text-stone-500 text-xs sm:text-sm mt-2">PDF only, max 10MB</p>
+                  </label>
+                </div>
 
-              {/* Remarks Textbox */}
-              <div>
-                <label className="block text-stone-600 text-xs sm:text-sm mb-2">
-                  Remarks (Optional)
-                </label>
-                <textarea
-                  value={remarks}
-                  onChange={(e) => setRemarks(e.target.value)}
-                  placeholder="Add any remarks or notes about your position paper..."
-                  className="w-full px-3 sm:px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 resize-none text-sm sm:text-base"
-                  rows={3}
-                />
+                {/* Remarks Textbox */}
+                <div>
+                  <label className="block text-stone-600 text-xs sm:text-sm mb-2">
+                    Remarks (Optional)
+                  </label>
+                  <textarea
+                    value={remarks}
+                    onChange={(e) => setRemarks(e.target.value)}
+                    placeholder="Add any remarks or notes about your position paper..."
+                    className="w-full px-3 sm:px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 resize-none text-sm sm:text-base"
+                    rows={3}
+                  />
+                </div>
+
+                {/* Error/Success Messages */}
+                {uploadError && (
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-3">
+                    <p className="text-red-600 text-sm">{uploadError}</p>
+                  </div>
+                )}
+                {uploadSuccess && (
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+                    <p className="text-green-600 text-sm">{uploadSuccess}</p>
+                  </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  onClick={handleUpload}
+                  disabled={!selectedFile || uploading}
+                  className={`w-full py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
+                    selectedFile && !uploading
+                      ? 'bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
+                      : 'bg-stone-200 text-stone-400 cursor-not-allowed'
+                  }`}
+                >
+                  {uploading ? 'Uploading...' : '📤 Submit Position Paper'}
+                </button>
               </div>
-
-              {/* Error/Success Messages */}
-              {uploadError && (
-                <div className="bg-red-50 border border-red-200 rounded-xl p-3">
-                  <p className="text-red-600 text-sm">{uploadError}</p>
-                </div>
-              )}
-              {uploadSuccess && (
-                <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-                  <p className="text-green-600 text-sm">{uploadSuccess}</p>
-                </div>
-              )}
-
-              {/* Submit Button */}
-              <button
-                onClick={handleUpload}
-                disabled={!selectedFile || uploading}
-                className={`w-full py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
-                  selectedFile && !uploading
-                    ? 'bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
-                    : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-                }`}
-              >
-                {uploading ? 'Uploading...' : '📤 Submit Position Paper'}
-              </button>
-            </div>
-          )}
-        </motion.div>
+            )}
+          </motion.div>
+        )}
 
         {/* Application History (if multiple) */}
         {applications.length > 1 && (

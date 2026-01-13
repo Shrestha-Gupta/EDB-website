@@ -323,39 +323,29 @@ const MunCompleteProfilePage = () => {
               )}
 
               {/* Country Preferences */}
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-3">
-                  Country Preferences <span className="text-stone-500 font-normal">(optional)</span>
-                </label>
-                {[0, 1, 2].map((index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    value={formData.countryPreferences[index]}
-                    onChange={(e) => {
-                      const newPrefs = [...formData.countryPreferences];
-                      newPrefs[index] = e.target.value;
-                      setFormData({ ...formData, countryPreferences: newPrefs });
-                    }}
-                    placeholder={`${index + 1}${index === 0 ? 'st' : index === 1 ? 'nd' : 'rd'} Preference (e.g., India)`}
-                    className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-2"
-                  />
-                ))}
-              </div>
+              {formData.preferredCommittee === 'UNHRC' && (
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-3">
+                    Country Preferences <span className="text-stone-500 font-normal">(optional)</span>
+                  </label>
+                  {[0, 1, 2].map((index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      value={formData.countryPreferences[index]}
+                      onChange={(e) => {
+                        const newPrefs = [...formData.countryPreferences];
+                        newPrefs[index] = e.target.value;
+                        setFormData({ ...formData, countryPreferences: newPrefs });
+                      }}
+                      placeholder={`${index + 1}${index === 0 ? 'st' : index === 1 ? 'nd' : 'rd'} Preference (e.g., India)`}
+                      className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-2"
+                    />
+                  ))}
+                </div>
+              )}
 
-              {/* Agenda Preferences */}
-              <div>
-                <label className="block text-sm font-medium text-stone-700 mb-2">
-                  Agenda/Topic Interest <span className="text-stone-500 font-normal">(optional)</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.agendaPreferences}
-                  onChange={(e) => setFormData({ ...formData, agendaPreferences: e.target.value })}
-                  placeholder="E.g., Climate Change, Human Rights..."
-                  className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
-                />
-              </div>
+
 
               <div className="flex gap-3 mt-6">
                 <motion.button
