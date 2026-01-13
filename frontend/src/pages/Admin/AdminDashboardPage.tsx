@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { FiChevronDown, FiChevronUp, FiFile, FiDownload, FiCalendar, FiUsers } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiFile, FiDownload, FiCalendar, FiUsers, FiBook, FiGlobe, FiLogOut, FiCheck, FiX } from "react-icons/fi";
 import {
   getAllEventRegistrations,
   updateEventRegistration,
@@ -121,15 +121,15 @@ const AdminDashboardPage = () => {
   });
 
   const tabs = [
-    { id: "users" as TabType, label: "Users", icon: "👥", count: users.length },
-    { id: "events" as TabType, label: "Events", icon: "📅", count: eventRegistrations.length },
-    { id: "arunoday" as TabType, label: "Arunoday", icon: "🎭", count: arunodayRegistrations.length },
-    { id: "mun" as TabType, label: "MUN", icon: "🌍", count: null },
+    { id: "users" as TabType, label: "Users", count: users.length },
+    { id: "events" as TabType, label: "Events", count: eventRegistrations.length },
+    { id: "arunoday" as TabType, label: "Arunoday", count: arunodayRegistrations.length },
+    { id: "mun" as TabType, label: "MUN", count: null },
   ];
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 flex items-center justify-center">
+      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-4"></div>
           <p className="text-stone-700 text-lg">Loading dashboard...</p>
@@ -139,7 +139,7 @@ const AdminDashboardPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-stone-50 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -148,81 +148,96 @@ const AdminDashboardPage = () => {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4"
         >
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">
+            <h1 className="text-3xl font-bold text-stone-900">
               Admin Dashboard
             </h1>
-            <p className="text-stone-600 text-sm mt-1">
+            <p className="text-stone-600 mt-1">
               Welcome, {user?.name || "Admin"}
             </p>
           </div>
-          <div className="flex gap-3">
-            <button
-              onClick={() => {
-                logout();
-                navigate("/");
-              }}
-              className="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm font-medium"
-            >
-              Logout
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+            className="flex items-center gap-2 px-6 py-2.5 bg-white border border-stone-300 hover:border-red-500 hover:text-red-600 text-stone-700 rounded-lg transition-colors font-medium shadow-sm"
+          >
+            <FiLogOut className="w-4 h-4" />
+            Logout
+          </button>
         </motion.div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm"
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="text-3xl mb-2">👥</div>
-            <p className="text-2xl font-bold text-stone-900">{users.length}</p>
-            <p className="text-stone-500 text-sm">Total Users</p>
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <FiUsers className="w-6 h-6 text-amber-600" />
+              </div>
+            </div>
+            <p className="text-3xl font-bold text-stone-900 mb-1">{users.length}</p>
+            <p className="text-stone-600 text-sm">Total Users</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm"
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="text-3xl mb-2">📅</div>
-            <p className="text-2xl font-bold text-stone-900">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <FiCalendar className="w-6 h-6 text-amber-600" />
+              </div>
+            </div>
+            <p className="text-3xl font-bold text-stone-900 mb-1">
               {eventRegistrations.length}
             </p>
-            <p className="text-stone-500 text-sm">Event Registrations</p>
+            <p className="text-stone-600 text-sm">Event Registrations</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm"
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="text-3xl mb-2">🎭</div>
-            <p className="text-2xl font-bold text-stone-900">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <FiBook className="w-6 h-6 text-amber-600" />
+              </div>
+            </div>
+            <p className="text-3xl font-bold text-stone-900 mb-1">
               {arunodayRegistrations.length}
             </p>
-            <p className="text-stone-500 text-sm">Arunoday Teams</p>
+            <p className="text-stone-600 text-sm">Arunoday Teams</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm"
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="text-3xl mb-2">🌍</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <FiGlobe className="w-6 h-6 text-amber-600" />
+              </div>
+            </div>
             <Link
               to="/mun/admin"
-              className="text-amber-600 hover:text-amber-700 font-semibold"
+              className="text-amber-600 hover:text-amber-700 font-semibold flex items-center gap-1"
             >
-              Open MUN Dashboard →
+              Manage MUN →
             </Link>
-            <p className="text-stone-500 text-sm">Manage MUN</p>
+            <p className="text-stone-600 text-sm mt-1">MUN Dashboard</p>
           </motion.div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-lg border border-stone-200 shadow-sm overflow-hidden">
           <div className="flex border-b border-stone-200 overflow-x-auto">
             {tabs.map((tab) => (
               <button
@@ -234,16 +249,15 @@ const AdminDashboardPage = () => {
                     setActiveTab(tab.id);
                   }
                 }}
-                className={`flex-1 min-w-max px-4 py-4 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
+                className={`flex-1 min-w-max px-6 py-4 font-medium transition-colors flex items-center justify-center gap-2 ${
                   activeTab === tab.id
-                    ? "text-amber-600 border-b-2 border-amber-500 bg-amber-50/50"
+                    ? "text-amber-600 border-b-2 border-amber-500 bg-amber-50"
                     : "text-stone-600 hover:text-stone-900 hover:bg-stone-50"
                 }`}
               >
-                <span>{tab.icon}</span>
                 {tab.label}
                 {tab.count !== null && (
-                  <span className="bg-stone-200 text-stone-700 px-2 py-0.5 rounded-full text-xs">
+                  <span className="bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-full text-xs font-medium">
                     {tab.count}
                   </span>
                 )}
@@ -252,20 +266,20 @@ const AdminDashboardPage = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="p-4 border-b border-stone-200">
+          <div className="p-6 border-b border-stone-200">
             <div className="flex flex-col sm:flex-row gap-4">
               <input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:border-amber-500"
+                className="flex-1 px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
               />
               {activeTab === "events" && (
                 <select
                   value={eventFilter}
                   onChange={(e) => setEventFilter(e.target.value)}
-                  className="px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:border-amber-500"
+                  className="px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
                 >
                   <option value="all">All Events</option>
                   <option value="pralekh">Pralekh</option>
@@ -277,7 +291,7 @@ const AdminDashboardPage = () => {
           </div>
 
           {/* Content */}
-          <div className="p-4">
+          <div className="p-6">
             <AnimatePresence mode="wait">
               {/* Users Tab */}
               {activeTab === "users" && (
@@ -366,13 +380,15 @@ const AdminDashboardPage = () => {
                   className="space-y-6"
                 >
                   {/* Pralekh Section */}
-                  <div className="border border-amber-200 rounded-xl overflow-hidden">
-                    <div className="bg-amber-50 px-4 py-3 flex items-center justify-between">
+                  <div className="border border-stone-200 rounded-lg overflow-hidden shadow-sm">
+                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-4 border-b border-amber-100">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">📜</span>
+                        <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                          <FiFile className="w-5 h-5 text-amber-600" />
+                        </div>
                         <div>
-                          <h3 className="font-semibold text-amber-800">Pralekh - Newsletter Writing</h3>
-                          <p className="text-sm text-amber-600">
+                          <h3 className="font-semibold text-stone-900">Pralekh - Newsletter Writing</h3>
+                          <p className="text-sm text-stone-600">
                             {eventRegistrations.filter(r => r.eventType === 'pralekh').length} registrations
                           </p>
                         </div>
@@ -431,8 +447,20 @@ const AdminDashboardPage = () => {
                                 </td>
                                 <td className="py-3 px-4">
                                   <div className="flex gap-2">
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "approved")} 
+                                      className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                                      title="Approve"
+                                    >
+                                      <FiCheck className="w-4 h-4" />
+                                    </button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "rejected")} 
+                                      className="p-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                                      title="Reject"
+                                    >
+                                      <FiX className="w-4 h-4" />
+                                    </button>
                                   </div>
                                 </td>
                               </tr>
@@ -512,13 +540,15 @@ const AdminDashboardPage = () => {
                   </div>
 
                   {/* Plotlines Section */}
-                  <div className="border border-blue-200 rounded-xl overflow-hidden">
-                    <div className="bg-blue-50 px-4 py-3 flex items-center justify-between">
+                  <div className="border border-stone-200 rounded-lg overflow-hidden shadow-sm">
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-blue-100">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">✍️</span>
+                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                          <FiBook className="w-5 h-5 text-blue-600" />
+                        </div>
                         <div>
-                          <h3 className="font-semibold text-blue-800">Plotlines - Creative Writing</h3>
-                          <p className="text-sm text-blue-600">
+                          <h3 className="font-semibold text-stone-900">Plotlines - Creative Writing</h3>
+                          <p className="text-sm text-stone-600">
                             {eventRegistrations.filter(r => r.eventType === 'plotlines').length} registrations
                           </p>
                         </div>
@@ -575,8 +605,20 @@ const AdminDashboardPage = () => {
                                 </td>
                                 <td className="py-3 px-4">
                                   <div className="flex gap-2">
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "approved")} 
+                                      className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                                      title="Approve"
+                                    >
+                                      <FiCheck className="w-4 h-4" />
+                                    </button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "rejected")} 
+                                      className="p-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                                      title="Reject"
+                                    >
+                                      <FiX className="w-4 h-4" />
+                                    </button>
                                   </div>
                                 </td>
                               </tr>
@@ -635,13 +677,15 @@ const AdminDashboardPage = () => {
                   </div>
 
                   {/* Open Mic Section */}
-                  <div className="border border-purple-200 rounded-xl overflow-hidden">
-                    <div className="bg-purple-50 px-4 py-3 flex items-center justify-between">
+                  <div className="border border-stone-200 rounded-lg overflow-hidden shadow-sm">
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-6 py-4 border-b border-purple-100">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">🎤</span>
+                        <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                          <FiCalendar className="w-5 h-5 text-purple-600" />
+                        </div>
                         <div>
-                          <h3 className="font-semibold text-purple-800">Open Mic - Poetry & Performance</h3>
-                          <p className="text-sm text-purple-600">
+                          <h3 className="font-semibold text-stone-900">Open Mic - Poetry & Performance</h3>
+                          <p className="text-sm text-stone-600">
                             {eventRegistrations.filter(r => r.eventType === 'openmic').length} registrations
                           </p>
                         </div>
@@ -698,8 +742,20 @@ const AdminDashboardPage = () => {
                                 </td>
                                 <td className="py-3 px-4">
                                   <div className="flex gap-2">
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "approved")} 
+                                      className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                                      title="Approve"
+                                    >
+                                      <FiCheck className="w-4 h-4" />
+                                    </button>
+                                    <button 
+                                      onClick={() => handleEventStatusUpdate(reg._id, "rejected")} 
+                                      className="p-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                                      title="Reject"
+                                    >
+                                      <FiX className="w-4 h-4" />
+                                    </button>
                                   </div>
                                 </td>
                               </tr>
@@ -837,9 +893,10 @@ const AdminDashboardPage = () => {
                                       "approved"
                                     )
                                   }
-                                  className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200"
+                                  className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                                  title="Approve"
                                 >
-                                  ✓
+                                  <FiCheck className="w-4 h-4" />
                                 </button>
                                 <button
                                   onClick={() =>
@@ -848,9 +905,10 @@ const AdminDashboardPage = () => {
                                       "rejected"
                                     )
                                   }
-                                  className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200"
+                                  className="p-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                                  title="Reject"
                                 >
-                                  ✗
+                                  <FiX className="w-4 h-4" />
                                 </button>
                               </div>
                             </td>

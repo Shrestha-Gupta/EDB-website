@@ -70,7 +70,7 @@ const DashboardPage = () => {
   const quickActions = [
     {
       title: "Browse Events",
-      description: "Explore upcoming literary events and workshops",
+      description: "Explore upcoming literary events ",
       icon: FiCalendar,
       link: "/events",
     },
