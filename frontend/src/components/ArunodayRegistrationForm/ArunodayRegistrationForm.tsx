@@ -349,7 +349,12 @@ const ArunodayRegistrationForm = () => {
                   ))}
                 </select>
                 <p className="text-xs text-amber-600 mt-1.5">
-                  ℹ️ All team members will be from same hostel.
+                  ℹ️ All team members should be from the same hostel.
+                  
+                </p>
+                <p className="text-xs text-amber-600 mt-1.5">
+                  ℹ️ Participants may change their teammates for further rounds if needed.
+                  
                 </p>
               </div>
             )}

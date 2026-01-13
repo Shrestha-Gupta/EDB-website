@@ -186,49 +186,9 @@ export default function Contact() {
                     <ArrowUpRight className="w-5 h-5 text-gray-400" />
                   </div>
 
-                  <a
-                    href="https://whatsapp.com/channel/0029VamUHA1LNSZzy9QRLG2r"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-green-50 rounded-lg border border-green-100">
-                        <MessageCircle className="w-5 h-5 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
-                          WhatsApp Channel
-                        </p>
-                        <p className="font-medium text-gray-900">
-                          The Editorial Board Channel
-                        </p>
-                      </div>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
-                  </a>
+                  
 
-                  <a
-                    href="https://www.linkedin.com/company/theeditorialboard/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 bg-white/90 backdrop-blur-md rounded-xl px-4 py-4 border border-orange-100 shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
-                        <Linkedin className="w-5 h-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
-                          LinkedIn
-                        </p>
-                        <p className="font-medium text-gray-900">
-                          The Editorial Board
-                        </p>
-                      </div>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-gray-400" />
-                  </a>
+                  
                 </div>
 
                 {/* Google Maps Embed */}
