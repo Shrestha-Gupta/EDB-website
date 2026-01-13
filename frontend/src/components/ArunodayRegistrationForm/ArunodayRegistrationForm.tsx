@@ -349,7 +349,7 @@ const ArunodayRegistrationForm = () => {
                   ))}
                 </select>
                 <p className="text-xs text-amber-600 mt-1.5">
-                  ℹ️ All team members will be assigned the same hostel as the team leader
+                  ℹ️ All team members will be from same hostel.
                 </p>
               </div>
             )}
