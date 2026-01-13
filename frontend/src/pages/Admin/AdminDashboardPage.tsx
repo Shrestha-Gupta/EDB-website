@@ -17,7 +17,7 @@ type TabType = "users" | "events" | "arunoday" | "mun";
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout, isLoading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>("users");
   const [loading, setLoading] = useState(true);
 
@@ -31,12 +31,14 @@ const AdminDashboardPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    if (authLoading) return;
+
     if (!user || user.role !== "admin") {
       navigate("/mun/login");
       return;
     }
     fetchData();
-  }, [user, navigate]);
+  }, [user, navigate, authLoading]);
 
   const fetchData = async () => {
     setLoading(true);
