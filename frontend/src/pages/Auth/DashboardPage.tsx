@@ -2,15 +2,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import { EventRegistrationModal } from "../../components/EventRegistration";
 import { getMyEventRegistrations, eventInfo, type EventType, type EventRegistration } from "../../services/eventsApi";
 // React Icons - Modern icon library
-import { FiMail, FiLogOut, FiSettings, FiBell, FiArrowRight, FiFileText, FiClock, FiCheckCircle } from "react-icons/fi";
-import { HiOutlineCalendar, HiOutlineBookOpen, HiOutlineUserGroup, HiOutlineSparkles, HiOutlineGlobe, HiOutlineUser } from "react-icons/hi";
-import { BsPenFill, BsMicFill } from "react-icons/bs";
-import { RiQuillPenLine } from "react-icons/ri";
-import { BiParty } from "react-icons/bi";
+import { FiMail, FiLogOut, FiSettings, FiBell, FiArrowRight, FiCalendar, FiBook, FiImage, FiUsers } from "react-icons/fi";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -76,30 +71,26 @@ const DashboardPage = () => {
     {
       title: "Browse Events",
       description: "Explore upcoming literary events and workshops",
-      icon: HiOutlineCalendar,
+      icon: FiCalendar,
       link: "/events",
-      color: "from-amber-500 to-orange-500",
     },
     {
       title: "Publications",
       description: "Read our latest magazines and articles",
-      icon: HiOutlineBookOpen,
+      icon: FiBook,
       link: "/publications",
-      color: "from-orange-500 to-red-500",
     },
     {
       title: "Canvas Gallery",
       description: "View creative works from our community",
-      icon: HiOutlineSparkles,
+      icon: FiImage,
       link: "/canvas",
-      color: "from-amber-400 to-amber-600",
     },
     {
       title: "Our Team",
       description: "Meet the editorial board members",
-      icon: HiOutlineUserGroup,
+      icon: FiUsers,
       link: "/team",
-      color: "from-stone-500 to-stone-700",
     },
   ];
 
@@ -111,21 +102,9 @@ const DashboardPage = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-linear-to-br from-stone-50 via-orange-50/30 to-amber-50/20" />
-      
-      {/* Particles */}
-      <div className="absolute inset-0 pointer-events-none opacity-50">
-        <ParticlesBackground />
-      </div>
-
-      {/* Decorative Blobs */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
-
+    <div className="min-h-screen bg-stone-50">
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,389 +112,249 @@ const DashboardPage = () => {
           transition={{ duration: 0.5 }}
           className="mb-8 md:mb-12"
         >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-stone-900">
-                Welcome back, <span className="text-amber-600">{user.name || "User"}</span>
-                <span className="text-amber-600">.</span>
-              </h1>
-              <p className="text-stone-600 mt-2 text-lg">
-                Here's what's happening with your account
-              </p>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+            {/* Profile Card */}
+            <div className="bg-white rounded-lg border border-stone-200 p-6 flex-1">
+              <div className="flex items-start gap-4">
+                <div className="w-20 h-20 rounded-lg bg-amber-500 flex items-center justify-center text-white text-3xl font-bold">
+                  {user.name ? user.name.charAt(0).toUpperCase() : "A"}
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-stone-900 mb-1">
+                    {user.name || "User"}
+                  </h2>
+                  <div className="flex items-center gap-2 text-stone-600 mb-3">
+                    <FiMail className="w-4 h-4" />
+                    <span className="text-sm">{user.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      user.role === 'admin' 
+                        ? 'bg-purple-100 text-purple-700' 
+                        : 'bg-stone-100 text-stone-700'
+                    }`}>
+                      {user.role === 'admin' ? 'Admin' : 'Member'}
+                    </span>
+                    {user.isProfileComplete && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                        Profile Complete
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-            
+
+            {/* Action buttons */}
             <div className="flex items-center gap-3">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-stone-200 text-stone-600 hover:text-amber-600 hover:border-amber-300 transition-all shadow-sm"
-              >
+              <button className="px-4 py-2 rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-50 transition-colors">
                 <FiBell className="w-5 h-5" />
-              </motion.button>
+              </button>
               <Link to="/profile">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-xl bg-white/80 backdrop-blur-sm border border-stone-200 text-stone-600 hover:text-amber-600 hover:border-amber-300 transition-all shadow-sm"
-                >
+                <button className="px-4 py-2 rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-50 transition-colors">
                   <FiSettings className="w-5 h-5" />
-                </motion.button>
+                </button>
               </Link>
-              <motion.button
+              <button
                 onClick={handleLogout}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-all shadow-sm font-medium"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-red-300 text-red-600 hover:bg-red-50 transition-colors"
               >
                 <FiLogOut className="w-5 h-5" />
                 <span className="hidden sm:inline">Logout</span>
-              </motion.button>
+              </button>
             </div>
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
-          {/* Main Content - Left Column */}
-          <div className="lg:col-span-2 space-y-6 md:space-y-8">
-            {/* Profile Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-stone-200/50 shadow-xl"
-            >
-              <div className="flex items-start gap-4 md:gap-6">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-2xl md:text-3xl font-bold shadow-lg">
-                  {user.name ? user.name.charAt(0).toUpperCase() : "U"}
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-xl md:text-2xl font-serif font-bold text-stone-900">
-                    {user.name || "User"}
-                  </h2>
-                  <div className="flex items-center gap-2 text-stone-500 mt-1">
-                    <FiMail className="w-4 h-4" />
-                    <span className="text-sm md:text-base">{user.email}</span>
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="mb-12"
+        >
+          <h3 className="text-xl font-bold text-stone-900 mb-6">Quick Actions</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {quickActions.map((action, index) => (
+              <Link key={index} to={action.link}>
+                <div className="bg-white rounded-lg border border-stone-200 p-6 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center text-white mb-4">
+                    <action.icon className="w-6 h-6" />
                   </div>
-                  <div className="flex flex-wrap items-center gap-2 mt-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      user.role === 'admin' 
-                        ? 'bg-purple-100 text-purple-700' 
-                        : 'bg-amber-100 text-amber-700'
-                    }`}>
-                      {user.role === 'admin' ? '👑 Admin' : '✨ Member'}
-                    </span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      user.isProfileComplete 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-orange-100 text-orange-700'
-                    }`}>
-                      {user.isProfileComplete ? '✓ Profile Complete' : '⚠ Complete Profile'}
-                    </span>
+                  <h4 className="font-semibold text-stone-900 mb-2">{action.title}</h4>
+                  <p className="text-sm text-stone-600 mb-4">{action.description}</p>
+                  <div className="flex items-center text-amber-600 text-sm font-medium">
+                    Explore <FiArrowRight className="w-4 h-4 ml-1" />
                   </div>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Quick Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <h3 className="text-lg font-semibold text-stone-900 mb-4">Quick Actions</h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {quickActions.map((action, index) => (
-                  <Link key={index} to={action.link}>
-                    <motion.div
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="bg-white/80 backdrop-blur-xl rounded-xl p-5 border border-stone-200/50 shadow-lg hover:shadow-xl transition-all group cursor-pointer"
-                    >
-                      <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${action.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
-                        <action.icon className="w-6 h-6" />
-                      </div>
-                      <h4 className="font-semibold text-stone-900 mb-1">{action.title}</h4>
-                      <p className="text-sm text-stone-500">{action.description}</p>
-                      <div className="flex items-center text-amber-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        Explore <FiArrowRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </motion.div>
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Events Registration Panel */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.5 }}
-            >
-              <h3 className="text-lg font-semibold text-stone-900 mb-4 flex items-center gap-2">
-                <BiParty className="w-5 h-5 text-amber-500" /> Arunoday 2026 Events
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {/* MUN Event Card */}
-                <Link to="/mun">
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="bg-white/80 backdrop-blur-xl rounded-xl p-5 border border-stone-200/50 shadow-lg hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden"
-                  >
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-stone-800 to-stone-900 rounded-bl-[60px] opacity-10" />
-                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-stone-700 to-stone-900 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                      <HiOutlineGlobe className="w-6 h-6" />
-                    </div>
-                    <h4 className="font-semibold text-stone-900 mb-1">MUN 2026</h4>
-                    <p className="text-sm text-stone-500">Model United Nations</p>
-                    <div className="flex items-center text-stone-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                      Register <FiArrowRight className="w-4 h-4 ml-1" />
-                    </div>
-                  </motion.div>
-                </Link>
-
-                {/* Pralekh Event Card */}
-                {(() => {
-                  const reg = getEventRegistrationStatus('pralekh');
-                  return (
-                    <motion.div
-                      onClick={() => setSelectedEvent('pralekh')}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="bg-white/80 backdrop-blur-xl rounded-xl p-5 border border-stone-200/50 shadow-lg hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden"
-                    >
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-amber-500 to-orange-500 rounded-bl-[60px] opacity-10" />
-                      {reg && (
-                        <div className="absolute top-3 right-3">
-                          {reg.registrationStatus === 'submitted' ? (
-                            <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <FiCheckCircle className="w-3 h-3" /> Submitted
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">
-                              <FiClock className="w-3 h-3" /> Registered
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <RiQuillPenLine className="w-6 h-6" />
-                      </div>
-                      <h4 className="font-semibold text-stone-900 mb-1">Pralekh</h4>
-                      <p className="text-sm text-stone-500">Newsletter Writing</p>
-                      <div className="flex items-center text-amber-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </motion.div>
-                  );
-                })()}
-
-                {/* Plotlines Event Card */}
-                {(() => {
-                  const reg = getEventRegistrationStatus('plotlines');
-                  return (
-                    <motion.div
-                      onClick={() => setSelectedEvent('plotlines')}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="bg-white/80 backdrop-blur-xl rounded-xl p-5 border border-stone-200/50 shadow-lg hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden"
-                    >
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-blue-500 to-indigo-500 rounded-bl-[60px] opacity-10" />
-                      {reg && (
-                        <div className="absolute top-3 right-3">
-                          {reg.registrationStatus === 'submitted' ? (
-                            <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <FiCheckCircle className="w-3 h-3" /> Submitted
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                              <FiClock className="w-3 h-3" /> Registered
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <BsPenFill className="w-5 h-5" />
-                      </div>
-                      <h4 className="font-semibold text-stone-900 mb-1">Plotlines</h4>
-                      <p className="text-sm text-stone-500">Creative Writing</p>
-                      <div className="flex items-center text-blue-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </motion.div>
-                  );
-                })()}
-
-                {/* Open Mic Event Card */}
-                {(() => {
-                  const reg = getEventRegistrationStatus('openmic');
-                  return (
-                    <motion.div
-                      onClick={() => setSelectedEvent('openmic')}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="bg-white/80 backdrop-blur-xl rounded-xl p-5 border border-stone-200/50 shadow-lg hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden"
-                    >
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-purple-500 to-pink-500 rounded-bl-[60px] opacity-10" />
-                      {reg && (
-                        <div className="absolute top-3 right-3">
-                          {reg.registrationStatus === 'submitted' ? (
-                            <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                              <FiCheckCircle className="w-3 h-3" /> Submitted
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                              <FiClock className="w-3 h-3" /> Registered
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                        <BsMicFill className="w-5 h-5" />
-                      </div>
-                      <h4 className="font-semibold text-stone-900 mb-1">Open Mic</h4>
-                      <p className="text-sm text-stone-500">Poetry & Performance</p>
-                      <div className="flex items-center text-purple-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                        {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </motion.div>
-                  );
-                })()}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Sidebar - Right Column */}
-          <div className="space-y-6 md:space-y-8">
-            {/* Recent Activity */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-stone-200/50 shadow-xl"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-stone-900">Recent Activity</h3>
-                <FiFileText className="w-5 h-5 text-stone-400" />
-              </div>
-              <div className="space-y-4">
-                {recentActivities.map((activity, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-2 ${
-                      activity.type === 'welcome' ? 'bg-green-500' :
-                      activity.type === 'event' ? 'bg-amber-500' : 'bg-blue-500'
-                    }`} />
-                    <div>
-                      <p className="text-sm text-stone-700">{activity.title}</p>
-                      <p className="text-xs text-stone-400">{activity.date}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Profile Completion */}
-            {!user.isProfileComplete && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-200/50 shadow-xl"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
-                    <HiOutlineUser className="w-5 h-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-stone-900">Complete Profile</h3>
-                    <p className="text-xs text-stone-500">Add more details</p>
-                  </div>
-                </div>
-                <p className="text-sm text-stone-600 mb-4">
-                  Complete your profile to unlock all features and personalized recommendations.
-                </p>
-                <div className="w-full bg-amber-200/50 rounded-full h-2 mb-4">
-                  <div className="bg-amber-500 h-2 rounded-full" style={{ width: '40%' }} />
-                </div>
-                <Link
-                  to="/profile"
-                  className="block w-full py-2.5 text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors text-sm"
-                >
-                  Complete Now
-                </Link>
-              </motion.div>
-            )}
-
-            {/* My Registrations Summary */}
-            {eventRegistrations.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-stone-200/50 shadow-xl"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-stone-900">My Registrations</h3>
-                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">
-                    {eventRegistrations.length} event{eventRegistrations.length > 1 ? 's' : ''}
-                  </span>
-                </div>
-                <div className="space-y-3">
-                  {eventRegistrations.map((reg) => {
-                    const info = eventInfo[reg.eventType];
-                    return (
-                      <div 
-                        key={reg._id} 
-                        className="flex items-center justify-between p-3 bg-stone-50 rounded-xl cursor-pointer hover:bg-stone-100 transition-colors"
-                        onClick={() => setSelectedEvent(reg.eventType)}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl">{info.icon}</span>
-                          <div>
-                            <p className="font-medium text-stone-900 text-sm">{info.name}</p>
-                            <p className="text-xs text-stone-500 capitalize">{reg.registrationStatus}</p>
-                          </div>
-                        </div>
-                        {reg.registrationStatus === 'submitted' ? (
-                          <FiCheckCircle className="w-5 h-5 text-green-500" />
-                        ) : (
-                          <FiClock className="w-5 h-5 text-amber-500" />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Arunoday Info Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-200/50 shadow-xl"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
-                  <HiOutlineSparkles className="w-5 h-5 text-amber-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-stone-900">Arunoday 2026</h3>
-                  <p className="text-xs text-stone-500">Annual Literary Festival</p>
-                </div>
-              </div>
-              <p className="text-sm text-stone-600 mb-4">
-                Register for our flagship events and showcase your literary talents!
-              </p>
-              <Link
-                to="/arunoday-live"
-                className="block w-full py-2.5 text-center bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors text-sm"
-              >
-                Learn More
               </Link>
-            </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
+
+        {/* Events Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-stone-900 mb-2"> Events</h3>
+            <p className="text-stone-600">Register now and showcase your talents at MMMUT's premier literary and cultural fest</p>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 gap-6">
+            {/* MUN Card */}
+            <Link to="/mun">
+              <div className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-2xl font-bold text-stone-900">Model United Nations</h4>
+                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">OPEN</span>
+                  </div>
+                  <p className="text-amber-600 font-medium mb-4">Diplomatic Excellence</p>
+                  <p className="text-stone-600 mb-6">
+                    Step into the shoes of world leaders. Debate, negotiate, and make history.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-500 text-sm">Open to All Years</span>
+                    <button className="px-6 py-2 border-2 border-amber-500 text-amber-600 rounded-lg font-medium hover:bg-amber-50 transition-colors flex items-center gap-2">
+                      Register <FiArrowRight />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Pralekh Card */}
+            {(() => {
+              const reg = getEventRegistrationStatus('pralekh');
+              return (
+                <div 
+                  onClick={() => setSelectedEvent('pralekh')}
+                  className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer"
+                >
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h4 className="text-2xl font-bold text-stone-900">Pralekh</h4>
+                      {reg ? (
+                        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+                          {reg.registrationStatus === 'submitted' ? 'SUBMITTED' : 'REGISTERED'}
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">OPEN</span>
+                      )}
+                    </div>
+                    <p className="text-amber-600 font-medium mb-4">Newsletter Writing</p>
+                    <p className="text-stone-600 mb-6">
+                      Express your thoughts through compelling and creative newsletter writing.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-stone-500 text-sm">Open to All Years</span>
+                      <button className="px-6 py-2 border-2 border-amber-500 text-amber-600 rounded-lg font-medium hover:bg-amber-50 transition-colors flex items-center gap-2">
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Plotlines Card */}
+            {(() => {
+              const reg = getEventRegistrationStatus('plotlines');
+              return (
+                <div 
+                  onClick={() => setSelectedEvent('plotlines')}
+                  className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer"
+                >
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h4 className="text-2xl font-bold text-stone-900">Plotlines</h4>
+                      {reg ? (
+                        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+                          {reg.registrationStatus === 'submitted' ? 'SUBMITTED' : 'REGISTERED'}
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">OPEN</span>
+                      )}
+                    </div>
+                    <p className="text-amber-600 font-medium mb-4">Creative Writing</p>
+                    <p className="text-stone-600 mb-6">
+                      Craft captivating stories and let your imagination run wild on paper.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-stone-500 text-sm">Open to All Years</span>
+                      <button className="px-6 py-2 border-2 border-amber-500 text-amber-600 rounded-lg font-medium hover:bg-amber-50 transition-colors flex items-center gap-2">
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Open Mic Card */}
+            {(() => {
+              const reg = getEventRegistrationStatus('openmic');
+              return (
+                <div 
+                  onClick={() => setSelectedEvent('openmic')}
+                  className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer"
+                >
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h4 className="text-2xl font-bold text-stone-900">Open Mic</h4>
+                      {reg ? (
+                        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+                          {reg.registrationStatus === 'submitted' ? 'SUBMITTED' : 'REGISTERED'}
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">OPEN</span>
+                      )}
+                    </div>
+                    <p className="text-amber-600 font-medium mb-4">Poetry & Performance</p>
+                    <p className="text-stone-600 mb-6">
+                      Take the stage and share your voice through poetry, spoken word, or performance.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-stone-500 text-sm">Open to All Years</span>
+                      <button className="px-6 py-2 border-2 border-amber-500 text-amber-600 rounded-lg font-medium hover:bg-amber-50 transition-colors flex items-center gap-2">
+                        {reg ? 'View Status' : 'Register'} <FiArrowRight />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        </motion.div>
+
+        {/* Recent Activity Sidebar */}
+        {eventRegistrations.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-12"
+          >
+            <h3 className="text-xl font-bold text-stone-900 mb-6">Recent Activity</h3>
+            <div className="grid gap-3">
+              {recentActivities.map((activity, index) => (
+                <div key={index} className="bg-white rounded-lg border border-stone-200 p-4 flex items-center gap-4">
+                  <div className={`w-2 h-2 rounded-full ${
+                    activity.type === 'welcome' ? 'bg-green-500' :
+                    activity.type === 'event' ? 'bg-amber-500' : 'bg-blue-500'
+                  }`} />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-stone-800">{activity.title}</p>
+                    <p className="text-xs text-stone-500">{activity.date}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
 
       {/* Event Registration Modal */}
