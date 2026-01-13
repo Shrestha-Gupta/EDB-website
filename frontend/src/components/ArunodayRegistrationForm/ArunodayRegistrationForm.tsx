@@ -4,10 +4,23 @@ import { FaUserTie, FaLanguage, FaCheckCircle, FaRedoAlt } from "react-icons/fa"
 import { HiUserGroup } from "react-icons/hi";
 import { MdGroups } from "react-icons/md";
 
+type ResidenceType = 'hosteler' | 'dayScholar' | '';
+type HostelName = 'Tilak Bhawan' | 'Visveswaraya Bhawan' | 'Ambedkar Bhawan' | 'Tagore Bhawan' | 'Savitri Bai Phule Hostel' | '';
+
+const HOSTEL_OPTIONS = [
+  'Tilak Bhawan',
+  'Visveswaraya Bhawan',
+  'Ambedkar Bhawan',
+  'Tagore Bhawan',
+  'Savitri Bai Phule Hostel',
+] as const;
+
 interface TeamMember {
   name: string;
   rollNumber: string;
   branch: string;
+  residenceType: ResidenceType;
+  hostelName: HostelName;
 }
 
 interface FormData {
@@ -16,6 +29,8 @@ interface FormData {
   teamLeaderEmail: string;
   teamLeaderRollNumber: string;
   teamLeaderBranch: string;
+  teamLeaderResidenceType: ResidenceType;
+  teamLeaderHostelName: HostelName;
   teamMembers: TeamMember[];
   preferredLanguage: string;
 }
@@ -27,10 +42,12 @@ const ArunodayRegistrationForm = () => {
     teamLeaderEmail: "",
     teamLeaderRollNumber: "",
     teamLeaderBranch: "",
+    teamLeaderResidenceType: "",
+    teamLeaderHostelName: "",
     teamMembers: [
-      { name: "", rollNumber: "", branch: "" },
-      { name: "", rollNumber: "", branch: "" },
-      { name: "", rollNumber: "", branch: "" },
+      { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
+      { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
+      { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
     ],
     preferredLanguage: "",
   });
@@ -41,6 +58,39 @@ const ArunodayRegistrationForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle team leader residence type change - sync to all team members
+  const handleLeaderResidenceChange = (value: ResidenceType) => {
+    setFormData((prev) => {
+      const newHostelName = value === 'dayScholar' ? '' : prev.teamLeaderHostelName;
+      const updatedMembers = prev.teamMembers.map(member => ({
+        ...member,
+        residenceType: value,
+        hostelName: value === 'dayScholar' ? '' as HostelName : newHostelName,
+      }));
+      return {
+        ...prev,
+        teamLeaderResidenceType: value,
+        teamLeaderHostelName: newHostelName,
+        teamMembers: updatedMembers,
+      };
+    });
+  };
+
+  // Handle team leader hostel change - sync to all team members
+  const handleLeaderHostelChange = (value: HostelName) => {
+    setFormData((prev) => {
+      const updatedMembers = prev.teamMembers.map(member => ({
+        ...member,
+        hostelName: value,
+      }));
+      return {
+        ...prev,
+        teamLeaderHostelName: value,
+        teamMembers: updatedMembers,
+      };
+    });
   };
 
   const handleTeamMemberChange = (index: number, field: keyof TeamMember, value: string) => {
@@ -70,6 +120,8 @@ const ArunodayRegistrationForm = () => {
           teamLeaderEmail: formData.teamLeaderEmail,
           teamLeaderRollNumber: formData.teamLeaderRollNumber,
           teamLeaderBranch: formData.teamLeaderBranch,
+          teamLeaderResidenceType: formData.teamLeaderResidenceType,
+          teamLeaderHostelName: formData.teamLeaderHostelName,
           teamMembers: formData.teamMembers.filter(m => m.name && m.rollNumber && m.branch),
           preferredLanguage: formData.preferredLanguage,
         }),
@@ -100,10 +152,12 @@ const ArunodayRegistrationForm = () => {
       teamLeaderEmail: "",
       teamLeaderRollNumber: "",
       teamLeaderBranch: "",
+      teamLeaderResidenceType: "",
+      teamLeaderHostelName: "",
       teamMembers: [
-        { name: "", rollNumber: "", branch: "" },
-        { name: "", rollNumber: "", branch: "" },
-        { name: "", rollNumber: "", branch: "" },
+        { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
+        { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
+        { name: "", rollNumber: "", branch: "", residenceType: "", hostelName: "" },
       ],
       preferredLanguage: "",
     });
@@ -259,6 +313,46 @@ const ArunodayRegistrationForm = () => {
                 className={inputClasses}
               />
             </div>
+            
+            <div>
+              <label className={labelClasses}>
+                Residence Type <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={formData.teamLeaderResidenceType}
+                onChange={(e) => handleLeaderResidenceChange(e.target.value as ResidenceType)}
+                required
+                className={inputClasses}
+              >
+                <option value="">Select residence type</option>
+                <option value="hosteler">Hosteler</option>
+                <option value="dayScholar">Day Scholar</option>
+              </select>
+            </div>
+            
+            {formData.teamLeaderResidenceType === 'hosteler' && (
+              <div>
+                <label className={labelClasses}>
+                  Hostel Name <span className="text-red-500">*</span>
+                </label>
+                <select
+                  value={formData.teamLeaderHostelName}
+                  onChange={(e) => handleLeaderHostelChange(e.target.value as HostelName)}
+                  required
+                  className={inputClasses}
+                >
+                  <option value="">Select your hostel</option>
+                  {HOSTEL_OPTIONS.map((hostel) => (
+                    <option key={hostel} value={hostel}>
+                      {hostel}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-amber-600 mt-1.5">
+                  ℹ️ All team members will be assigned the same hostel as the team leader
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -284,10 +378,21 @@ const ArunodayRegistrationForm = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-stone-50 rounded-xl p-6 border border-stone-200 relative"
               >
-                <div className="mb-4">
+                <div className="mb-4 flex items-center justify-between">
                   <span className="text-sm font-medium text-amber-600">
                     Member {index + 1}
                   </span>
+                  {formData.teamLeaderResidenceType && (
+                    <span className={`text-xs px-2 py-1 rounded-full ${
+                      formData.teamLeaderResidenceType === 'hosteler' 
+                        ? 'bg-blue-100 text-blue-700' 
+                        : 'bg-green-100 text-green-700'
+                    }`}>
+                      {formData.teamLeaderResidenceType === 'hosteler' 
+                        ? `🏠 ${formData.teamLeaderHostelName || 'Hosteler'}` 
+                        : '🏡 Day Scholar'}
+                    </span>
+                  )}
                 </div>
                 
                 <div className="grid md:grid-cols-3 gap-4">

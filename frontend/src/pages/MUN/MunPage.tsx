@@ -288,23 +288,32 @@ const MunPage = () => {
                 <p className="text-stone-600 mb-1">
                   Essential materials for preparation
                 </p>
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-amber-700">
+                <span className="inline-flex items-center gap-2 text-sm font-medium text-green-700">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
                   </span>
-                  Coming Soon
+                  Available Now
                 </span>
               </div>
-              <div className="flex flex-wrap gap-4 opacity-50 pointer-events-none">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-600 font-medium">
-                  <FileText className="w-5 h-5" />
-                  Background Guide
-                </div>
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-600 font-medium">
-                  <Award className="w-5 h-5" />
-                  Rules of Procedure
-                </div>
+              <div className="flex flex-wrap gap-4">
+                <a 
+                  href="https://drive.google.com/file/d/1Zqq0XbiX9Mn6jq5OTBgexwl6d6x3VSCl/view?usp=sharing" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 font-medium hover:bg-amber-50 hover:border-amber-300 transition-all duration-300"
+                >
+                  <FileText className="w-5 h-5 text-amber-600" />
+                  Sample Position Paper
+                </a>
+                <a 
+                  href="https://drive.google.com/file/d/1vkDxRvyP3OkbUmJqd9bIHiTgC9FlRdvj/view?usp=drive_link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 font-medium hover:bg-amber-50 hover:border-amber-300 transition-all duration-300"
+                >
+                  <Award className="w-5 h-5 text-amber-600" />
+                  MUN Guidebook
+                </a>
               </div>
             </div>
           </div>
