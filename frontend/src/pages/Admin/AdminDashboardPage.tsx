@@ -11,7 +11,6 @@ import {
   type EventRegistration,
   type ArunodayRegistration,
   type MunUser,
-  eventInfo,
 } from "../../services/adminApi";
 
 type TabType = "users" | "events" | "arunoday" | "mun";
@@ -83,18 +82,7 @@ const AdminDashboardPage = () => {
     }
   };
 
-  const filteredEventRegistrations = eventRegistrations.filter((reg) => {
-    if (eventFilter !== "all" && reg.eventType !== eventFilter) return false;
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      return (
-        reg.name.toLowerCase().includes(query) ||
-        reg.email.toLowerCase().includes(query) ||
-        reg.teamName?.toLowerCase().includes(query)
-      );
-    }
-    return true;
-  });
+
 
   const filteredUsers = users.filter((u) => {
     if (!searchQuery) return true;
