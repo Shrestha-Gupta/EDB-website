@@ -8,8 +8,6 @@ import {
   Upload,
   X,
   ArrowUpRight,
-  MessageCircle,
-  Linkedin,
 } from "lucide-react";
 import ParticlesBackground from "../ParticlesBackground/ParticlesBackground";
 import PageHero from "../PageHero/PageHero";

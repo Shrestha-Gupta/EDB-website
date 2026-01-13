@@ -139,7 +139,6 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// @ts-expect-error - Mongoose typing issue with complex schemas
 const User = mongoose.model('User', userSchema);
 
 export default User;
