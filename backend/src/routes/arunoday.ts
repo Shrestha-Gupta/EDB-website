@@ -1,5 +1,6 @@
-import express, { Request, Response } from 'express';
+import express, { Response } from 'express';
 import ArunodayRegistration from '../models/ArunodayRegistration';
+import { protect, adminOnly, AuthRequest } from '../middleware/auth';
 
 const router = express.Router();
 
@@ -84,9 +85,9 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
 });
 
 // @route   GET /api/arunoday/registrations
-// @desc    Get all Arunoday registrations (admin only - add auth middleware in production)
+// @desc    Get all Arunoday registrations
 // @access  Private/Admin
-router.get('/registrations', async (req: Request, res: Response): Promise<void> => {
+router.get('/registrations', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const registrations = await ArunodayRegistration.find()
       .sort({ createdAt: -1 })
@@ -135,9 +136,9 @@ router.get('/registration/:id', async (req: Request, res: Response): Promise<voi
 });
 
 // @route   PATCH /api/arunoday/registration/:id/status
-// @desc    Update registration status (admin only)
+// @desc    Update registration status
 // @access  Private/Admin
-router.patch('/registration/:id/status', async (req: Request, res: Response): Promise<void> => {
+router.patch('/registration/:id/status', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { status, remarks } = req.body;
 
@@ -178,9 +179,9 @@ router.patch('/registration/:id/status', async (req: Request, res: Response): Pr
 });
 
 // @route   DELETE /api/arunoday/registration/:id
-// @desc    Delete a registration (admin only)
+// @desc    Delete a registration
 // @access  Private/Admin
-router.delete('/registration/:id', async (req: Request, res: Response): Promise<void> => {
+router.delete('/registration/:id', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const registration = await ArunodayRegistration.findByIdAndDelete(req.params.id);
 

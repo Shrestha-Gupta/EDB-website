@@ -511,175 +511,196 @@ const MunAdminDashboard = () => {
               )}
             </div>
 
-            {/* Applications List */}
-            <div className="space-y-4">
-              {filteredApplications.map((app) => (
-                <motion.div
-                  key={app._id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-xl p-6 border border-stone-200 shadow-lg"
-                >
-                  <div className="flex flex-col lg:flex-row justify-between gap-4">
-                    <div className="flex-1">
-                      {/* Header Row */}
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">
-                          {app.user.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-stone-900">{app.user.name}</h3>
-                          <p className="text-stone-500 text-xs">{app.delegateId || 'No ID'}</p>
-                        </div>
-                        <div className="flex gap-2 ml-auto">
-                          <StatusBadge status={app.status} />
-                          <StatusBadge status={app.paymentStatus} />
-                          {app.allotmentLocked && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">🔒 Locked</span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Contact Info */}
-                      <div className="text-sm text-stone-600 mb-3">
-                        <p>{app.user.email} | {app.user.phone}</p>
-                        <p>{app.user.college} - {app.user.branch} ({app.user.year})</p>
-                      </div>
-
-                      {/* Preferences Grid */}
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
-                        <div className="bg-stone-50 p-2 rounded-lg">
-                          <p className="text-xs text-stone-500">Committee Pref.</p>
-                          <p className="font-semibold">{app.preferredCommittee}</p>
-                        </div>
-                        <div className="bg-stone-50 p-2 rounded-lg">
-                          <p className="text-xs text-stone-500">Experience</p>
-                          <p className="font-semibold capitalize">{app.experienceLevel}</p>
-                        </div>
-                        <div className="bg-stone-50 p-2 rounded-lg">
-                          <p className="text-xs text-stone-500">Past MUN</p>
-                          <p className="font-semibold">{app.hasAttendedMun ? 'Yes' : 'No'}</p>
-                        </div>
-                        <div className="bg-stone-50 p-2 rounded-lg">
-                          <p className="text-xs text-stone-500">Country Pref.</p>
-                          <p className="font-semibold text-xs">{app.countryPreferences?.filter(c => c).join(", ") || "None"}</p>
-                        </div>
-                      </div>
-
-                      {/* Allotment Details (if allotted) */}
-                      {app.status === "allotted" && (
-                        <div className="bg-blue-50 rounded-lg p-3 text-sm border border-blue-200">
-                          <p className="font-semibold text-blue-900 mb-1">Allotment Details:</p>
-                          <div className="grid grid-cols-3 gap-2">
-                            <p><span className="text-blue-600">Committee:</span> {app.allottedCommittee}</p>
-                            <p><span className="text-blue-600">Country:</span> {app.allottedCountry}</p>
-                            <p><span className="text-blue-600">Agenda:</span> {app.allottedAgenda || 'TBA'}</p>
-                          </div>
-                          {app.allottedRole && <p className="mt-1"><span className="text-blue-600">Role:</span> {app.allottedRole}</p>}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex flex-col gap-2 min-w-[140px]">
-                      {/* Application Status Actions */}
-                      {app.status === "pending" && (
-                        <>
-                          <button
-                            onClick={() => handleStatusUpdate(app._id, "approved")}
-                            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700"
-                          >
-                            ✓ Approve
-                          </button>
-                          <button
-                            onClick={() => handleStatusUpdate(app._id, "rejected")}
-                            className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700"
-                          >
-                            ✕ Reject
-                          </button>
-                        </>
-                      )}
-
-                      {/* Allotment Action */}
-                      {app.status === "approved" && (
-                        <button
-                          onClick={() => {
-                            setAllotmentModal({ open: true, application: app });
-                            setAllotmentData({
-                              ...allotmentData,
-                              committee: app.preferredCommittee,
-                            });
-                          }}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700"
-                        >
-                          🌍 Allot
-                        </button>
-                      )}
-
-                      {/* Payment Actions */}
-                      {app.paymentStatus === "pending" && (
-                        <div className="flex gap-1">
-                          <button
-                            onClick={() => handlePaymentUpdate(app._id, "verified")}
-                            className="flex-1 px-2 py-1 bg-green-50 text-green-600 rounded text-xs hover:bg-green-100"
-                          >
-                            💰 Verify
-                          </button>
-                          <button
-                            onClick={() => handlePaymentUpdate(app._id, "failed")}
-                            className="flex-1 px-2 py-1 bg-red-50 text-red-600 rounded text-xs hover:bg-red-100"
-                          >
-                            ✕ Fail
-                          </button>
-                        </div>
-                      )}
-
-                      {/* Lock/Unlock Allotment */}
-                      {app.status === "allotted" && (
-                        <button
-                          onClick={() => handleLockAllotment(app._id, !app.allotmentLocked)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold ${
-                            app.allotmentLocked
-                              ? 'bg-green-50 text-green-600 hover:bg-green-100'
-                              : 'bg-red-50 text-red-600 hover:bg-red-100'
-                          }`}
-                        >
-                          {app.allotmentLocked ? '🔓 Unlock' : '🔒 Lock'}
-                        </button>
-                      )}
-
-                      {/* Re-allot (if not locked) */}
-                      {app.status === "allotted" && !app.allotmentLocked && (
-                        <button
-                          onClick={() => {
-                            setAllotmentModal({ open: true, application: app });
-                            setAllotmentData({
-                              committee: app.allottedCommittee || "",
-                              country: app.allottedCountry || "",
-                              agenda: app.allottedAgenda || "",
-                              role: app.allottedRole || "",
-                              committeeRoom: app.committeeRoom || "",
-                              reportingTime: app.reportingTime || "",
-                              reportingDate: app.reportingDate?.split('T')[0] || "",
-                              positionPaperDeadline: app.positionPaperDeadline?.split('T')[0] || "",
-                              notes: app.adminNotes || "",
-                            });
-                          }}
-                          className="px-4 py-2 bg-amber-50 text-amber-600 rounded-lg text-sm font-semibold hover:bg-amber-100"
-                        >
-                          🔄 Re-allot
-                        </button>
-                      )}
-                    </div>
+            {/* UNHRC Section */}
+            <div className="border border-blue-200 rounded-xl overflow-hidden">
+              <div className="bg-blue-50 px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🌍</span>
+                  <div>
+                    <h3 className="font-semibold text-blue-800">UNHRC - United Nations Human Rights Council</h3>
+                    <p className="text-sm text-blue-600">
+                      {filteredApplications.filter(a => a.preferredCommittee === 'UNHRC').length} participants
+                    </p>
                   </div>
-                </motion.div>
-              ))}
-
-              {filteredApplications.length === 0 && (
-                <div className="bg-white rounded-xl p-12 text-center border border-stone-200">
-                  <p className="text-stone-600">No applications found matching your filters</p>
                 </div>
-              )}
+              </div>
+              <div className="p-4 space-y-4">
+                {filteredApplications
+                  .filter(app => app.preferredCommittee === 'UNHRC')
+                  .map((app) => (
+                  <motion.div
+                    key={app._id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm"
+                  >
+                    <div className="flex flex-col lg:flex-row justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                            {app.user.name.charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-stone-900">{app.user.name}</h3>
+                            <p className="text-stone-500 text-xs">{app.delegateId || 'No ID'}</p>
+                          </div>
+                          <div className="flex gap-2 ml-auto">
+                            <StatusBadge status={app.status} />
+                            <StatusBadge status={app.paymentStatus} />
+                            {app.allotmentLocked && <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">🔒 Locked</span>}
+                          </div>
+                        </div>
+                        <div className="text-sm text-stone-600 mb-3">
+                          <p>{app.user.email} | {app.user.phone}</p>
+                          <p>{app.user.college} - {app.user.branch} ({app.user.year})</p>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-3">
+                          <div className="bg-blue-50 p-2 rounded-lg">
+                            <p className="text-xs text-blue-500">Experience</p>
+                            <p className="font-semibold capitalize">{app.experienceLevel}</p>
+                          </div>
+                          <div className="bg-blue-50 p-2 rounded-lg">
+                            <p className="text-xs text-blue-500">Past MUN</p>
+                            <p className="font-semibold">{app.hasAttendedMun ? 'Yes' : 'No'}</p>
+                          </div>
+                          <div className="bg-blue-50 p-2 rounded-lg col-span-2">
+                            <p className="text-xs text-blue-500">Country Preferences</p>
+                            <p className="font-semibold text-xs">{app.countryPreferences?.filter(c => c).join(", ") || "None"}</p>
+                          </div>
+                        </div>
+                        {app.status === "allotted" && (
+                          <div className="bg-green-50 rounded-lg p-3 text-sm border border-green-200">
+                            <p className="font-semibold text-green-900 mb-1">Allotment Details:</p>
+                            <div className="grid grid-cols-3 gap-2">
+                              <p><span className="text-green-600">Committee:</span> {app.allottedCommittee}</p>
+                              <p><span className="text-green-600">Country:</span> {app.allottedCountry}</p>
+                              <p><span className="text-green-600">Agenda:</span> {app.allottedAgenda || 'TBA'}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-2 min-w-[140px]">
+                        {app.status === "pending" && (
+                          <>
+                            <button onClick={() => handleStatusUpdate(app._id, "approved")} className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">✓ Approve</button>
+                            <button onClick={() => handleStatusUpdate(app._id, "rejected")} className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700">✕ Reject</button>
+                          </>
+                        )}
+                        {app.status === "approved" && (
+                          <button onClick={() => { setAllotmentModal({ open: true, application: app }); setAllotmentData({ ...allotmentData, committee: app.preferredCommittee }); }} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700">🌍 Allot Country</button>
+                        )}
+                        {app.paymentStatus === "pending" && (
+                          <div className="flex gap-1">
+                            <button onClick={() => handlePaymentUpdate(app._id, "verified")} className="flex-1 px-2 py-1 bg-green-50 text-green-600 rounded text-xs hover:bg-green-100">💰 Verify</button>
+                            <button onClick={() => handlePaymentUpdate(app._id, "failed")} className="flex-1 px-2 py-1 bg-red-50 text-red-600 rounded text-xs hover:bg-red-100">✕ Fail</button>
+                          </div>
+                        )}
+                        {app.status === "allotted" && (
+                          <button onClick={() => handleLockAllotment(app._id, !app.allotmentLocked)} className={`px-4 py-2 rounded-lg text-sm font-semibold ${app.allotmentLocked ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}>{app.allotmentLocked ? '🔓 Unlock' : '🔒 Lock'}</button>
+                        )}
+                        {app.status === "allotted" && !app.allotmentLocked && (
+                          <button onClick={() => { setAllotmentModal({ open: true, application: app }); setAllotmentData({ committee: app.allottedCommittee || "", country: app.allottedCountry || "", agenda: app.allottedAgenda || "", role: app.allottedRole || "", committeeRoom: app.committeeRoom || "", reportingTime: app.reportingTime || "", reportingDate: app.reportingDate?.split('T')[0] || "", positionPaperDeadline: app.positionPaperDeadline?.split('T')[0] || "", notes: app.adminNotes || "" }); }} className="px-4 py-2 bg-amber-50 text-amber-600 rounded-lg text-sm font-semibold hover:bg-amber-100">🔄 Re-allot</button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+                {filteredApplications.filter(a => a.preferredCommittee === 'UNHRC').length === 0 && (
+                  <p className="text-center text-stone-500 py-4">No UNHRC participants found</p>
+                )}
+              </div>
+            </div>
+
+            {/* IP Section */}
+            <div className="border border-purple-200 rounded-xl overflow-hidden">
+              <div className="bg-purple-50 px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📰</span>
+                  <div>
+                    <h3 className="font-semibold text-purple-800">IP - International Press</h3>
+                    <p className="text-sm text-purple-600">
+                      {filteredApplications.filter(a => a.preferredCommittee === 'IP').length} participants
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 space-y-4">
+                {filteredApplications
+                  .filter(app => app.preferredCommittee === 'IP')
+                  .map((app) => (
+                  <motion.div
+                    key={app._id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-xl p-6 border border-stone-200 shadow-sm"
+                  >
+                    <div className="flex flex-col lg:flex-row justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                            {app.user.name.charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-stone-900">{app.user.name}</h3>
+                            <p className="text-stone-500 text-xs">{app.delegateId || 'No ID'}</p>
+                          </div>
+                          <div className="flex gap-2 ml-auto">
+                            <StatusBadge status={app.status} />
+                            <StatusBadge status={app.paymentStatus} />
+                            {app.allotmentLocked && <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">🔒 Locked</span>}
+                          </div>
+                        </div>
+                        <div className="text-sm text-stone-600 mb-3">
+                          <p>{app.user.email} | {app.user.phone}</p>
+                          <p>{app.user.college} - {app.user.branch} ({app.user.year})</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 text-sm mb-3">
+                          <div className="bg-purple-50 p-2 rounded-lg">
+                            <p className="text-xs text-purple-500">Experience</p>
+                            <p className="font-semibold capitalize">{app.experienceLevel}</p>
+                          </div>
+                          <div className="bg-purple-50 p-2 rounded-lg">
+                            <p className="text-xs text-purple-500">Past MUN</p>
+                            <p className="font-semibold">{app.hasAttendedMun ? 'Yes' : 'No'}</p>
+                          </div>
+                        </div>
+                        {app.status === "allotted" && (
+                          <div className="bg-green-50 rounded-lg p-3 text-sm border border-green-200">
+                            <p className="font-semibold text-green-900 mb-1">Allotment Details:</p>
+                            <div className="grid grid-cols-2 gap-2">
+                              <p><span className="text-green-600">Committee:</span> {app.allottedCommittee}</p>
+                              <p><span className="text-green-600">Role:</span> {app.allottedRole || 'Press Member'}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-2 min-w-[140px]">
+                        {app.status === "pending" && (
+                          <>
+                            <button onClick={() => handleStatusUpdate(app._id, "approved")} className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">✓ Approve</button>
+                            <button onClick={() => handleStatusUpdate(app._id, "rejected")} className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700">✕ Reject</button>
+                          </>
+                        )}
+                        {app.status === "approved" && (
+                          <button onClick={() => { setAllotmentModal({ open: true, application: app }); setAllotmentData({ ...allotmentData, committee: app.preferredCommittee }); }} className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700">📰 Assign Role</button>
+                        )}
+                        {app.paymentStatus === "pending" && (
+                          <div className="flex gap-1">
+                            <button onClick={() => handlePaymentUpdate(app._id, "verified")} className="flex-1 px-2 py-1 bg-green-50 text-green-600 rounded text-xs hover:bg-green-100">💰 Verify</button>
+                            <button onClick={() => handlePaymentUpdate(app._id, "failed")} className="flex-1 px-2 py-1 bg-red-50 text-red-600 rounded text-xs hover:bg-red-100">✕ Fail</button>
+                          </div>
+                        )}
+                        {app.status === "allotted" && (
+                          <button onClick={() => handleLockAllotment(app._id, !app.allotmentLocked)} className={`px-4 py-2 rounded-lg text-sm font-semibold ${app.allotmentLocked ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-red-50 text-red-600 hover:bg-red-100'}`}>{app.allotmentLocked ? '🔓 Unlock' : '🔒 Lock'}</button>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+                {filteredApplications.filter(a => a.preferredCommittee === 'IP').length === 0 && (
+                  <p className="text-center text-stone-500 py-4">No International Press participants found</p>
+                )}
+              </div>
             </div>
           </div>
         )}

@@ -140,11 +140,6 @@ const MunDashboardPage = () => {
                 <p className={`text-base sm:text-lg font-medium ${getStatusColor(currentApplication.status)}`}>
                   Application: {currentApplication.status.charAt(0).toUpperCase() + currentApplication.status.slice(1)}
                 </p>
-                {isAllotted ? (
-                  <p className="text-green-600 text-sm sm:text-base">Country Allotted ✅</p>
-                ) : (
-                  <p className="text-amber-600 text-sm sm:text-base">Awaiting allotment ⏳</p>
-                )}
               </div>
             </div>
           ) : (
@@ -152,7 +147,7 @@ const MunDashboardPage = () => {
               {user?.preferredCommittee ? (
                 <>
                   <p className="text-green-600 font-medium mb-2">✅ Preferences Submitted</p>
-                  <p className="text-stone-500 text-sm">Your MUN preferences have been saved. Please complete your application from the events page.</p>
+                
                 </>
               ) : (
                 <>
@@ -168,6 +163,51 @@ const MunDashboardPage = () => {
             </div>
           )}
         </motion.div>
+
+        {/* Section: Assigned Country (from User model) */}
+        {user?.allottedCountry && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-green-200 shadow-lg"
+          >
+            <h2 className="text-lg sm:text-xl font-semibold text-green-900 mb-4 flex items-center gap-2">
+              🌍 Your Country Assignment
+            </h2>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-4xl">🇺🇳</span>
+                  <div>
+                    <p className="text-2xl font-bold text-green-800">{user.allottedCountry}</p>
+                    <p className="text-green-600">{user.allottedCommittee || user.preferredCommittee || 'UNHRC'}</p>
+                  </div>
+                </div>
+                <p className="text-green-700 text-sm mt-2">
+                  🎉 Congratulations! You have been assigned to represent <strong>{user.allottedCountry}</strong> in the MUN conference.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Section: Position Paper Info (for UNHRC) */}
+        {user?.preferredCommittee === 'UNHRC' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-blue-200 shadow-lg"
+          >
+            <h2 className="text-lg sm:text-xl font-semibold text-blue-900 mb-2 flex items-center gap-2">
+              📄 Position Paper
+            </h2>
+            <p className="text-blue-800 font-medium text-lg">
+              Submission for position paper will start soon.
+            </p>
+          </motion.div>
+        )}
 
         {/* Section 2: My Profile */}
         <motion.div
@@ -259,41 +299,7 @@ const MunDashboardPage = () => {
           </motion.div>
         )}
 
-        {/* Section 4: My Allotment */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-        >
-          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-            🌍 My Allotment
-          </h2>
-          {isAllotted ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <div className="bg-linear-to-br from-blue-50 to-indigo-100 rounded-xl p-4 border border-blue-200">
-                <p className="text-blue-600 text-xs sm:text-sm mb-1">Committee</p>
-                <p className="text-blue-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCommittee}</p>
-              </div>
-              <div className="bg-linear-to-br from-green-50 to-emerald-100 rounded-xl p-4 border border-green-200">
-                <p className="text-green-600 text-xs sm:text-sm mb-1">Country</p>
-                <p className="text-green-900 font-bold text-base sm:text-lg">{currentApplication?.allottedCountry}</p>
-              </div>
-              <div className="bg-linear-to-br from-purple-50 to-violet-100 rounded-xl p-4 border border-purple-200 sm:col-span-2 lg:col-span-1">
-                <p className="text-purple-600 text-xs sm:text-sm mb-1">Agenda</p>
-                <p className="text-purple-900 font-bold text-base sm:text-lg">{currentApplication?.allottedAgenda || 'TBA'}</p>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
-              <span className="text-4xl mb-3 block">⏳</span>
-              <p className="text-amber-700 font-medium">Awaiting allotment</p>
-              <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
-                Your country and committee will appear here once allotted by the admin.
-              </p>
-            </div>
-          )}
-        </motion.div>
+        
 
         {/* Section 4: Position Paper Submission */}
         {currentApplication?.preferredCommittee === 'UNHRC' && (

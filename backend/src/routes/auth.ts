@@ -136,6 +136,8 @@ router.get('/me', protect, async (req: AuthRequest, res: Response): Promise<void
         experienceLevel: user.experienceLevel,
         hasAttendedMun: user.hasAttendedMun,
         previousMunExperience: user.previousMunExperience,
+        allottedCountry: user.allottedCountry,
+        allottedCommittee: user.allottedCommittee,
       },
     });
   } catch (error: any) {

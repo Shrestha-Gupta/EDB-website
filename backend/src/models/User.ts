@@ -100,6 +100,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    // Allotted details (assigned by admin)
+    allottedCountry: {
+      type: String,
+      default: '',
+    },
+    allottedCommittee: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,

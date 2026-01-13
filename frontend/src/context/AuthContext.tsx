@@ -23,6 +23,9 @@ export interface User {
   experienceLevel?: 'beginner' | 'intermediate' | 'advanced' | '';
   hasAttendedMun?: boolean;
   previousMunExperience?: string;
+  // Allotted details (assigned by admin)
+  allottedCountry?: string;
+  allottedCommittee?: string;
 }
 
 interface AuthContextType {

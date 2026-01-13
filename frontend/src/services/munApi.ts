@@ -91,6 +91,15 @@ export interface MunUser {
   year: string;
   role: 'user' | 'admin';
   isProfileComplete: boolean;
+  // MUN Preferences
+  preferredCommittee?: 'UNHRC' | 'IP' | '';
+  countryPreferences?: string[];
+  experienceLevel?: 'beginner' | 'intermediate' | 'advanced' | '';
+  hasAttendedMun?: boolean;
+  previousMunExperience?: string;
+  // Allotted details (assigned by admin)
+  allottedCountry?: string;
+  allottedCommittee?: string;
   createdAt: string;
 }
 
@@ -238,6 +247,19 @@ export const updateApplicationStatus = async (
 export const getAllUsers = async (): Promise<MunUser[]> => {
   const data = await apiCall('/api/mun/admin/users');
   return data.users;
+};
+
+// Assign country to a user (Admin)
+export const assignCountryToUser = async (
+  userId: string,
+  country: string,
+  committee?: string
+): Promise<MunUser> => {
+  const data = await apiCall(`/api/mun/admin/users/${userId}/assign-country`, {
+    method: 'PUT',
+    body: JSON.stringify({ country, committee }),
+  });
+  return data.user;
 };
 
 // NEW API FUNCTIONS

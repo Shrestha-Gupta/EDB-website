@@ -289,6 +289,35 @@ router.get('/admin/users', protect, adminOnly, async (req: AuthRequest, res: Res
   }
 });
 
+// @route   PUT /api/mun/admin/users/:id/assign-country
+// @desc    Assign country to a user
+// @access  Admin only
+router.put('/admin/users/:id/assign-country', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { country, committee } = req.body;
+    const User = (await import('../models/User')).default;
+    
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { 
+        allottedCountry: country,
+        allottedCommittee: committee || 'UNHRC'
+      },
+      { new: true }
+    ).select('-password');
+    
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+    
+    res.json({ message: 'Country assigned successfully', user });
+  } catch (error: any) {
+    console.error('Assign country error:', error);
+    res.status(500).json({ message: error.message || 'Failed to assign country' });
+  }
+});
+
 // @route   POST /api/mun/admin/events
 // @desc    Create a new MUN event
 // @access  Admin only
