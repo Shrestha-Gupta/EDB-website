@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express, { Request, Response } from 'express';
 import ArunodayRegistration from '../models/ArunodayRegistration';
 import { protect, adminOnly, AuthRequest } from '../middleware/auth';
 
