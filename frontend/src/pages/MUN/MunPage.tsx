@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
-// import { useAuth } from "../../context/AuthContext";
-import { Calendar, MapPin, Users, Award, FileText, Globe, Mic } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import { Calendar, MapPin, Users, Award, FileText, Globe, Mic, ArrowRight } from "lucide-react";
 
 const MunPage = () => {
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const committees = [
     {
@@ -31,14 +31,12 @@ const MunPage = () => {
     { title: "Best Journalist", description: "Outstanding reporting", icon: "📰" },
   ];
 
-  /* COMMENTED OUT - Registration Steps (for when registrations go live)
   const steps = [
     { step: 1, title: "Login / Sign Up", description: "Create your account or login to get started" },
     { step: 2, title: "Complete Profile", description: "Fill in your delegate details and preferences" },
     { step: 3, title: "Apply for Committee", description: "Select your preferred committee and country" },
     { step: 4, title: "Get Confirmed", description: "Receive confirmation and prepare for MUN" },
   ];
-  */
 
   return (
     <div className="bg-stone-50 min-h-screen pb-20 relative overflow-x-hidden font-sans text-stone-800">
@@ -94,15 +92,19 @@ const MunPage = () => {
               "Step into the shoes of world leaders. Debate. Negotiate. Make history."
             </motion.p>
 
-            {/* Registrations Opening Soon */}
+            {/* Registrations Open */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-10"
             >
-              <h2 className="text-2xl md:text-3xl font-semibold text-stone-700">
-                Registrations Opening Soon
+              <h2 className="text-2xl md:text-3xl font-semibold text-green-700 flex items-center justify-center gap-3">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                </span>
+                Registrations Open Now!
               </h2>
             </motion.div>
 
@@ -147,16 +149,16 @@ const MunPage = () => {
 
       {/* Main Content Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-6">
-        {/* COMMENTED OUT - CTA Buttons (for when registrations go live)
+        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4"
+          className="flex flex-wrap justify-center gap-4 mb-12"
         >
           <Link
             to={isAuthenticated ? "/mun/dashboard" : "/login"}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
           >
             {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
             <ArrowRight className="w-5 h-5" />
@@ -168,9 +170,8 @@ const MunPage = () => {
             View Committees
           </a>
         </motion.div>
-        */}
 
-        {/* COMMENTED OUT - Registration Steps (for when registrations go live)
+        {/* Registration Steps */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,12 +186,13 @@ const MunPage = () => {
               <motion.div
                 key={item.step}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                 className="relative"
               >
                 <div className="bg-white/80 backdrop-blur-sm border border-amber-200/50 rounded-2xl p-6 text-center shadow-lg h-full">
-                  <div className="w-12 h-12 mx-auto mb-4 bg-linear-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                  <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
                     {item.step}
                   </div>
                   <h3 className="font-bold text-stone-900 mb-2">{item.title}</h3>
@@ -205,7 +207,6 @@ const MunPage = () => {
             ))}
           </div>
         </motion.div>
-        */}
 
         {/* Committees Section */}
         <motion.div
@@ -319,12 +320,13 @@ const MunPage = () => {
           </div>
         </motion.div>
 
-        {/* COMMENTED OUT - Final CTA (for when registrations go live)
+        {/* Final CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.6 }}
-          className="text-center"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="text-center border-t border-stone-200 pt-12"
         >
           <h3 className="text-2xl font-serif font-bold text-stone-900 mb-4">
             Ready to Make Your Voice Heard?
@@ -334,28 +336,11 @@ const MunPage = () => {
           </p>
           <Link
             to={isAuthenticated ? "/mun/dashboard" : "/login"}
-            className="inline-flex items-center gap-2 px-10 py-4 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
+            className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
           >
             {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
             <ArrowRight className="w-6 h-6" />
           </Link>
-        </motion.div>
-        */}
-
-        {/* Stay Tuned CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="border-t border-stone-200 pt-12"
-        >
-          <h3 className="text-2xl font-serif font-bold text-stone-900 mb-3">
-            Stay Updated
-          </h3>
-          <p className="text-stone-600 max-w-2xl">
-            Registrations will open soon. Follow us for updates and be ready to represent your nation.
-          </p>
         </motion.div>
 
         {/* Footer Note */}
