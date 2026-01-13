@@ -11,15 +11,15 @@ export interface EventConfig {
 export const eventConfigurations: Record<'pralekh' | 'plotlines' | 'openmic', EventConfig> = {
   pralekh: {
     registrationOpen: true,
-    submissionOpen: false, // Submissions closed for now
+    submissionOpen: true, // Submissions open
   },
   plotlines: {
     registrationOpen: true,
-    submissionOpen: false, // Submissions closed for now
+    submissionOpen: true, // Submissions open
   },
   openmic: {
     registrationOpen: true,
-    submissionOpen: false, // Submissions closed for now
+    submissionOpen: true, // Submissions open
   },
 };
 

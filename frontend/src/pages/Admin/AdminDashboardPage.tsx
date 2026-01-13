@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { FiChevronDown, FiChevronUp, FiFile, FiDownload, FiCalendar, FiUsers } from "react-icons/fi";
 import {
   getAllEventRegistrations,
   updateEventRegistration,
@@ -29,6 +30,19 @@ const AdminDashboardPage = () => {
   // Filters
   const [eventFilter, setEventFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
+
+  const toggleRowExpansion = (id: string) => {
+    setExpandedRows(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
 
   useEffect(() => {
     if (authLoading) return;
@@ -368,9 +382,11 @@ const AdminDashboardPage = () => {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-stone-200 bg-stone-50">
+                            <th className="text-left py-3 px-4 font-medium text-stone-600 w-8"></th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Name</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Email</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Team</th>
+                            <th className="text-left py-3 px-4 font-medium text-stone-600">Submission</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Status</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Actions</th>
                           </tr>
@@ -380,27 +396,112 @@ const AdminDashboardPage = () => {
                             .filter(reg => reg.eventType === 'pralekh')
                             .filter(reg => !searchQuery || reg.name.toLowerCase().includes(searchQuery.toLowerCase()) || reg.email.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map((reg) => (
-                            <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
-                              <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
-                              <td className="py-3 px-4 text-stone-600">{reg.email}</td>
-                              <td className="py-3 px-4 text-stone-600">{reg.teamName || "-"}</td>
-                              <td className="py-3 px-4">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
-                                  reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
-                                  reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
-                                  "bg-amber-100 text-amber-700"
-                                }`}>
-                                  {reg.registrationStatus}
-                                </span>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="flex gap-2">
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
-                                </div>
-                              </td>
-                            </tr>
+                            <>
+                              <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
+                                <td className="py-3 px-4">
+                                  <button 
+                                    onClick={() => toggleRowExpansion(reg._id)}
+                                    className="p-1 hover:bg-stone-200 rounded"
+                                  >
+                                    {expandedRows.has(reg._id) ? <FiChevronUp /> : <FiChevronDown />}
+                                  </button>
+                                </td>
+                                <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
+                                <td className="py-3 px-4 text-stone-600">{reg.email}</td>
+                                <td className="py-3 px-4 text-stone-600">{reg.teamName || "-"}</td>
+                                <td className="py-3 px-4">
+                                  {reg.submissionUrl ? (
+                                    <a href={reg.submissionUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 hover:text-blue-800">
+                                      <FiFile className="text-sm" />
+                                      <span className="text-xs">View PDF</span>
+                                    </a>
+                                  ) : (
+                                    <span className="text-stone-400 text-xs">Not submitted</span>
+                                  )}
+                                </td>
+                                <td className="py-3 px-4">
+                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
+                                    reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
+                                    reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
+                                    "bg-amber-100 text-amber-700"
+                                  }`}>
+                                    {reg.registrationStatus}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4">
+                                  <div className="flex gap-2">
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                  </div>
+                                </td>
+                              </tr>
+                              {expandedRows.has(reg._id) && (
+                                <tr key={`${reg._id}-details`} className="bg-amber-50/50">
+                                  <td colSpan={7} className="px-4 py-4">
+                                    <div className="space-y-4">
+                                      {/* Submission Details */}
+                                      <div className="bg-white rounded-lg p-4 border border-amber-100">
+                                        <h4 className="font-semibold text-stone-800 mb-3 flex items-center gap-2">
+                                          <FiFile className="text-amber-600" /> Submission Details
+                                        </h4>
+                                        {reg.submissionUrl ? (
+                                          <div className="space-y-2">
+                                            <div className="flex items-center gap-4 text-sm">
+                                              <span className="text-stone-500">Title:</span>
+                                              <span className="font-medium text-stone-800">{reg.title || "N/A"}</span>
+                                            </div>
+                                            <div className="flex items-center gap-4 text-sm">
+                                              <span className="text-stone-500">Description:</span>
+                                              <span className="text-stone-700">{reg.description || "N/A"}</span>
+                                            </div>
+                                            <div className="flex items-center gap-4 text-sm">
+                                              <span className="text-stone-500">File:</span>
+                                              <span className="text-stone-700">{reg.submissionFileName || "N/A"}</span>
+                                            </div>
+                                            <div className="flex items-center gap-4 text-sm">
+                                              <span className="text-stone-500">Submitted:</span>
+                                              <span className="text-stone-700 flex items-center gap-1">
+                                                <FiCalendar className="text-xs" />
+                                                {reg.submissionDate ? new Date(reg.submissionDate).toLocaleString() : "N/A"}
+                                              </span>
+                                            </div>
+                                            <a 
+                                              href={reg.submissionUrl} 
+                                              target="_blank" 
+                                              rel="noopener noreferrer"
+                                              className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-amber-600 text-white rounded-lg text-sm hover:bg-amber-700 transition-colors"
+                                            >
+                                              <FiDownload /> Download PDF
+                                            </a>
+                                          </div>
+                                        ) : (
+                                          <p className="text-stone-500 text-sm">No submission yet</p>
+                                        )}
+                                      </div>
+
+                                      {/* Team Members */}
+                                      {reg.teamMembers && reg.teamMembers.length > 0 && (
+                                        <div className="bg-white rounded-lg p-4 border border-amber-100">
+                                          <h4 className="font-semibold text-stone-800 mb-3 flex items-center gap-2">
+                                            <FiUsers className="text-amber-600" /> Team Members ({reg.teamMembers.length})
+                                          </h4>
+                                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            {reg.teamMembers.map((member, idx) => (
+                                              <div key={idx} className="p-3 bg-stone-50 rounded-lg text-sm">
+                                                <p className="font-medium text-stone-800">{member.name}</p>
+                                                <p className="text-stone-600">{member.email}</p>
+                                                <p className="text-stone-500">{member.college} • {member.branch} • {member.year}</p>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </>
                           ))}
                         </tbody>
                       </table>
@@ -427,8 +528,10 @@ const AdminDashboardPage = () => {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-stone-200 bg-stone-50">
+                            <th className="text-left py-3 px-4 font-medium text-stone-600 w-8"></th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Name</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Email</th>
+                            <th className="text-left py-3 px-4 font-medium text-stone-600">Submission</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Status</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Actions</th>
                           </tr>
@@ -438,26 +541,90 @@ const AdminDashboardPage = () => {
                             .filter(reg => reg.eventType === 'plotlines')
                             .filter(reg => !searchQuery || reg.name.toLowerCase().includes(searchQuery.toLowerCase()) || reg.email.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map((reg) => (
-                            <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
-                              <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
-                              <td className="py-3 px-4 text-stone-600">{reg.email}</td>
-                              <td className="py-3 px-4">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
-                                  reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
-                                  reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
-                                  "bg-amber-100 text-amber-700"
-                                }`}>
-                                  {reg.registrationStatus}
-                                </span>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="flex gap-2">
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
-                                </div>
-                              </td>
-                            </tr>
+                            <>
+                              <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
+                                <td className="py-3 px-4">
+                                  <button 
+                                    onClick={() => toggleRowExpansion(reg._id)}
+                                    className="p-1 hover:bg-stone-200 rounded"
+                                  >
+                                    {expandedRows.has(reg._id) ? <FiChevronUp /> : <FiChevronDown />}
+                                  </button>
+                                </td>
+                                <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
+                                <td className="py-3 px-4 text-stone-600">{reg.email}</td>
+                                <td className="py-3 px-4">
+                                  {reg.submissionUrl ? (
+                                    <a href={reg.submissionUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 hover:text-blue-800">
+                                      <FiFile className="text-sm" />
+                                      <span className="text-xs">View PDF</span>
+                                    </a>
+                                  ) : (
+                                    <span className="text-stone-400 text-xs">Not submitted</span>
+                                  )}
+                                </td>
+                                <td className="py-3 px-4">
+                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
+                                    reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
+                                    reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
+                                    "bg-amber-100 text-amber-700"
+                                  }`}>
+                                    {reg.registrationStatus}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4">
+                                  <div className="flex gap-2">
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                  </div>
+                                </td>
+                              </tr>
+                              {expandedRows.has(reg._id) && (
+                                <tr key={`${reg._id}-details`} className="bg-blue-50/50">
+                                  <td colSpan={6} className="px-4 py-4">
+                                    <div className="bg-white rounded-lg p-4 border border-blue-100">
+                                      <h4 className="font-semibold text-stone-800 mb-3 flex items-center gap-2">
+                                        <FiFile className="text-blue-600" /> Submission Details
+                                      </h4>
+                                      {reg.submissionUrl ? (
+                                        <div className="space-y-2">
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Title:</span>
+                                            <span className="font-medium text-stone-800">{reg.title || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Description:</span>
+                                            <span className="text-stone-700">{reg.description || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">File:</span>
+                                            <span className="text-stone-700">{reg.submissionFileName || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Submitted:</span>
+                                            <span className="text-stone-700 flex items-center gap-1">
+                                              <FiCalendar className="text-xs" />
+                                              {reg.submissionDate ? new Date(reg.submissionDate).toLocaleString() : "N/A"}
+                                            </span>
+                                          </div>
+                                          <a 
+                                            href={reg.submissionUrl} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors"
+                                          >
+                                            <FiDownload /> Download PDF
+                                          </a>
+                                        </div>
+                                      ) : (
+                                        <p className="text-stone-500 text-sm">No submission yet</p>
+                                      )}
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </>
                           ))}
                         </tbody>
                       </table>
@@ -484,8 +651,10 @@ const AdminDashboardPage = () => {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-stone-200 bg-stone-50">
+                            <th className="text-left py-3 px-4 font-medium text-stone-600 w-8"></th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Name</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Email</th>
+                            <th className="text-left py-3 px-4 font-medium text-stone-600">Submission</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Status</th>
                             <th className="text-left py-3 px-4 font-medium text-stone-600">Actions</th>
                           </tr>
@@ -495,26 +664,90 @@ const AdminDashboardPage = () => {
                             .filter(reg => reg.eventType === 'openmic')
                             .filter(reg => !searchQuery || reg.name.toLowerCase().includes(searchQuery.toLowerCase()) || reg.email.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map((reg) => (
-                            <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
-                              <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
-                              <td className="py-3 px-4 text-stone-600">{reg.email}</td>
-                              <td className="py-3 px-4">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
-                                  reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
-                                  reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
-                                  "bg-amber-100 text-amber-700"
-                                }`}>
-                                  {reg.registrationStatus}
-                                </span>
-                              </td>
-                              <td className="py-3 px-4">
-                                <div className="flex gap-2">
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
-                                  <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
-                                </div>
-                              </td>
-                            </tr>
+                            <>
+                              <tr key={reg._id} className="border-b border-stone-100 hover:bg-stone-50">
+                                <td className="py-3 px-4">
+                                  <button 
+                                    onClick={() => toggleRowExpansion(reg._id)}
+                                    className="p-1 hover:bg-stone-200 rounded"
+                                  >
+                                    {expandedRows.has(reg._id) ? <FiChevronUp /> : <FiChevronDown />}
+                                  </button>
+                                </td>
+                                <td className="py-3 px-4 font-medium text-stone-900">{reg.name}</td>
+                                <td className="py-3 px-4 text-stone-600">{reg.email}</td>
+                                <td className="py-3 px-4">
+                                  {reg.submissionUrl ? (
+                                    <a href={reg.submissionUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-purple-600 hover:text-purple-800">
+                                      <FiFile className="text-sm" />
+                                      <span className="text-xs">View PDF</span>
+                                    </a>
+                                  ) : (
+                                    <span className="text-stone-400 text-xs">Not submitted</span>
+                                  )}
+                                </td>
+                                <td className="py-3 px-4">
+                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    reg.registrationStatus === "approved" ? "bg-green-100 text-green-700" :
+                                    reg.registrationStatus === "rejected" ? "bg-red-100 text-red-700" :
+                                    reg.registrationStatus === "submitted" ? "bg-blue-100 text-blue-700" :
+                                    "bg-amber-100 text-amber-700"
+                                  }`}>
+                                    {reg.registrationStatus}
+                                  </span>
+                                </td>
+                                <td className="py-3 px-4">
+                                  <div className="flex gap-2">
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "approved")} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs hover:bg-green-200">✓</button>
+                                    <button onClick={() => handleEventStatusUpdate(reg._id, "rejected")} className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs hover:bg-red-200">✗</button>
+                                  </div>
+                                </td>
+                              </tr>
+                              {expandedRows.has(reg._id) && (
+                                <tr key={`${reg._id}-details`} className="bg-purple-50/50">
+                                  <td colSpan={6} className="px-4 py-4">
+                                    <div className="bg-white rounded-lg p-4 border border-purple-100">
+                                      <h4 className="font-semibold text-stone-800 mb-3 flex items-center gap-2">
+                                        <FiFile className="text-purple-600" /> Submission Details
+                                      </h4>
+                                      {reg.submissionUrl ? (
+                                        <div className="space-y-2">
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Title:</span>
+                                            <span className="font-medium text-stone-800">{reg.title || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Description:</span>
+                                            <span className="text-stone-700">{reg.description || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">File:</span>
+                                            <span className="text-stone-700">{reg.submissionFileName || "N/A"}</span>
+                                          </div>
+                                          <div className="flex items-center gap-4 text-sm">
+                                            <span className="text-stone-500">Submitted:</span>
+                                            <span className="text-stone-700 flex items-center gap-1">
+                                              <FiCalendar className="text-xs" />
+                                              {reg.submissionDate ? new Date(reg.submissionDate).toLocaleString() : "N/A"}
+                                            </span>
+                                          </div>
+                                          <a 
+                                            href={reg.submissionUrl} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-purple-600 text-white rounded-lg text-sm hover:bg-purple-700 transition-colors"
+                                          >
+                                            <FiDownload /> Download PDF
+                                          </a>
+                                        </div>
+                                      ) : (
+                                        <p className="text-stone-500 text-sm">No submission yet</p>
+                                      )}
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </>
                           ))}
                         </tbody>
                       </table>
