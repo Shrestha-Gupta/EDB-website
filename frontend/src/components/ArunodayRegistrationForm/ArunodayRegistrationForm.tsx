@@ -361,7 +361,6 @@ const ArunodayRegistrationForm = () => {
               <option value="">Select a language</option>
               <option value="Hindi">Hindi</option>
               <option value="English">English</option>
-              <option value="Both">Both (Hindi & English)</option>
             </select>
           </div>
         </div>
