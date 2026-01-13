@@ -153,8 +153,8 @@ export const eventInfo: Record<EventType, {
 }> = {
   pralekh: {
     name: 'Pralekh',
-    fullName: 'प्रलेख - Hindi Essay Writing',
-    description: 'Express your thoughts in Hindi through creative essay writing',
+    fullName: 'प्रलेख - Newsletter Writing',
+    description: 'Express your thoughts through creative newsletter writing',
     icon: '📜',
     color: 'amber',
     gradientFrom: 'from-amber-500',

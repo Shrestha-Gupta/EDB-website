@@ -302,7 +302,7 @@ const DashboardPage = () => {
                         <RiQuillPenLine className="w-6 h-6" />
                       </div>
                       <h4 className="font-semibold text-stone-900 mb-1">Pralekh</h4>
-                      <p className="text-sm text-stone-500">Hindi Essay Writing</p>
+                      <p className="text-sm text-stone-500">Newsletter Writing</p>
                       <div className="flex items-center text-amber-600 text-sm font-medium mt-3 group-hover:gap-2 transition-all">
                         {reg ? 'View Status' : 'Register'} <FiArrowRight className="w-4 h-4 ml-1" />
                       </div>

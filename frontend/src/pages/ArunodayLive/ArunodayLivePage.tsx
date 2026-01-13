@@ -21,9 +21,9 @@ const ArunodayLivePage = () => {
     },
     { 
       name: "Pralekh", 
-      subtitle: "Hindi Essay Writing", 
+      subtitle: "Newsletter Writing", 
       eligibility: "Open to All Years", 
-      description: "Express your thoughts in the beautiful language of Hindi through compelling essays.",
+      description: "Express your thoughts through compelling and creative newsletter writing.",
       link: "/dashboard"
     },
     { 
