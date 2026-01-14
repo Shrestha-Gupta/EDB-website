@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -6,7 +6,22 @@ import ParticlesBackground from "../../components/ParticlesBackground/ParticlesB
 
 const MunCompleteProfilePage = () => {
   const navigate = useNavigate();
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, isAuthenticated } = useAuth();
+
+  // Redirect to events page if profile is already complete
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+    
+    if (user?.isProfileComplete) {
+      // Profile already complete, skip to events page
+      navigate("/mun/events");
+      return;
+    }
+  }, [user, isAuthenticated, navigate]);
+
   const [formData, setFormData] = useState({
     // Personal Info
     name: user?.name || "",
