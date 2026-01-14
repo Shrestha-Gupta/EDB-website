@@ -149,9 +149,10 @@ const MunDashboardPage = () => {
           >
             <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Committee</h3>
             <span className="text-base font-medium text-stone-900">
-              {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
-               user?.preferredCommittee === 'IP' ? 'International Press' : 
-               '—'}
+              {currentApplication?.allottedCommittee || user?.allottedCommittee || 
+               ((currentApplication?.preferredCommittee || user?.preferredCommittee) === 'UNHRC' ? 'UNHRC' : 
+                (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? 'International Press' : 
+                '—')}
             </span>
           </motion.div>
 
@@ -164,7 +165,7 @@ const MunDashboardPage = () => {
           >
             <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Country</h3>
             <span className="text-base font-medium text-stone-900">
-              {user?.allottedCountry || '—'}
+              {currentApplication?.allottedCountry || user?.allottedCountry || '—'}
             </span>
           </motion.div>
         </div>
@@ -195,7 +196,7 @@ const MunDashboardPage = () => {
             )}
 
             {/* Country Assignment Banner */}
-            {user?.allottedCountry && (
+            {(currentApplication?.allottedCountry || user?.allottedCountry) && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -204,7 +205,7 @@ const MunDashboardPage = () => {
               >
                 <h3 className="text-lg font-serif font-bold text-stone-900 mb-2">Country Assignment Confirmed</h3>
                 <p className="text-stone-600">
-                  You will represent <strong className="text-stone-900">{user.allottedCountry}</strong> in {user.allottedCommittee || user.preferredCommittee}
+                  You will represent <strong className="text-stone-900">{currentApplication?.allottedCountry || user?.allottedCountry}</strong> in {currentApplication?.allottedCommittee || user?.allottedCommittee || currentApplication?.preferredCommittee || user?.preferredCommittee}
                 </p>
               </motion.div>
             )}
@@ -260,8 +261,8 @@ const MunDashboardPage = () => {
                   <div className="flex justify-between items-center py-3 border-b border-stone-100">
                     <span className="text-sm text-stone-500">Committee</span>
                     <span className="text-base font-medium text-stone-900">
-                      {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
-                       user?.preferredCommittee === 'IP' ? 'International Press' : '—'}
+                      {(currentApplication?.preferredCommittee || user?.preferredCommittee) === 'UNHRC' ? 'UNHRC' : 
+                       (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? 'International Press' : '—'}
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-stone-100">
@@ -332,7 +333,7 @@ const MunDashboardPage = () => {
             </motion.div>
 
             {/* Position Paper Section */}
-            {user?.preferredCommittee === 'UNHRC' && (
+            {(currentApplication?.preferredCommittee === 'UNHRC' || user?.preferredCommittee === 'UNHRC') && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
