@@ -166,31 +166,8 @@ const DashboardPage = () => {
           </div>
         </motion.div>
 
-        {/* Quick Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          className="mb-12"
-        >
-          <h3 className="text-xl font-bold text-stone-900 mb-6">Quick Actions</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickActions.map((action, index) => (
-              <Link key={index} to={action.link}>
-                <div className="bg-white rounded-lg border border-stone-200 p-6 hover:shadow-lg transition-shadow">
-                  <div className="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center text-white mb-4">
-                    <action.icon className="w-6 h-6" />
-                  </div>
-                  <h4 className="font-semibold text-stone-900 mb-2">{action.title}</h4>
-                  <p className="text-sm text-stone-600 mb-4">{action.description}</p>
-                  <div className="flex items-center text-amber-600 text-sm font-medium">
-                    Explore <FiArrowRight className="w-4 h-4 ml-1" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </motion.div>
+       
+       
 
         {/* Events Section */}
         <motion.div
@@ -205,7 +182,7 @@ const DashboardPage = () => {
           
           <div className="grid sm:grid-cols-2 gap-6">
             {/* MUN Card */}
-            <Link to="/mun">
+            <Link to="/mun/dashboard">
               <div className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer">
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -327,6 +304,33 @@ const DashboardPage = () => {
                 </div>
               );
             })()}
+          </div>
+        </motion.div>
+
+
+         {/* Quick Actions */}
+         <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="mb-12"
+        >
+          <h3 className="text-xl font-bold text-stone-900 mb-6">Quick Actions</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {quickActions.map((action, index) => (
+              <Link key={index} to={action.link}>
+                <div className="bg-white rounded-lg border border-stone-200 p-6 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center text-white mb-4">
+                    <action.icon className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-semibold text-stone-900 mb-2">{action.title}</h4>
+                  <p className="text-sm text-stone-600 mb-4">{action.description}</p>
+                  <div className="flex items-center text-amber-600 text-sm font-medium">
+                    Explore <FiArrowRight className="w-4 h-4 ml-1" />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </motion.div>
 
