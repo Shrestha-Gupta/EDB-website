@@ -246,15 +246,27 @@ export default function EventsPage() {
                     </div>
 
                     <div className="flex items-center gap-4 pt-6 border-t border-stone-200">
-                      <a href=""><button className="bg-stone-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors flex items-center gap-2 group/btn">
-                        View Details
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </button></a>
+                      <Link to={
+                        event.title === 'Arunoday' ? '/arunoday-live' : 
+                        event.title === 'MUN' ? '/mun' : 
+                        '#'
+                      }>
+                        <button className="bg-stone-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors flex items-center gap-2 group/btn">
+                          View Details
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                        </button>
+                      </Link>
                       
                       {event.status === 'registration-open' && (
-                       <a href=""> <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
-                          Register Now
-                        </button></a>
+                        <Link to={
+                          event.title === 'Arunoday' ? '/arunoday-live' : 
+                          event.title === 'MUN' ? '/mun/register' : 
+                          '#'
+                        }>
+                          <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
+                            Register Now
+                          </button>
+                        </Link>
                       )}
                     </div>
                   </div>
