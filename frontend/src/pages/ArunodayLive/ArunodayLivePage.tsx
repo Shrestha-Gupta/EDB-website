@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
 import { ArunodayRegistrationForm } from "../../components/ArunodayRegistrationForm";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import EventRegistrationModal from "../../components/EventRegistration/EventRegistrationModal";
+import type { EventType } from "../../services/eventsApi";
 
 const ArunodayLivePage = () => {
+  const { isAuthenticated } = useAuth();
+  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
+  
   const scrollToForm = () => {
     document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -17,28 +24,32 @@ const ArunodayLivePage = () => {
       subtitle: "Diplomatic Excellence", 
       eligibility: "Open to All Years", 
       description: "Step into the shoes of world leaders. Debate, negotiate, and make history.",
-      link: "/mun"
+      link: "/mun",
+      eventType: null
     },
     { 
       name: "Pralekh", 
       subtitle: "Newsletter Writing", 
       eligibility: "Open to All Years", 
       description: "Express your thoughts through compelling and creative newsletter writing.",
-      link: "/dashboard"
+      link: "/dashboard",
+      eventType: "pralekh" as EventType
     },
     { 
       name: "Plotlines", 
       subtitle: "Creative Writing", 
       eligibility: "Open to All Years", 
       description: "Craft captivating stories and let your imagination run wild on paper.",
-      link: "/dashboard"
+      link: "/dashboard",
+      eventType: "plotlines" as EventType
     },
     { 
       name: "Open Mic", 
       subtitle: "Poetry & Performance", 
       eligibility: "Open to All Years", 
       description: "Take the stage and share your voice through poetry, spoken word, or performance.",
-      link: "/dashboard"
+      link: "/dashboard",
+      eventType: "openmic" as EventType
     },
   ];
 
@@ -215,13 +226,23 @@ const ArunodayLivePage = () => {
                     <span className="text-sm text-stone-500 font-medium">
                       {event.eligibility}
                     </span>
-                    <Link
-                      to={event.link}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-orange-300 text-orange-600 hover:bg-orange-300 hover:text-orange-900 font-medium transition-all duration-300 text-sm"
-                    >
-                      Register
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
+                    {isAuthenticated && event.eventType ? (
+                      <button
+                        onClick={() => setSelectedEvent(event.eventType!)}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-orange-300 text-orange-600 hover:bg-orange-300 hover:text-orange-900 font-medium transition-all duration-300 text-sm"
+                      >
+                        Register
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    ) : (
+                      <Link
+                        to={event.link}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-orange-300 text-orange-600 hover:bg-orange-300 hover:text-orange-900 font-medium transition-all duration-300 text-sm"
+                      >
+                        Register
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -270,6 +291,77 @@ const ArunodayLivePage = () => {
           </div>
         </motion.div>
 
+        {/* Call Coordinators Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-16 mb-12"
+        >
+          <div className="border-l-4 border-amber-600 bg-amber-50/30 p-6 md:p-8">
+            <div className="flex items-start gap-3 mb-4">
+              <div className="flex-shrink-0">
+                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-stone-900 mb-1">Need Help?</h3>
+                <div className="flex items-center gap-2 text-sm text-green-700">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  Available to assist
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-stone-600 mb-6">
+              Have questions about the event or registration? Our coordinators are here to help!
+            </p>
+            
+            <div className="grid sm:grid-cols-2 gap-4">
+              <a 
+                href="tel:+917004324717"
+                className="flex items-center gap-3 bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 hover:shadow-md transition-all duration-300 group"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                    <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <div className="font-semibold text-stone-900">Anurag Banerjee</div>
+                  <div className="text-sm text-amber-600">+91 7004324717</div>
+                </div>
+              </a>
+              
+              <a 
+                href="tel:+918115303806"
+                className="flex items-center gap-3 bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 hover:shadow-md transition-all duration-300 group"
+              >
+                <div className="flex-shrink-0">
+                  <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                    <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <div className="font-semibold text-stone-900">Ritesh Yadav</div>
+                  <div className="text-sm text-amber-600">+91 8115303806</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Footer Note */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -283,6 +375,16 @@ const ArunodayLivePage = () => {
           </a>
         </motion.p>
       </motion.div>
+
+      {/* Event Registration Modal */}
+      {selectedEvent && (
+        <EventRegistrationModal
+          isOpen={!!selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+          eventType={selectedEvent}
+          onRegistrationComplete={() => setSelectedEvent(null)}
+        />
+      )}
     </div>
   );
 };

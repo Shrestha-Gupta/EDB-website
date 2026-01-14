@@ -253,22 +253,19 @@ const EventRegistrationModal = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden border border-stone-200"
+          className="bg-white shadow-lg w-full max-w-md max-h-[90vh] overflow-hidden border-t-4 border-amber-600"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Top Orange Line */}
-          <div className="h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-t-lg" />
-
           {/* Header */}
-          <div className="px-6 py-5 border-b border-orange-100 bg-gradient-to-r from-orange-50/50 to-transparent">
+          <div className="px-6 py-5 border-b border-stone-100">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-stone-900">{event.name}</h2>
-                <p className="text-sm text-orange-600/70 mt-0.5">{event.fullName}</p>
+                <h2 className="text-xl font-serif font-bold text-stone-900">{event.name}</h2>
+                <p className="text-amber-600 font-medium text-sm mt-0.5">{event.fullName}</p>
               </div>
               <button
                 onClick={handleClose}
-                className="p-1.5 hover:bg-stone-100 rounded transition-colors -mr-1.5"
+                className="p-1.5 hover:bg-stone-100 transition-colors -mr-1.5"
                 aria-label="Close"
               >
                 <X className="w-5 h-5 text-stone-400" />
@@ -289,15 +286,15 @@ const EventRegistrationModal = ({
             {/* Profile Incomplete Warning */}
             {step === 'register' && isProfileIncomplete && (
               <div className="text-center py-6">
-                <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-3" />
-                <h3 className="text-base font-medium text-stone-900 mb-1">Complete Your Profile</h3>
+                <AlertCircle className="w-8 h-8 text-stone-400 mx-auto mb-3" />
+                <h3 className="text-sm font-semibold text-stone-900 mb-1">Complete Your Profile</h3>
                 <p className="text-stone-500 text-sm mb-5">
                   Add your details before registering.
                 </p>
                 <Link
                   to="/profile"
                   onClick={handleClose}
-                  className="inline-block px-5 py-2 bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium rounded transition-colors"
+                  className="inline-block px-5 py-2 bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium transition-colors"
                 >
                   Go to Profile
                 </Link>
@@ -307,16 +304,14 @@ const EventRegistrationModal = ({
             {/* Registration Closed Notice */}
             {step === 'register' && !isRegistrationOpen && (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-stone-200">
-                  <AlertCircle className="w-8 h-8 text-stone-500" />
-                </div>
-                <h3 className="text-lg font-semibold text-stone-900 mb-2">Registrations Closed</h3>
+                <AlertCircle className="w-10 h-10 text-stone-400 mx-auto mb-3" />
+                <h3 className="text-base font-semibold text-stone-900 mb-2">Registrations Closed</h3>
                 <p className="text-stone-600 text-sm mb-6 max-w-xs mx-auto">
                   Registrations for {event.name} are currently closed. Please check back later.
                 </p>
                 <button
                   onClick={handleClose}
-                  className="px-6 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium rounded-lg transition-colors"
+                  className="px-6 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium transition-colors"
                 >
                   Close
                 </button>
@@ -329,7 +324,7 @@ const EventRegistrationModal = ({
                 <p className="text-stone-600 text-sm leading-relaxed">{event.description}</p>
 
                 {error && (
-                  <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-red-700 text-sm flex items-start gap-2">
+                  <div className="p-3 bg-red-50 border border-red-100 text-red-700 text-sm flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>{error}</span>
                   </div>
@@ -339,21 +334,21 @@ const EventRegistrationModal = ({
                 {isPralekh ? (
                   <div className="space-y-4">
                     {/* Team Info Notice */}
-                    <p className="text-xs text-stone-500 border-l-2 border-orange-300 pl-3">
+                    <p className="text-xs text-stone-600 pb-3 border-b border-stone-100">
                       Team registration requires 2-5 members. You will be the team leader.
                     </p>
 
                     {/* Team Name */}
                     <div>
                       <label className="block text-xs font-medium text-stone-600 mb-1">
-                        Team Name <span className="text-orange-500">*</span>
+                        Team Name <span className="text-amber-600">*</span>
                       </label>
                       <input
                         type="text"
                         value={teamName}
                         onChange={(e) => setTeamName(e.target.value)}
                         placeholder="Enter your team name"
-                        className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-sm"
+                        className="w-full px-3 py-2 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-sm"
                       />
                     </div>
 
@@ -367,7 +362,7 @@ const EventRegistrationModal = ({
                           <button
                             type="button"
                             onClick={addTeamMember}
-                            className="text-xs text-orange-600 hover:text-orange-700 font-medium"
+                            className="text-xs text-amber-600 hover:text-amber-700 font-medium"
                           >
                             + Add Member
                           </button>
@@ -375,7 +370,7 @@ const EventRegistrationModal = ({
                       </div>
 
                       {teamMembers.map((member, index) => (
-                        <div key={index} className="border border-stone-200 rounded p-3 space-y-2">
+                        <div key={index} className="border border-stone-100 bg-white p-3 space-y-2">
                           <div className="flex items-center justify-between">
                             <span className="text-xs font-medium text-stone-600">
                               {index === 0 ? 'Team Leader (You)' : `Member ${index + 1}`}
@@ -393,7 +388,7 @@ const EventRegistrationModal = ({
 
                           {index === 0 ? (
                             // Team leader info (read-only)
-                            <div className="grid grid-cols-2 gap-2 text-xs text-stone-600 bg-orange-50/50 -mx-3 -mb-3 mt-1 p-3 rounded-b">
+                            <div className="grid grid-cols-2 gap-2 text-xs text-stone-600 bg-stone-50 -mx-3 -mb-3 mt-1 p-3 border-t border-stone-100">
                               <span>{member.name}</span>
                               <span className="truncate">{member.email}</span>
                               <span>{member.phone}</span>
@@ -409,40 +404,40 @@ const EventRegistrationModal = ({
                                 value={member.name}
                                 onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
                                 placeholder="Full Name *"
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               />
                               <input
                                 type="email"
                                 value={member.email}
                                 onChange={(e) => updateTeamMember(index, 'email', e.target.value)}
                                 placeholder="Email *"
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               />
                               <input
                                 type="tel"
                                 value={member.phone}
                                 onChange={(e) => updateTeamMember(index, 'phone', e.target.value)}
                                 placeholder="Phone *"
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               />
                               <input
                                 type="text"
                                 value={member.college}
                                 onChange={(e) => updateTeamMember(index, 'college', e.target.value)}
                                 placeholder="College *"
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               />
                               <input
                                 type="text"
                                 value={member.branch}
                                 onChange={(e) => updateTeamMember(index, 'branch', e.target.value)}
                                 placeholder="Branch *"
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               />
                               <select
                                 value={member.year}
                                 onChange={(e) => updateTeamMember(index, 'year', e.target.value)}
-                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
+                                className="px-2.5 py-1.5 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-xs"
                               >
                                 <option value="">Year *</option>
                                 <option value="1st Year">1st Year</option>
@@ -465,8 +460,8 @@ const EventRegistrationModal = ({
                   </div>
                 ) : (
                   /* Individual Registration for other events */
-                  <div className="border border-orange-200 rounded p-3 bg-orange-50/30">
-                    <span className="text-xs font-medium text-orange-700 block mb-2">Your Details</span>
+                  <div className="border border-stone-100 p-3 bg-white">
+                    <span className="text-xs font-medium text-stone-600 block mb-2 pb-2 border-b border-stone-100">Your Details</span>
                     
                     <div className="grid grid-cols-2 gap-2 text-xs text-stone-600">
                       <span>{user.name}</span>
@@ -483,7 +478,7 @@ const EventRegistrationModal = ({
                 <button
                   onClick={handleRegister}
                   disabled={isLoading || (isPralekh && teamMembers.length < 2)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
@@ -500,10 +495,8 @@ const EventRegistrationModal = ({
             {/* Success State */}
             {step === 'success' && (
               <div className="text-center py-8">
-                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-6 h-6 text-orange-600" />
-                </div>
-                <h3 className="text-base font-medium text-stone-900 mb-1">
+                <Check className="w-10 h-10 text-amber-600 mx-auto mb-4" />
+                <h3 className="text-base font-semibold text-stone-900 mb-1">
                   {isPralekh ? 'Team Registered' : 'Registration Complete'}
                 </h3>
                 <p className="text-stone-500 text-sm">
@@ -521,7 +514,7 @@ const EventRegistrationModal = ({
             {/* Submission Form */}
             {step === 'submit' && (
               <div className="space-y-4">
-                <div className="text-xs text-stone-500 border-l-2 border-orange-300 pl-3">
+                <div className="text-xs text-stone-600 pb-3 border-b border-stone-100">
                   {registration?.teamName ? `Team "${registration.teamName}" registered` : 'Registration complete'}.
                   {isSubmissionOpen ? ' You can submit your work below.' : ' Submissions will open soon.'}
                 </div>
@@ -547,7 +540,7 @@ const EventRegistrationModal = ({
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter a title for your submission"
                     disabled={!isSubmissionOpen}
-                    className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -562,18 +555,18 @@ const EventRegistrationModal = ({
                     placeholder="Add a brief description"
                     rows={2}
                     disabled={!isSubmissionOpen}
-                    className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none resize-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-stone-300 focus:border-amber-600 focus:ring-1 focus:ring-amber-600 outline-none resize-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 {/* File Upload */}
                 <div>
                   <label className="block text-xs font-medium text-stone-600 mb-1">
-                    Upload PDF <span className="text-orange-500">*</span>
+                    Upload PDF <span className="text-amber-600">*</span>
                   </label>
                   <label className={`block ${isSubmissionOpen ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}>
-                    <div className={`border border-dashed rounded p-4 text-center ${
-                      file ? 'border-orange-400 bg-orange-50' : 'border-stone-300 hover:border-orange-400 hover:bg-orange-50/30'
+                    <div className={`border p-4 text-center transition-colors ${
+                      file ? 'border-amber-600 bg-amber-50/30' : 'border-stone-200 hover:border-amber-600'
                     }`}>
                       {file ? (
                         <div className="flex items-center justify-center gap-2">
@@ -609,7 +602,7 @@ const EventRegistrationModal = ({
                     <button
                       onClick={handleSubmit}
                       disabled={isLoading || !file}
-                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isLoading ? (
                         <>
@@ -627,7 +620,7 @@ const EventRegistrationModal = ({
                 ) : (
                   <button
                     onClick={handleClose}
-                    className="w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded transition-colors"
+                    className="w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium transition-colors"
                   >
                     Close
                   </button>
@@ -638,18 +631,16 @@ const EventRegistrationModal = ({
             {/* Submitted State */}
             {step === 'submitted' && registration && (
               <div className="text-center py-6">
-                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Check className="w-6 h-6 text-orange-600" />
-                </div>
-                <h3 className="text-base font-medium text-stone-900 mb-1">Submission Complete</h3>
+                <Check className="w-10 h-10 text-amber-600 mx-auto mb-4" />
+                <h3 className="text-base font-semibold text-stone-900 mb-1">Submission Complete</h3>
                 <p className="text-stone-500 text-sm mb-5">
                   Your work has been submitted successfully.
                 </p>
                 
-                <div className="border border-orange-200 rounded p-3 text-left space-y-1.5 text-xs bg-orange-50/30">
+                <div className="border border-stone-100 p-3 text-left space-y-1.5 text-xs bg-white">
                   <div className="flex justify-between">
                     <span className="text-stone-500">Status</span>
-                    <span className="text-orange-600 capitalize">{registration.registrationStatus}</span>
+                    <span className="text-amber-600 capitalize">{registration.registrationStatus}</span>
                   </div>
                   {registration.teamName && (
                     <div className="flex justify-between">
@@ -673,7 +664,7 @@ const EventRegistrationModal = ({
 
                 <button
                   onClick={handleClose}
-                  className="mt-5 px-5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded transition-colors"
+                  className="mt-5 px-5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium transition-colors"
                 >
                   Close
                 </button>

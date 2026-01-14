@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaUserTie, FaLanguage, FaCheckCircle, FaRedoAlt } from "react-icons/fa";
-import { HiUserGroup } from "react-icons/hi";
-import { MdGroups } from "react-icons/md";
+import { FaCheckCircle, FaRedoAlt } from "react-icons/fa";
 
 type ResidenceType = 'hosteler' | 'dayScholar' | '';
 type HostelName = 'Tilak Bhawan' | 'Visveswaraya Bhawan' | 'Ambedkar Bhawan' | 'Tagore Bhawan' | 'Savitri Bai Phule Hostel' | '';
@@ -54,10 +52,36 @@ const ArunodayRegistrationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [duplicateRollNumbers, setDuplicateRollNumbers] = useState<Set<string>>(new Set());
+
+  // Check for duplicate roll numbers in real-time
+  const checkDuplicateRollNumbers = (data: FormData) => {
+    const allRollNumbers = [
+      data.teamLeaderRollNumber,
+      ...data.teamMembers.map(m => m.rollNumber)
+    ].filter(roll => roll.trim() !== '');
+    
+    const seen = new Set<string>();
+    const duplicates = new Set<string>();
+    
+    allRollNumbers.forEach(roll => {
+      if (seen.has(roll)) {
+        duplicates.add(roll);
+      } else {
+        seen.add(roll);
+      }
+    });
+    
+    setDuplicateRollNumbers(duplicates);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+    if (name === 'teamLeaderRollNumber') {
+      checkDuplicateRollNumbers(updatedData);
+    }
   };
 
   // Handle team leader residence type change - sync to all team members
@@ -94,16 +118,32 @@ const ArunodayRegistrationForm = () => {
   };
 
   const handleTeamMemberChange = (index: number, field: keyof TeamMember, value: string) => {
-    setFormData((prev) => {
-      const newMembers = [...prev.teamMembers];
-      newMembers[index] = { ...newMembers[index], [field]: value };
-      return { ...prev, teamMembers: newMembers };
-    });
+    const newMembers = [...formData.teamMembers];
+    newMembers[index] = { ...newMembers[index], [field]: value };
+    const updatedData = { ...formData, teamMembers: newMembers };
+    setFormData(updatedData);
+    if (field === 'rollNumber') {
+      checkDuplicateRollNumbers(updatedData);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    // Validate unique roll numbers
+    const allRollNumbers = [
+      formData.teamLeaderRollNumber,
+      ...formData.teamMembers.filter(m => m.rollNumber).map(m => m.rollNumber)
+    ];
+    
+    const uniqueRollNumbers = new Set(allRollNumbers);
+    if (uniqueRollNumbers.size !== allRollNumbers.length) {
+      setSubmitStatus("error");
+      setErrorMessage('All roll numbers must be unique. Please check for duplicates.');
+      setIsSubmitting(false);
+      return;
+    }
     
     try {
       // Call actual backend API for Arunoday registration
@@ -165,33 +205,33 @@ const ArunodayRegistrationForm = () => {
     setErrorMessage("");
   };
 
-  const inputClasses = "w-full px-4 py-3 bg-white border border-stone-300 rounded-lg text-stone-800 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-colors";
-  const labelClasses = "block text-sm font-medium text-stone-700 mb-1.5";
+  const inputClasses = "w-full px-4 py-3 bg-white border border-stone-200 text-stone-800 placeholder-stone-400 focus:outline-none focus:border-amber-600 transition-colors";
+  const labelClasses = "block text-sm font-medium text-stone-700 mb-2 uppercase tracking-wide";
 
   if (submitStatus === "success") {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white rounded-3xl p-10 md:p-16 border border-stone-200 shadow-xl shadow-stone-200/50 text-center"
+        className="border-t-4 border-green-600 bg-white p-10 md:p-16 text-center"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", delay: 0.2 }}
-          className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center"
+          className="w-20 h-20 mx-auto mb-6 bg-green-50 flex items-center justify-center"
         >
-          <FaCheckCircle className="w-10 h-10 text-green-500" />
+          <FaCheckCircle className="w-10 h-10 text-green-600" />
         </motion.div>
         <h3 className="text-3xl font-serif font-bold text-stone-900 mb-4">
-          Registration Successful!
+          Registration Successful
         </h3>
         <p className="text-stone-600 text-lg mb-8">
-          Thank you for registering for Arunoday'26! We'll contact your team leader soon with more details.
+          Thank you for registering for Arunoday'26. We'll contact your team leader soon with more details.
         </p>
         <motion.button
           onClick={resetForm}
-          className="px-8 py-3 bg-linear-to-r from-amber-600 to-orange-600 text-white font-bold rounded-full shadow-lg flex items-center gap-2 mx-auto"
+          className="px-8 py-3 bg-amber-600 text-white font-medium hover:bg-amber-700 transition-colors flex items-center gap-2 mx-auto"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -208,20 +248,14 @@ const ArunodayRegistrationForm = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="bg-white rounded-3xl p-8 md:p-12 border border-stone-200 shadow-xl shadow-stone-200/50"
+      className="border-t-4 border-amber-600 bg-white p-8 md:p-12"
       id="registration-form"
     >
       <div className="text-center mb-10">
-        <motion.span
-          className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 border border-amber-300 rounded-full text-amber-700 text-sm font-medium mb-4"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <HiUserGroup className="w-4 h-4" /> Team Registration
-        </motion.span>
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-3">
-          Register Your Team
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-2">
+          Team Registration
         </h2>
+        <div className="w-16 h-1 bg-amber-600 mx-auto mb-4"></div>
         <p className="text-stone-600 max-w-xl mx-auto">
           Fill in the details below to register your team for Arunoday'26
         </p>
@@ -245,11 +279,8 @@ const ArunodayRegistrationForm = () => {
         </div>
 
         {/* Team Leader Section */}
-        <div className="border-t border-stone-200 pt-8">
-          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-              <FaUserTie className="w-5 h-5 text-amber-600" />
-            </span>
+        <div className="border-t-2 border-stone-200 pt-8">
+          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6">
             Team Leader Details
           </h3>
           
@@ -295,8 +326,13 @@ const ArunodayRegistrationForm = () => {
                 onChange={handleChange}
                 required
                 placeholder="e.g., 2023001234"
-                className={inputClasses}
+                className={`${inputClasses} ${duplicateRollNumbers.has(formData.teamLeaderRollNumber) && formData.teamLeaderRollNumber ? 'border-red-500 border-2' : ''}`}
               />
+              {duplicateRollNumbers.has(formData.teamLeaderRollNumber) && formData.teamLeaderRollNumber && (
+                <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                  <span>⚠</span> This roll number is duplicated
+                </p>
+              )}
             </div>
             
             <div>
@@ -348,13 +384,11 @@ const ArunodayRegistrationForm = () => {
                     </option>
                   ))}
                 </select>
-                <p className="text-xs text-amber-600 mt-1.5">
-                  ℹ️ All team members should be from the same hostel.
-                  
+                <p className="text-xs text-amber-700 mt-2">
+                  Note: All team members should be from the same hostel
                 </p>
-                <p className="text-xs text-amber-600 mt-1.5">
-                  ℹ️ Participants may change their teammates for further rounds if needed.
-                  
+                <p className="text-xs text-amber-700 mt-1">
+                  Note: Participants may change teammates for further rounds if needed
                 </p>
               </div>
             )}
@@ -362,15 +396,12 @@ const ArunodayRegistrationForm = () => {
         </div>
 
         {/* Team Members Section */}
-        <div className="border-t border-stone-200 pt-8">
+        <div className="border-t-2 border-stone-200 pt-8">
           <div className="mb-6">
-            <h3 className="text-xl font-serif font-bold text-stone-900 flex items-center gap-3">
-              <span className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <MdGroups className="w-6 h-6 text-blue-600" />
-              </span>
+            <h3 className="text-xl font-serif font-bold text-stone-900">
               Team Members (3 Members)
             </h3>
-            <p className="text-stone-500 text-sm mt-2 ml-13">
+            <p className="text-stone-500 text-sm mt-2">
               Please enter details for all 3 team members
             </p>
           </div>
@@ -381,21 +412,21 @@ const ArunodayRegistrationForm = () => {
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-stone-50 rounded-xl p-6 border border-stone-200 relative"
+                className="bg-stone-50 p-6 border-l-4 border-amber-600 relative"
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="text-sm font-medium text-amber-600">
+                  <span className="text-sm font-medium text-amber-700 uppercase tracking-wide">
                     Member {index + 1}
                   </span>
                   {formData.teamLeaderResidenceType && (
-                    <span className={`text-xs px-2 py-1 rounded-full ${
+                    <span className={`text-xs px-3 py-1 font-medium ${
                       formData.teamLeaderResidenceType === 'hosteler' 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'bg-green-100 text-green-700'
+                        ? 'bg-blue-50 text-blue-700 border border-blue-200' 
+                        : 'bg-green-50 text-green-700 border border-green-200'
                     }`}>
                       {formData.teamLeaderResidenceType === 'hosteler' 
-                        ? `🏠 ${formData.teamLeaderHostelName || 'Hosteler'}` 
-                        : '🏡 Day Scholar'}
+                        ? `${formData.teamLeaderHostelName || 'Hosteler'}` 
+                        : 'Day Scholar'}
                     </span>
                   )}
                 </div>
@@ -425,8 +456,13 @@ const ArunodayRegistrationForm = () => {
                       onChange={(e) => handleTeamMemberChange(index, "rollNumber", e.target.value)}
                       required
                       placeholder="e.g., 2023001234"
-                      className={inputClasses}
+                      className={`${inputClasses} ${duplicateRollNumbers.has(member.rollNumber) && member.rollNumber ? 'border-red-500 border-2' : ''}`}
                     />
+                    {duplicateRollNumbers.has(member.rollNumber) && member.rollNumber && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                        <span>⚠</span> This roll number is duplicated
+                      </p>
+                    )}
                   </div>
                   
                   <div>
@@ -449,11 +485,8 @@ const ArunodayRegistrationForm = () => {
         </div>
 
         {/* Preferred Language Section */}
-        <div className="border-t border-stone-200 pt-8">
-          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6 flex items-center gap-3">
-            <span className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-              <FaLanguage className="w-5 h-5 text-purple-600" />
-            </span>
+        <div className="border-t-2 border-stone-200 pt-8">
+          <h3 className="text-xl font-serif font-bold text-stone-900 mb-6">
             Preferred Language
           </h3>
           
@@ -480,7 +513,7 @@ const ArunodayRegistrationForm = () => {
           <motion.button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-4 bg-linear-to-r from-amber-600 to-orange-600 text-white text-lg font-bold rounded-xl shadow-lg shadow-amber-900/20 hover:shadow-amber-900/30 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full py-4 bg-amber-600 text-white text-lg font-medium hover:bg-amber-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
@@ -493,9 +526,7 @@ const ArunodayRegistrationForm = () => {
                 Submitting Registration...
               </span>
             ) : (
-              <span className="flex items-center justify-center gap-2">
-                Register Team
-              </span>
+              <span>Register Team</span>
             )}
           </motion.button>
 
