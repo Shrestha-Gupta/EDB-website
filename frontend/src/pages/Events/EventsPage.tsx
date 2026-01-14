@@ -16,13 +16,28 @@ const events = [
     month: 'FEB',
     type: 'Workshop',
     description: 'When dawn breaks upon the realm of words, Arunoday \'26 unfolds, where narratives are spoken, shaped, and tested. Guided by The Editorial Board, language is treated as both craft and responsibility. Enter and witness the narrative being unveiled and carried forward.',
-    status: 'rising-soon',
+    status: 'registration-open',
     location: 'MPH',
     theme: 'from-orange-500 to-amber-500',
-    image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1768167016/Screenshot_2026-01-12_030001_jvcpwj.png'
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1768374921/grey-new-12_n96vgh.jpg'
   },
   {
-    id: 2,
+  id: 2,
+  title: 'MUN',
+  subtitle: 'Model United Nations Conference',
+  date: 'February 10, 2025',
+  day: '10',
+  month: 'FEB',
+  type: 'Workshop',
+  description: 'Model United Nations (MUN) at Arunoday ’26 is a dynamic diplomatic simulation that brings global discourse to life. Delegates represent nations, engage in structured debate, negotiate policies, and collaboratively draft resolutions on pressing international issues. Guided by The Editorial Board, the conference fosters critical thinking, diplomacy, leadership, and responsible communication, offering participants an immersive experience in international relations and global decision-making.',
+  status: 'registration-open',
+  location: 'MPH',
+  theme: 'from-orange-500 to-amber-500',
+  image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1768374455/Mun_Poster_z1qvoj.jpg'
+},
+
+  {
+    id: 3,
     title: 'Abhyudaya 2025',
     subtitle: 'Annual Art Culture and Literary Fest',
     date: 'March 15-17, 2025',
@@ -36,7 +51,7 @@ const events = [
     image: 'https://res.cloudinary.com/dzqtx9kms/image/upload/v1768167902/Screenshot_2026-01-12_031442_s2uwpb.png'
   },
   {
-    id: 3,
+    id: 4,
     title: 'Vagmita',
     subtitle: 'The Poetry Slam',
     date: 'January 28, 2025',
@@ -50,7 +65,7 @@ const events = [
     image: 'https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767466802/WhatsApp_Image_2026-01-04_at_12.26.42_AM_muatti.jpg'
   },
   {
-    id: 4,
+    id: 5,
     title: 'Annual Debate Competition',
     subtitle: 'Battle of Perspectives',
     date: 'December 20, 2024',
@@ -64,7 +79,7 @@ const events = [
     image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Annual Photoshoot',
     subtitle: 'Capturing Memories',
     date: 'April 05, 2025',
@@ -231,15 +246,15 @@ export default function EventsPage() {
                     </div>
 
                     <div className="flex items-center gap-4 pt-6 border-t border-stone-200">
-                      <button className="bg-stone-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors flex items-center gap-2 group/btn">
+                      <a href=""><button className="bg-stone-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors flex items-center gap-2 group/btn">
                         View Details
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </button>
+                      </button></a>
                       
                       {event.status === 'registration-open' && (
-                        <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
+                       <a href=""> <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
                           Register Now
-                        </button>
+                        </button></a>
                       )}
                     </div>
                   </div>
