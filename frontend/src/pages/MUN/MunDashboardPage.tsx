@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { getMyApplications, uploadPositionPaper, type MunApplication } from '../../services/munApi';
 import { Link, useNavigate } from 'react-router-dom';
+import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground';
 
 const MunDashboardPage = () => {
   const { user, logout } = useAuth();
@@ -15,7 +16,6 @@ const MunDashboardPage = () => {
   const [uploadError, setUploadError] = useState('');
   const [uploadSuccess, setUploadSuccess] = useState('');
 
-  // Get the latest/current application
   const currentApplication = applications.length > 0 ? applications[0] : null;
   const isAllotted = currentApplication?.allottedCountry && currentApplication?.allottedCommittee;
 
@@ -71,383 +71,355 @@ const MunDashboardPage = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'approved': return 'text-green-600';
-      case 'rejected': return 'text-red-600';
-      case 'pending': return 'text-amber-600';
-      default: return 'text-stone-500';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'approved': return '✅';
-      case 'rejected': return '❌';
-      case 'pending': return '⏳';
-      default: return '📋';
-    }
+  const getStatusBadge = (status: string) => {
+    const styles: Record<string, string> = {
+      approved: 'bg-green-100 text-green-700 border-green-200',
+      rejected: 'bg-red-100 text-red-700 border-red-200',
+      pending: 'bg-yellow-100 text-yellow-700 border-yellow-200',
+    };
+    return (
+      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium border ${styles[status] || styles.pending}`}>
+        {status === 'approved' ? '✅' : status === 'rejected' ? '❌' : '⏳'}
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </span>
+    );
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 flex items-center justify-center px-4">
+      <div className="bg-stone-50 min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-stone-700 text-lg">Loading dashboard...</p>
+          <p className="text-stone-600">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-stone-50 via-amber-50/30 to-orange-50/20 pt-20 pb-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-x-hidden font-sans text-stone-800">
+      <ParticlesBackground />
+      
+      {/* Background Decorations */}
+      <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold text-stone-900">MUN Dashboard</h1>
-          <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
-            <button
-              onClick={() => {
-                logout();
-                navigate('/');
-              }}
-              className="flex-1 sm:flex-none px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm sm:text-base font-medium"
-            >
-              Logout
-            </button>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-serif font-bold text-stone-900">
+              MUN Dashboard<span className="text-amber-600">.</span>
+            </h1>
+            <p className="text-amber-600 mt-1">Welcome back, {user?.name?.split(' ')[0] || 'Delegate'}</p>
           </div>
+          <button
+            onClick={() => { logout(); navigate('/'); }}
+            className="flex items-center gap-2 px-4 py-2 text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-lg transition-colors text-sm"
+          >
+            <span>↪</span> Sign out
+          </button>
         </motion.div>
 
-        {/* Section 1: Status */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-        >
-          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-            ✅ Status
-          </h2>
-          {currentApplication ? (
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <span className="text-2xl">{getStatusIcon(currentApplication.status)}</span>
-              <div className="flex-1 min-w-0">
-                <p className={`text-base sm:text-lg font-medium ${getStatusColor(currentApplication.status)}`}>
-                  Application: {currentApplication.status.charAt(0).toUpperCase() + currentApplication.status.slice(1)}
-                </p>
-              </div>
+        {/* Status Cards Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {/* Status */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xl">✨</span>
+              <span className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Status</span>
             </div>
-          ) : (
-            <div className="text-center py-4">
-              {user?.preferredCommittee ? (
-                <>
-                  <p className="text-green-600 font-medium mb-2">✅ Preferences Submitted</p>
-                
-                </>
-              ) : (
-                <>
-                  <p className="text-stone-500 mb-4">No application submitted yet</p>
-                  <Link
-                    to="/mun/select-committee"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg"
-                  >
-                    🚀 Apply for Committee
-                  </Link>
-                </>
-              )}
-            </div>
-          )}
-        </motion.div>
+            {currentApplication ? (
+              getStatusBadge(currentApplication.status)
+            ) : user?.preferredCommittee ? (
+              <span className="text-sm font-medium text-green-600">Preferences saved</span>
+            ) : (
+              <span className="text-sm text-stone-400">Not applied</span>
+            )}
+          </motion.div>
 
-        {/* Section: Assigned Country (from User model) */}
-        {user?.allottedCountry && (
+          {/* Committee */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-green-200 shadow-lg"
+            className="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm"
           >
-            <h2 className="text-lg sm:text-xl font-semibold text-green-900 mb-4 flex items-center gap-2">
-              🌍 Your Country Assignment
-            </h2>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-4xl">🇺🇳</span>
-                  <div>
-                    <p className="text-2xl font-bold text-green-800">{user.allottedCountry}</p>
-                    <p className="text-green-600">{user.allottedCommittee || user.preferredCommittee || 'UNHRC'}</p>
-                  </div>
-                </div>
-                <p className="text-green-700 text-sm mt-2">
-                  🎉 Congratulations! You have been assigned to represent <strong>{user.allottedCountry}</strong> in the MUN conference.
-                </p>
-              </div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xl">📋</span>
+              <span className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Committee</span>
             </div>
+            <span className="text-sm font-medium text-stone-900">
+              {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
+               user?.preferredCommittee === 'IP' ? 'International Press' : 
+               '—'}
+            </span>
           </motion.div>
-        )}
 
-        {/* Section: Position Paper Info (for UNHRC) */}
-        {user?.preferredCommittee === 'UNHRC' && (
+          {/* Assigned Country */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-blue-200 shadow-lg"
+            className="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm"
           >
-            <h2 className="text-lg sm:text-xl font-semibold text-blue-900 mb-2 flex items-center gap-2">
-              📄 Position Paper
-            </h2>
-            <p className="text-blue-800 font-medium text-lg">
-              Submission for position paper will start soon.
-            </p>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xl">🌍</span>
+              <span className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Assigned Country</span>
+            </div>
+            <span className="text-sm font-medium text-stone-900">
+              {user?.allottedCountry || '—'}
+            </span>
           </motion.div>
-        )}
+        </div>
 
-        {/* Section 2: My Profile */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-        >
-          <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-            👤 My Profile
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">Full Name</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.name || 'N/A'}</p>
-            </div>
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">Email</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.email || 'N/A'}</p>
-            </div>
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">Phone</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.phone || 'N/A'}</p>
-            </div>
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">College</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base truncate">{user?.college || 'N/A'}</p>
-            </div>
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">Branch</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.branch || 'N/A'}</p>
-            </div>
-            <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-              <p className="text-stone-500 text-xs sm:text-sm mb-1">Year</p>
-              <p className="text-stone-900 font-medium text-sm sm:text-base">{user?.year || 'N/A'}</p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Section 3: MUN Preferences */}
-        {currentApplication && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-          >
-            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-              📋 MUN Preferences
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-                <p className="text-stone-500 text-xs sm:text-sm mb-1">Attended MUN Before?</p>
-                <p className="text-stone-900 font-medium text-sm sm:text-base">
-                  {currentApplication.hasAttendedMun ? '✅ Yes' : '❌ No'}
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Apply CTA */}
+            {!currentApplication && !user?.preferredCommittee && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 text-white"
+              >
+                <h2 className="text-xl font-bold mb-2">Ready to participate?</h2>
+                <p className="text-amber-100 text-sm mb-4">
+                  Select your preferred committee and country to get started.
                 </p>
-              </div>
-              <div className="bg-stone-50 rounded-xl p-3 sm:p-4">
-                <p className="text-stone-500 text-xs sm:text-sm mb-1">Preferred Committee</p>
-                <p className="text-stone-900 font-medium text-sm sm:text-base">
-                  {currentApplication.preferredCommittee === 'UNHRC' 
-                    ? '🌍 UNHRC' 
-                    : currentApplication.preferredCommittee === 'IP' 
-                    ? '📰 IP' 
-                    : 'N/A'}
-                </p>
-              </div>
-              <div className="bg-stone-50 rounded-xl p-3 sm:p-4 sm:col-span-2">
-                <p className="text-stone-500 text-xs sm:text-sm mb-1">Country Preferences</p>
-                <p className="text-stone-900 font-medium text-sm sm:text-base">
-                  {currentApplication.countryPreferences?.filter(c => c).length > 0 
-                    ? currentApplication.countryPreferences.filter(c => c).map((country, i) => (
-                        <span key={i} className="inline-block mr-2">
-                          {i + 1}. {country}
-                        </span>
-                      ))
-                    : 'None specified'}
-                </p>
-              </div>
-              {currentApplication.hasAttendedMun && currentApplication.previousMunExperience && (
-                <div className="bg-stone-50 rounded-xl p-3 sm:p-4 sm:col-span-2">
-                  <p className="text-stone-500 text-xs sm:text-sm mb-1">Previous MUN Experience</p>
-                  <p className="text-stone-900 font-medium text-sm sm:text-base whitespace-pre-wrap">
-                    {currentApplication.previousMunExperience}
-                  </p>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-
-        
-
-        {/* Section 4: Position Paper Submission */}
-        {currentApplication?.preferredCommittee === 'UNHRC' && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-stone-200 shadow-lg"
-          >
-            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-              📄 Position Paper Submission
-            </h2>
-            
-            {!isAllotted ? (
-              <div className="bg-stone-100 border border-stone-200 rounded-xl p-6 text-center">
-                <span className="text-4xl mb-3 block">🔒</span>
-                <p className="text-stone-600 font-medium">Upload Disabled</p>
-                <p className="text-stone-500 text-sm mt-2 max-w-md mx-auto">
-                  You can upload your position paper after country allotment.
-                </p>
-              </div>
-            ) : currentApplication?.positionPaperUrl ? (
-              <div className="bg-green-50 border border-green-200 rounded-xl p-4 sm:p-6">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4">
-                  <span className="text-2xl">✅</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-green-700 font-medium">Position Paper Submitted</p>
-                    <p className="text-stone-500 text-sm">
-                      Uploaded on: {currentApplication.positionPaperSubmittedAt ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString() : 'N/A'}
-                    </p>
-                  </div>
-                </div>
-                {currentApplication.positionPaperRemarks && (
-                  <div className="mt-4 bg-white rounded-xl p-3 sm:p-4 border border-green-100">
-                    <p className="text-stone-500 text-xs sm:text-sm mb-1">Your Remarks:</p>
-                    <p className="text-stone-700 text-sm sm:text-base">{currentApplication.positionPaperRemarks}</p>
-                  </div>
-                )}
-                <a
-                  href={currentApplication.positionPaperUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-4 px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors text-sm sm:text-base"
+                <Link
+                  to="/mun/select-committee"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-amber-600 text-sm font-semibold rounded-xl hover:bg-amber-50 transition-colors"
                 >
-                  📥 View Uploaded Paper
-                </a>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {/* File Upload */}
-                <div className="border-2 border-dashed border-stone-300 rounded-xl p-4 sm:p-6 text-center hover:border-amber-400 transition-colors bg-stone-50">
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    id="position-paper-upload"
-                  />
-                  <label
-                    htmlFor="position-paper-upload"
-                    className="cursor-pointer block"
-                  >
-                    <span className="text-4xl mb-3 block">📎</span>
-                    <p className="text-stone-700 font-medium text-sm sm:text-base break-all">
-                      {selectedFile ? selectedFile.name : 'Click to select PDF file'}
-                    </p>
-                    <p className="text-stone-500 text-xs sm:text-sm mt-2">PDF only, max 10MB</p>
-                  </label>
-                </div>
-
-                {/* Remarks Textbox */}
-                <div>
-                  <label className="block text-stone-600 text-xs sm:text-sm mb-2">
-                    Remarks (Optional)
-                  </label>
-                  <textarea
-                    value={remarks}
-                    onChange={(e) => setRemarks(e.target.value)}
-                    placeholder="Add any remarks or notes about your position paper..."
-                    className="w-full px-3 sm:px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 resize-none text-sm sm:text-base"
-                    rows={3}
-                  />
-                </div>
-
-                {/* Error/Success Messages */}
-                {uploadError && (
-                  <div className="bg-red-50 border border-red-200 rounded-xl p-3">
-                    <p className="text-red-600 text-sm">{uploadError}</p>
-                  </div>
-                )}
-                {uploadSuccess && (
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-                    <p className="text-green-600 text-sm">{uploadSuccess}</p>
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <button
-                  onClick={handleUpload}
-                  disabled={!selectedFile || uploading}
-                  className={`w-full py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
-                    selectedFile && !uploading
-                      ? 'bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg'
-                      : 'bg-stone-200 text-stone-400 cursor-not-allowed'
-                  }`}
-                >
-                  {uploading ? 'Uploading...' : '📤 Submit Position Paper'}
-                </button>
-              </div>
+                  Apply Now <span>→</span>
+                </Link>
+              </motion.div>
             )}
-          </motion.div>
-        )}
 
-        {/* Application History (if multiple) */}
-        {applications.length > 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200 shadow-lg"
-          >
-            <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 flex items-center gap-2">
-              📋 Application History
-            </h2>
-            <div className="space-y-3">
-              {applications.slice(1).map((app, index) => (
-                <div
-                  key={app._id}
-                  className="bg-stone-50 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="text-stone-800 font-medium text-sm sm:text-base">Application #{applications.length - index - 1}</p>
-                    <p className="text-stone-500 text-xs sm:text-sm">
-                      {new Date(app.createdAt).toLocaleDateString()}
+            {/* Country Assignment Banner */}
+            {user?.allottedCountry && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="bg-green-50 border border-green-200 rounded-2xl p-5"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="text-3xl">🎉</span>
+                  <div>
+                    <h3 className="font-semibold text-green-900">Country Assigned!</h3>
+                    <p className="text-green-700 mt-1">
+                      You will represent <strong>{user.allottedCountry}</strong> in {user.allottedCommittee || user.preferredCommittee}
                     </p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs sm:text-sm shrink-0 ${
-                    app.status === 'approved' ? 'bg-green-100 text-green-700' :
-                    app.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                    'bg-amber-100 text-amber-700'
-                  }`}>
-                    {app.status}
-                  </span>
                 </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+              </motion.div>
+            )}
+
+            {/* Profile Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden"
+            >
+              <div className="px-5 py-4 border-b border-stone-100 flex items-center gap-3">
+                <span className="text-lg">👤</span>
+                <h2 className="font-semibold text-stone-900">Profile</h2>
+              </div>
+              <div className="p-5">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">Name</p>
+                    <p className="text-sm text-stone-900">{user?.name || '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">Email</p>
+                    <p className="text-sm text-stone-900 truncate">{user?.email || '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">Phone</p>
+                    <p className="text-sm text-stone-900">{user?.phone || '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">College</p>
+                    <p className="text-sm text-stone-900 truncate">{user?.college || '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">Branch</p>
+                    <p className="text-sm text-stone-900">{user?.branch || '—'}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-stone-500 mb-1">Year</p>
+                    <p className="text-sm text-stone-900">{user?.year || '—'}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* MUN Preferences */}
+            {(currentApplication || user?.preferredCommittee) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden"
+              >
+                <div className="px-5 py-4 border-b border-stone-100 flex items-center gap-3">
+                  <span className="text-lg">📝</span>
+                  <h2 className="font-semibold text-stone-900">MUN Preferences</h2>
+                </div>
+                <div className="p-5 space-y-4">
+                  <div className="flex justify-between items-center py-2 border-b border-stone-100">
+                    <span className="text-sm text-stone-500">Committee</span>
+                    <span className="text-sm font-medium text-stone-900">
+                      {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
+                       user?.preferredCommittee === 'IP' ? 'International Press' : '—'}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-stone-100">
+                    <span className="text-sm text-stone-500">Previous MUN Experience</span>
+                    <span className="text-sm font-medium text-stone-900">
+                      {currentApplication?.hasAttendedMun || user?.hasAttendedMun ? 'Yes' : 'No'}
+                    </span>
+                  </div>
+                  {(currentApplication?.countryPreferences?.length || user?.countryPreferences?.length) ? (
+                    <div className="py-2">
+                      <p className="text-sm text-stone-500 mb-2">Country Preferences</p>
+                      <div className="flex flex-wrap gap-2">
+                        {(currentApplication?.countryPreferences || user?.countryPreferences)?.filter(c => c).map((country, i) => (
+                          <span key={i} className="px-3 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-lg border border-amber-200">
+                            {i + 1}. {country}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-6">
+            {/* Help Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="bg-amber-50 rounded-2xl p-5 border border-amber-100"
+            >
+              <h3 className="font-semibold text-amber-900 mb-2">Need Help?</h3>
+              <p className="text-xs text-amber-700 leading-relaxed">
+                Anurag Banerjee (7004324717)
+                Ritesh Yadav (8115303806)
+              </p>
+            </motion.div>
+
+            {/* Position Paper Section */}
+            {user?.preferredCommittee === 'UNHRC' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden"
+              >
+                <div className="px-5 py-4 border-b border-stone-100 flex items-center gap-3">
+                  <span className="text-lg">📄</span>
+                  <h2 className="font-semibold text-stone-900">Position Paper</h2>
+                </div>
+                <div className="p-5">
+                  {!isAllotted ? (
+                    <div className="text-center py-6">
+                      <span className="text-3xl mb-3 block">🔒</span>
+                      <p className="text-sm text-stone-500">
+                        Available after country assignment
+                      </p>
+                    </div>
+                  ) : currentApplication?.positionPaperUrl ? (
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
+                        <span>✅</span>
+                        <div>
+                          <p className="text-sm font-medium text-green-900">Submitted</p>
+                          <p className="text-xs text-green-600">
+                            {currentApplication.positionPaperSubmittedAt 
+                              ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString()
+                              : ''}
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={currentApplication.positionPaperUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full text-center px-4 py-2.5 bg-amber-500 text-white text-sm font-semibold rounded-xl hover:bg-amber-600 transition-colors"
+                      >
+                        View Document
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <label className="block">
+                        <div className="border-2 border-dashed border-stone-200 rounded-xl p-6 text-center hover:border-amber-300 transition-colors cursor-pointer">
+                          <input
+                            type="file"
+                            accept=".pdf"
+                            onChange={handleFileChange}
+                            className="hidden"
+                          />
+                          <span className="text-2xl mb-2 block">📎</span>
+                          <p className="text-sm text-stone-600">
+                            {selectedFile ? selectedFile.name : 'Choose PDF file'}
+                          </p>
+                          <p className="text-xs text-stone-400 mt-1">Max 10MB</p>
+                        </div>
+                      </label>
+
+                      <textarea
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                        placeholder="Add remarks (optional)"
+                        className="w-full px-3 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-200 resize-none"
+                        rows={2}
+                      />
+
+                      {uploadError && (
+                        <p className="text-sm text-red-600">{uploadError}</p>
+                      )}
+                      {uploadSuccess && (
+                        <p className="text-sm text-green-600">{uploadSuccess}</p>
+                      )}
+
+                      <button
+                        onClick={handleUpload}
+                        disabled={!selectedFile || uploading}
+                        className={`w-full py-2.5 text-sm font-semibold rounded-xl transition-colors ${
+                          selectedFile && !uploading
+                            ? 'bg-amber-500 text-white hover:bg-amber-600'
+                            : 'bg-stone-100 text-stone-400 cursor-not-allowed'
+                        }`}
+                      >
+                        {uploading ? 'Uploading...' : 'Upload'}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
