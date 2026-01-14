@@ -37,15 +37,10 @@ const MunEventsPage = () => {
       setEvents(eventsData);
       setApplications(applicationsData);
       
-      // If no active events, redirect to dashboard
-      if (eventsData.length === 0) {
-        navigate("/mun/dashboard");
-        return;
-      }
+      // Don't redirect - let the page show "no events" message if empty
     } catch (error) {
       console.error("Failed to fetch data:", error);
-      // On error, redirect to dashboard
-      navigate("/mun/dashboard");
+      // Don't redirect on error - show the page with error state
     } finally {
       setLoading(false);
     }
