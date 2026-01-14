@@ -208,6 +208,29 @@ const MunPage = () => {
           </div>
         </motion.div>
 
+        {/* Agenda Section */}
+        <motion.div
+          id="agenda"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-2">
+            Agenda
+          </h2>
+          <div className="w-16 h-1 bg-amber-600 mb-10"></div>
+          <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-l-4 border-amber-600 p-8 shadow-md">
+            <h3 className="text-2xl font-serif font-bold text-stone-900 mb-4">
+              Deliberation on the ongoing armed conflict in the Republic of Sudan
+            </h3>
+            <p className="text-stone-700 leading-relaxed text-lg">
+              With special emphasis on human rights violations, the humanitarian crisis, and the impact of external support and proxy actors on civilian protection and regional stability.
+            </p>
+          </div>
+        </motion.div>
+
         {/* Committees Section */}
         <motion.div
           id="committees"
