@@ -202,6 +202,27 @@ const DashboardPage = () => {
                 </div>
               </div>
             </Link>
+            {/* MUN Card */}
+            <Link to="/mun/dashboard">
+              <div className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-2xl font-bold text-stone-900">Arunoday</h4>
+                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">OPEN</span>
+                  </div>
+                  <p className="text-amber-600 font-medium mb-4">Literary Extravaganza</p>
+                  <p className="text-stone-600 mb-6">
+                    Showcase your literary talents in Arunoday, the flagship event.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-500 text-sm">First year only</span>
+                    <button className="px-6 py-2 border-2 border-amber-500 text-amber-600 rounded-lg font-medium hover:bg-amber-50 transition-colors flex items-center gap-2">
+                      Register <FiArrowRight />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Link>
 
             {/* Pralekh Card */}
             {(() => {
