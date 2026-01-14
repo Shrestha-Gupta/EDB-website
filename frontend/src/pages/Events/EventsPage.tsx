@@ -257,12 +257,8 @@ export default function EventsPage() {
                         </button>
                       </Link>
                       
-                      {event.status === 'registration-open' && (
-                        <Link to={
-                          event.title === 'Arunoday' ? '/arunoday-live' : 
-                          event.title === 'MUN' ? '/mun/register' : 
-                          '#'
-                        }>
+                      {event.status === 'registration-open' && event.title !== 'Arunoday' && event.title !== 'MUN' && (
+                        <Link to='#'>
                           <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
                             Register Now
                           </button>
