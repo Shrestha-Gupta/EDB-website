@@ -7,3 +7,4 @@ export { default as MunApplyPage } from "./MunApplyPage";
 export { default as MunAdminPage } from "./MunAdminPage";
 export { default as MunProfileDashboard } from "./MunProfileDashboard";
 export { default as MunAdminDashboard } from "./MunAdminDashboard";
+export { default as MunSelectCommitteePage } from "./MunSelectCommitteePage";

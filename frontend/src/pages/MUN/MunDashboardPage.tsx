@@ -153,7 +153,7 @@ const MunDashboardPage = () => {
                 <>
                   <p className="text-stone-500 mb-4">No application submitted yet</p>
                   <Link
-                    to="/mun/events"
+                    to="/mun/select-committee"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg"
                   >
                     🚀 Apply for Committee
