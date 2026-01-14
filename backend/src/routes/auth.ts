@@ -19,7 +19,7 @@ const generateToken = (userId: string): string => {
 // @access  Public
 router.post('/register', async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, name, phone, college, branch, year } = req.body;
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -28,11 +28,15 @@ router.post('/register', async (req: AuthRequest, res: Response): Promise<void> 
       return;
     }
 
-    // Create user
+    // Create user with all profile fields
     const user = await User.create({
       email,
       password,
       name: name || '',
+      phone: phone || '',
+      college: college || '',
+      branch: branch || '',
+      year: year || '',
     });
 
     const token = generateToken(user._id.toString());
@@ -44,6 +48,10 @@ router.post('/register', async (req: AuthRequest, res: Response): Promise<void> 
         id: user._id,
         email: user.email,
         name: user.name,
+        phone: user.phone,
+        college: user.college,
+        branch: user.branch,
+        year: user.year,
         role: user.role,
         isProfileComplete: user.isProfileComplete,
       },

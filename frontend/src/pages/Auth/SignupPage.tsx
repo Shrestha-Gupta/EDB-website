@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Check } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Check, Phone, Building, BookOpen, Calendar } from "lucide-react";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -11,6 +11,10 @@ const SignupPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    college: "",
+    branch: "",
+    year: "",
     password: "",
     confirmPassword: "",
   });
@@ -45,6 +49,26 @@ const SignupPage = () => {
       return;
     }
 
+    if (!formData.phone.trim()) {
+      setError("Please enter your phone number");
+      return;
+    }
+
+    if (!formData.college.trim()) {
+      setError("Please enter your college name");
+      return;
+    }
+
+    if (!formData.branch.trim()) {
+      setError("Please enter your branch");
+      return;
+    }
+
+    if (!formData.year) {
+      setError("Please select your year");
+      return;
+    }
+
     if (!isPasswordValid) {
       setError("Please meet all password requirements");
       return;
@@ -58,7 +82,7 @@ const SignupPage = () => {
     setIsLoading(true);
 
     try {
-      await register(formData.email, formData.password, formData.name);
+      await register(formData.email, formData.password, formData.name, formData.phone, formData.college, formData.branch, formData.year);
       navigate("/dashboard");
     } catch (err: any) {
       setError(err.message || "Registration failed. Please try again.");
@@ -172,6 +196,94 @@ const SignupPage = () => {
                     className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all bg-white/50 placeholder:text-stone-400"
                     placeholder="your.email@example.com"
                   />
+                </div>
+              </div>
+
+              {/* Phone Field */}
+              <div>
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  Phone Number
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Phone className="h-5 w-5 text-stone-400" />
+                  </div>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all bg-white/50 placeholder:text-stone-400"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+              </div>
+
+              {/* College Field */}
+              <div>
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  College/University
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Building className="h-5 w-5 text-stone-400" />
+                  </div>
+                  <input
+                    type="text"
+                    required
+                    value={formData.college}
+                    onChange={(e) => setFormData({ ...formData, college: e.target.value })}
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all bg-white/50 placeholder:text-stone-400"
+                    placeholder="MMMUT Gorakhpur"
+                  />
+                </div>
+              </div>
+
+              {/* Branch and Year Row */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Branch Field */}
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-2">
+                    Branch
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <BookOpen className="h-5 w-5 text-stone-400" />
+                    </div>
+                    <input
+                      type="text"
+                      required
+                      value={formData.branch}
+                      onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                      className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all bg-white/50 placeholder:text-stone-400"
+                      placeholder="CSE"
+                    />
+                  </div>
+                </div>
+
+                {/* Year Field */}
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-2">
+                    Year
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <Calendar className="h-5 w-5 text-stone-400" />
+                    </div>
+                    <select
+                      required
+                      value={formData.year}
+                      onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                      className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all bg-white/50 text-stone-700 appearance-none"
+                    >
+                      <option value="">Select</option>
+                      <option value="1st">1st Year</option>
+                      <option value="2nd">2nd Year</option>
+                      <option value="3rd">3rd Year</option>
+                      <option value="4th">4th Year</option>
+                     
+                    </select>
+                  </div>
                 </div>
               </div>
 
