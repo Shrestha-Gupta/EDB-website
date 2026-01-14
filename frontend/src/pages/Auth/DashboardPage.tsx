@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { EventRegistrationModal } from "../../components/EventRegistration";
-import { getMyEventRegistrations, eventInfo, type EventType, type EventRegistration } from "../../services/eventsApi";
+import { getMyEventRegistrations, type EventType, type EventRegistration } from "../../services/eventsApi";
 // React Icons - Modern icon library
 import { FiMail, FiLogOut, FiSettings, FiBell, FiArrowRight, FiCalendar, FiBook, FiImage, FiUsers } from "react-icons/fi";
 
