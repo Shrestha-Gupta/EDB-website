@@ -139,6 +139,7 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, this.password);
 };
 
+// @ts-expect-error mongoose model type instantiation issue
 const User = mongoose.model('User', userSchema);
 
 export default User;
