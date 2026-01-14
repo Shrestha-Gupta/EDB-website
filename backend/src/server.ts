@@ -8,8 +8,8 @@ import cookieParser from "cookie-parser";
 import fs from 'fs';
 
 // Load environment variables FIRST before any other imports that need them
-const envLocalPath = path.resolve(__dirname, '../.env.local');
-const envPath = path.resolve(__dirname, '../.env');
+const envLocalPath = path.resolve(__dirname, '../../.env.local');
+const envPath = path.resolve(__dirname, '../../.env');
 
 console.log(`Attempting to load env from: ${envLocalPath}`);
 if (fs.existsSync(envLocalPath)) {

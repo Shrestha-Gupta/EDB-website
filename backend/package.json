@@ -2,11 +2,11 @@
   "name": "edb-backend",
   "version": "1.0.0",
   "description": "Backend API for EDB",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "nodemon --exec ts-node --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "test": "jest"
   },
   "keywords": [],

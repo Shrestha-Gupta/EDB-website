@@ -17,16 +17,7 @@ import {
   Check, 
   AlertCircle, 
   FileText, 
-  Loader2,
-  User,
-  Mail,
-  Phone,
-  Building2,
-  GraduationCap,
-  Calendar,
-  Users,
-  Plus,
-  Trash2
+  Loader2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -254,78 +245,78 @@ const EventRegistrationModal = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30"
         onClick={handleClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
+          className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-hidden border border-stone-200"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Top Orange Line */}
+          <div className="h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 rounded-t-lg" />
+
           {/* Header */}
-          <div className={`p-6 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white rounded-t-2xl`}>
+          <div className="px-6 py-5 border-b border-orange-100 bg-gradient-to-r from-orange-50/50 to-transparent">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">{event.icon}</span>
-                <div>
-                  <h2 className="text-xl font-bold">{event.name}</h2>
-                  <p className="text-sm opacity-90">{event.fullName}</p>
-                </div>
+              <div>
+                <h2 className="text-lg font-semibold text-stone-900">{event.name}</h2>
+                <p className="text-sm text-orange-600/70 mt-0.5">{event.fullName}</p>
               </div>
               <button
                 onClick={handleClose}
-                className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                className="p-1.5 hover:bg-stone-100 rounded transition-colors -mr-1.5"
+                aria-label="Close"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 text-stone-400" />
               </button>
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-6">
+          <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
             {/* Loading State */}
             {step === 'check' && (
-              <div className="text-center py-8">
-                <Loader2 className="w-8 h-8 animate-spin text-amber-500 mx-auto mb-3" />
-                <p className="text-stone-600">Checking registration status...</p>
+              <div className="text-center py-10">
+                <Loader2 className="w-6 h-6 animate-spin text-stone-400 mx-auto mb-3" />
+                <p className="text-stone-500 text-sm">Checking status...</p>
               </div>
             )}
 
             {/* Profile Incomplete Warning */}
             {step === 'register' && isProfileIncomplete && (
               <div className="text-center py-6">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <AlertCircle className="w-8 h-8 text-orange-500" />
-                </div>
-                <h3 className="text-lg font-semibold text-stone-900 mb-2">Complete Your Profile First</h3>
-                <p className="text-stone-600 mb-6">
-                  Please complete your profile before registering for events.
+                <AlertCircle className="w-10 h-10 text-amber-500 mx-auto mb-3" />
+                <h3 className="text-base font-medium text-stone-900 mb-1">Complete Your Profile</h3>
+                <p className="text-stone-500 text-sm mb-5">
+                  Add your details before registering.
                 </p>
                 <Link
                   to="/profile"
                   onClick={handleClose}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors"
+                  className="inline-block px-5 py-2 bg-stone-900 hover:bg-stone-800 text-white text-sm font-medium rounded transition-colors"
                 >
-                  Complete Profile
+                  Go to Profile
                 </Link>
               </div>
             )}
 
             {/* Registration Closed Notice */}
             {step === 'register' && !isRegistrationOpen && (
-              <div className="text-center py-6">
-                <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-stone-200">
                   <AlertCircle className="w-8 h-8 text-stone-500" />
                 </div>
                 <h3 className="text-lg font-semibold text-stone-900 mb-2">Registrations Closed</h3>
-                <p className="text-stone-600 mb-6">
-                  Registrations for {event.name} are currently closed. Stay tuned for updates.
+                <p className="text-stone-600 text-sm mb-6 max-w-xs mx-auto">
+                  Registrations for {event.name} are currently closed. Please check back later.
                 </p>
                 <button
                   onClick={handleClose}
-                  className="px-6 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold rounded-xl transition-colors"
+                  className="px-6 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium rounded-lg transition-colors"
                 >
                   Close
                 </button>
@@ -334,147 +325,124 @@ const EventRegistrationModal = ({
 
             {/* Registration Form */}
             {step === 'register' && isRegistrationOpen && !isProfileIncomplete && user && (
-              <div className="space-y-6">
-                <p className="text-stone-600 text-sm">{event.description}</p>
+              <div className="space-y-5">
+                <p className="text-stone-600 text-sm leading-relaxed">{event.description}</p>
 
                 {error && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    {error}
+                  <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-red-700 text-sm flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <span>{error}</span>
                   </div>
                 )}
 
                 {/* Team Registration for Pralekh */}
                 {isPralekh ? (
                   <div className="space-y-4">
-                    {/* Team Info Banner */}
-                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-                      <Users className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-medium text-amber-800">Team Registration</p>
-                        <p className="text-sm text-amber-600">Pralekh requires a team of 2-5 members. You are the Team Leader.</p>
-                      </div>
-                    </div>
+                    {/* Team Info Notice */}
+                    <p className="text-xs text-stone-500 border-l-2 border-orange-300 pl-3">
+                      Team registration requires 2-5 members. You will be the team leader.
+                    </p>
 
                     {/* Team Name */}
                     <div>
-                      <label className="block text-sm font-medium text-stone-700 mb-2">
-                        Team Name <span className="text-red-500">*</span>
+                      <label className="block text-xs font-medium text-stone-600 mb-1">
+                        Team Name <span className="text-orange-500">*</span>
                       </label>
                       <input
                         type="text"
                         value={teamName}
                         onChange={(e) => setTeamName(e.target.value)}
                         placeholder="Enter your team name"
-                        className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
+                        className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-sm"
                       />
                     </div>
 
                     {/* Team Members */}
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-semibold text-stone-900 text-sm">
-                          Team Members ({teamMembers.length}/5)
-                        </h4>
+                        <span className="text-xs font-medium text-stone-600">
+                          Members ({teamMembers.length}/5)
+                        </span>
                         {teamMembers.length < 5 && (
                           <button
                             type="button"
                             onClick={addTeamMember}
-                            className="flex items-center gap-1 text-sm text-amber-600 hover:text-amber-700 font-medium"
+                            className="text-xs text-orange-600 hover:text-orange-700 font-medium"
                           >
-                            <Plus className="w-4 h-4" />
-                            Add Member
+                            + Add Member
                           </button>
                         )}
                       </div>
 
                       {teamMembers.map((member, index) => (
-                        <div key={index} className="bg-stone-50 rounded-xl p-4 space-y-3 relative">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-semibold text-stone-700">
-                              {index === 0 ? '👑 Team Leader (You)' : `Member ${index + 1}`}
+                        <div key={index} className="border border-stone-200 rounded p-3 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-stone-600">
+                              {index === 0 ? 'Team Leader (You)' : `Member ${index + 1}`}
                             </span>
                             {index > 0 && teamMembers.length > 2 && (
                               <button
                                 type="button"
                                 onClick={() => removeTeamMember(index)}
-                                className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                className="text-xs text-red-500 hover:text-red-700"
                               >
-                                <Trash2 className="w-4 h-4" />
+                                Remove
                               </button>
                             )}
                           </div>
 
                           {index === 0 ? (
-                            // Team leader info (read-only, from profile)
-                            <div className="grid grid-cols-2 gap-3 text-sm">
-                              <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700">{member.name}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Mail className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700 truncate">{member.email}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Phone className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700">{member.phone}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Building2 className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700 truncate">{member.college}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <GraduationCap className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700">{member.branch}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-stone-400" />
-                                <span className="text-stone-700">{member.year}</span>
-                              </div>
+                            // Team leader info (read-only)
+                            <div className="grid grid-cols-2 gap-2 text-xs text-stone-600 bg-orange-50/50 -mx-3 -mb-3 mt-1 p-3 rounded-b">
+                              <span>{member.name}</span>
+                              <span className="truncate">{member.email}</span>
+                              <span>{member.phone}</span>
+                              <span className="truncate">{member.college}</span>
+                              <span>{member.branch}</span>
+                              <span>{member.year}</span>
                             </div>
                           ) : (
                             // Editable member fields
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-2 gap-2">
                               <input
                                 type="text"
                                 value={member.name}
                                 onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
                                 placeholder="Full Name *"
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               />
                               <input
                                 type="email"
                                 value={member.email}
                                 onChange={(e) => updateTeamMember(index, 'email', e.target.value)}
                                 placeholder="Email *"
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               />
                               <input
                                 type="tel"
                                 value={member.phone}
                                 onChange={(e) => updateTeamMember(index, 'phone', e.target.value)}
                                 placeholder="Phone *"
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               />
                               <input
                                 type="text"
                                 value={member.college}
                                 onChange={(e) => updateTeamMember(index, 'college', e.target.value)}
                                 placeholder="College *"
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               />
                               <input
                                 type="text"
                                 value={member.branch}
                                 onChange={(e) => updateTeamMember(index, 'branch', e.target.value)}
                                 placeholder="Branch *"
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               />
                               <select
                                 value={member.year}
                                 onChange={(e) => updateTeamMember(index, 'year', e.target.value)}
-                                className="px-3 py-2 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-1 focus:ring-amber-200 outline-none text-sm"
+                                className="px-2.5 py-1.5 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-xs"
                               >
                                 <option value="">Year *</option>
                                 <option value="1st Year">1st Year</option>
@@ -489,136 +457,88 @@ const EventRegistrationModal = ({
                       ))}
 
                       {teamMembers.length < 2 && (
-                        <p className="text-sm text-amber-600 text-center">
-                          Add at least one more member to complete your team
+                        <p className="text-xs text-stone-500 text-center">
+                          Add at least one more member
                         </p>
                       )}
                     </div>
                   </div>
                 ) : (
                   /* Individual Registration for other events */
-                  <div className="bg-stone-50 rounded-xl p-4 space-y-3">
-                    <h4 className="font-semibold text-stone-900 text-sm mb-3">Your Details</h4>
+                  <div className="border border-orange-200 rounded p-3 bg-orange-50/30">
+                    <span className="text-xs font-medium text-orange-700 block mb-2">Your Details</span>
                     
-                    <div className="flex items-center gap-3 text-sm">
-                      <User className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.name}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <Mail className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.email}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <Phone className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <Building2 className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.college}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <GraduationCap className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.branch}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <Calendar className="w-4 h-4 text-stone-400" />
-                      <span className="text-stone-700">{user.year}</span>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-stone-600">
+                      <span>{user.name}</span>
+                      <span className="truncate">{user.email}</span>
+                      <span>{user.phone}</span>
+                      <span className="truncate">{user.college}</span>
+                      <span>{user.branch}</span>
+                      <span>{user.year}</span>
                     </div>
                   </div>
                 )}
 
                 {/* Register Button */}
-                <motion.button
+                <button
                   onClick={handleRegister}
                   disabled={isLoading || (isPralekh && teamMembers.length < 2)}
-                  className={`w-full py-4 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2`}
-                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
-                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                       Registering...
                     </>
                   ) : (
                     isPralekh ? 'Register Team' : 'Confirm Registration'
                   )}
-                </motion.button>
+                </button>
               </div>
             )}
 
             {/* Success State */}
             {step === 'success' && (
               <div className="text-center py-8">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                  <Check className="w-10 h-10 text-green-500" />
-                </motion.div>
-                <h3 className="text-xl font-bold text-stone-900 mb-2">
-                  {isPralekh ? 'Team Registration Successful!' : 'Registration Successful!'}
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Check className="w-6 h-6 text-orange-600" />
+                </div>
+                <h3 className="text-base font-medium text-stone-900 mb-1">
+                  {isPralekh ? 'Team Registered' : 'Registration Complete'}
                 </h3>
-                <p className="text-stone-600">
+                <p className="text-stone-500 text-sm">
                   {isPralekh 
-                    ? `Your team "${teamName}" has been registered for ${event.name}.`
-                    : `You have successfully registered for ${event.name}.`
+                    ? `Team "${teamName}" has been registered`
+                    : `You're now registered for ${event.name}`
                   }
                 </p>
-                <p className="text-sm text-stone-500 mt-2">
-                  Opening submission window...
+                <p className="text-xs text-stone-400 mt-3">
+                  Loading submission form...
                 </p>
               </div>
             )}
 
             {/* Submission Form */}
             {step === 'submit' && (
-              <div className="space-y-6">
-                <div className={`border rounded-xl p-4 flex items-center gap-3 ${
-                  isSubmissionOpen 
-                    ? 'bg-green-50 border-green-200' 
-                    : 'bg-amber-50 border-amber-200'
-                }`}>
-                  <Check className={`w-5 h-5 shrink-0 ${
-                    isSubmissionOpen ? 'text-green-500' : 'text-amber-500'
-                  }`} />
-                  <div>
-                    <p className={`font-medium ${
-                      isSubmissionOpen ? 'text-green-800' : 'text-amber-800'
-                    }`}>
-                      {registration?.teamName ? `Team "${registration.teamName}" is registered!` : 'You are registered!'}
-                    </p>
-                    <p className={`text-sm ${
-                      isSubmissionOpen ? 'text-green-600' : 'text-amber-600'
-                    }`}>
-                      {isSubmissionOpen 
-                        ? 'Now submit your work' 
-                        : 'Submissions will open soon'}
-                    </p>
-                  </div>
+              <div className="space-y-4">
+                <div className="text-xs text-stone-500 border-l-2 border-orange-300 pl-3">
+                  {registration?.teamName ? `Team "${registration.teamName}" registered` : 'Registration complete'}.
+                  {isSubmissionOpen ? ' You can submit your work below.' : ' Submissions will open soon.'}
                 </div>
 
                 {error && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    {error}
-                  </div>
+                  <p className="text-red-600 text-sm">{error}</p>
                 )}
 
                 {!isSubmissionOpen && (
-                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-sm flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    <div>
-                      <p className="font-medium">Submissions are currently closed</p>
-                      <p className="text-xs mt-1">You can submit your work once submissions open. Check back later or visit your dashboard.</p>
-                    </div>
-                  </div>
+                  <p className="text-stone-500 text-sm">
+                    Submissions are currently closed. Check back later.
+                  </p>
                 )}
 
                 {/* Title Input */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
+                  <label className="block text-xs font-medium text-stone-600 mb-1">
                     Submission Title
                   </label>
                   <input
@@ -627,49 +547,49 @@ const EventRegistrationModal = ({
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter a title for your submission"
                     disabled={!isSubmissionOpen}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all disabled:bg-stone-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 {/* Description Input */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Brief Description (Optional)
+                  <label className="block text-xs font-medium text-stone-600 mb-1">
+                    Description <span className="text-stone-400">(Optional)</span>
                   </label>
                   <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Add a brief description of your work"
-                    rows={3}
+                    placeholder="Add a brief description"
+                    rows={2}
                     disabled={!isSubmissionOpen}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all resize-none disabled:bg-stone-100 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 rounded border border-stone-300 focus:border-orange-400 focus:ring-1 focus:ring-orange-400 outline-none resize-none text-sm disabled:bg-stone-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
                 {/* File Upload */}
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-2">
-                    Upload PDF <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-stone-600 mb-1">
+                    Upload PDF <span className="text-orange-500">*</span>
                   </label>
                   <label className={`block ${isSubmissionOpen ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}>
-                    <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${
-                      file ? 'border-green-400 bg-green-50' : 'border-stone-300 hover:border-amber-400'
+                    <div className={`border border-dashed rounded p-4 text-center ${
+                      file ? 'border-orange-400 bg-orange-50' : 'border-stone-300 hover:border-orange-400 hover:bg-orange-50/30'
                     }`}>
                       {file ? (
-                        <div className="flex items-center justify-center gap-3">
-                          <FileText className="w-8 h-8 text-green-500" />
+                        <div className="flex items-center justify-center gap-2">
+                          <FileText className="w-5 h-5 text-stone-600" />
                           <div className="text-left">
-                            <p className="font-medium text-stone-900">{file.name}</p>
-                            <p className="text-sm text-stone-500">
+                            <p className="text-sm text-stone-700">{file.name}</p>
+                            <p className="text-xs text-stone-500">
                               {(file.size / 1024 / 1024).toFixed(2)} MB
                             </p>
                           </div>
                         </div>
                       ) : (
                         <>
-                          <Upload className="w-10 h-10 text-stone-400 mx-auto mb-2" />
-                          <p className="text-stone-600">Click to upload PDF</p>
-                          <p className="text-xs text-stone-400 mt-1">Max size: 10MB</p>
+                          <Upload className="w-6 h-6 text-stone-400 mx-auto mb-1" />
+                          <p className="text-stone-600 text-sm">Click to upload PDF</p>
+                          <p className="text-xs text-stone-400">Max 10MB</p>
                         </>
                       )}
                     </div>
@@ -685,34 +605,29 @@ const EventRegistrationModal = ({
 
                 {/* Submit Button */}
                 {isSubmissionOpen ? (
-                  <>
-                    <motion.button
+                  <div className="space-y-2">
+                    <button
                       onClick={handleSubmit}
                       disabled={isLoading || !file}
-                      className={`w-full py-4 bg-linear-to-r ${event.gradientFrom} ${event.gradientTo} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-70 flex items-center justify-center gap-2`}
-                      whileHover={{ scale: isLoading || !file ? 1 : 1.02 }}
-                      whileTap={{ scale: isLoading || !file ? 1 : 0.98 }}
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isLoading ? (
                         <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <Loader2 className="w-4 h-4 animate-spin" />
                           Uploading...
                         </>
                       ) : (
-                        <>
-                          <Upload className="w-5 h-5" />
-                          Submit
-                        </>
+                        'Submit'
                       )}
-                    </motion.button>
-                    <p className="text-xs text-stone-500 text-center">
+                    </button>
+                    <p className="text-xs text-stone-400 text-center">
                       You can also submit later from your dashboard
                     </p>
-                  </>
+                  </div>
                 ) : (
                   <button
                     onClick={handleClose}
-                    className="w-full py-4 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl transition-colors"
+                    className="w-full py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded transition-colors"
                   >
                     Close
                   </button>
@@ -723,60 +638,42 @@ const EventRegistrationModal = ({
             {/* Submitted State */}
             {step === 'submitted' && registration && (
               <div className="text-center py-6">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                  <Check className="w-10 h-10 text-green-500" />
-                </motion.div>
-                <h3 className="text-xl font-bold text-stone-900 mb-2">Submission Complete!</h3>
-                <p className="text-stone-600 mb-4">
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Check className="w-6 h-6 text-orange-600" />
+                </div>
+                <h3 className="text-base font-medium text-stone-900 mb-1">Submission Complete</h3>
+                <p className="text-stone-500 text-sm mb-5">
                   Your work has been submitted successfully.
                 </p>
                 
-                <div className="bg-stone-50 rounded-xl p-4 text-left space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-stone-500">Status:</span>
-                    <span className="font-medium text-green-600 capitalize">{registration.registrationStatus}</span>
+                <div className="border border-orange-200 rounded p-3 text-left space-y-1.5 text-xs bg-orange-50/30">
+                  <div className="flex justify-between">
+                    <span className="text-stone-500">Status</span>
+                    <span className="text-orange-600 capitalize">{registration.registrationStatus}</span>
                   </div>
                   {registration.teamName && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-stone-500">Team:</span>
-                      <span className="font-medium text-stone-700">{registration.teamName}</span>
-                    </div>
-                  )}
-                  {registration.teamMembers && registration.teamMembers.length > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-stone-500">Members:</span>
-                      <span className="font-medium text-stone-700">{registration.teamMembers.length} members</span>
+                    <div className="flex justify-between">
+                      <span className="text-stone-500">Team</span>
+                      <span className="text-stone-700">{registration.teamName}</span>
                     </div>
                   )}
                   {registration.title && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-stone-500">Title:</span>
-                      <span className="font-medium text-stone-700">{registration.title}</span>
+                    <div className="flex justify-between">
+                      <span className="text-stone-500">Title</span>
+                      <span className="text-stone-700 truncate max-w-[180px]">{registration.title}</span>
                     </div>
                   )}
                   {registration.submissionFileName && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-stone-500">File:</span>
-                      <span className="font-medium text-stone-700 truncate max-w-[200px]">{registration.submissionFileName}</span>
-                    </div>
-                  )}
-                  {registration.submissionDate && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-stone-500">Submitted:</span>
-                      <span className="font-medium text-stone-700">
-                        {new Date(registration.submissionDate).toLocaleDateString()}
-                      </span>
+                    <div className="flex justify-between">
+                      <span className="text-stone-500">File</span>
+                      <span className="text-stone-700 truncate max-w-[180px]">{registration.submissionFileName}</span>
                     </div>
                   )}
                 </div>
 
                 <button
                   onClick={handleClose}
-                  className="mt-6 px-6 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold rounded-xl transition-colors"
+                  className="mt-5 px-5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 text-sm font-medium rounded transition-colors"
                 >
                   Close
                 </button>
