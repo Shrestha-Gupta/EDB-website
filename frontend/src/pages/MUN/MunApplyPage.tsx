@@ -80,13 +80,14 @@ const MunApplyPage = () => {
       return;
     }
 
-    if (!formData.countryPreferences[0]) {
-      setError("Please enter at least your 1st country preference");
+    if (!formData.preferredCommittee) {
+      setError("Please select your preferred committee (UNHRC or IP)");
       return;
     }
 
-    if (!formData.preferredCommittee) {
-      setError("Please select your preferred committee (UNHRC or IP)");
+    // Country preferences are only required for UNHRC
+    if (formData.preferredCommittee === 'UNHRC' && !formData.countryPreferences[0]) {
+      setError("Please enter at least your 1st country preference");
       return;
     }
 
@@ -101,7 +102,8 @@ const MunApplyPage = () => {
       await applyForEvent({
         eventId: eventId!,
         preferredCommittee: formData.preferredCommittee as 'UNHRC' | 'IP',
-        countryPreferences: formData.countryPreferences.filter((c) => c),
+        // Only include country preferences for UNHRC
+        countryPreferences: formData.preferredCommittee === 'UNHRC' ? formData.countryPreferences.filter((c) => c) : [],
         agendaPreferences: formData.agendaPreferences,
         experienceLevel: formData.experienceLevel as 'beginner' | 'intermediate' | 'advanced',
         hasAttendedMun: formData.hasAttendedMun,
@@ -219,31 +221,7 @@ const MunApplyPage = () => {
             </div>
           </div>
 
-          {/* Country Preferences */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-stone-700 mb-3">
-              Country Preferences <span className="text-red-500">*</span>
-            </label>
-            <p className="text-xs text-stone-500 mb-3">Enter your top 3 country preferences in order</p>
-            {[0, 1, 2].map((index) => (
-              <input
-                key={index}
-                type="text"
-                value={formData.countryPreferences[index]}
-                onChange={(e) => {
-                  const newPrefs = [...formData.countryPreferences];
-                  newPrefs[index] = e.target.value;
-                  setFormData({ ...formData, countryPreferences: newPrefs });
-                }}
-                placeholder={
-                  index === 0 ? "1st Preference (e.g., India)" : index === 1 ? "2nd Preference" : "3rd Preference"
-                }
-                className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-3"
-              />
-            ))}
-          </div>
-
-          {/* Preferred Committee */}
+          {/* Preferred Committee - moved before Country Preferences */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-stone-700 mb-3">
               Which committee would you like to join? <span className="text-red-500">*</span>
@@ -275,6 +253,38 @@ const MunApplyPage = () => {
               </button>
             </div>
           </div>
+
+          {/* Country Preferences - Only for UNHRC */}
+          {formData.preferredCommittee === 'UNHRC' && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mb-6"
+            >
+              <label className="block text-sm font-medium text-stone-700 mb-3">
+                Country Preferences <span className="text-red-500">*</span>
+              </label>
+              <p className="text-xs text-stone-500 mb-3">Enter your top 3 country preferences in order</p>
+              {[0, 1, 2].map((index) => (
+                <input
+                  key={index}
+                  type="text"
+                  value={formData.countryPreferences[index]}
+                  onChange={(e) => {
+                    const newPrefs = [...formData.countryPreferences];
+                    newPrefs[index] = e.target.value;
+                    setFormData({ ...formData, countryPreferences: newPrefs });
+                  }}
+                  placeholder={
+                    index === 0 ? "1st Preference (e.g., India)" : index === 1 ? "2nd Preference" : "3rd Preference"
+                  }
+                  className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all mb-3"
+                />
+              ))}
+            </motion.div>
+          )}
 
           {/* Previous Experience Details (shown only if hasAttendedMun) */}
           {formData.hasAttendedMun && (

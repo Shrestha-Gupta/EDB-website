@@ -51,7 +51,8 @@ const MunSelectCommitteePage = () => {
       return;
     }
 
-    if (!countryPreferences[0]) {
+    // Country preferences are only required for UNHRC
+    if (selectedCommittee === 'UNHRC' && !countryPreferences[0]) {
       setError('Please enter at least your 1st country preference');
       return;
     }
@@ -71,7 +72,8 @@ const MunSelectCommitteePage = () => {
     try {
       await updateProfile({
         preferredCommittee: selectedCommittee,
-        countryPreferences: countryPreferences.filter(c => c.trim()),
+        // Only include country preferences for UNHRC
+        countryPreferences: selectedCommittee === 'UNHRC' ? countryPreferences.filter(c => c.trim()) : [],
         hasAttendedMun: hasAttendedMun,
         previousMunExperience: previousMunExperience,
       });
@@ -175,29 +177,36 @@ const MunSelectCommitteePage = () => {
               </div>
             </div>
 
-            {/* Country Preferences */}
-            <div>
-              <label className="block text-stone-900 font-serif font-bold mb-1 text-xl">
-                Country Preferences <span className="text-amber-600">*</span>
-              </label>
-              <p className="text-stone-500 text-sm mb-4">
-                Enter your top 3 country preferences in order of priority
-              </p>
-              <div className="space-y-3">
-                {[0, 1, 2].map((index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <span className="text-amber-600 font-medium w-8">{index + 1}.</span>
-                    <input
-                      type="text"
-                      value={countryPreferences[index]}
-                      onChange={(e) => handleCountryChange(index, e.target.value)}
-                      placeholder={index === 0 ? "Enter country name (required)" : "Enter country name (optional)"}
-                      className="flex-1 px-4 py-3 border border-stone-200 focus:outline-none focus:border-amber-600 transition-colors bg-white"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Country Preferences - Only for UNHRC */}
+            {selectedCommittee === 'UNHRC' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <label className="block text-stone-900 font-serif font-bold mb-1 text-xl">
+                  Country Preferences <span className="text-amber-600">*</span>
+                </label>
+                <p className="text-stone-500 text-sm mb-4">
+                  Enter your top 3 country preferences in order of priority
+                </p>
+                <div className="space-y-3">
+                  {[0, 1, 2].map((index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <span className="text-amber-600 font-medium w-8">{index + 1}.</span>
+                      <input
+                        type="text"
+                        value={countryPreferences[index]}
+                        onChange={(e) => handleCountryChange(index, e.target.value)}
+                        placeholder={index === 0 ? "Enter country name (required)" : "Enter country name (optional)"}
+                        className="flex-1 px-4 py-3 border border-stone-200 focus:outline-none focus:border-amber-600 transition-colors bg-white"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
 
             {/* Previous MUN Experience */}
             <div>
