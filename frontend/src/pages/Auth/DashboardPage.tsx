@@ -202,8 +202,8 @@ const DashboardPage = () => {
                 </div>
               </div>
             </Link>
-            {/* MUN Card */}
-            <Link to="/mun/dashboard">
+            {/* Arunoday Card */}
+            <Link to="/arunoday-live">
               <div className="bg-white rounded-lg overflow-hidden border-t-4 border-amber-500 hover:shadow-xl transition-shadow cursor-pointer">
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
