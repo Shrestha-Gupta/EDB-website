@@ -312,6 +312,9 @@ const AdminDashboardPage = () => {
                             Email
                           </th>
                           <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Phone
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
                             College
                           </th>
                           <th className="text-left py-3 px-4 font-medium text-stone-600">
@@ -336,6 +339,9 @@ const AdminDashboardPage = () => {
                             </td>
                             <td className="py-3 px-4 text-stone-600">
                               {u.email}
+                            </td>
+                            <td className="py-3 px-4 text-stone-600">
+                              {u.phone || "N/A"}
                             </td>
                             <td className="py-3 px-4 text-stone-600">
                               {u.college || "N/A"}
