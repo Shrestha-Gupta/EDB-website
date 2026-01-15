@@ -100,6 +100,11 @@ export interface MunUser {
   // Allotted details (assigned by admin)
   allottedCountry?: string;
   allottedCommittee?: string;
+  // Position Paper fields
+  positionPaperUrl?: string;
+  positionPaperSubmittedAt?: string;
+  positionPaperStatus?: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
+  positionPaperRemarks?: string;
   createdAt: string;
 }
 
@@ -170,6 +175,28 @@ export const uploadPositionPaper = async (applicationId: string, file: File, rem
   if (remarks) formData.append('remarks', remarks);
 
   const response = await fetch(`${API_BASE_URL}/api/mun/upload-position-paper/${applicationId}`, {
+    method: 'POST',
+    headers: {
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Upload failed');
+  }
+};
+
+// Upload position paper directly to user profile (no application needed)
+export const uploadPositionPaperDirect = async (file: File, remarks?: string): Promise<void> => {
+  const token = getToken();
+  const formData = new FormData();
+  formData.append('positionPaper', file);
+  if (remarks) formData.append('remarks', remarks);
+
+  const response = await fetch(`${API_BASE_URL}/api/mun/upload-position-paper-direct`, {
     method: 'POST',
     headers: {
       ...(token && { Authorization: `Bearer ${token}` }),

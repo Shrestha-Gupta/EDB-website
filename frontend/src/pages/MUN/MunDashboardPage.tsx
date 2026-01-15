@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
-import { getMyApplications, uploadPositionPaper, type MunApplication } from '../../services/munApi';
+import { getMyApplications, uploadPositionPaper, uploadPositionPaperDirect, type MunApplication } from '../../services/munApi';
 import { Link, useNavigate } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground';
 
 const MunDashboardPage = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, refreshUser } = useAuth();
   const navigate = useNavigate();
   const [applications, setApplications] = useState<MunApplication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const MunDashboardPage = () => {
   const [uploadSuccess, setUploadSuccess] = useState('');
 
   const currentApplication = applications.length > 0 ? applications[0] : null;
-  const isAllotted = currentApplication?.allottedCountry && currentApplication?.allottedCommittee;
+  const isAllotted = currentApplication?.allottedCountry || user?.allottedCountry;
 
   useEffect(() => {
     fetchApplications();
@@ -51,21 +51,28 @@ const MunDashboardPage = () => {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !currentApplication) return;
+    if (!selectedFile) return;
 
     setUploading(true);
     setUploadError('');
     setUploadSuccess('');
 
     try {
-      await uploadPositionPaper(currentApplication._id, selectedFile, remarks);
+      // Use application-based upload if we have an application, otherwise use direct upload
+      if (currentApplication) {
+        await uploadPositionPaper(currentApplication._id, selectedFile, remarks);
+      } else {
+        await uploadPositionPaperDirect(selectedFile, remarks);
+      }
       setUploadSuccess('Position paper uploaded successfully!');
       setSelectedFile(null);
       setRemarks('');
-      fetchApplications();
+      // Refresh applications and user data to get updated position paper info
+      await fetchApplications();
+      await refreshUser();
     } catch (error: unknown) {
-      const err = error as { response?: { data?: { error?: string } } };
-      setUploadError(err.response?.data?.error || 'Failed to upload position paper');
+      const err = error as { message?: string };
+      setUploadError(err.message || 'Failed to upload position paper');
     } finally {
       setUploading(false);
     }
@@ -349,13 +356,13 @@ const MunDashboardPage = () => {
                         Available after country assignment
                       </p>
                     </div>
-                  ) : currentApplication?.positionPaperUrl ? (
+                  ) : (currentApplication?.positionPaperUrl || user?.positionPaperUrl) ? (
                     <div className="space-y-4">
                       <div className="bg-green-50 p-4">
                         <p className="text-sm font-medium text-green-900 mb-1">Document Submitted</p>
                         <p className="text-xs text-green-700">
-                          {currentApplication.positionPaperSubmittedAt 
-                            ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString('en-US', { 
+                          {(currentApplication?.positionPaperSubmittedAt || user?.positionPaperSubmittedAt)
+                            ? new Date(currentApplication?.positionPaperSubmittedAt || user?.positionPaperSubmittedAt || '').toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
@@ -364,7 +371,7 @@ const MunDashboardPage = () => {
                         </p>
                       </div>
                       <a
-                        href={currentApplication.positionPaperUrl}
+                        href={currentApplication?.positionPaperUrl || user?.positionPaperUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium transition-colors"

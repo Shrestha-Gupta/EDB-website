@@ -1,10 +1,18 @@
 import express, { Response } from 'express';
 import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
 import MunEvent from '../models/MunEvent';
 import MunApplication from '../models/MunApplication';
 import { protect, adminOnly, profileComplete, AuthRequest } from '../middleware/auth';
 
 const router = express.Router();
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Configure multer for position paper uploads
 const upload = multer({
@@ -214,7 +222,7 @@ router.post('/final-confirmation/:applicationId', protect, async (req: AuthReque
 });
 
 // @route   POST /api/mun/upload-position-paper/:applicationId
-// @desc    Upload position paper for an application
+// @desc    Upload position paper for an application (stored in Cloudinary)
 // @access  Private
 router.post(
   '/upload-position-paper/:applicationId',
@@ -232,8 +240,12 @@ router.post(
         return;
       }
 
-      if (application.status !== 'allotted') {
-        res.status(400).json({ message: 'You can only upload position paper after allotment' });
+      // Check if country has been allotted (either via application or user profile)
+      const user = req.user!;
+      const hasAllottedCountry = application.allottedCountry || (user as any).allottedCountry;
+      
+      if (!hasAllottedCountry) {
+        res.status(400).json({ message: 'You can only upload position paper after country assignment' });
         return;
       }
 
@@ -251,10 +263,26 @@ router.post(
       // Get remarks from body
       const { remarks } = req.body;
 
-      // In production, upload to cloud storage (Cloudinary, S3, etc.)
-      // For now, we'll store the base64 data (not recommended for production)
-      const base64Data = req.file.buffer.toString('base64');
-      application.positionPaperUrl = `data:application/pdf;base64,${base64Data}`;
+      // Upload to Cloudinary
+      const uploadResult = await new Promise<{ secure_url: string }>((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            resource_type: 'raw',
+            folder: 'mun-position-papers',
+            public_id: `${req.user!._id}_${application._id}_${Date.now()}`,
+            format: 'pdf',
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else if (result) resolve(result);
+            else reject(new Error('Upload failed'));
+          }
+        );
+        uploadStream.end(req.file!.buffer);
+      });
+
+      // Update application with Cloudinary URL
+      application.positionPaperUrl = uploadResult.secure_url;
       application.positionPaperSubmittedAt = new Date();
       application.positionPaperStatus = 'submitted';
       if (remarks) application.positionPaperRemarks = remarks;
@@ -263,6 +291,7 @@ router.post(
 
       res.json({
         message: 'Position paper uploaded successfully',
+        positionPaperUrl: application.positionPaperUrl,
         submittedAt: application.positionPaperSubmittedAt,
         status: application.positionPaperStatus,
       });
@@ -272,6 +301,77 @@ router.post(
     }
   }
 );
+
+// @route   POST /api/mun/upload-position-paper-direct
+// @desc    Upload position paper directly to user profile (no application needed)
+// @access  Private
+router.post(
+  '/upload-position-paper-direct',
+  protect,
+  upload.single('positionPaper'),
+  async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+      const User = (await import('../models/User')).default;
+      const user = await User.findById(req.user!._id);
+
+      if (!user) {
+        res.status(404).json({ message: 'User not found' });
+        return;
+      }
+
+      // Check if country has been allotted
+      if (!user.allottedCountry) {
+        res.status(400).json({ message: 'You can only upload position paper after country assignment' });
+        return;
+      }
+
+      if (!req.file) {
+        res.status(400).json({ message: 'Please upload a PDF file' });
+        return;
+      }
+
+      // Get remarks from body
+      const { remarks } = req.body;
+
+      // Upload to Cloudinary
+      const uploadResult = await new Promise<{ secure_url: string }>((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            resource_type: 'raw',
+            folder: 'mun-position-papers',
+            public_id: `user_${req.user!._id}_${Date.now()}`,
+            format: 'pdf',
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else if (result) resolve(result);
+            else reject(new Error('Upload failed'));
+          }
+        );
+        uploadStream.end(req.file!.buffer);
+      });
+
+      // Update user with Cloudinary URL
+      user.positionPaperUrl = uploadResult.secure_url;
+      user.positionPaperSubmittedAt = new Date();
+      user.positionPaperStatus = 'submitted';
+      if (remarks) user.positionPaperRemarks = remarks;
+
+      await user.save();
+
+      res.json({
+        message: 'Position paper uploaded successfully',
+        positionPaperUrl: user.positionPaperUrl,
+        submittedAt: user.positionPaperSubmittedAt,
+        status: user.positionPaperStatus,
+      });
+    } catch (error: any) {
+      console.error('Direct upload error:', error);
+      res.status(500).json({ message: error.message || 'Upload failed' });
+    }
+  }
+);
+
 
 // ==================== ADMIN ROUTES ====================
 

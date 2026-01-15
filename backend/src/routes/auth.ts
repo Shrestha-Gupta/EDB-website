@@ -146,6 +146,11 @@ router.get('/me', protect, async (req: AuthRequest, res: Response): Promise<void
         previousMunExperience: user.previousMunExperience,
         allottedCountry: user.allottedCountry,
         allottedCommittee: user.allottedCommittee,
+        // Position Paper fields
+        positionPaperUrl: user.positionPaperUrl,
+        positionPaperSubmittedAt: user.positionPaperSubmittedAt,
+        positionPaperStatus: user.positionPaperStatus,
+        positionPaperRemarks: user.positionPaperRemarks,
       },
     });
   } catch (error: any) {

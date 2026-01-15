@@ -109,6 +109,24 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    // Position Paper fields (for direct upload without application)
+    positionPaperUrl: {
+      type: String,
+      default: '',
+    },
+    positionPaperSubmittedAt: {
+      type: Date,
+      default: null,
+    },
+    positionPaperStatus: {
+      type: String,
+      enum: ['not_submitted', 'submitted', 'under_review', 'approved', 'revision_requested'],
+      default: 'not_submitted',
+    },
+    positionPaperRemarks: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,
@@ -139,7 +157,7 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// @ts-expect-error mongoose model type instantiation issue
+
 const User = mongoose.model('User', userSchema);
 
 export default User;

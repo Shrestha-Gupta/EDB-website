@@ -496,6 +496,7 @@ const MunAdminPage = () => {
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Country Preferences</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Assigned Country</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Experience</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Position Paper</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Action</th>
                     </tr>
                   </thead>
@@ -523,6 +524,35 @@ const MunAdminPage = () => {
                           }`}>
                             {u.experienceLevel || 'N/A'}
                           </span>
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {u.positionPaperUrl ? (
+                            <div className="flex items-center gap-2">
+                              <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                u.positionPaperStatus === 'approved' ? 'bg-green-100 text-green-700' :
+                                u.positionPaperStatus === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                                u.positionPaperStatus === 'under_review' ? 'bg-purple-100 text-purple-700' :
+                                u.positionPaperStatus === 'revision_requested' ? 'bg-orange-100 text-orange-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}>
+                                {u.positionPaperStatus === 'submitted' ? '📄 Submitted' :
+                                 u.positionPaperStatus === 'approved' ? '✅ Approved' :
+                                 u.positionPaperStatus === 'under_review' ? '🔍 Review' :
+                                 u.positionPaperStatus === 'revision_requested' ? '📝 Revision' :
+                                 u.positionPaperStatus || 'Uploaded'}
+                              </span>
+                              <a
+                                href={u.positionPaperUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2 py-1 bg-blue-600 text-white rounded text-xs font-semibold hover:bg-blue-700"
+                              >
+                                View
+                              </a>
+                            </div>
+                          ) : (
+                            <span className="text-stone-400">Not submitted</span>
+                          )}
                         </td>
                         <td className="px-4 py-3 text-sm">
                           <button
@@ -569,6 +599,7 @@ const MunAdminPage = () => {
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Phone</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">College</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Experience</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Position Paper</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-stone-200">
@@ -586,6 +617,35 @@ const MunAdminPage = () => {
                           }`}>
                             {u.experienceLevel || 'N/A'}
                           </span>
+                        </td>
+                        <td className="px-4 py-3 text-sm">
+                          {u.positionPaperUrl ? (
+                            <div className="flex items-center gap-2">
+                              <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                u.positionPaperStatus === 'approved' ? 'bg-green-100 text-green-700' :
+                                u.positionPaperStatus === 'submitted' ? 'bg-blue-100 text-blue-700' :
+                                u.positionPaperStatus === 'under_review' ? 'bg-purple-100 text-purple-700' :
+                                u.positionPaperStatus === 'revision_requested' ? 'bg-orange-100 text-orange-700' :
+                                'bg-gray-100 text-gray-700'
+                              }`}>
+                                {u.positionPaperStatus === 'submitted' ? '📄 Submitted' :
+                                 u.positionPaperStatus === 'approved' ? '✅ Approved' :
+                                 u.positionPaperStatus === 'under_review' ? '🔍 Review' :
+                                 u.positionPaperStatus === 'revision_requested' ? '📝 Revision' :
+                                 u.positionPaperStatus || 'Uploaded'}
+                              </span>
+                              <a
+                                href={u.positionPaperUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2 py-1 bg-purple-600 text-white rounded text-xs font-semibold hover:bg-purple-700"
+                              >
+                                View
+                              </a>
+                            </div>
+                          ) : (
+                            <span className="text-stone-400">Not submitted</span>
+                          )}
                         </td>
                       </tr>
                     ))}

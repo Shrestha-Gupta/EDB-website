@@ -196,10 +196,19 @@ const MunAdminDashboard = () => {
   // Get applications with edit requests pending
   const editRequests = applications.filter(app => app.editRequestPending);
   
-  // Get applications with submitted position papers
+  // Get applications with submitted position papers (any status except not_submitted)
   const positionPapers = applications.filter(app => 
+    app.positionPaperUrl || 
     app.positionPaperStatus === 'submitted' || 
-    app.positionPaperStatus === 'under_review'
+    app.positionPaperStatus === 'under_review' ||
+    app.positionPaperStatus === 'approved' ||
+    app.positionPaperStatus === 'revision_requested'
+  );
+
+  // Get users with position papers (direct uploads)
+  const usersWithPapers = users.filter(u => 
+    u.positionPaperUrl || 
+    (u.positionPaperStatus && u.positionPaperStatus !== 'not_submitted')
   );
 
   const handleStatusUpdate = async (appId: string, status: "approved" | "rejected") => {
@@ -326,7 +335,7 @@ const MunAdminDashboard = () => {
     approved: applications.filter(a => a.status === 'approved').length,
     allotted: applications.filter(a => a.status === 'allotted').length,
     rejected: applications.filter(a => a.status === 'rejected').length,
-    pendingPapers: positionPapers.length,
+    pendingPapers: positionPapers.length + usersWithPapers.length,
     editRequests: editRequests.length,
   };
 
@@ -578,6 +587,41 @@ const MunAdminDashboard = () => {
                             </div>
                           </div>
                         )}
+                        {/* Position Paper Section */}
+                        {app.positionPaperUrl && (
+                          <div className="bg-purple-50 rounded-lg p-3 text-sm border border-purple-200 mt-2">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="font-semibold text-purple-900 mb-1">📄 Position Paper</p>
+                                <div className="flex items-center gap-2">
+                                  <StatusBadge status={app.positionPaperStatus} />
+                                  <span className="text-xs text-purple-600">
+                                    {app.positionPaperSubmittedAt 
+                                      ? `Submitted: ${new Date(app.positionPaperSubmittedAt).toLocaleDateString()}`
+                                      : ''}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex gap-2">
+                                <a
+                                  href={app.positionPaperUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-3 py-1 bg-purple-600 text-white rounded text-xs font-semibold hover:bg-purple-700"
+                                >
+                                  View
+                                </a>
+                                <a
+                                  href={app.positionPaperUrl}
+                                  download={`position_paper_${app.user.name.replace(/\s+/g, '_')}.pdf`}
+                                  className="px-3 py-1 bg-green-600 text-white rounded text-xs font-semibold hover:bg-green-700"
+                                >
+                                  Download
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                       <div className="flex flex-col gap-2 min-w-[140px]">
                         {app.status === "pending" && (
@@ -673,6 +717,41 @@ const MunAdminDashboard = () => {
                             </div>
                           </div>
                         )}
+                        {/* Position Paper Section */}
+                        {app.positionPaperUrl && (
+                          <div className="bg-purple-50 rounded-lg p-3 text-sm border border-purple-200 mt-2">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="font-semibold text-purple-900 mb-1">📄 Position Paper</p>
+                                <div className="flex items-center gap-2">
+                                  <StatusBadge status={app.positionPaperStatus} />
+                                  <span className="text-xs text-purple-600">
+                                    {app.positionPaperSubmittedAt 
+                                      ? `Submitted: ${new Date(app.positionPaperSubmittedAt).toLocaleDateString()}`
+                                      : ''}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="flex gap-2">
+                                <a
+                                  href={app.positionPaperUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-3 py-1 bg-purple-600 text-white rounded text-xs font-semibold hover:bg-purple-700"
+                                >
+                                  View
+                                </a>
+                                <a
+                                  href={app.positionPaperUrl}
+                                  download={`position_paper_${app.user.name.replace(/\s+/g, '_')}.pdf`}
+                                  className="px-3 py-1 bg-green-600 text-white rounded text-xs font-semibold hover:bg-green-700"
+                                >
+                                  Download
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                       <div className="flex flex-col gap-2 min-w-[140px]">
                         {app.status === "pending" && (
@@ -709,14 +788,44 @@ const MunAdminDashboard = () => {
         {activeTab === "papers" && (
           <div className="space-y-4">
             <div className="bg-white rounded-xl p-4 border border-stone-200 shadow-sm">
-              <h3 className="font-bold text-stone-900 mb-2">📄 Position Papers to Review</h3>
-              <p className="text-stone-600 text-sm">Review and approve position papers submitted by delegates</p>
+              <div className="flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                  <h3 className="font-bold text-stone-900 mb-2">📄 Position Papers</h3>
+                  <p className="text-stone-600 text-sm">Review and approve position papers submitted by delegates</p>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="text-sm text-stone-500">Filter:</span>
+                  <select
+                    className="px-3 py-1.5 rounded-lg border border-stone-300 text-sm focus:border-amber-500 outline-none"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // This is a client-side filter for the position papers display
+                      const cards = document.querySelectorAll('[data-paper-status]');
+                      cards.forEach((card) => {
+                        const status = card.getAttribute('data-paper-status');
+                        if (value === '' || status === value) {
+                          (card as HTMLElement).style.display = '';
+                        } else {
+                          (card as HTMLElement).style.display = 'none';
+                        }
+                      });
+                    }}
+                  >
+                    <option value="">All Papers</option>
+                    <option value="submitted">Submitted</option>
+                    <option value="under_review">Under Review</option>
+                    <option value="approved">Approved</option>
+                    <option value="revision_requested">Revision Requested</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             {positionPapers.length > 0 ? (
               positionPapers.map((app) => (
                 <motion.div
                   key={app._id}
+                  data-paper-status={app.positionPaperStatus}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="bg-white rounded-xl p-6 border border-stone-200 shadow-lg"
@@ -730,14 +839,14 @@ const MunAdminDashboard = () => {
                       <p className="text-stone-600 text-sm">{app.user.email}</p>
                       <p className="text-stone-500 text-sm">{app.user.college}</p>
                       
-                      <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
+                      <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                         <div className="bg-blue-50 p-2 rounded">
                           <p className="text-xs text-blue-600">Committee</p>
-                          <p className="font-semibold">{app.allottedCommittee}</p>
+                          <p className="font-semibold">{app.allottedCommittee || 'N/A'}</p>
                         </div>
                         <div className="bg-green-50 p-2 rounded">
                           <p className="text-xs text-green-600">Country</p>
-                          <p className="font-semibold">{app.allottedCountry}</p>
+                          <p className="font-semibold">{app.allottedCountry || 'N/A'}</p>
                         </div>
                         <div className="bg-purple-50 p-2 rounded">
                           <p className="text-xs text-purple-600">Submitted</p>
@@ -745,6 +854,12 @@ const MunAdminDashboard = () => {
                             {app.positionPaperSubmittedAt 
                               ? new Date(app.positionPaperSubmittedAt).toLocaleDateString()
                               : 'N/A'}
+                          </p>
+                        </div>
+                        <div className="bg-amber-50 p-2 rounded">
+                          <p className="text-xs text-amber-600">File</p>
+                          <p className="font-semibold text-xs truncate">
+                            {app.positionPaperUrl ? '📄 PDF Uploaded' : 'No file'}
                           </p>
                         </div>
                       </div>
@@ -755,18 +870,34 @@ const MunAdminDashboard = () => {
                           <p className="text-sm text-stone-700">{app.positionPaperRemarks}</p>
                         </div>
                       )}
+
+                      {app.positionPaperAdminRemarks && (
+                        <div className="mt-3 bg-amber-50 p-3 rounded border border-amber-200">
+                          <p className="text-xs text-amber-600 mb-1">Admin Remarks:</p>
+                          <p className="text-sm text-stone-700">{app.positionPaperAdminRemarks}</p>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex flex-col gap-2 min-w-[160px]">
                       {app.positionPaperUrl && (
-                        <a
-                          href={app.positionPaperUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 text-center"
-                        >
-                          📥 View Paper
-                        </a>
+                        <>
+                          <a
+                            href={app.positionPaperUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 text-center"
+                          >
+                            📄 View Paper
+                          </a>
+                          <a
+                            href={app.positionPaperUrl}
+                            download={`position_paper_${app.user.name.replace(/\s+/g, '_')}.pdf`}
+                            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 text-center"
+                          >
+                            📥 Download
+                          </a>
+                        </>
                       )}
                       <button
                         onClick={() => {
@@ -780,9 +911,98 @@ const MunAdminDashboard = () => {
                   </div>
                 </motion.div>
               ))
-            ) : (
+            ) : null}
+
+            {/* User-based position papers (direct uploads) */}
+            {usersWithPapers.length > 0 && (
+              <>
+                <div className="bg-purple-50 rounded-xl p-4 border border-purple-200 mt-6">
+                  <h3 className="font-bold text-purple-900 mb-2">📄 Direct Uploads (No Application)</h3>
+                  <p className="text-purple-600 text-sm">Position papers uploaded directly by users without MUN application</p>
+                </div>
+                {usersWithPapers.map((u) => (
+                  <motion.div
+                    key={u._id}
+                    data-paper-status={u.positionPaperStatus}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-xl p-6 border border-purple-200 shadow-lg"
+                  >
+                    <div className="flex flex-col lg:flex-row justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-lg font-bold text-stone-900">{u.name}</h3>
+                          <StatusBadge status={u.positionPaperStatus || 'not_submitted'} />
+                          <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                            Direct Upload
+                          </span>
+                        </div>
+                        <p className="text-stone-600 text-sm">{u.email}</p>
+                        <p className="text-stone-500 text-sm">{u.college}</p>
+                        
+                        <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                          <div className="bg-blue-50 p-2 rounded">
+                            <p className="text-xs text-blue-600">Committee</p>
+                            <p className="font-semibold">{u.allottedCommittee || u.preferredCommittee || 'N/A'}</p>
+                          </div>
+                          <div className="bg-green-50 p-2 rounded">
+                            <p className="text-xs text-green-600">Country</p>
+                            <p className="font-semibold">{u.allottedCountry || 'N/A'}</p>
+                          </div>
+                          <div className="bg-purple-50 p-2 rounded">
+                            <p className="text-xs text-purple-600">Submitted</p>
+                            <p className="font-semibold">
+                              {u.positionPaperSubmittedAt 
+                                ? new Date(u.positionPaperSubmittedAt).toLocaleDateString()
+                                : 'N/A'}
+                            </p>
+                          </div>
+                          <div className="bg-amber-50 p-2 rounded">
+                            <p className="text-xs text-amber-600">File</p>
+                            <p className="font-semibold text-xs truncate">
+                              {u.positionPaperUrl ? '📄 PDF Uploaded' : 'No file'}
+                            </p>
+                          </div>
+                        </div>
+
+                        {u.positionPaperRemarks && (
+                          <div className="mt-3 bg-stone-50 p-3 rounded">
+                            <p className="text-xs text-stone-500 mb-1">User's Remarks:</p>
+                            <p className="text-sm text-stone-700">{u.positionPaperRemarks}</p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col gap-2 min-w-[160px]">
+                        {u.positionPaperUrl && (
+                          <>
+                            <a
+                              href={u.positionPaperUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 text-center"
+                            >
+                              📄 View Paper
+                            </a>
+                            <a
+                              href={u.positionPaperUrl}
+                              download={`position_paper_${u.name.replace(/\s+/g, '_')}.pdf`}
+                              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 text-center"
+                            >
+                              📥 Download
+                            </a>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </>
+            )}
+
+            {positionPapers.length === 0 && usersWithPapers.length === 0 && (
               <div className="bg-white rounded-xl p-12 text-center border border-stone-200">
-                <p className="text-stone-600">No position papers pending review</p>
+                <p className="text-stone-600">No position papers submitted yet</p>
               </div>
             )}
           </div>
