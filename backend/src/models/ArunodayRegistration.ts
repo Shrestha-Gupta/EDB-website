@@ -23,7 +23,8 @@ export interface IArunodayRegistration {
   updatedAt: Date;
 }
 
-const teamMemberSchema = new mongoose.Schema({
+// Workaround for mongoose v9 TypeScript depth issue
+const teamMemberSchema: any = new (mongoose.Schema as any)({
   name: {
     type: String,
     required: [true, 'Team member name is required'],
@@ -41,7 +42,7 @@ const teamMemberSchema = new mongoose.Schema({
   },
 });
 
-const arunodayRegistrationSchema = new mongoose.Schema(
+const arunodayRegistrationSchema: any = new (mongoose.Schema as any)(
   {
     teamName: {
       type: String,
@@ -117,9 +118,9 @@ arunodayRegistrationSchema.index({ teamLeaderEmail: 1 });
 arunodayRegistrationSchema.index({ teamName: 1 });
 arunodayRegistrationSchema.index({ status: 1 });
 
-const ArunodayRegistration = mongoose.model<IArunodayRegistration>(
+const ArunodayRegistration = (mongoose.model as any)(
   'ArunodayRegistration',
   arunodayRegistrationSchema
-);
+) as mongoose.Model<IArunodayRegistration>;
 
 export default ArunodayRegistration;

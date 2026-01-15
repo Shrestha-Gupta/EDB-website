@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-export interface IUser {
+export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
   email: string;
   password: string;
@@ -19,12 +19,20 @@ export interface IUser {
   experienceLevel: 'beginner' | 'intermediate' | 'advanced' | '';
   hasAttendedMun: boolean;
   previousMunExperience: string;
+  // Allotted details (assigned by admin)
+  allottedCountry: string;
+  allottedCommittee: string;
+  // Position Paper fields
+  positionPaperUrl: string;
+  positionPaperSubmittedAt: Date | null;
+  positionPaperStatus: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
+  positionPaperRemarks: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     email: {
       type: String,
@@ -157,6 +165,8 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-const User = mongoose.model<IUser>('User', userSchema);
+// Workaround for mongoose v9 TypeScript depth issue
+const schemaAny = userSchema as any;
+const User = mongoose.model('User', schemaAny) as any as Model<IUser>;
 
 export default User;
