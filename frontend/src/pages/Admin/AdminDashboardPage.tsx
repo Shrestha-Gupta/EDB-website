@@ -237,6 +237,25 @@ const AdminDashboardPage = () => {
             </Link>
             <p className="text-stone-600 text-sm mt-1">MUN Dashboard</p>
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                <FiUsers className="w-6 h-6 text-purple-600" />
+              </div>
+            </div>
+            <Link
+              to="/admin/user-info"
+              className="text-purple-600 hover:text-purple-700 font-semibold flex items-center gap-1"
+            >
+              User Info →
+            </Link>
+            <p className="text-stone-600 text-sm mt-1">Comprehensive User Data</p>
+          </motion.div>
         </div>
 
         {/* Tabs */}

@@ -39,6 +39,7 @@ const MunSelectCommitteePage = lazy(() => import("./pages/MUN/MunSelectCommittee
 
 // Admin Pages
 const AdminDashboardPage = lazy(() => import("./pages/Admin/AdminDashboardPage"));
+const UserInfoPage = lazy(() => import("./pages/Admin/UserInfoPage"));
 
 // Auth Pages
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
@@ -179,6 +180,7 @@ function App() {
                     
                     {/* Admin Routes */}
                     <Route path="/admin" element={<AdminDashboardPage />} />
+                    <Route path="/admin/user-info" element={<UserInfoPage />} />
                   </Routes>
                 </AnimatePresence>
               </Suspense>
