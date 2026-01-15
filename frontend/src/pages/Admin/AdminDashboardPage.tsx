@@ -9,6 +9,9 @@ import {
   getArunodayRegistrations,
   updateArunodayStatus,
   getAllUsers,
+  exportEventRegistrations,
+  exportArunodayRegistrations,
+  exportMunRegistrations,
   type EventRegistration,
   type ArunodayRegistration,
   type MunUser,
@@ -276,16 +279,43 @@ const AdminDashboardPage = () => {
                 className="flex-1 px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
               />
               {activeTab === "events" && (
-                <select
-                  value={eventFilter}
-                  onChange={(e) => setEventFilter(e.target.value)}
-                  className="px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                <>
+                  <select
+                    value={eventFilter}
+                    onChange={(e) => setEventFilter(e.target.value)}
+                    className="px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                  >
+                    <option value="all">All Events</option>
+                    <option value="pralekh">Pralekh</option>
+                    <option value="plotlines">Plotlines</option>
+                    <option value="openmic">Open Mic</option>
+                  </select>
+                  <button
+                    onClick={() => exportEventRegistrations(eventFilter !== 'all' ? eventFilter : undefined)}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                  >
+                    <FiDownload className="w-4 h-4" />
+                    Export CSV
+                  </button>
+                </>
+              )}
+              {activeTab === "arunoday" && (
+                <button
+                  onClick={() => exportArunodayRegistrations()}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
                 >
-                  <option value="all">All Events</option>
-                  <option value="pralekh">Pralekh</option>
-                  <option value="plotlines">Plotlines</option>
-                  <option value="openmic">Open Mic</option>
-                </select>
+                  <FiDownload className="w-4 h-4" />
+                  Export CSV
+                </button>
+              )}
+              {activeTab === "users" && (
+                <button
+                  onClick={() => exportMunRegistrations()}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                >
+                  <FiDownload className="w-4 h-4" />
+                  Export CSV
+                </button>
               )}
             </div>
           </div>

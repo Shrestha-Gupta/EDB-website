@@ -10,6 +10,7 @@ import {
   createEvent,
   getAllUsers,
   assignCountryToUser,
+  exportMunRegistrations,
 } from "../../services/munApi";
 import type { MunEvent, MunApplication, MunUser } from "../../services/munApi";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
@@ -473,6 +474,12 @@ const MunAdminPage = () => {
                   Unselected: {users.filter(u => !u.preferredCommittee).length}
                 </p>
               </div>
+              <button
+                onClick={() => exportMunRegistrations()}
+                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
+              >
+                📥 Export CSV
+              </button>
             </div>
 
             {/* UNHRC Registrations Section */}

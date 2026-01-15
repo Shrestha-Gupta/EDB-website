@@ -686,4 +686,69 @@ router.put('/admin/applications/:id/status', protect, adminOnly, async (req: Aut
   }
 });
 
+// @route   GET /api/mun/admin/export/csv
+// @desc    Export all MUN registrations as CSV
+// @access  Admin only
+router.get('/admin/export/csv', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const User = (await import('../models/User')).default;
+    const users = await User.find({ preferredCommittee: { $ne: '' } })
+      .select('-password')
+      .sort({ createdAt: -1 });
+
+    // CSV header
+    const headers = [
+      'Name',
+      'Email',
+      'Phone',
+      'College',
+      'Branch',
+      'Year',
+      'Preferred Committee',
+      'Country Preferences',
+      'Experience Level',
+      'Has Attended MUN',
+      'Previous MUN Experience',
+      'Allotted Country',
+      'Allotted Committee',
+      'Position Paper Status',
+      'Position Paper URL',
+      'Registration Date',
+    ];
+
+    // Convert to CSV rows
+    const rows = users.map((user) => {
+      const countryPrefsStr = (user.countryPreferences || []).filter(c => c).join('; ');
+      
+      return [
+        `"${(user.name || '').replace(/"/g, '""')}"`,
+        `"${user.email}"`,
+        `"${user.phone || ''}"`,
+        `"${(user.college || '').replace(/"/g, '""')}"`,
+        `"${(user.branch || '').replace(/"/g, '""')}"`,
+        `"${user.year || ''}"`,
+        `"${user.preferredCommittee || ''}"`,
+        `"${countryPrefsStr}"`,
+        `"${user.experienceLevel || ''}"`,
+        `"${user.hasAttendedMun ? 'Yes' : 'No'}"`,
+        `"${(user.previousMunExperience || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        `"${user.allottedCountry || ''}"`,
+        `"${user.allottedCommittee || ''}"`,
+        `"${user.positionPaperStatus || 'not_submitted'}"`,
+        `"${user.positionPaperUrl || ''}"`,
+        `"${new Date(user.createdAt).toLocaleString()}"`,
+      ].join(',');
+    });
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=mun_registrations.csv');
+    res.send(csvContent);
+  } catch (error: any) {
+    console.error('Error exporting MUN registrations:', error);
+    res.status(500).json({ message: error.message || 'Failed to export registrations' });
+  }
+});
+
 export default router;

@@ -103,3 +103,48 @@ export const deleteArunodayRegistration = async (id: string): Promise<void> => {
     method: 'DELETE',
   });
 };
+
+// Export functions for downloading CSV files
+
+// Helper to trigger file download
+const downloadCsv = async (url: string, filename: string) => {
+  const token = getToken();
+  const response = await fetch(`${API_BASE_URL}${url}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Export failed');
+  }
+
+  const blob = await response.blob();
+  const downloadUrl = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = downloadUrl;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(downloadUrl);
+};
+
+export const exportMunRegistrations = async (): Promise<void> => {
+  await downloadCsv('/api/mun/admin/export/csv', 'mun_registrations.csv');
+};
+
+export const exportArunodayRegistrations = async (): Promise<void> => {
+  await downloadCsv('/api/arunoday/export/csv', 'arunoday_registrations.csv');
+};
+
+export const exportEventRegistrations = async (eventType?: string): Promise<void> => {
+  const url = eventType 
+    ? `/api/events/admin/export/csv?eventType=${eventType}`
+    : '/api/events/admin/export/csv';
+  const filename = eventType 
+    ? `${eventType}_registrations.csv` 
+    : 'all_event_registrations.csv';
+  await downloadCsv(url, filename);
+};

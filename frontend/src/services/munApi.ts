@@ -390,3 +390,28 @@ export const allotApplicationEnhanced = async (
   });
   return data.application;
 };
+
+// Export MUN registrations as CSV
+export const exportMunRegistrations = async (): Promise<void> => {
+  const token = getToken();
+  const response = await fetch(`${API_BASE_URL}/api/mun/admin/export/csv`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Export failed');
+  }
+
+  const blob = await response.blob();
+  const downloadUrl = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = downloadUrl;
+  a.download = 'mun_registrations.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(downloadUrl);
+};
