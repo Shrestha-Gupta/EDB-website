@@ -20,6 +20,8 @@ const MunDashboardPage = () => {
   const isAllotted = currentApplication?.allottedCountry || user?.allottedCountry;
 
   useEffect(() => {
+    // Refresh user data to get latest assigned country and position paper info
+    refreshUser().catch(console.error);
     fetchApplications();
   }, []);
 
