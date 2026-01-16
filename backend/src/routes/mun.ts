@@ -4,6 +4,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import MunEvent from '../models/MunEvent';
 import MunApplication from '../models/MunApplication';
 import { protect, adminOnly, profileComplete, AuthRequest } from '../middleware/auth';
+import { sendMunCountryAssignmentEmail } from '../utils/emailService';
 
 const router = express.Router();
 
@@ -410,6 +411,24 @@ router.put('/admin/users/:id/assign-country', protect, adminOnly, async (req: Au
       res.status(404).json({ message: 'User not found' });
       return;
     }
+
+    // Send email notification to the participant (async, don't block response)
+    if (country && user.email) {
+      sendMunCountryAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Delegate',
+        country: country,
+        committee: committee || 'UNHRC',
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Country assignment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send country assignment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending country assignment email:', err);
+      });
+    }
     
     res.json({ message: 'Country assigned successfully', user });
   } catch (error: any) {
@@ -490,7 +509,7 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
       notes 
     } = req.body;
 
-    const application = await MunApplication.findById(req.params.id);
+    const application = await MunApplication.findById(req.params.id).populate('user', 'name email');
     if (!application) {
       res.status(404).json({ message: 'Application not found' });
       return;
@@ -501,6 +520,9 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
       res.status(400).json({ message: 'Allotment is locked and cannot be modified' });
       return;
     }
+
+    // Check if this is a new allotment (not a reassignment)
+    const isNewAllotment = !application.allottedCountry;
 
     application.status = 'allotted';
     application.allotmentStatus = application.allottedCountry ? 'reassigned' : 'allotted';
@@ -515,6 +537,26 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
     if (notes) application.adminNotes = notes;
 
     await application.save();
+
+    // Send email notification to the participant (async, don't block response)
+    // Only send for new allotments, not reassignments
+    const user = application.user as any;
+    if (country && user && user.email && isNewAllotment) {
+      sendMunCountryAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Delegate',
+        country: country,
+        committee: committee || 'UNHRC',
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Country allotment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send country allotment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending country allotment email:', err);
+      });
+    }
 
     res.json({ message: 'Allotment successful', application });
   } catch (error: any) {
