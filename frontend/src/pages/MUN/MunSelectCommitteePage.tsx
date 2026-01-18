@@ -153,27 +153,25 @@ const MunSelectCommitteePage = () => {
                   )}
                 </button>
 
-                {/* IP Option */}
-                <button
-                  type="button"
-                  onClick={() => setSelectedCommittee('IP')}
-                  className={`p-6 border-2 transition-all text-left hover:shadow-md ${
-                    selectedCommittee === 'IP'
-                      ? 'border-amber-600 bg-amber-50/50'
-                      : 'border-stone-200 bg-white hover:border-amber-600'
-                  }`}
-                >
-                  <h3 className="font-bold text-stone-900 text-lg mb-1">International Press</h3>
-                  <p className="text-amber-600 text-sm mb-3 font-medium">Press Committee</p>
-                  <p className="text-stone-600 text-sm leading-relaxed">
-                    Question delegates and seek clarifications on resolutions.
-                  </p>
-                  {selectedCommittee === 'IP' && (
-                    <div className="mt-4 pt-3 border-t border-amber-200 text-amber-600 font-medium text-sm">
-                      Selected
-                    </div>
-                  )}
-                </button>
+                {/* IP Option - REGISTRATIONS CLOSED */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full p-6 border-2 border-stone-200 bg-stone-100 text-left opacity-60 cursor-not-allowed"
+                  >
+                    <h3 className="font-bold text-stone-500 text-lg mb-1">International Press</h3>
+                    <p className="text-stone-400 text-sm mb-3 font-medium">Press Committee</p>
+                    <p className="text-stone-400 text-sm leading-relaxed">
+                      Question delegates and seek clarifications on resolutions.
+                    </p>
+                  </button>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="bg-red-600 text-white px-4 py-2 text-sm font-bold uppercase tracking-wide shadow-lg transform -rotate-6">
+                      Registrations Closed
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
