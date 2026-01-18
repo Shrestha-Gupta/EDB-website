@@ -48,6 +48,7 @@ export interface UserInfo {
   experienceLevel: string;
   allottedCountry: string;
   allottedCommittee: string;
+  allottedNewspaper: string; // For IP participants
   createdAt: string;
   updatedAt: string;
 }

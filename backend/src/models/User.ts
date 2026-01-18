@@ -22,6 +22,7 @@ export interface IUser extends Document {
   // Allotted details (assigned by admin)
   allottedCountry: string;
   allottedCommittee: string;
+  allottedNewspaper: string; // For IP participants
   // Position Paper fields
   positionPaperUrl: string;
   positionPaperSubmittedAt: Date | null;
@@ -114,6 +115,11 @@ const userSchema = new Schema(
       default: '',
     },
     allottedCommittee: {
+      type: String,
+      default: '',
+    },
+    // Newspaper assignment for IP participants
+    allottedNewspaper: {
       type: String,
       default: '',
     },

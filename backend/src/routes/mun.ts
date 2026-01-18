@@ -4,7 +4,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import MunEvent from '../models/MunEvent';
 import MunApplication from '../models/MunApplication';
 import { protect, adminOnly, profileComplete, AuthRequest } from '../middleware/auth';
-import { sendMunCountryAssignmentEmail } from '../utils/emailService';
+import { sendMunCountryAssignmentEmail, sendMunNewspaperAssignmentEmail } from '../utils/emailService';
 
 const router = express.Router();
 
@@ -437,6 +437,52 @@ router.put('/admin/users/:id/assign-country', protect, adminOnly, async (req: Au
   }
 });
 
+// @route   PUT /api/mun/admin/users/:id/assign-newspaper
+// @desc    Assign newspaper company to an IP participant
+// @access  Admin only
+router.put('/admin/users/:id/assign-newspaper', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { newspaper } = req.body;
+    const User = (await import('../models/User')).default;
+    
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { 
+        allottedNewspaper: newspaper,
+        allottedCommittee: 'IP'
+      },
+      { new: true }
+    ).select('-password');
+    
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    // Send email notification to the participant (async, don't block response)
+    if (newspaper && user.email) {
+      sendMunNewspaperAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Press Reporter',
+        newspaper: newspaper,
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Newspaper assignment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send newspaper assignment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending newspaper assignment email:', err);
+      });
+    }
+    
+    res.json({ message: 'Newspaper assigned successfully', user });
+  } catch (error: any) {
+    console.error('Assign newspaper error:', error);
+    res.status(500).json({ message: error.message || 'Failed to assign newspaper' });
+  }
+});
+
 // @route   POST /api/mun/admin/events
 // @desc    Create a new MUN event
 // @access  Admin only
@@ -753,6 +799,7 @@ router.get('/admin/export/csv', protect, adminOnly, async (req: AuthRequest, res
       'Previous MUN Experience',
       'Allotted Country',
       'Allotted Committee',
+      'Allotted Newspaper',
       'Position Paper Status',
       'Position Paper URL',
       'Registration Date',
@@ -776,6 +823,7 @@ router.get('/admin/export/csv', protect, adminOnly, async (req: AuthRequest, res
         `"${(user.previousMunExperience || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
         `"${user.allottedCountry || ''}"`,
         `"${user.allottedCommittee || ''}"`,
+        `"${user.allottedNewspaper || ''}"`,
         `"${user.positionPaperStatus || 'not_submitted'}"`,
         `"${user.positionPaperUrl || ''}"`,
         `"${new Date(user.createdAt).toLocaleString()}"`,

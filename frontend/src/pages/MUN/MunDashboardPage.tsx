@@ -165,17 +165,28 @@ const MunDashboardPage = () => {
             </span>
           </motion.div>
 
-          {/* Assigned Country */}
+          {/* Assigned Country/Newspaper - conditional based on committee */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="border-t-4 border-amber-600 bg-white p-6 hover:shadow-lg transition-all duration-300"
           >
-            <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Country</h3>
-            <span className="text-base font-medium text-stone-900">
-              {currentApplication?.allottedCountry || user?.allottedCountry || '—'}
-            </span>
+            {(currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? (
+              <>
+                <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Newspaper</h3>
+                <span className="text-base font-medium text-stone-900">
+                  {user?.allottedNewspaper || '—'}
+                </span>
+              </>
+            ) : (
+              <>
+                <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Country</h3>
+                <span className="text-base font-medium text-stone-900">
+                  {currentApplication?.allottedCountry || user?.allottedCountry || '—'}
+                </span>
+              </>
+            )}
           </motion.div>
         </div>
 
@@ -204,8 +215,8 @@ const MunDashboardPage = () => {
               </motion.div>
             )}
 
-            {/* Country Assignment Banner */}
-            {(currentApplication?.allottedCountry || user?.allottedCountry) && (
+            {/* Country Assignment Banner - for UNHRC delegates */}
+            {(currentApplication?.allottedCountry || user?.allottedCountry) && (currentApplication?.preferredCommittee || user?.preferredCommittee) !== 'IP' && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -215,6 +226,24 @@ const MunDashboardPage = () => {
                 <h3 className="text-lg font-serif font-bold text-stone-900 mb-2">Country Assignment Confirmed</h3>
                 <p className="text-stone-600">
                   You will represent <strong className="text-stone-900">{currentApplication?.allottedCountry || user?.allottedCountry}</strong> in {currentApplication?.allottedCommittee || user?.allottedCommittee || currentApplication?.preferredCommittee || user?.preferredCommittee}
+                </p>
+              </motion.div>
+            )}
+
+            {/* Newspaper Assignment Banner - for IP participants */}
+            {user?.allottedNewspaper && (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="border-t-4 border-purple-600 bg-white p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <h3 className="text-lg font-serif font-bold text-stone-900 mb-2">📰 Newspaper Assignment Confirmed</h3>
+                <p className="text-stone-600">
+                  You will represent <strong className="text-purple-700">{user?.allottedNewspaper}</strong> as a <strong className="text-stone-900">Press Reporter</strong> in the International Press committee.
+                </p>
+                <p className="text-sm text-stone-500 mt-3">
+                  Your role includes covering MUN proceedings, interviewing delegates, and writing articles about the debates.
                 </p>
               </motion.div>
             )}

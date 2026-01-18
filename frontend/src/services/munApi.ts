@@ -100,6 +100,7 @@ export interface MunUser {
   // Allotted details (assigned by admin)
   allottedCountry?: string;
   allottedCommittee?: string;
+  allottedNewspaper?: string; // For IP participants
   // Position Paper fields
   positionPaperUrl?: string;
   positionPaperSubmittedAt?: string;
@@ -285,6 +286,18 @@ export const assignCountryToUser = async (
   const data = await apiCall(`/api/mun/admin/users/${userId}/assign-country`, {
     method: 'PUT',
     body: JSON.stringify({ country, committee }),
+  });
+  return data.user;
+};
+
+// Assign newspaper to an IP user (Admin)
+export const assignNewspaperToUser = async (
+  userId: string,
+  newspaper: string
+): Promise<MunUser> => {
+  const data = await apiCall(`/api/mun/admin/users/${userId}/assign-newspaper`, {
+    method: 'PUT',
+    body: JSON.stringify({ newspaper }),
   });
   return data.user;
 };

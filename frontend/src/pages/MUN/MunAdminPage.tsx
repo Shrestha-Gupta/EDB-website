@@ -10,6 +10,7 @@ import {
   createEvent,
   getAllUsers,
   assignCountryToUser,
+  assignNewspaperToUser,
   exportMunRegistrations,
 } from "../../services/munApi";
 import type { MunEvent, MunApplication, MunUser } from "../../services/munApi";
@@ -56,6 +57,13 @@ const MunAdminPage = () => {
     user: MunUser | null;
   }>({ open: false, user: null });
   const [assignCountry, setAssignCountry] = useState("");
+
+  // Newspaper assignment modal state (for IP Registrations)
+  const [newspaperAssignModal, setNewspaperAssignModal] = useState<{
+    open: boolean;
+    user: MunUser | null;
+  }>({ open: false, user: null });
+  const [assignNewspaper, setAssignNewspaper] = useState("");
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -154,6 +162,25 @@ const MunAdminPage = () => {
       alert("Country assigned successfully!");
     } catch (error: any) {
       alert(error.message || "Failed to assign country");
+    }
+  };
+
+  const handleAssignNewspaper = async () => {
+    if (!newspaperAssignModal.user || !assignNewspaper.trim()) {
+      alert("Please enter a newspaper name");
+      return;
+    }
+    try {
+      await assignNewspaperToUser(
+        newspaperAssignModal.user._id,
+        assignNewspaper
+      );
+      setNewspaperAssignModal({ open: false, user: null });
+      setAssignNewspaper("");
+      await fetchData();
+      alert("Newspaper assigned successfully!");
+    } catch (error: any) {
+      alert(error.message || "Failed to assign newspaper");
     }
   };
 
@@ -605,8 +632,9 @@ const MunAdminPage = () => {
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Email</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Phone</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">College</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Assigned Newspaper</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Experience</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Position Paper</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-stone-700">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-stone-200">
@@ -617,6 +645,15 @@ const MunAdminPage = () => {
                         <td className="px-4 py-3 text-sm text-stone-600">{u.phone}</td>
                         <td className="px-4 py-3 text-sm text-stone-600">{u.college}</td>
                         <td className="px-4 py-3 text-sm">
+                          {u.allottedNewspaper ? (
+                            <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                              📰 {u.allottedNewspaper}
+                            </span>
+                          ) : (
+                            <span className="text-stone-400">Not assigned</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-3 text-sm">
                           <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
                             u.experienceLevel === 'advanced' ? 'bg-green-100 text-green-700' :
                             u.experienceLevel === 'intermediate' ? 'bg-amber-100 text-amber-700' :
@@ -626,33 +663,19 @@ const MunAdminPage = () => {
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          {u.positionPaperUrl ? (
-                            <div className="flex items-center gap-2">
-                              <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                                u.positionPaperStatus === 'approved' ? 'bg-green-100 text-green-700' :
-                                u.positionPaperStatus === 'submitted' ? 'bg-blue-100 text-blue-700' :
-                                u.positionPaperStatus === 'under_review' ? 'bg-purple-100 text-purple-700' :
-                                u.positionPaperStatus === 'revision_requested' ? 'bg-orange-100 text-orange-700' :
-                                'bg-gray-100 text-gray-700'
-                              }`}>
-                                {u.positionPaperStatus === 'submitted' ? '📄 Submitted' :
-                                 u.positionPaperStatus === 'approved' ? '✅ Approved' :
-                                 u.positionPaperStatus === 'under_review' ? '🔍 Review' :
-                                 u.positionPaperStatus === 'revision_requested' ? '📝 Revision' :
-                                 u.positionPaperStatus || 'Uploaded'}
-                              </span>
-                              <a
-                                href={u.positionPaperUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-2 py-1 bg-purple-600 text-white rounded text-xs font-semibold hover:bg-purple-700"
-                              >
-                                View
-                              </a>
-                            </div>
-                          ) : (
-                            <span className="text-stone-400">Not submitted</span>
-                          )}
+                          <button
+                            onClick={() => {
+                              setNewspaperAssignModal({ open: true, user: u });
+                              setAssignNewspaper(u.allottedNewspaper || '');
+                            }}
+                            className={`px-3 py-1 rounded-lg text-xs font-semibold ${
+                              u.allottedNewspaper 
+                                ? 'bg-amber-50 text-amber-600 hover:bg-amber-100' 
+                                : 'bg-purple-600 text-white hover:bg-purple-700'
+                            }`}
+                          >
+                            {u.allottedNewspaper ? '🔄 Change' : '📰 Assign'}
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -908,6 +931,59 @@ const MunAdminPage = () => {
                 className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-semibold"
               >
                 Assign Country
+              </button>
+            </div>
+            </motion.div>
+        </div>
+      )}
+
+      {/* Newspaper Assignment Modal */}
+      {newspaperAssignModal.open && newspaperAssignModal.user && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-2xl p-6 max-w-md w-full"
+          >
+            <h3 className="text-xl font-bold text-stone-900 mb-4">📰 Assign Newspaper</h3>
+            <p className="text-stone-600 text-sm mb-2">
+              Assigning for: <strong>{newspaperAssignModal.user.name}</strong>
+            </p>
+            <p className="text-purple-600 text-xs mb-4">
+              Committee: International Press (IP)
+            </p>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-stone-700 mb-1">Newspaper Company</label>
+                <input
+                  type="text"
+                  value={assignNewspaper}
+                  onChange={(e) => setAssignNewspaper(e.target.value)}
+                  className="w-full px-4 py-2 rounded-lg border border-stone-300 focus:border-purple-500 outline-none"
+                  placeholder="e.g., Reuters, The Hindu, Times of India"
+                />
+                <p className="text-xs text-stone-500 mt-2">
+                  Suggested: Reuters, BBC, Al Jazeera, The Hindu, Times of India, CNN, The Guardian
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => {
+                  setNewspaperAssignModal({ open: false, user: null });
+                  setAssignNewspaper("");
+                }}
+                className="flex-1 py-2 bg-stone-200 text-stone-700 rounded-lg font-semibold"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAssignNewspaper}
+                className="flex-1 py-2 bg-purple-600 text-white rounded-lg font-semibold"
+              >
+                Assign Newspaper
               </button>
             </div>
           </motion.div>

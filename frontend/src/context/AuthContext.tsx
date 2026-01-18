@@ -26,6 +26,7 @@ export interface User {
   // Allotted details (assigned by admin)
   allottedCountry?: string;
   allottedCommittee?: string;
+  allottedNewspaper?: string; // For IP participants
   // Position Paper fields
   positionPaperUrl?: string;
   positionPaperSubmittedAt?: string;
