@@ -72,6 +72,18 @@ router.post('/apply', protect, profileComplete, async (req: AuthRequest, res: Re
     return;
 
     // Check if user already applied
+    const userId = req.user!._id;
+    const { 
+      eventId, 
+      preferredCommittee, 
+      countryPreferences, 
+      agendaPreferences, 
+      experienceLevel, 
+      hasAttendedMun, 
+      previousMunExperience, 
+      whyJoin 
+    } = req.body;
+
     const existingApplication = await MunApplication.findOne({ user: userId, event: eventId });
     if (existingApplication) {
       res.status(400).json({ message: 'You have already applied for this event' });
@@ -307,6 +319,7 @@ router.post(
       });
 
       // Update user with Cloudinary URL
+      const user = req.user!;
       user.positionPaperUrl = uploadResult.secure_url;
       user.positionPaperSubmittedAt = new Date();
       user.positionPaperStatus = 'submitted';
