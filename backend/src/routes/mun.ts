@@ -67,30 +67,9 @@ router.get('/events/:id', async (req: AuthRequest, res: Response): Promise<void>
 // @access  Private (profile complete required)
 router.post('/apply', protect, profileComplete, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { 
-      eventId, 
-      preferredCommittee,
-      countryPreferences, 
-      agendaPreferences,
-      experienceLevel,
-      hasAttendedMun,
-      previousMunExperience, 
-      whyJoin 
-    } = req.body;
-    const userId = req.user!._id;
-
-    // Check if event exists and is active
-    const event = await MunEvent.findById(eventId);
-    if (!event || !event.isActive) {
-      res.status(404).json({ message: 'Event not found or not accepting applications' });
-      return;
-    }
-
-    // Check if registration deadline has passed
-    if (new Date() > event.registrationDeadline) {
-      res.status(400).json({ message: 'Registration deadline has passed' });
-      return;
-    }
+    // MUN Registrations are CLOSED
+    res.status(400).json({ message: 'MUN registrations are now closed. Thank you for your interest.' });
+    return;
 
     // Check if user already applied
     const existingApplication = await MunApplication.findOne({ user: userId, event: eventId });
@@ -231,24 +210,9 @@ router.post(
   upload.single('positionPaper'),
   async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-      const application = await MunApplication.findOne({
-        _id: req.params.applicationId,
-        user: req.user!._id,
-      });
-
-      if (!application) {
-        res.status(404).json({ message: 'Application not found' });
-        return;
-      }
-
-      // Check if country has been allotted (either via application or user profile)
-      const user = req.user!;
-      const hasAllottedCountry = application.allottedCountry || (user as any).allottedCountry;
-      
-      if (!hasAllottedCountry) {
-        res.status(400).json({ message: 'You can only upload position paper after country assignment' });
-        return;
-      }
+      // Position paper submissions are CLOSED
+      res.status(400).json({ message: 'Position paper submissions are now closed. The deadline has passed.' });
+      return;
 
       // Check if deadline has passed
       if (application.positionPaperDeadline && new Date() > application.positionPaperDeadline) {
@@ -312,19 +276,9 @@ router.post(
   upload.single('positionPaper'),
   async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-      const User = (await import('../models/User')).default;
-      const user = await User.findById(req.user!._id);
-
-      if (!user) {
-        res.status(404).json({ message: 'User not found' });
-        return;
-      }
-
-      // Check if country has been allotted
-      if (!user.allottedCountry) {
-        res.status(400).json({ message: 'You can only upload position paper after country assignment' });
-        return;
-      }
+      // Position paper submissions are CLOSED
+      res.status(400).json({ message: 'Position paper submissions are now closed. The deadline has passed.' });
+      return;
 
       if (!req.file) {
         res.status(400).json({ message: 'Please upload a PDF file' });

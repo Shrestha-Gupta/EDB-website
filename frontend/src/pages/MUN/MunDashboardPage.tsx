@@ -412,49 +412,22 @@ const MunDashboardPage = () => {
                       </a>
                     </div>
                   ) : (
+                    // Position Paper Submissions are CLOSED
                     <div className="space-y-4">
-                      <label className="block">
-                        <div className="border-2 border-dashed border-stone-200 p-6 text-center hover:border-amber-600 transition-all duration-200 cursor-pointer">
-                          <input
-                            type="file"
-                            accept=".pdf"
-                            onChange={handleFileChange}
-                            className="hidden"
-                          />
-                          <p className="text-sm text-stone-600 mb-1">
-                            {selectedFile ? selectedFile.name : 'Choose PDF file'}
-                          </p>
-                          <p className="text-xs text-stone-400">Maximum file size: 10MB</p>
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-3">
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                          </svg>
                         </div>
-                      </label>
-
-                      <textarea
-                        value={remarks}
-                        onChange={(e) => setRemarks(e.target.value)}
-                        placeholder="Additional remarks (optional)"
-                        className="w-full px-4 py-3 text-sm border border-stone-200 focus:outline-none focus:border-amber-600 resize-none transition-colors duration-200"
-                        rows={3}
-                      />
-
-                      {uploadError && (
-                        <p className="text-sm text-red-700">{uploadError}</p>
-                      )}
-                      {uploadSuccess && (
-                        <p className="text-sm text-green-700">{uploadSuccess}</p>
-                      )}
-
-                      <button
-                        onClick={handleUpload}
-                        disabled={!selectedFile || uploading}
-                        className={`inline-flex items-center gap-2 font-medium text-sm transition-colors ${
-                          selectedFile && !uploading
-                            ? 'text-stone-900 hover:text-amber-600'
-                            : 'text-stone-400 cursor-not-allowed'
-                        }`}
-                      >
-                        {uploading ? 'Uploading...' : 'Submit Position Paper'}
-                        {selectedFile && !uploading && <span>→</span>}
-                      </button>
+                        <p className="text-sm font-semibold text-red-800 mb-1">Submissions Closed</p>
+                        <p className="text-xs text-red-600">
+                          The deadline for position paper submissions has passed.
+                        </p>
+                      </div>
+                      <p className="text-xs text-stone-500 text-center">
+                        If you have any questions, please contact the MUN coordinators.
+                      </p>
                     </div>
                   )}
                 </div>
