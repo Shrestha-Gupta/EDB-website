@@ -99,12 +99,12 @@ const MunPage = () => {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-10"
             >
-              <h2 className="text-2xl md:text-3xl font-semibold text-green-700 flex items-center justify-center gap-3">
+              <h2 className="text-2xl md:text-3xl font-semibold text-red-700 flex items-center justify-center gap-3">
                 <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-600"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
                 </span>
-                Registrations Open Now!
+                Registrations Closed
               </h2>
             </motion.div>
 
@@ -156,13 +156,22 @@ const MunPage = () => {
           transition={{ duration: 0.3, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          <Link
-            to={isAuthenticated ? "/mun/dashboard" : "/login"}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
-          >
-            {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              to="/mun/dashboard"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+            >
+              Go to Dashboard
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          ) : (
+            <button
+              disabled
+              className="inline-flex items-center gap-2 px-8 py-4 bg-stone-300 text-stone-500 font-bold rounded-xl cursor-not-allowed"
+            >
+              Registrations Closed
+            </button>
+          )}
           <a
             href="#committees"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white border border-stone-200 text-stone-700 font-semibold rounded-xl hover:bg-stone-50 transition-colors"
@@ -357,13 +366,22 @@ const MunPage = () => {
           <p className="text-stone-600 mb-6 max-w-2xl mx-auto">
             Join delegates from across the country and experience the thrill of diplomatic discourse
           </p>
-          <Link
-            to={isAuthenticated ? "/mun/dashboard" : "/login"}
-            className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
-          >
-            {isAuthenticated ? "Go to Dashboard" : "Login to Register"}
-            <ArrowRight className="w-6 h-6" />
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              to="/mun/dashboard"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
+            >
+              Go to Dashboard
+              <ArrowRight className="w-6 h-6" />
+            </Link>
+          ) : (
+            <button
+              disabled
+              className="inline-flex items-center gap-2 px-10 py-4 bg-stone-300 text-stone-500 font-bold rounded-xl cursor-not-allowed text-lg"
+            >
+              Registrations Closed
+            </button>
+          )}
         </motion.div>
 
         {/* Call Coordinators Card */}
