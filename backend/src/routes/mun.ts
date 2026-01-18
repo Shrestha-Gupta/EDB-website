@@ -222,10 +222,21 @@ router.post(
   upload.single('positionPaper'),
   async (req: AuthRequest, res: Response): Promise<void> => {
     try {
+      const application = await MunApplication.findOne({
+        _id: req.params.applicationId,
+        user: req.user!._id,
+      });
+
+      if (!application) {
+        res.status(404).json({ message: 'Application not found' });
+        return;
+      }
+
       // Position paper submissions are CLOSED
       res.status(400).json({ message: 'Position paper submissions are now closed. The deadline has passed.' });
       return;
 
+      /*
       // Check if deadline has passed
       if (application.positionPaperDeadline && new Date() > application.positionPaperDeadline) {
         res.status(400).json({ message: 'Position paper submission deadline has passed' });
@@ -272,6 +283,7 @@ router.post(
         submittedAt: application.positionPaperSubmittedAt,
         status: application.positionPaperStatus,
       });
+      */
     } catch (error: any) {
       console.error('Upload error:', error);
       res.status(500).json({ message: error.message || 'Upload failed' });
