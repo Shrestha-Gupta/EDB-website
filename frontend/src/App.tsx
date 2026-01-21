@@ -47,7 +47,6 @@ const SignupPage = lazy(() => import("./pages/Auth/SignupPage"));
 const DashboardPage = lazy(() => import("./pages/Auth/DashboardPage"));
 const ProfilePage = lazy(() => import("./pages/Auth/ProfilePage"));
 
-import { RegistrationPopup } from "./components/RegistrationPopup";
 import "./App.css";
 
 function ScrollToTop() {
@@ -105,22 +104,6 @@ class ErrorBoundary extends Component<
 function App() {
   // Disable splash screen by default to avoid blank screen issues
   const [showSplash, setShowSplash] = useState<boolean>(true);
-  const [showRegistration, setShowRegistration] = useState<boolean>(false);
-
-  // Show registration popup after splash screen closes (only once per session)
-  useEffect(() => {
-    if (!showSplash) {
-      // Temporarily disabled sessionStorage check for testing
-      // const hasSeenPopup = sessionStorage.getItem('arunoday26_popup_shown');
-      // if (!hasSeenPopup) {
-        const timer = setTimeout(() => {
-          setShowRegistration(true);
-          sessionStorage.setItem('arunoday26_popup_shown', 'true');
-        }, 1000);
-        return () => clearTimeout(timer);
-      // }
-    }
-  }, [showSplash]);
 
   return (
     <AuthProvider>
@@ -145,7 +128,7 @@ function App() {
               >
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route path="/" element={<HomePage onOpenRegistration={() => setShowRegistration(true)} />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/team" element={<TeamPage />} />
                     <Route path="/events" element={<EventsPage />} />
                     <Route
@@ -158,13 +141,13 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
-                    
+
                     {/* Auth Routes */}
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    
+
                     {/* MUN Routes */}
                     <Route path="/mun" element={<MunPage />} />
                     <Route path="/mun/login" element={<MunLoginPage />} />
@@ -177,7 +160,7 @@ function App() {
                     <Route path="/mun/apply/:eventId" element={<MunApplyPage />} />
                     <Route path="/mun/admin" element={<MunAdminPage />} />
                     <Route path="/mun/admin-dashboard" element={<MunAdminDashboard />} />
-                    
+
                     {/* Admin Routes */}
                     <Route path="/admin" element={<AdminDashboardPage />} />
                     <Route path="/admin/user-info" element={<UserInfoPage />} />
@@ -187,12 +170,7 @@ function App() {
             </main>
             <Footer />
           </div>
-          
-          {/* Global Registration Popup */}
-          <RegistrationPopup 
-            isOpen={showRegistration} 
-            onClose={() => setShowRegistration(false)} 
-          />
+
         </ErrorBoundary>
       </Router>
     </AuthProvider>
