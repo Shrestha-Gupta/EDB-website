@@ -4,6 +4,7 @@ import ParticlesBackground from "../../components/ParticlesBackground/ParticlesB
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
 import { useAuth } from "../../context/AuthContext";
 import { Calendar, MapPin, Users, Globe, Mic, ArrowRight } from "lucide-react";
+import MunWinnersShowcase from "../../components/MunWinnersShowcase/MunWinnersShowcase";
 
 const MunPage = () => {
   const { isAuthenticated } = useAuth();
@@ -12,53 +13,7 @@ const MunPage = () => {
     document.getElementById("mun-winners")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const winners = [
-    {
-      category: "Best Delegate",
-      icon: "🏆",
-      winners: [
-        "Aditya Pandey (EE, 1st Year)",
-        "Vedansh Tiwari (IT, 1st Year)",
-        "Shreyash Ranjan Thakur (ECE, 1st Year)"
-      ],
-      color: "from-amber-400 to-yellow-600"
-    },
-    {
-      category: "Best Orator",
-      icon: "🎤",
-      winners: [
-        "Parul Tiwari (IT, 1st Year)",
-        "Ananaya Kumar (EE, 1st Year)",
-        "Lungshen Ailly (CE, 1st Year)"
-      ],
-      color: "from-blue-400 to-indigo-600"
-    },
-    {
-      category: "Best Position Paper",
-      icon: "📝",
-      winners: [
-        "Shaurya Kumar (ECE, 1st Year)",
-        "Ananya Prasad (ECE, 1st Year)"
-      ],
-      color: "from-emerald-400 to-teal-600"
-    },
-    {
-      category: "Best Journalist",
-      icon: "📰",
-      winners: [
-        "Kaushiki Kesarwani (CSE, 1st Year)"
-      ],
-      color: "from-purple-400 to-violet-600"
-    },
-    {
-      category: "Best Resolution",
-      icon: "📋",
-      winners: [
-        "Vivekanand Tiwari (IT, 1st Year)"
-      ],
-      color: "from-rose-400 to-pink-600"
-    }
-  ];
+
 
   const committees = [
     {
@@ -75,13 +30,7 @@ const MunPage = () => {
     },
   ];
 
-  const awards = [
-    { title: "Best Delegate", description: "Outstanding overall performance", icon: "🏆" },
-    { title: "Best Orator", description: "Excellence in diplomacy", icon: "🎤" },
-    { title: "Best Resolution", description: "Notable contribution", icon: "📋" },
-    { title: "Best Position Paper", description: "Outstanding research", icon: "📝" },
-    { title: "Best Journalist", description: "Outstanding reporting", icon: "📰" },
-  ];
+
 
   return (
     <div className="bg-stone-50 min-h-screen pb-20 relative overflow-x-hidden font-sans text-stone-800">
@@ -225,45 +174,7 @@ const MunPage = () => {
           transition={{ duration: 0.4 }}
           className="mb-24"
         >
-           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-stone-900 mb-6">
-              Distinguished Delegates
-            </h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-6"></div>
-            <p className="text-stone-600 max-w-2xl mx-auto text-lg">
-              Honoring outstanding diplomacy, journalism, and research.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {winners.map((category, index) => (
-              <motion.div
-                key={category.category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-stone-100 hover:shadow-xl transition-all duration-300 group"
-              >
-                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  {category.icon}
-                </div>
-                
-                <h3 className="text-2xl font-serif font-bold text-stone-900 mb-6 pb-4 border-b border-stone-100">
-                  {category.category}
-                </h3>
-                
-                <ul className="space-y-4">
-                  {category.winners.map((winner, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className={`mt-2 w-1.5 h-1.5 rounded-full bg-stone-400 flex-shrink-0`}></div>
-                      <span className="text-stone-700 font-medium text-lg">{winner}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
+          <MunWinnersShowcase />
         </motion.div>
 
         {/* Agenda Section */}
