@@ -3,10 +3,62 @@ import { Link } from "react-router-dom";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
 import { useAuth } from "../../context/AuthContext";
-import { Calendar, MapPin, Users, Award, FileText, Globe, Mic, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Users, Globe, Mic, ArrowRight } from "lucide-react";
 
 const MunPage = () => {
   const { isAuthenticated } = useAuth();
+  
+  const scrollToWinners = () => {
+    document.getElementById("mun-winners")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const winners = [
+    {
+      category: "Best Delegate",
+      icon: "🏆",
+      winners: [
+        "Aditya Pandey (EE, 1st Year)",
+        "Vedansh Tiwari (IT, 1st Year)",
+        "Shreyash Ranjan Thakur (ECE, 1st Year)"
+      ],
+      color: "from-amber-400 to-yellow-600"
+    },
+    {
+      category: "Best Orator",
+      icon: "🎤",
+      winners: [
+        "Parul Tiwari (IT, 1st Year)",
+        "Ananaya Kumar (EE, 1st Year)",
+        "Lungshen Ailly (CE, 1st Year)"
+      ],
+      color: "from-blue-400 to-indigo-600"
+    },
+    {
+      category: "Best Position Paper",
+      icon: "📝",
+      winners: [
+        "Shaurya Kumar (ECE, 1st Year)",
+        "Ananya Prasad (ECE, 1st Year)"
+      ],
+      color: "from-emerald-400 to-teal-600"
+    },
+    {
+      category: "Best Journalist",
+      icon: "📰",
+      winners: [
+        "Kaushiki Kesarwani (CSE, 1st Year)"
+      ],
+      color: "from-purple-400 to-violet-600"
+    },
+    {
+      category: "Best Resolution",
+      icon: "📋",
+      winners: [
+        "Vivekanand Tiwari (IT, 1st Year)"
+      ],
+      color: "from-rose-400 to-pink-600"
+    }
+  ];
 
   const committees = [
     {
@@ -29,13 +81,6 @@ const MunPage = () => {
     { title: "Best Resolution", description: "Notable contribution", icon: "📋" },
     { title: "Best Position Paper", description: "Outstanding research", icon: "📝" },
     { title: "Best Journalist", description: "Outstanding reporting", icon: "📰" },
-  ];
-
-  const steps = [
-    { step: 1, title: "Login / Sign Up", description: "Create your account or login to get started" },
-    { step: 2, title: "Complete Profile", description: "Fill in your delegate details and preferences" },
-    { step: 3, title: "Apply for Committee", description: "Select your preferred committee and country" },
-    { step: 4, title: "Get Confirmed", description: "Receive confirmation and prepare for MUN" },
   ];
 
   return (
@@ -92,19 +137,18 @@ const MunPage = () => {
               "Step into the shoes of world leaders. Debate. Negotiate. Make history."
             </motion.p>
 
-            {/* Registrations Open */}
+            {/* Event Concluded Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-10"
             >
-              <h2 className="text-2xl md:text-3xl font-semibold text-red-700 flex items-center justify-center gap-3">
+              <h2 className="text-2xl md:text-3xl font-semibold text-stone-700 flex items-center justify-center gap-3">
                 <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-stone-500"></span>
                 </span>
-                Registrations Closed
+                Event Concluded
               </h2>
             </motion.div>
 
@@ -156,62 +200,67 @@ const MunPage = () => {
           transition={{ duration: 0.3, delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {isAuthenticated ? (
-            <Link
-              to="/mun/dashboard"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
-            >
-              Go to Dashboard
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          ) : (
-            <button
-              disabled
-              className="inline-flex items-center gap-2 px-8 py-4 bg-stone-300 text-stone-500 font-bold rounded-xl cursor-not-allowed"
-            >
-              Registrations Closed
-            </button>
-          )}
-          <a
-            href="#committees"
+          <button
+            onClick={scrollToWinners}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+          >
+            View Winners
+            <ArrowRight className="w-5 h-5" />
+          </button>
+          
+          <Link
+            to="/mun/dashboard"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white border border-stone-200 text-stone-700 font-semibold rounded-xl hover:bg-stone-50 transition-colors"
           >
-            View Committees
-          </a>
+            Dashboard
+          </Link>
         </motion.div>
 
-        {/* Registration Steps */}
+        {/* Winners Section */}
         <motion.div
+          id="mun-winners"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.25 }}
-          className="mb-16"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-24"
         >
-          <h2 className="text-3xl font-serif font-bold text-stone-900 text-center mb-10">
-            How to Register
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {steps.map((item, index) => (
+           <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-stone-900 mb-6">
+              Distinguished Delegates
+            </h2>
+            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-stone-600 max-w-2xl mx-auto text-lg">
+              Honoring outstanding diplomacy, journalism, and research.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {winners.map((category, index) => (
               <motion.div
-                key={item.step}
+                key={category.category}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                className="relative"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-2xl p-8 shadow-lg border border-stone-100 hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="bg-white/80 backdrop-blur-sm border border-amber-200/50 rounded-2xl p-6 text-center shadow-lg h-full">
-                  <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                    {item.step}
-                  </div>
-                  <h3 className="font-bold text-stone-900 mb-2">{item.title}</h3>
-                  <p className="text-stone-600 text-sm">{item.description}</p>
+                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  {category.icon}
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-amber-400" />
-                  </div>
-                )}
+                
+                <h3 className="text-2xl font-serif font-bold text-stone-900 mb-6 pb-4 border-b border-stone-100">
+                  {category.category}
+                </h3>
+                
+                <ul className="space-y-4">
+                  {category.winners.map((winner, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className={`mt-2 w-1.5 h-1.5 rounded-full bg-stone-400 flex-shrink-0`}></div>
+                      <span className="text-stone-700 font-medium text-lg">{winner}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
@@ -275,114 +324,19 @@ const MunPage = () => {
           </div>
         </motion.div>
 
-        {/* Awards Section */}
+        {/* Resources Section & CTA removed/condensed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mb-20"
+          className="text-center pt-12 border-t border-stone-200"
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-2">
-            Awards & Recognition
-          </h2>
-          <div className="w-16 h-1 bg-amber-600 mb-10"></div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {awards.map((award, index) => (
-              <motion.div
-                key={award.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl mb-3 text-stone-700">{award.icon}</div>
-                <h3 className="font-semibold text-stone-900 text-sm">{award.title}</h3>
-              </motion.div>
-            ))}
-          </div>
+           <p className="text-stone-500 italic">
+             "Diplomacy is the art of letting someone else have your way."
+           </p>
         </motion.div>
 
-        {/* Resources Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-20"
-        >
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-l-4 border-amber-600 p-8 md:p-12">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2 text-stone-900">
-                  Delegate Resources
-                </h3>
-                <p className="text-stone-600 mb-1">
-                  Essential materials for preparation
-                </p>
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-green-700">
-                  <span className="relative flex h-2 w-2">
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
-                  </span>
-                  Available Now
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href="https://drive.google.com/file/d/1Zqq0XbiX9Mn6jq5OTBgexwl6d6x3VSCl/view?usp=sharing" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 font-medium hover:bg-amber-50 hover:border-amber-300 transition-all duration-300"
-                >
-                  <FileText className="w-5 h-5 text-amber-600" />
-                  Sample Position Paper
-                </a>
-                <a 
-                  href="https://drive.google.com/file/d/1vkDxRvyP3OkbUmJqd9bIHiTgC9FlRdvj/view?usp=drive_link" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 font-medium hover:bg-amber-50 hover:border-amber-300 transition-all duration-300"
-                >
-                  <Award className="w-5 h-5 text-amber-600" />
-                  MUN Guidebook
-                </a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Final CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-center border-t border-stone-200 pt-12"
-        >
-          <h3 className="text-2xl font-serif font-bold text-stone-900 mb-4">
-            Ready to Make Your Voice Heard?
-          </h3>
-          <p className="text-stone-600 mb-6 max-w-2xl mx-auto">
-            Join delegates from across the country and experience the thrill of diplomatic discourse
-          </p>
-          {isAuthenticated ? (
-            <Link
-              to="/mun/dashboard"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25 text-lg"
-            >
-              Go to Dashboard
-              <ArrowRight className="w-6 h-6" />
-            </Link>
-          ) : (
-            <button
-              disabled
-              className="inline-flex items-center gap-2 px-10 py-4 bg-stone-300 text-stone-500 font-bold rounded-xl cursor-not-allowed text-lg"
-            >
-              Registrations Closed
-            </button>
-          )}
-        </motion.div>
 
         {/* Call Coordinators Card */}
         <motion.div
@@ -414,7 +368,7 @@ const MunPage = () => {
             </div>
             
             <p className="text-stone-600 mb-6">
-              Have questions about the event or registration? Our coordinators are here to help!
+              Have questions about certificates or results? Our coordinators are here!
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4">
