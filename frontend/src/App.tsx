@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState, Component, Suspense, lazy } from "react";
@@ -142,11 +143,11 @@ function App() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
 
-                    {/* Auth Routes */}
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
+                    {/* Auth Routes - Redirected for Prod */}
+                    <Route path="/login" element={<Navigate to="/" replace />} />
+                    <Route path="/signup" element={<Navigate to="/" replace />} />
+                    <Route path="/dashboard" element={<Navigate to="/" replace />} />
+                    <Route path="/profile" element={<Navigate to="/" replace />} />
 
                     {/* MUN Routes */}
                     <Route path="/mun" element={<MunPage />} />

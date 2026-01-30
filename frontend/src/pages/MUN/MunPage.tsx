@@ -157,12 +157,7 @@ const MunPage = () => {
             <ArrowRight className="w-5 h-5" />
           </button>
           
-          <Link
-            to="/mun/dashboard"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white border border-stone-200 text-stone-700 font-semibold rounded-xl hover:bg-stone-50 transition-colors"
-          >
-            Dashboard
-          </Link>
+          
         </motion.div>
 
         {/* Winners Section */}
