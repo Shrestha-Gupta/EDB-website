@@ -246,9 +246,8 @@ export default function Navbar() {
             {navLinks.slice(0, 10).map((link) => (
               <Link key={link.name} to={link.path} onMouseEnter={() => prefetchRoute(link.path)} onFocus={() => prefetchRoute(link.path)}>
                 <motion.div
-                  className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${
-                    isActive(link.path) ? "text-orange-500" : "text-gray-700"
-                  }`}
+                  className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${isActive(link.path) ? "text-orange-500" : "text-gray-700"
+                    }`}
                   whileTap={{ scale: 0.95 }}
                 >
                   {/* Before pseudo-element (top and bottom borders) */}
@@ -273,18 +272,49 @@ export default function Navbar() {
 
           {/* Right: Contact Button */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
-              <Link to="/contact">
-                <motion.div
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-amber-500 text-amber-600 font-medium text-sm hover:bg-amber-50 transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+            <Link to="/contact">
+              <motion.div
+                className="group relative flex items-center gap-2 px-4 py-2 rounded-full border-2 border-amber-500 bg-white font-medium text-sm overflow-hidden cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+                }}
+                style={{
+                  ['--mouse-x' as any]: '50%',
+                  ['--mouse-y' as any]: '50%',
+                }}
+              >
+                {/* Cursor-following spotlight with defined boundary */}
+                <div
+                  className="absolute w-20 h-20 rounded-full pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                  style={{
+                    left: 'var(--mouse-x)',
+                    top: 'var(--mouse-y)',
+                    transform: 'translate(-50%, -50%)',
+                    background: 'radial-gradient(circle, rgba(251, 146, 60, 0.5) 0%, rgba(251, 191, 36, 0.3) 40%, transparent 70%)',
+                    filter: 'blur(8px)',
+                  }}
+                />
+
+                <svg
+                  className="w-4 h-4 relative z-10 text-amber-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span>Contact Us</span>
-                </motion.div>
-              </Link>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+
+                <span className="relative z-10 text-amber-600">
+                  Contact Us
+                </span>
+              </motion.div>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -336,7 +366,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 style={{ top: '56px' }}
               />
-              
+
               {/* Mobile menu panel */}
               <motion.div
                 className="lg:hidden fixed left-0 right-0 bg-white/98 backdrop-blur-lg border-t border-gray-100 shadow-xl max-h-[calc(100vh-56px)] overflow-y-auto"
@@ -359,11 +389,10 @@ export default function Navbar() {
                         <Link
                           to={link.path}
                           onClick={() => setIsOpen(false)}
-                          className={`flex items-center gap-2 p-3 rounded-xl transition-all duration-200 ${
-                            isActive(link.path)
-                              ? "text-orange-600 bg-orange-50 shadow-sm"
-                              : "text-gray-700 hover:text-orange-500 hover:bg-orange-50/50 active:bg-orange-100"
-                          }`}
+                          className={`flex items-center gap-2 p-3 rounded-xl transition-all duration-200 ${isActive(link.path)
+                            ? "text-orange-600 bg-orange-50 shadow-sm"
+                            : "text-gray-700 hover:text-orange-500 hover:bg-orange-50/50 active:bg-orange-100"
+                            }`}
                         >
                           <span className="w-5 h-5 flex-shrink-0">
                             {link.icon}
@@ -375,7 +404,7 @@ export default function Navbar() {
                       </motion.div>
                     ))}
                   </div>
-                  
+
                   {/* Mobile CTA button */}
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -407,7 +436,7 @@ export default function Navbar() {
                         Login / Sign Up
                       </Link>
                     )} */}
-                    
+
                     {/* Contact Button */}
                     <Link
                       to="/contact"

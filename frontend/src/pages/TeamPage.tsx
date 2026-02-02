@@ -136,7 +136,7 @@ const preFinalTeam = [
     id: 11,
     name: "Shreshtha Gupta",
     department: "Electronics and Communication Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.36.13_PM_vmf3mq.jpg",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/c_fill,g_face,h_800,w_800,z_0.6/v1767464082/WhatsApp_Image_2026-01-03_at_11.36.13_PM_vmf3mq.jpg",
   },
   {
     id: 12,
@@ -156,7 +156,7 @@ const preFinalTeam = [
     id: 14,
     name: "Yashvardhan Ojha",
     department: "Computer Science and Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767465590/WhatsApp_Image_2026-01-03_at_11.53.22_PM_1_ai1p7f.jpg",
+    image: "https://res.cloudinary.com/doch9ibf6/image/upload/c_fill,g_face,h_800,w_800,z_0.6/v1770057514/2A6A8115_pqnt3u.jpg",
   },
 ];
 
