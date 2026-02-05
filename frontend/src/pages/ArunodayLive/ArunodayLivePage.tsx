@@ -106,9 +106,11 @@ const ArunodayLivePage = () => {
               transition={{ duration: 0.3, delay: 0.1 }}
               className="mb-8"
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 text-sm font-semibold tracking-wide uppercase mb-4 border border-amber-200">
-                ✨ Event Concluded ✨
-              </span>
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-4 border-2 border-amber-600/30 bg-stone-50/80 backdrop-blur-sm">
+                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
+                <span className="text-sm font-medium tracking-wider text-stone-700 uppercase">Event Concluded</span>
+                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
+              </div>
               <p className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed">
                 "Where creativity meets culture, and talents find their stage."
               </p>
@@ -189,7 +191,7 @@ const ArunodayLivePage = () => {
           transition={{ duration: 0.5 }}
           className="mb-24"
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-stone-900 mb-6">
               Hall of Victory
             </h2>
@@ -203,7 +205,7 @@ const ArunodayLivePage = () => {
         </motion.div>
 
         {/* Featured Events Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
@@ -228,7 +230,6 @@ const ArunodayLivePage = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group relative bg-white border-2 border-stone-100 hover:border-amber-200/60 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden"
               >
-                {/* Top orangish accent bar */}
                 <div className="h-1 bg-gradient-to-r from-orange-400 to-amber-500" />
                 
                 <div className="p-8">
@@ -252,13 +253,12 @@ const ArunodayLivePage = () => {
                     <span className="text-sm text-stone-500 font-medium">
                       {event.eligibility}
                     </span>
-                    {/* Buttons removed/disabled for concluded event */}
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
 
         {/* Call Coordinators Card */}

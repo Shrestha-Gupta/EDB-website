@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Hero from "../components/Hero/Hero";
 import About from "../components/About/About";
 import Publications from "../components/Publications/Publications";
 import Contact from "../components/Contact/Contact";
 import SEO, { seoConfigs } from "../components/SEO/SEO";
 import { ArrowRight } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
-import EventRegistrationModal from "../components/EventRegistration/EventRegistrationModal";
-import type { EventType } from "../services/eventsApi";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -26,16 +22,13 @@ const containerVariants = {
 
 // Featured Events Section
 const FeaturedEvents = () => {
-  const { isAuthenticated } = useAuth();
-  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
-
   const events = [
     {
       name: "Arunoday",
       subtitle: "The Literary Extravaganza",
       icon: "🌅",
       description: "When dawn breaks upon the realm of words. Narratives are spoken, shaped, and tested.",
-      link: "/arunoday-live",
+      link: "/arunoday-live#winners",
       eventType: null
     },
     {
@@ -43,7 +36,7 @@ const FeaturedEvents = () => {
       subtitle: "Diplomatic Excellence",
       icon: "🇺🇳",
       description: "Step into the shoes of world leaders. Debate, negotiate, and make history.",
-      link: "/mun",
+      link: "/mun#mun-winners",
       eventType: null
     },
     {
@@ -51,24 +44,24 @@ const FeaturedEvents = () => {
       subtitle: "Newsletter Writing",
       icon: "📝",
       description: "Express your thoughts through compelling and creative newsletter writing.",
-      link: "/dashboard",
-      eventType: "pralekh" as EventType
+      link: "/arunoday-live#winners",
+      eventType: null
     },
     {
       name: "Plotlines",
       subtitle: "Creative Writing",
       icon: "✍️",
       description: "Craft captivating stories and let your imagination run wild on paper.",
-      link: "/dashboard",
-      eventType: "plotlines" as EventType
+      link: "/arunoday-live#winners",
+      eventType: null
     },
     {
       name: "Open Mic",
       subtitle: "Poetry & Performance",
       icon: "🎤",
       description: "Take the stage and share your voice through poetry, spoken word, or performance.",
-      link: "/dashboard",
-      eventType: "openmic" as EventType
+      link: "/arunoday-live#winners",
+      eventType: null
     },
   ];
 
@@ -88,7 +81,7 @@ const FeaturedEvents = () => {
           </h2>
           <div className="w-16 h-1 bg-amber-600 mb-6"></div>
           <p className="text-stone-600 max-w-2xl">
-            Register now and showcase your talents at MMMUT's premier literary and cultural fest
+            Celebrating excellence and achievement at MMMUT's premier literary and cultural fest
           </p>
         </motion.div>
 
@@ -109,23 +102,13 @@ const FeaturedEvents = () => {
                 <p className="text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
                   {event.description}
                 </p>
-                {isAuthenticated && event.eventType ? (
-                  <button
-                    onClick={() => setSelectedEvent(event.eventType!)}
-                    className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium text-sm transition-colors group-hover:gap-3"
-                  >
-                    Register Now
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                ) : (
-                  <Link
-                    to={event.link}
-                    className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium text-sm transition-colors group-hover:gap-3"
-                  >
-                    Register Now
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                )}
+                <Link
+                  to={event.link}
+                  className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium text-sm transition-colors group-hover:gap-3"
+                >
+                  View Winners
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -140,7 +123,7 @@ const FeaturedEvents = () => {
           className="mt-12"
         >
           <Link
-            to="/arunoday-live"
+            to="/events"
             className="inline-flex items-center gap-2 px-8 py-3 border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white font-medium transition-colors"
           >
             View All Events
@@ -148,16 +131,6 @@ const FeaturedEvents = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* Event Registration Modal */}
-      {selectedEvent && (
-        <EventRegistrationModal
-          isOpen={!!selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          eventType={selectedEvent}
-          onRegistrationComplete={() => setSelectedEvent(null)}
-        />
-      )}
     </section>
   );
 };

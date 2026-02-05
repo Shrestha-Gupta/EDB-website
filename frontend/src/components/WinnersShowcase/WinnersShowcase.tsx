@@ -1,8 +1,8 @@
-import { Trophy, Medal, Star, Crown, Users, ChevronRight, Share2, Sparkles, Zap, User } from 'lucide-react';
+import { Users, Award, TrendingUp, Pen, Mic, Feather } from 'lucide-react';
 
 const WinnersShowcase = () => {
-  // Mock data for the 3 winning teams
-  const winners = [
+  // Arunoday team winners data
+  const arunodayWinners = [
     {
       rank: 1,
       teamName: "There_are_days",
@@ -41,153 +41,466 @@ const WinnersShowcase = () => {
     },
   ];
 
+  // Individual event winners data
+  const pralekhWinners = [
+    { 
+      rank: 1, 
+      teamName: "Ink and Insight", 
+      description: "Outstanding newsletter creativity and design",
+      members: [
+        "Annisha Pal (ME, 1st Year)",
+        "Akshata Shivasaiana (ME, 1st Year)"
+      ]
+    },
+    { 
+      rank: 2, 
+      teamName: "Pratekshan", 
+      description: "Exceptional storytelling and journalistic excellence",
+      members: [
+        "Nishoo Yadav (ECE, 1st Year)",
+        "Anushka Raj (ECE, 1st Year)",
+        "Aditi Singh (EE, 1st Year)",
+        "Jagriti Maurya (ECE, 1st Year)"
+      ]
+    },
+    { 
+      rank: 3, 
+      teamName: "Farmaan", 
+      description: "Creative presentation and engaging content",
+      members: [
+        "Atharv Rajpoot (CSE, 1st Year)",
+        "Abhinn Rao (ECE-IoT, 1st Year)",
+        "Kaushiki Kesarwani (CSE, 1st Year)",
+        "Palak Rathore (BBA, 1st Year)"
+      ]
+    }
+  ];
+
+  const openMicWinners = [
+    { rank: 1, name: "Manan Baranwal", details: "IT, 1st Year" },
+    { rank: 2, name: "Divyanand Pandey", details: "CSE, 1st Year" },
+    { rank: 3, name: "Vedansh Tiwari", details: "IT, 1st Year" }
+  ];
+
+  const plotlinesWinners = [
+    { rank: 1, name: "Aryan Mathur", details: "CSE, 1st Year" },
+    { rank: 2, name: "Ananya Prasad", details: "ECE, 1st Year" },
+    { rank: 3, name: "Vishal Yadav", details: "ECE, 1st Year" }
+  ];
+
   return (
-    <div className="relative w-full py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      
-      {/* Header Section
-      <div className="relative z-10 max-w-4xl mx-auto text-center mb-20">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-amber-200 text-amber-700 text-sm font-medium mb-6 shadow-sm backdrop-blur-sm">
-          <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-          <span className="tracking-wide">2026 Championship Finals</span>
-          <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+    <div className="relative w-full py-8 px-4 sm:px-6 lg:px-8">
+
+      {/* Arunoday Team Winners Section */}
+      <div className="max-w-7xl mx-auto mb-12">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900 mb-1">
+            Arunoday '26 Winners
+          </h2>
+          <p className="text-stone-600 text-sm">The teams that excelled in the main event</p>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-stone-900 mb-6 drop-shadow-sm">
-          Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600">Victory</span>
-        </h1>
-        
-        <p className="text-lg md:text-xl text-stone-600 max-w-2xl mx-auto leading-relaxed">
-          Celebrating the rising stars who outshined the competition.
-          <br className="hidden md:block" /> Meet the legends forged in the heat of battle.
-        </p>
-      </div> */}
-
-      {/* Podium Layout */}
-      <div className="relative z-10 max-w-[90rem] mx-auto">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-8 pb-12">
-          
-          {winners.map((team) => {
+        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-6 lg:gap-8">
+          {arunodayWinners.map((team) => {
             const isFirst = team.rank === 1;
-            
-            // Layout ordering
-            const orderClass = isFirst ? 'lg:order-2' : team.rank === 2 ? 'lg:order-1' : 'lg:order-3';
-
-            // Stepped podium margins
-            const marginClass = isFirst ? 'lg:mt-0' : team.rank === 2 ? 'lg:mt-16' : 'lg:mt-32';
+            const isSecond = team.rank === 2;
+            const isThird = team.rank === 3;
             
             return (
               <div 
                 key={team.teamName}
-                className={`w-full max-w-xl ${orderClass} ${marginClass} relative group transition-all duration-500 hover:-translate-y-2`}
+                className={`w-full lg:w-1/3 group`}
               >
-                {/* 1st Place Special: Crown Icon Floating Above */}
-                {isFirst && (
-                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 text-amber-500 animate-bounce" style={{ animationDuration: '3s' }}>
-                        <Crown className="w-8 h-8 fill-amber-200" />
-                    </div>
-                )}
-
-                {/* Glow Effect for First Place */}
-                {isFirst && (
-                  <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                )}
-
-                {/* Card Container */}
-                <div className={`relative bg-white/40 backdrop-blur-xl rounded-2xl overflow-hidden shadow-2xl ${isFirst ? 'border-0 ring-4 ring-amber-100/50 ring-offset-2 ring-offset-transparent' : 'border border-white/40'} flex flex-col h-full`}>
+                <div className="relative overflow-hidden h-full flex flex-col bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
                   
-                  {/* Decorative Corner Accents (1st Place Only) */}
-                  {isFirst && (
-                    <>
-                      <div className="absolute top-0 right-0 -mt-2 -mr-2 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent rotate-45 transform pointer-events-none"></div>
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-50"></div>
-                    </>
-                  )}
+                  <div className={`h-1 ${
+                    isFirst ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600' :
+                    isSecond ? 'bg-gradient-to-r from-stone-400 via-stone-500 to-stone-400' :
+                    'bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700'
+                  }`} />
 
-                  {/* Card Header / Banner */}
-                  <div className="px-5 py-5 sm:px-6 sm:py-6 relative overflow-hidden bg-white/20 backdrop-blur-sm border-b border-white/20">
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={isFirst 
+                        ? "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=1000&auto=format&fit=crop"
+                        : isSecond
+                        ? "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1000&auto=format&fit=crop"
+                        : "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1000&auto=format&fit=crop"
+                      }
+                      alt={`Rank ${team.rank}`}
+                      className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/60 to-white/85" />
                     
-                    {/* Background Pattern for Header */}
-                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
-
-                    <div className="relative flex flex-col sm:flex-row sm:justify-between sm:items-start z-10 gap-3">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          {isFirst ? <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0" /> : <Medal className="w-4 h-4 text-amber-600 flex-shrink-0" />}
-                          <span className="font-bold tracking-widest uppercase text-xs text-amber-700">
-                            {team.rank === 1 ? 'Grand Champion' : `${team.rank === 2 ? 'Runner Up' : 'Third Place'}`}
-                          </span>
+                    <div className="absolute top-5 right-5 z-10">
+                      <div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-lg shadow-md ${
+                        isFirst ? 'bg-amber-500 text-white' :
+                        isSecond ? 'bg-stone-400 text-white' :
+                        'bg-amber-700 text-white'
+                      }`}>
+                        {team.rank}
+                      </div>
+                    </div>
+                    
+                    <div className="relative z-10 px-6 pt-6 pb-5">
+                      <div className="pr-14">
+                        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3 ${
+                          isFirst ? 'bg-amber-100/80 text-amber-800' :
+                          isSecond ? 'bg-stone-100/80 text-stone-700' :
+                          'bg-amber-50/80 text-amber-900'
+                        }`}>
+                          <Award className="w-3.5 h-3.5" />
+                          {team.rank === 1 ? 'Champion' : team.rank === 2 ? 'Runner Up' : 'Third Place'}
                         </div>
-                        <h3 className="text-2xl sm:text-3xl font-bold tracking-tight break-words text-stone-800">
+                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900 leading-tight mb-3">
                           {team.teamName}
                         </h3>
-                      </div>
-                      <div className="self-start sm:self-auto px-4 py-1.5 rounded-full font-bold shadow-sm whitespace-nowrap text-sm bg-white border border-stone-200 text-stone-600">
-                        {team.prize}
+                        <p className="text-stone-600 text-sm leading-relaxed">
+                          {team.description}
+                        </p>
                       </div>
                     </div>
                   </div>
+                  
+                  <div className="relative flex-1 flex flex-col">
+                    <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] bg-[size:20px_20px] pointer-events-none" />
+                    <div className={`absolute inset-0 pointer-events-none ${
+                      isFirst ? 'bg-gradient-to-b from-amber-50/40 via-orange-50/30 to-white/50' :
+                      isSecond ? 'bg-gradient-to-b from-stone-50/40 via-stone-50/30 to-white/50' :
+                      'bg-gradient-to-b from-amber-50/30 via-amber-50/20 to-white/50'
+                    }`} />
 
-                  {/* Team Members */}
-                  <div className="p-5 sm:p-6 flex-grow bg-transparent relative">
-                    {/* Subtle watermark */}
-                    <div className="absolute bottom-4 right-4 opacity-[0.03] pointer-events-none">
-                        <Trophy className="w-24 h-24 sm:w-32 sm:h-32" />
-                    </div>
+                    <div className="relative z-10 h-px bg-stone-200 mx-6 mt-1" />
 
-                    <p className="text-stone-600 text-sm mb-6 leading-relaxed border-l-2 border-amber-200 pl-3 italic">
-                      "{team.description}"
-                    </p>
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-2 text-xs font-bold text-stone-400 uppercase tracking-widest mb-4">
-                        <Users className="w-3 h-3" />
-                        <span>Squad Roster</span>
-                        <div className="h-px bg-stone-100 flex-grow ml-2"></div>
+                    <div className="relative z-10 px-6 py-6 flex-grow">
+                      <div className="flex items-center gap-2 mb-4">
+                        <Users className="w-4 h-4 text-stone-500" />
+                        <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
+                          Team Members
+                        </span>
                       </div>
                       
-                      <div className="space-y-3">
+                      <div className="space-y-2.5">
                         {team.members.map((member, idx) => (
-                          <div key={idx} className="relative group/player pl-2">
-                             
-                            {/* Connector Line Logic */}
-                            {idx !== team.members.length - 1 && (
-                                <div className={`absolute left-[26px] top-10 h-8 w-px ${isFirst ? 'bg-amber-200/40' : 'bg-stone-200/60'}`}></div>
-                            )}
-
-                            <div className={`relative flex items-center p-2 rounded-xl border transition-all duration-300
-                                ${isFirst 
-                                    ? 'bg-gradient-to-r from-amber-50/50 to-transparent border-amber-100/50 hover:border-amber-300 hover:shadow-md hover:from-amber-100/80 hover:-translate-x-1' 
-                                    : 'bg-stone-50/30 border-stone-100 hover:border-stone-300 hover:bg-stone-50 hover:shadow-sm hover:-translate-x-1'
-                                }`}>
-                                
-                                <div className="flex items-center gap-3 w-full overflow-hidden">
-                                    {/* Icon Container */}
-                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center border shadow-sm transition-transform duration-300 group-hover/player:scale-110 flex-shrink-0
-                                        ${isFirst 
-                                            ? 'bg-amber-100 border-amber-200 text-amber-700' 
-                                            : 'bg-white border-stone-200 text-stone-500 group-hover/player:text-stone-800'}`}>
-                                        <User className="w-4 h-4" />
-                                    </div>
-                                    
-                                    <div className="flex flex-col min-w-0">
-                                        <span className={`text-sm font-bold tracking-tight truncate ${isFirst ? 'text-stone-900' : 'text-stone-700'}`}>
-                                            {member.name}
-                                        </span>
-                                    </div>
-                                </div>
+                          <div 
+                            key={idx} 
+                            className="flex items-center gap-3 p-3 bg-white/60 backdrop-blur-sm border border-stone-200 hover:border-stone-300 hover:bg-white/80 transition-all duration-200"
+                          >
+                            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                              isFirst ? 'bg-amber-100 text-amber-800' :
+                              isSecond ? 'bg-stone-100 text-stone-700' :
+                              'bg-amber-50 text-amber-800'
+                            }`}>
+                              {idx + 1}
                             </div>
+                            <span className="text-sm text-stone-700 font-medium leading-tight">
+                              {member.name}
+                            </span>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
 
-
-
                 </div>
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Individual Events Winners Section */}
+      <div className="max-w-7xl mx-auto">
+        {/* Pralekh Winners */}
+        <div className="mb-12">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900 mb-1">
+              Pralekh Winners
+            </h2>
+            <p className="text-stone-600 text-sm">Newsletter Writing Excellence</p>
+          </div>
+          
+          <div className="flex flex-col lg:flex-row items-stretch lg:items-start justify-center gap-6 lg:gap-8">
+            {pralekhWinners.map((team) => {
+              const isFirst = team.rank === 1;
+              const isSecond = team.rank === 2;
+              const isThird = team.rank === 3;
+              
+              return (
+                <div 
+                  key={team.teamName}
+                  className="w-full lg:w-1/3 group"
+                >
+                  <div className="relative overflow-hidden h-full flex flex-col bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    
+                    <div className={`h-1 ${
+                      isFirst ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600' :
+                      isSecond ? 'bg-gradient-to-r from-stone-400 via-stone-500 to-stone-400' :
+                      'bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700'
+                    }`} />
+
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={
+                          team.teamName === "Ink and Insight" 
+                            ? "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop"
+                            : team.teamName === "Pratekshan"
+                            ? "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1000&auto=format&fit=crop"
+                            : "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1000&auto=format&fit=crop"
+                        }
+                        alt={team.teamName}
+                        className="absolute inset-0 w-full h-full object-cover opacity-60"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/80" />
+                      
+                      <div className="absolute top-5 right-5 z-10">
+                        <div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-lg shadow-md ${
+                          isFirst ? 'bg-amber-500 text-white' :
+                          isSecond ? 'bg-stone-400 text-white' :
+                          'bg-amber-700 text-white'
+                        }`}>
+                          {team.rank}
+                        </div>
+                      </div>
+                      
+                      <div className="relative z-10 px-6 pt-6 pb-5">
+                        <div className="pr-14">
+                          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3 ${
+                            isFirst ? 'bg-amber-100/80 text-amber-800' :
+                            isSecond ? 'bg-stone-100/80 text-stone-700' :
+                            'bg-amber-50/80 text-amber-900'
+                          }`}>
+                            <Pen className="w-3.5 h-3.5" />
+                            Newsletter Writing
+                          </div>
+                          <h3 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900 leading-tight mb-3">
+                            {team.teamName}
+                          </h3>
+                          <p className="text-stone-600 text-sm leading-relaxed">
+                            {team.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="relative flex-1 flex flex-col">
+                      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] bg-[size:20px_20px] pointer-events-none" />
+                      <div className={`absolute inset-0 pointer-events-none ${
+                        isFirst ? 'bg-gradient-to-b from-amber-50/40 via-orange-50/30 to-white/50' :
+                        isSecond ? 'bg-gradient-to-b from-stone-50/40 via-stone-50/30 to-white/50' :
+                        'bg-gradient-to-b from-amber-50/30 via-amber-50/20 to-white/50'
+                      }`} />
+
+                      <div className="relative z-10 h-px bg-stone-200 mx-6 mt-1" />
+
+                      <div className="relative z-10 px-6 py-6 flex-grow">
+                        <div className="flex items-center gap-2 mb-4">
+                          <Users className="w-4 h-4 text-stone-500" />
+                          <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
+                            Team Members
+                          </span>
+                        </div>
+                        
+                        <div className="space-y-2.5">
+                          {team.members.map((member, idx) => (
+                            <div 
+                              key={idx} 
+                              className="flex items-center gap-3 p-3 bg-white/60 backdrop-blur-sm border border-stone-200 hover:border-stone-300 hover:bg-white/80 transition-all duration-200"
+                            >
+                              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                                isFirst ? 'bg-amber-100 text-amber-800' :
+                                isSecond ? 'bg-stone-100 text-stone-700' :
+                                'bg-amber-50 text-amber-800'
+                              }`}>
+                                {idx + 1}
+                              </div>
+                              <span className="text-sm text-stone-700 font-medium leading-tight">
+                                {member}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Open Mic and Plotlines */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Open Mic Winners */}
+          <div>
+            <div className="text-center mb-6">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-stone-900 mb-1">
+                Open Mic Winners
+              </h2>
+              <p className="text-stone-600 text-sm">Poetry & Performance</p>
+            </div>
+            
+            <div className="relative overflow-hidden bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="h-1 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600" />
+
+              <div className="relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000&auto=format&fit=crop"
+                  alt="Open Mic"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/80" />
+                
+                <div className="absolute top-5 right-5 z-10">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center shadow-md bg-amber-500 text-white">
+                    <Mic className="w-5 h-5" />
+                  </div>
+                </div>
+                
+                <div className="relative z-10 px-6 pt-6 pb-5">
+                  <div className="pr-14">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3 bg-amber-100/80 text-amber-800">
+                      <Award className="w-3.5 h-3.5" />
+                      Individual Event
+                    </div>
+                    <h3 className="text-2xl font-serif font-bold text-stone-900 leading-tight mb-3">
+                      Open Mic
+                    </h3>
+                    <p className="text-stone-600 text-sm leading-relaxed">
+                      Voices that inspire and captivate
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] bg-[size:20px_20px] pointer-events-none" />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-amber-50/40 via-orange-50/30 to-white/50" />
+
+                <div className="relative z-10 h-px bg-stone-200 mx-6 mt-1" />
+
+                <div className="relative z-10 px-6 py-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Award className="w-4 h-4 text-stone-500" />
+                    <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
+                      Winners
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2.5">
+                    {openMicWinners.map((winner) => (
+                      <div 
+                        key={winner.rank}
+                        className="flex items-center gap-3 p-3 bg-white/60 backdrop-blur-sm border border-stone-200 hover:border-amber-300 hover:bg-white/80 transition-all duration-200"
+                      >
+                        <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                          winner.rank === 1 ? 'bg-amber-100 text-amber-800' :
+                          winner.rank === 2 ? 'bg-stone-100 text-stone-700' :
+                          'bg-amber-50 text-amber-800'
+                        }`}>
+                          {winner.rank}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-stone-900 font-bold leading-tight">
+                            {winner.name}
+                          </div>
+                          <div className="text-xs text-stone-500">
+                            {winner.details}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Plotlines Winners */}
+          <div>
+            <div className="text-center mb-6">
+              <h2 className="text-xl md:text-2xl font-serif font-bold text-stone-900 mb-1">
+                Plotlines Winners
+              </h2>
+              <p className="text-stone-600 text-sm">Creative Writing</p>
+            </div>
+            
+            <div className="relative overflow-hidden bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="h-1 bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600" />
+
+              <div className="relative overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop"
+                  alt="Plotlines"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/50 to-white/80" />
+                
+                <div className="absolute top-5 right-5 z-10">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center shadow-md bg-amber-500 text-white">
+                    <Feather className="w-5 h-5" />
+                  </div>
+                </div>
+                
+                <div className="relative z-10 px-6 pt-6 pb-5">
+                  <div className="pr-14">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider mb-3 bg-amber-100/80 text-amber-800">
+                      <Award className="w-3.5 h-3.5" />
+                      Individual Event
+                    </div>
+                    <h3 className="text-2xl font-serif font-bold text-stone-900 leading-tight mb-3">
+                      Plotlines
+                    </h3>
+                    <p className="text-stone-600 text-sm leading-relaxed">
+                      Crafting captivating narratives
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] bg-[size:20px_20px] pointer-events-none" />
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-amber-50/40 via-orange-50/30 to-white/50" />
+
+                <div className="relative z-10 h-px bg-stone-200 mx-6 mt-1" />
+
+                <div className="relative z-10 px-6 py-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Award className="w-4 h-4 text-stone-500" />
+                    <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
+                      Winners
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2.5">
+                    {plotlinesWinners.map((winner) => (
+                      <div 
+                        key={winner.rank}
+                        className="flex items-center gap-3 p-3 bg-white/60 backdrop-blur-sm border border-stone-200 hover:border-amber-300 hover:bg-white/80 transition-all duration-200"
+                      >
+                        <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                          winner.rank === 1 ? 'bg-amber-100 text-amber-800' :
+                          winner.rank === 2 ? 'bg-stone-100 text-stone-700' :
+                          'bg-amber-50 text-amber-800'
+                        }`}>
+                          {winner.rank}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-stone-900 font-bold leading-tight">
+                            {winner.name}
+                          </div>
+                          <div className="text-xs text-stone-500">
+                            {winner.details}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
