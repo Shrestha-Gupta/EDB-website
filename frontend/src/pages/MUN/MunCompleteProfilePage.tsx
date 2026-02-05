@@ -247,18 +247,22 @@ const MunCompleteProfilePage = () => {
                     <span className="font-bold text-stone-900">UNHRC</span>
                     <p className="text-xs text-stone-500 mt-1">United Nations Human Rights Council</p>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => setFormData({ ...formData, preferredCommittee: 'IP' })}
-                    className={`p-4 rounded-lg border-2 transition-all text-left ${
-                      formData.preferredCommittee === 'IP'
-                        ? 'border-amber-500 bg-amber-50'
-                        : 'border-stone-300 hover:border-amber-300'
-                    }`}
-                  >
-                    <span className="font-bold text-stone-900">IP</span>
-                    <p className="text-xs text-stone-500 mt-1">International Press</p>
-                  </button>
+                  {/* IP Option - REGISTRATIONS CLOSED */}
+                  <div className="relative">
+                    <button
+                      type="button"
+                      disabled
+                      className="w-full p-4 rounded-lg border-2 border-stone-200 bg-stone-100 text-left opacity-60 cursor-not-allowed"
+                    >
+                      <span className="font-bold text-stone-400">IP</span>
+                      <p className="text-xs text-stone-400 mt-1">International Press</p>
+                    </button>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-wide shadow-lg transform -rotate-6 rounded">
+                        Closed
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
 

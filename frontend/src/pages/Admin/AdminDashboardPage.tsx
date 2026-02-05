@@ -9,6 +9,9 @@ import {
   getArunodayRegistrations,
   updateArunodayStatus,
   getAllUsers,
+  exportEventRegistrations,
+  exportArunodayRegistrations,
+  exportMunRegistrations,
   type EventRegistration,
   type ArunodayRegistration,
   type MunUser,
@@ -234,6 +237,25 @@ const AdminDashboardPage = () => {
             </Link>
             <p className="text-stone-600 text-sm mt-1">MUN Dashboard</p>
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                <FiUsers className="w-6 h-6 text-purple-600" />
+              </div>
+            </div>
+            <Link
+              to="/admin/user-info"
+              className="text-purple-600 hover:text-purple-700 font-semibold flex items-center gap-1"
+            >
+              User Info →
+            </Link>
+            <p className="text-stone-600 text-sm mt-1">Comprehensive User Data</p>
+          </motion.div>
         </div>
 
         {/* Tabs */}
@@ -276,16 +298,43 @@ const AdminDashboardPage = () => {
                 className="flex-1 px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
               />
               {activeTab === "events" && (
-                <select
-                  value={eventFilter}
-                  onChange={(e) => setEventFilter(e.target.value)}
-                  className="px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                <>
+                  <select
+                    value={eventFilter}
+                    onChange={(e) => setEventFilter(e.target.value)}
+                    className="px-4 py-2.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+                  >
+                    <option value="all">All Events</option>
+                    <option value="pralekh">Pralekh</option>
+                    <option value="plotlines">Plotlines</option>
+                    <option value="openmic">Open Mic</option>
+                  </select>
+                  <button
+                    onClick={() => exportEventRegistrations(eventFilter !== 'all' ? eventFilter : undefined)}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                  >
+                    <FiDownload className="w-4 h-4" />
+                    Export CSV
+                  </button>
+                </>
+              )}
+              {activeTab === "arunoday" && (
+                <button
+                  onClick={() => exportArunodayRegistrations()}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
                 >
-                  <option value="all">All Events</option>
-                  <option value="pralekh">Pralekh</option>
-                  <option value="plotlines">Plotlines</option>
-                  <option value="openmic">Open Mic</option>
-                </select>
+                  <FiDownload className="w-4 h-4" />
+                  Export CSV
+                </button>
+              )}
+              {activeTab === "users" && (
+                <button
+                  onClick={() => exportMunRegistrations()}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                >
+                  <FiDownload className="w-4 h-4" />
+                  Export CSV
+                </button>
               )}
             </div>
           </div>

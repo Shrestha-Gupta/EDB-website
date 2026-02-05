@@ -1,13 +1,11 @@
 
 import { useIsMobile } from '../../hooks/useDevicePerformance';
 
-interface HeroProps {
-  onOpenRegistration?: () => void;
-}
 
-export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroProps) {
+
+export default function Hero() {
   const isMobile = useIsMobile();
-  
+
   return (
     <section className="bg-white min-h-[70vh] md:min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8 2xl:px-12 relative overflow-hidden -mt-10 md:pt-0">
       {/* 1. Background: Pattern + Gradient Tint */}
@@ -35,7 +33,7 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
 
       {/* 3. Main Content */}
       <div className="text-center max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto relative z-10 pt-16 md:pt-20 flex flex-col items-center">
-  
+
 
         {/* Sanskrit Text - disable blinking cursor on mobile */}
         <div className="inline-block mb-6 relative">
@@ -43,8 +41,8 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
             className="text-orange-600 text-lg md:text-4xl font-serif font-semibold overflow-hidden whitespace-nowrap pr-1"
             style={{
               borderRight: isMobile ? 'none' : '4px solid #fb923c',
-              animation: isMobile 
-                ? "none" 
+              animation: isMobile
+                ? "none"
                 : "typeWriter 3s steps(30) 0.5s both, blinkCursor 0.75s step-end infinite",
             }}
           >
@@ -100,17 +98,17 @@ export default function Hero({ onOpenRegistration: _onOpenRegistration }: HeroPr
           }}
         >
           <span>Read Latest Issue</span>
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 md:h-5 md:w-5 transform group-hover:translate-x-1 transition-transform duration-300" 
-            fill="none" 
-            viewBox="0 0 24 24" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 md:h-5 md:w-5 transform group-hover:translate-x-1 transition-transform duration-300"
+            fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
-        
+
       </div>
 
       {/* 4. CSS Keyframes - optimized for performance */}

@@ -18,6 +18,20 @@ const MunLoginPage = () => {
 
     try {
       await login(formData.email, formData.password);
+      // After login, get the user data from localStorage token to check role
+      // The AuthContext sets the user after login, but we need to get it fresh
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          if (payload.role === 'admin') {
+            navigate("/admin");
+            return;
+          }
+        } catch {
+          // Token parsing failed, proceed with default redirect
+        }
+      }
       navigate("/mun/dashboard");
     } catch (err: any) {
       setError(err.message || "Login failed");

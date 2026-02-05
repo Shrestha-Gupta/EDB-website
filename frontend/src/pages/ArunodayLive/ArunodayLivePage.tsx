@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
-import { ArunodayRegistrationForm } from "../../components/ArunodayRegistrationForm";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import EventRegistrationModal from "../../components/EventRegistration/EventRegistrationModal";
 import type { EventType } from "../../services/eventsApi";
+
+
+import WinnersShowcase from "../../components/WinnersShowcase/WinnersShowcase";
 
 const ArunodayLivePage = () => {
   const { isAuthenticated } = useAuth();
-  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
   
-  const scrollToForm = () => {
-    document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToWinners = () => {
+    document.getElementById("winners-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Main Events - All Arunoday events
@@ -55,7 +54,7 @@ const ArunodayLivePage = () => {
 
   const highlights = [
     { title: "4+", subtitle: "Events" },
-    { title: "500+", subtitle: "Participants" },
+    { title: "200+", subtitle: "Participants" },
     { title: "Assured", subtitle: "Cash Prizes" },
     { title: "3", subtitle: "Days" },
   ];
@@ -101,14 +100,21 @@ const ArunodayLivePage = () => {
             </motion.h1>
 
             {/* Subtitle */}
-            <motion.p 
-              className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed mb-8"
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
+              className="mb-8"
             >
-              "Where creativity meets culture, and talents find their stage."
-            </motion.p>
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-4 border-2 border-amber-600/30 bg-stone-50/80 backdrop-blur-sm">
+                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
+                <span className="text-sm font-medium tracking-wider text-stone-700 uppercase">Event Concluded</span>
+                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
+              </div>
+              <p className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed">
+                "Where creativity meets culture, and talents find their stage."
+              </p>
+            </motion.div>
 
             {/* Event Info */}
             <motion.div
@@ -129,13 +135,13 @@ const ArunodayLivePage = () => {
 
             {/* CTA Button */}
             <motion.button
-              onClick={scrollToForm}
+              onClick={scrollToWinners}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
               className="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
             >
-              Register Now
+              View Winners
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </div>
@@ -147,7 +153,7 @@ const ArunodayLivePage = () => {
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
-        className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8"
+        className="max-w-[95rem] mx-auto relative z-10 px-4 sm:px-6 lg:px-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
@@ -176,8 +182,30 @@ const ArunodayLivePage = () => {
           ))}
         </motion.div>
 
-        {/* Featured Events Section */}
+        {/* Winners Section */}
         <motion.div
+          id="winners-section"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-24"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-stone-900 mb-6">
+              Hall of Victory
+            </h2>
+            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-stone-600 max-w-2xl mx-auto text-lg">
+              Celebrating the rising stars who outshined the competition.
+            </p>
+          </div>
+          
+          <WinnersShowcase />
+        </motion.div>
+
+        {/* Featured Events Section */}
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
@@ -185,10 +213,10 @@ const ArunodayLivePage = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-3">
-              Featured Events
+              Event Highlights
             </h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
-              Register now and showcase your talents at MMMUT's premier literary and cultural fest
+              A glimpse into the diverse events that made Arunoday '26 memorable
             </p>
           </div>
 
@@ -202,7 +230,6 @@ const ArunodayLivePage = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group relative bg-white border-2 border-stone-100 hover:border-amber-200/60 transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden"
               >
-                {/* Top orangish accent bar */}
                 <div className="h-1 bg-gradient-to-r from-orange-400 to-amber-500" />
                 
                 <div className="p-8">
@@ -212,8 +239,8 @@ const ArunodayLivePage = () => {
                         <h3 className="text-2xl font-serif font-bold text-stone-900 mb-1 group-hover:text-amber-700 transition-colors">{event.name}</h3>
                         <p className="text-amber-600 text-sm font-medium tracking-wide">{event.subtitle}</p>
                       </div>
-                      <span className="text-xs text-green-700 bg-green-50 px-3 py-1.5 rounded font-medium uppercase tracking-wide">
-                        Open
+                      <span className="text-xs text-stone-500 bg-stone-100 px-3 py-1.5 rounded font-medium uppercase tracking-wide">
+                        Concluded
                       </span>
                     </div>
                   </div>
@@ -226,70 +253,13 @@ const ArunodayLivePage = () => {
                     <span className="text-sm text-stone-500 font-medium">
                       {event.eligibility}
                     </span>
-                    {isAuthenticated && event.eventType ? (
-                      <button
-                        onClick={() => setSelectedEvent(event.eventType!)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-orange-300 text-orange-600 hover:bg-orange-300 hover:text-orange-900 font-medium transition-all duration-300 text-sm"
-                      >
-                        Register
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                      </button>
-                    ) : (
-                      <Link
-                        to={event.link}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-orange-300 text-orange-600 hover:bg-orange-300 hover:text-orange-900 font-medium transition-all duration-300 text-sm"
-                      >
-                        Register
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                      </Link>
-                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
-        {/* Registration Form Section */}
-        <motion.div
-          id="registration-form"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="mb-16"
-        >
-          <ArunodayRegistrationForm />
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-          className="text-center py-16 border-t-2 border-stone-200"
-        >
-          <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-stone-900">
-            Join Arunoday '26
-          </h3>
-          <p className="text-stone-600 mb-8 max-w-2xl mx-auto text-lg">
-            Be part of MMMUT's literary and cultural celebration
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/dashboard"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-all duration-300"
-            >
-              View Dashboard
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              to="/mun"
-              className="inline-flex items-center gap-2 px-8 py-4 border-2 border-amber-500 text-amber-600 hover:bg-amber-500 hover:text-white font-semibold rounded-xl transition-all duration-300"
-            >
-              MUN Details
-            </Link>
-          </div>
-        </motion.div>
 
         {/* Call Coordinators Card */}
         <motion.div
@@ -321,7 +291,7 @@ const ArunodayLivePage = () => {
             </div>
             
             <p className="text-stone-600 mb-6">
-              Have questions about the event or registration? Our coordinators are here to help!
+              Have questions regarding the event results? Our coordinators are here!
             </p>
             
             <div className="grid sm:grid-cols-2 gap-4">
@@ -375,18 +345,9 @@ const ArunodayLivePage = () => {
           </a>
         </motion.p>
       </motion.div>
-
-      {/* Event Registration Modal */}
-      {selectedEvent && (
-        <EventRegistrationModal
-          isOpen={!!selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          eventType={selectedEvent}
-          onRegistrationComplete={() => setSelectedEvent(null)}
-        />
-      )}
     </div>
   );
 };
 
 export default ArunodayLivePage;
+

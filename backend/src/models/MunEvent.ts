@@ -22,7 +22,8 @@ export interface IMunEvent extends Document {
   updatedAt: Date;
 }
 
-const committeeSchema = new Schema<ICommittee>(
+// Workaround for mongoose v9 TypeScript depth issue - cast schemas to any
+const committeeSchema: any = new (Schema as any)(
   {
     name: {
       type: String,
@@ -47,7 +48,7 @@ const committeeSchema = new Schema<ICommittee>(
   { _id: false }
 );
 
-const munEventSchema = new Schema<IMunEvent>(
+const munEventSchema: any = new (Schema as any)(
   {
     title: {
       type: String,
@@ -85,6 +86,6 @@ const munEventSchema = new Schema<IMunEvent>(
   }
 );
 
-const MunEvent = mongoose.model<IMunEvent>('MunEvent', munEventSchema);
+const MunEvent = (mongoose.model as any)('MunEvent', munEventSchema) as mongoose.Model<IMunEvent>;
 
 export default MunEvent;

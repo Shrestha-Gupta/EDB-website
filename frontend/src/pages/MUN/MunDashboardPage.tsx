@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
-import { getMyApplications, uploadPositionPaper, type MunApplication } from '../../services/munApi';
+import { getMyApplications, uploadPositionPaper, uploadPositionPaperDirect, type MunApplication } from '../../services/munApi';
 import { Link, useNavigate } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground/ParticlesBackground';
 
 const MunDashboardPage = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, refreshUser } = useAuth();
   const navigate = useNavigate();
   const [applications, setApplications] = useState<MunApplication[]>([]);
   const [loading, setLoading] = useState(true);
@@ -17,9 +17,11 @@ const MunDashboardPage = () => {
   const [uploadSuccess, setUploadSuccess] = useState('');
 
   const currentApplication = applications.length > 0 ? applications[0] : null;
-  const isAllotted = currentApplication?.allottedCountry && currentApplication?.allottedCommittee;
+  const isAllotted = currentApplication?.allottedCountry || user?.allottedCountry;
 
   useEffect(() => {
+    // Refresh user data to get latest assigned country and position paper info
+    refreshUser().catch(console.error);
     fetchApplications();
   }, []);
 
@@ -51,21 +53,28 @@ const MunDashboardPage = () => {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !currentApplication) return;
+    if (!selectedFile) return;
 
     setUploading(true);
     setUploadError('');
     setUploadSuccess('');
 
     try {
-      await uploadPositionPaper(currentApplication._id, selectedFile, remarks);
+      // Use application-based upload if we have an application, otherwise use direct upload
+      if (currentApplication) {
+        await uploadPositionPaper(currentApplication._id, selectedFile, remarks);
+      } else {
+        await uploadPositionPaperDirect(selectedFile, remarks);
+      }
       setUploadSuccess('Position paper uploaded successfully!');
       setSelectedFile(null);
       setRemarks('');
-      fetchApplications();
+      // Refresh applications and user data to get updated position paper info
+      await fetchApplications();
+      await refreshUser();
     } catch (error: unknown) {
-      const err = error as { response?: { data?: { error?: string } } };
-      setUploadError(err.response?.data?.error || 'Failed to upload position paper');
+      const err = error as { message?: string };
+      setUploadError(err.message || 'Failed to upload position paper');
     } finally {
       setUploading(false);
     }
@@ -149,23 +158,35 @@ const MunDashboardPage = () => {
           >
             <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Committee</h3>
             <span className="text-base font-medium text-stone-900">
-              {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
-               user?.preferredCommittee === 'IP' ? 'International Press' : 
-               '—'}
+              {currentApplication?.allottedCommittee || user?.allottedCommittee || 
+               ((currentApplication?.preferredCommittee || user?.preferredCommittee) === 'UNHRC' ? 'UNHRC' : 
+                (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? 'International Press' : 
+                '—')}
             </span>
           </motion.div>
 
-          {/* Assigned Country */}
+          {/* Assigned Country/Newspaper - conditional based on committee */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="border-t-4 border-amber-600 bg-white p-6 hover:shadow-lg transition-all duration-300"
           >
-            <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Country</h3>
-            <span className="text-base font-medium text-stone-900">
-              {user?.allottedCountry || '—'}
-            </span>
+            {(currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? (
+              <>
+                <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Newspaper</h3>
+                <span className="text-base font-medium text-stone-900">
+                  {user?.allottedNewspaper || '—'}
+                </span>
+              </>
+            ) : (
+              <>
+                <h3 className="text-sm font-medium text-amber-600 mb-3 pb-3 border-b border-stone-100">Assigned Country</h3>
+                <span className="text-base font-medium text-stone-900">
+                  {currentApplication?.allottedCountry || user?.allottedCountry || '—'}
+                </span>
+              </>
+            )}
           </motion.div>
         </div>
 
@@ -194,8 +215,8 @@ const MunDashboardPage = () => {
               </motion.div>
             )}
 
-            {/* Country Assignment Banner */}
-            {user?.allottedCountry && (
+            {/* Country Assignment Banner - for UNHRC delegates */}
+            {(currentApplication?.allottedCountry || user?.allottedCountry) && (currentApplication?.preferredCommittee || user?.preferredCommittee) !== 'IP' && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -204,7 +225,25 @@ const MunDashboardPage = () => {
               >
                 <h3 className="text-lg font-serif font-bold text-stone-900 mb-2">Country Assignment Confirmed</h3>
                 <p className="text-stone-600">
-                  You will represent <strong className="text-stone-900">{user.allottedCountry}</strong> in {user.allottedCommittee || user.preferredCommittee}
+                  You will represent <strong className="text-stone-900">{currentApplication?.allottedCountry || user?.allottedCountry}</strong> in {currentApplication?.allottedCommittee || user?.allottedCommittee || currentApplication?.preferredCommittee || user?.preferredCommittee}
+                </p>
+              </motion.div>
+            )}
+
+            {/* Newspaper Assignment Banner - for IP participants */}
+            {user?.allottedNewspaper && (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="border-t-4 border-purple-600 bg-white p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <h3 className="text-lg font-serif font-bold text-stone-900 mb-2">📰 Newspaper Assignment Confirmed</h3>
+                <p className="text-stone-600">
+                  You will represent <strong className="text-purple-700">{user?.allottedNewspaper}</strong> as a <strong className="text-stone-900">Press Reporter</strong> in the International Press committee.
+                </p>
+                <p className="text-sm text-stone-500 mt-3">
+                  Your role includes covering MUN proceedings, interviewing delegates, and writing articles about the debates.
                 </p>
               </motion.div>
             )}
@@ -260,8 +299,8 @@ const MunDashboardPage = () => {
                   <div className="flex justify-between items-center py-3 border-b border-stone-100">
                     <span className="text-sm text-stone-500">Committee</span>
                     <span className="text-base font-medium text-stone-900">
-                      {user?.preferredCommittee === 'UNHRC' ? 'UNHRC' : 
-                       user?.preferredCommittee === 'IP' ? 'International Press' : '—'}
+                      {(currentApplication?.preferredCommittee || user?.preferredCommittee) === 'UNHRC' ? 'UNHRC' : 
+                       (currentApplication?.preferredCommittee || user?.preferredCommittee) === 'IP' ? 'International Press' : '—'}
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-stone-100">
@@ -332,7 +371,7 @@ const MunDashboardPage = () => {
             </motion.div>
 
             {/* Position Paper Section */}
-            {user?.preferredCommittee === 'UNHRC' && (
+            {(currentApplication?.preferredCommittee === 'UNHRC' || user?.preferredCommittee === 'UNHRC') && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -348,13 +387,13 @@ const MunDashboardPage = () => {
                         Available after country assignment
                       </p>
                     </div>
-                  ) : currentApplication?.positionPaperUrl ? (
+                  ) : (currentApplication?.positionPaperUrl || user?.positionPaperUrl) ? (
                     <div className="space-y-4">
                       <div className="bg-green-50 p-4">
                         <p className="text-sm font-medium text-green-900 mb-1">Document Submitted</p>
                         <p className="text-xs text-green-700">
-                          {currentApplication.positionPaperSubmittedAt 
-                            ? new Date(currentApplication.positionPaperSubmittedAt).toLocaleDateString('en-US', { 
+                          {(currentApplication?.positionPaperSubmittedAt || user?.positionPaperSubmittedAt)
+                            ? new Date(currentApplication?.positionPaperSubmittedAt || user?.positionPaperSubmittedAt || '').toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
@@ -363,7 +402,7 @@ const MunDashboardPage = () => {
                         </p>
                       </div>
                       <a
-                        href={currentApplication.positionPaperUrl}
+                        href={currentApplication?.positionPaperUrl || user?.positionPaperUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium transition-colors"
@@ -373,49 +412,22 @@ const MunDashboardPage = () => {
                       </a>
                     </div>
                   ) : (
+                    // Position Paper Submissions are CLOSED
                     <div className="space-y-4">
-                      <label className="block">
-                        <div className="border-2 border-dashed border-stone-200 p-6 text-center hover:border-amber-600 transition-all duration-200 cursor-pointer">
-                          <input
-                            type="file"
-                            accept=".pdf"
-                            onChange={handleFileChange}
-                            className="hidden"
-                          />
-                          <p className="text-sm text-stone-600 mb-1">
-                            {selectedFile ? selectedFile.name : 'Choose PDF file'}
-                          </p>
-                          <p className="text-xs text-stone-400">Maximum file size: 10MB</p>
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                        <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-3">
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                          </svg>
                         </div>
-                      </label>
-
-                      <textarea
-                        value={remarks}
-                        onChange={(e) => setRemarks(e.target.value)}
-                        placeholder="Additional remarks (optional)"
-                        className="w-full px-4 py-3 text-sm border border-stone-200 focus:outline-none focus:border-amber-600 resize-none transition-colors duration-200"
-                        rows={3}
-                      />
-
-                      {uploadError && (
-                        <p className="text-sm text-red-700">{uploadError}</p>
-                      )}
-                      {uploadSuccess && (
-                        <p className="text-sm text-green-700">{uploadSuccess}</p>
-                      )}
-
-                      <button
-                        onClick={handleUpload}
-                        disabled={!selectedFile || uploading}
-                        className={`inline-flex items-center gap-2 font-medium text-sm transition-colors ${
-                          selectedFile && !uploading
-                            ? 'text-stone-900 hover:text-amber-600'
-                            : 'text-stone-400 cursor-not-allowed'
-                        }`}
-                      >
-                        {uploading ? 'Uploading...' : 'Submit Position Paper'}
-                        {selectedFile && !uploading && <span>→</span>}
-                      </button>
+                        <p className="text-sm font-semibold text-red-800 mb-1">Submissions Closed</p>
+                        <p className="text-xs text-red-600">
+                          The deadline for position paper submissions has passed.
+                        </p>
+                      </div>
+                      <p className="text-xs text-stone-500 text-center">
+                        If you have any questions, please contact the MUN coordinators.
+                      </p>
                     </div>
                   )}
                 </div>

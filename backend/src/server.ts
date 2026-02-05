@@ -32,6 +32,7 @@ import authRoutes from "./routes/auth";
 import munRoutes from "./routes/mun";
 import arunodayRoutes from "./routes/arunoday";
 import eventsRoutes from "./routes/events";
+import userInfoRoutes from "./routes/userInfo";
 
 // Import database connection
 import connectDB from "./config/database";
@@ -139,6 +140,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/mun", munRoutes);
 app.use("/api/arunoday", arunodayRoutes);
 app.use("/api/events", eventsRoutes);
+app.use("/api/admin/user-info", userInfoRoutes);
 
 // Contact form endpoint
 app.post('/api/contact', upload.single('image'), async (req, res) => {

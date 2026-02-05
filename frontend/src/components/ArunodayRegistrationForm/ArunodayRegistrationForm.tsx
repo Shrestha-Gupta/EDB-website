@@ -147,7 +147,9 @@ const ArunodayRegistrationForm = () => {
     
     try {
       // Call actual backend API for Arunoday registration
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.PROD 
+        ? 'https://edb-website-7oxz.vercel.app' 
+        : 'http://localhost:5000';
       
       const response = await fetch(`${API_URL}/api/arunoday/register`, {
         method: 'POST',

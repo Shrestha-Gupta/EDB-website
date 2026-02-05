@@ -206,4 +206,63 @@ router.delete('/registration/:id', protect, adminOnly, async (req: AuthRequest, 
   }
 });
 
+// @route   GET /api/arunoday/export/csv
+// @desc    Export all Arunoday registrations as CSV
+// @access  Private/Admin
+router.get('/export/csv', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const registrations = await ArunodayRegistration.find().sort({ createdAt: -1 });
+
+    // CSV header
+    const headers = [
+      'Team Name',
+      'Team Leader Name',
+      'Team Leader Email',
+      'Team Leader Roll Number',
+      'Team Leader Branch',
+      'Team Leader Phone',
+      'Preferred Language',
+      'Event Category',
+      'Status',
+      'Remarks',
+      'Team Members',
+      'Registration Date',
+    ];
+
+    // Convert to CSV rows
+    const rows = registrations.map((reg) => {
+      const teamMembersStr = reg.teamMembers
+        .map((m) => `${m.name} (${m.rollNumber}, ${m.branch})`)
+        .join('; ');
+      
+      return [
+        `"${reg.teamName.replace(/"/g, '""')}"`,
+        `"${reg.teamLeaderName.replace(/"/g, '""')}"`,
+        `"${reg.teamLeaderEmail}"`,
+        `"${reg.teamLeaderRollNumber}"`,
+        `"${reg.teamLeaderBranch.replace(/"/g, '""')}"`,
+        `"${reg.teamLeaderPhone || ''}"`,
+        `"${reg.preferredLanguage || ''}"`,
+        `"${reg.eventCategory || ''}"`,
+        `"${reg.status}"`,
+        `"${(reg.remarks || '').replace(/"/g, '""')}"`,
+        `"${teamMembersStr.replace(/"/g, '""')}"`,
+        `"${new Date(reg.createdAt).toLocaleString()}"`,
+      ].join(',');
+    });
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=arunoday_registrations.csv');
+    res.send(csvContent);
+  } catch (error: any) {
+    console.error('Error exporting Arunoday registrations:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while exporting registrations.',
+    });
+  }
+});
+
 export default router;

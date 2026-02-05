@@ -26,6 +26,12 @@ export interface User {
   // Allotted details (assigned by admin)
   allottedCountry?: string;
   allottedCommittee?: string;
+  allottedNewspaper?: string; // For IP participants
+  // Position Paper fields
+  positionPaperUrl?: string;
+  positionPaperSubmittedAt?: string;
+  positionPaperStatus?: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
+  positionPaperRemarks?: string;
 }
 
 interface AuthContextType {

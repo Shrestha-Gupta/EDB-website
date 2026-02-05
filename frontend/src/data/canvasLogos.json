@@ -24,7 +24,12 @@
       "department": "Electronics and Communication Engineering",
       "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5211_kinkrq.jpg"
     },
-     { "id": 5, "name": "Jyoti Singh", "department": "Bachelor of Pharmacy", "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg" },
+    {
+      "id": 5,
+      "name": "Jyoti Singh",
+      "department": "Bachelor of Pharmacy",
+      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464083/WhatsApp_Image_2026-01-03_at_11.27.49_PM_udciu4.jpg"
+    },
     {
       "id": 6,
       "name": "Nandini Mishra",
@@ -53,7 +58,7 @@
       "id": 11,
       "name": "Vivek Mani Tripathy",
       "department": "Information Technology",
-      "image": "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg"
+      "image": "https://res.cloudinary.com/doch9ibf6/image/upload/v1770057145/ChatGPT_Image_Feb_3_2026_12_01_56_AM_rrq5o5.png"
     }
   ]
 }

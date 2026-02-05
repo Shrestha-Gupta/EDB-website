@@ -27,7 +27,7 @@ const finalYearTeam = [
     department: "Electronics and Communication Engineering",
     image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1768228884/WhatsApp_Image_2026-01-12_at_20.08.39_zitbke.jpg",
   },
-  
+
   { id: 5, name: "Jyoti Singh", department: "Bachelor of Pharmacy", image: "https://res.cloudinary.com/dml0jlwlv/image/upload/v1767900467/Jyoti_Singh_cstmeu.jpg" },
 
   { id: 6, name: "Nandini Mishra", department: "Civil Engineering", image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767371885/2A6A5089_yze2vt.jpg" },
@@ -59,7 +59,7 @@ const finalYearTeam = [
     id: 11,
     name: "Vivek Mani Tripathy",
     department: "Information Technology",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767372982/2A6A5071_yvsrug.jpg",
+    image: "https://res.cloudinary.com/doch9ibf6/image/upload/v1770057145/ChatGPT_Image_Feb_3_2026_12_01_56_AM_rrq5o5.png",
   },
 ];
 
@@ -136,7 +136,7 @@ const preFinalTeam = [
     id: 11,
     name: "Shreshtha Gupta",
     department: "Electronics and Communication Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767464082/WhatsApp_Image_2026-01-03_at_11.36.13_PM_vmf3mq.jpg",
+    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/c_fill,g_face,h_800,w_800,z_0.6/v1767464082/WhatsApp_Image_2026-01-03_at_11.36.13_PM_vmf3mq.jpg",
   },
   {
     id: 12,
@@ -156,7 +156,7 @@ const preFinalTeam = [
     id: 14,
     name: "Yashvardhan Ojha",
     department: "Computer Science and Engineering",
-    image: "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1767465590/WhatsApp_Image_2026-01-03_at_11.53.22_PM_1_ai1p7f.jpg",
+    image: "https://res.cloudinary.com/doch9ibf6/image/upload/c_fill,g_face,h_800,w_800,z_0.6/v1770057514/2A6A8115_pqnt3u.jpg",
   },
 ];
 
@@ -301,11 +301,11 @@ const mobileCardVariants = {
 
 export default function TeamPage() {
   const isMobile = useIsMobile();
-  
+
   // Use simplified variants on mobile
   const activeContainerVariants = isMobile ? mobileContainerVariants : containerVariants;
   const activeCardVariants = isMobile ? mobileCardVariants : cardVariants;
-  
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -325,7 +325,7 @@ export default function TeamPage() {
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <SEO {...seoConfigs.team} />
       <ParticlesBackground />
-      
+
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
@@ -338,8 +338,8 @@ export default function TeamPage() {
       >
         {/* Header - Fixed: Using ONLY Orange/Amber shades (Removed Red) */}
         {/* Header */}
-        <PageHero 
-          title="Our Team" 
+        <PageHero
+          title="Our Team"
           subtitle="The Editorial Board"
           description="A group of passionate individuals dedicated to the art of expression and the power of words."
         />

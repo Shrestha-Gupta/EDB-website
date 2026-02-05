@@ -100,6 +100,12 @@ export interface MunUser {
   // Allotted details (assigned by admin)
   allottedCountry?: string;
   allottedCommittee?: string;
+  allottedNewspaper?: string; // For IP participants
+  // Position Paper fields
+  positionPaperUrl?: string;
+  positionPaperSubmittedAt?: string;
+  positionPaperStatus?: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
+  positionPaperRemarks?: string;
   createdAt: string;
 }
 
@@ -170,6 +176,28 @@ export const uploadPositionPaper = async (applicationId: string, file: File, rem
   if (remarks) formData.append('remarks', remarks);
 
   const response = await fetch(`${API_BASE_URL}/api/mun/upload-position-paper/${applicationId}`, {
+    method: 'POST',
+    headers: {
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Upload failed');
+  }
+};
+
+// Upload position paper directly to user profile (no application needed)
+export const uploadPositionPaperDirect = async (file: File, remarks?: string): Promise<void> => {
+  const token = getToken();
+  const formData = new FormData();
+  formData.append('positionPaper', file);
+  if (remarks) formData.append('remarks', remarks);
+
+  const response = await fetch(`${API_BASE_URL}/api/mun/upload-position-paper-direct`, {
     method: 'POST',
     headers: {
       ...(token && { Authorization: `Bearer ${token}` }),
@@ -258,6 +286,18 @@ export const assignCountryToUser = async (
   const data = await apiCall(`/api/mun/admin/users/${userId}/assign-country`, {
     method: 'PUT',
     body: JSON.stringify({ country, committee }),
+  });
+  return data.user;
+};
+
+// Assign newspaper to an IP user (Admin)
+export const assignNewspaperToUser = async (
+  userId: string,
+  newspaper: string
+): Promise<MunUser> => {
+  const data = await apiCall(`/api/mun/admin/users/${userId}/assign-newspaper`, {
+    method: 'PUT',
+    body: JSON.stringify({ newspaper }),
   });
   return data.user;
 };
@@ -362,4 +402,29 @@ export const allotApplicationEnhanced = async (
     body: JSON.stringify(allotment),
   });
   return data.application;
+};
+
+// Export MUN registrations as CSV
+export const exportMunRegistrations = async (): Promise<void> => {
+  const token = getToken();
+  const response = await fetch(`${API_BASE_URL}/api/mun/admin/export/csv`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Export failed');
+  }
+
+  const blob = await response.blob();
+  const downloadUrl = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = downloadUrl;
+  a.download = 'mun_registrations.csv';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(downloadUrl);
 };

@@ -50,7 +50,8 @@ export interface IMunApplication extends Document {
   updatedAt: Date;
 }
 
-const munApplicationSchema = new Schema<IMunApplication>(
+// Workaround for mongoose v9 TypeScript depth issue
+const munApplicationSchema: any = new (Schema as any)(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -216,7 +217,7 @@ const munApplicationSchema = new Schema<IMunApplication>(
 );
 
 // Pre-save hook to generate delegateId
-munApplicationSchema.pre('save', async function() {
+munApplicationSchema.pre('save', async function(this: IMunApplication) {
   if (!this.delegateId) {
     const year = new Date().getFullYear().toString().slice(-2);
     const count = await mongoose.model('MunApplication').countDocuments();
@@ -228,6 +229,6 @@ munApplicationSchema.pre('save', async function() {
 munApplicationSchema.index({ user: 1, event: 1 }, { unique: true });
 munApplicationSchema.index({ delegateId: 1 }, { unique: true });
 
-const MunApplication = mongoose.model<IMunApplication>('MunApplication', munApplicationSchema);
+const MunApplication = (mongoose.model as any)('MunApplication', munApplicationSchema) as mongoose.Model<IMunApplication>;
 
 export default MunApplication;

@@ -1,10 +1,19 @@
 import express, { Response } from 'express';
 import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
 import MunEvent from '../models/MunEvent';
 import MunApplication from '../models/MunApplication';
 import { protect, adminOnly, profileComplete, AuthRequest } from '../middleware/auth';
+import { sendMunCountryAssignmentEmail, sendMunNewspaperAssignmentEmail } from '../utils/emailService';
 
 const router = express.Router();
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Configure multer for position paper uploads
 const upload = multer({
@@ -58,32 +67,23 @@ router.get('/events/:id', async (req: AuthRequest, res: Response): Promise<void>
 // @access  Private (profile complete required)
 router.post('/apply', protect, profileComplete, async (req: AuthRequest, res: Response): Promise<void> => {
   try {
+    // MUN Registrations are CLOSED
+    res.status(400).json({ message: 'MUN registrations are now closed. Thank you for your interest.' });
+    return;
+
+    // Check if user already applied
+    const userId = req.user!._id;
     const { 
       eventId, 
-      preferredCommittee,
+      preferredCommittee, 
       countryPreferences, 
-      agendaPreferences,
-      experienceLevel,
-      hasAttendedMun,
+      agendaPreferences, 
+      experienceLevel, 
+      hasAttendedMun, 
       previousMunExperience, 
       whyJoin 
     } = req.body;
-    const userId = req.user!._id;
 
-    // Check if event exists and is active
-    const event = await MunEvent.findById(eventId);
-    if (!event || !event.isActive) {
-      res.status(404).json({ message: 'Event not found or not accepting applications' });
-      return;
-    }
-
-    // Check if registration deadline has passed
-    if (new Date() > event.registrationDeadline) {
-      res.status(400).json({ message: 'Registration deadline has passed' });
-      return;
-    }
-
-    // Check if user already applied
     const existingApplication = await MunApplication.findOne({ user: userId, event: eventId });
     if (existingApplication) {
       res.status(400).json({ message: 'You have already applied for this event' });
@@ -214,7 +214,7 @@ router.post('/final-confirmation/:applicationId', protect, async (req: AuthReque
 });
 
 // @route   POST /api/mun/upload-position-paper/:applicationId
-// @desc    Upload position paper for an application
+// @desc    Upload position paper for an application (stored in Cloudinary)
 // @access  Private
 router.post(
   '/upload-position-paper/:applicationId',
@@ -232,11 +232,11 @@ router.post(
         return;
       }
 
-      if (application.status !== 'allotted') {
-        res.status(400).json({ message: 'You can only upload position paper after allotment' });
-        return;
-      }
+      // Position paper submissions are CLOSED
+      res.status(400).json({ message: 'Position paper submissions are now closed. The deadline has passed.' });
+      return;
 
+      /*
       // Check if deadline has passed
       if (application.positionPaperDeadline && new Date() > application.positionPaperDeadline) {
         res.status(400).json({ message: 'Position paper submission deadline has passed' });
@@ -251,10 +251,26 @@ router.post(
       // Get remarks from body
       const { remarks } = req.body;
 
-      // In production, upload to cloud storage (Cloudinary, S3, etc.)
-      // For now, we'll store the base64 data (not recommended for production)
-      const base64Data = req.file.buffer.toString('base64');
-      application.positionPaperUrl = `data:application/pdf;base64,${base64Data}`;
+      // Upload to Cloudinary
+      const uploadResult = await new Promise<{ secure_url: string }>((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            resource_type: 'raw',
+            folder: 'mun-position-papers',
+            public_id: `${req.user!._id}_${application._id}_${Date.now()}`,
+            format: 'pdf',
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else if (result) resolve(result);
+            else reject(new Error('Upload failed'));
+          }
+        );
+        uploadStream.end(req.file!.buffer);
+      });
+
+      // Update application with Cloudinary URL
+      application.positionPaperUrl = uploadResult.secure_url;
       application.positionPaperSubmittedAt = new Date();
       application.positionPaperStatus = 'submitted';
       if (remarks) application.positionPaperRemarks = remarks;
@@ -263,15 +279,79 @@ router.post(
 
       res.json({
         message: 'Position paper uploaded successfully',
+        positionPaperUrl: application.positionPaperUrl,
         submittedAt: application.positionPaperSubmittedAt,
         status: application.positionPaperStatus,
       });
+      */
     } catch (error: any) {
       console.error('Upload error:', error);
       res.status(500).json({ message: error.message || 'Upload failed' });
     }
   }
 );
+
+// @route   POST /api/mun/upload-position-paper-direct
+// @desc    Upload position paper directly to user profile (no application needed)
+// @access  Private
+router.post(
+  '/upload-position-paper-direct',
+  protect,
+  upload.single('positionPaper'),
+  async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+      // Position paper submissions are CLOSED
+      res.status(400).json({ message: 'Position paper submissions are now closed. The deadline has passed.' });
+      return;
+
+      if (!req.file) {
+        res.status(400).json({ message: 'Please upload a PDF file' });
+        return;
+      }
+
+      // Get remarks from body
+      const { remarks } = req.body;
+
+      // Upload to Cloudinary
+      const uploadResult = await new Promise<{ secure_url: string }>((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            resource_type: 'raw',
+            folder: 'mun-position-papers',
+            public_id: `user_${req.user!._id}_${Date.now()}`,
+            format: 'pdf',
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else if (result) resolve(result);
+            else reject(new Error('Upload failed'));
+          }
+        );
+        uploadStream.end(req.file!.buffer);
+      });
+
+      // Update user with Cloudinary URL
+      const user = req.user!;
+      user.positionPaperUrl = uploadResult.secure_url;
+      user.positionPaperSubmittedAt = new Date();
+      user.positionPaperStatus = 'submitted';
+      if (remarks) user.positionPaperRemarks = remarks;
+
+      await user.save();
+
+      res.json({
+        message: 'Position paper uploaded successfully',
+        positionPaperUrl: user.positionPaperUrl,
+        submittedAt: user.positionPaperSubmittedAt,
+        status: user.positionPaperStatus,
+      });
+    } catch (error: any) {
+      console.error('Direct upload error:', error);
+      res.status(500).json({ message: error.message || 'Upload failed' });
+    }
+  }
+);
+
 
 // ==================== ADMIN ROUTES ====================
 
@@ -310,11 +390,75 @@ router.put('/admin/users/:id/assign-country', protect, adminOnly, async (req: Au
       res.status(404).json({ message: 'User not found' });
       return;
     }
+
+    // Send email notification to the participant (async, don't block response)
+    if (country && user.email) {
+      sendMunCountryAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Delegate',
+        country: country,
+        committee: committee || 'UNHRC',
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Country assignment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send country assignment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending country assignment email:', err);
+      });
+    }
     
     res.json({ message: 'Country assigned successfully', user });
   } catch (error: any) {
     console.error('Assign country error:', error);
     res.status(500).json({ message: error.message || 'Failed to assign country' });
+  }
+});
+
+// @route   PUT /api/mun/admin/users/:id/assign-newspaper
+// @desc    Assign newspaper company to an IP participant
+// @access  Admin only
+router.put('/admin/users/:id/assign-newspaper', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { newspaper } = req.body;
+    const User = (await import('../models/User')).default;
+    
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { 
+        allottedNewspaper: newspaper,
+        allottedCommittee: 'IP'
+      },
+      { new: true }
+    ).select('-password');
+    
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    // Send email notification to the participant (async, don't block response)
+    if (newspaper && user.email) {
+      sendMunNewspaperAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Press Reporter',
+        newspaper: newspaper,
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Newspaper assignment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send newspaper assignment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending newspaper assignment email:', err);
+      });
+    }
+    
+    res.json({ message: 'Newspaper assigned successfully', user });
+  } catch (error: any) {
+    console.error('Assign newspaper error:', error);
+    res.status(500).json({ message: error.message || 'Failed to assign newspaper' });
   }
 });
 
@@ -390,7 +534,7 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
       notes 
     } = req.body;
 
-    const application = await MunApplication.findById(req.params.id);
+    const application = await MunApplication.findById(req.params.id).populate('user', 'name email');
     if (!application) {
       res.status(404).json({ message: 'Application not found' });
       return;
@@ -401,6 +545,9 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
       res.status(400).json({ message: 'Allotment is locked and cannot be modified' });
       return;
     }
+
+    // Check if this is a new allotment (not a reassignment)
+    const isNewAllotment = !application.allottedCountry;
 
     application.status = 'allotted';
     application.allotmentStatus = application.allottedCountry ? 'reassigned' : 'allotted';
@@ -415,6 +562,26 @@ router.put('/admin/applications/:id/allot', protect, adminOnly, async (req: Auth
     if (notes) application.adminNotes = notes;
 
     await application.save();
+
+    // Send email notification to the participant (async, don't block response)
+    // Only send for new allotments, not reassignments
+    const user = application.user as any;
+    if (country && user && user.email && isNewAllotment) {
+      sendMunCountryAssignmentEmail({
+        recipientEmail: user.email,
+        recipientName: user.name || 'Delegate',
+        country: country,
+        committee: committee || 'UNHRC',
+      }).then((emailSent) => {
+        if (emailSent) {
+          console.log(`Country allotment email sent successfully to ${user.email}`);
+        } else {
+          console.warn(`Failed to send country allotment email to ${user.email}`);
+        }
+      }).catch((err) => {
+        console.error('Error sending country allotment email:', err);
+      });
+    }
 
     res.json({ message: 'Allotment successful', application });
   } catch (error: any) {
@@ -583,6 +750,73 @@ router.put('/admin/applications/:id/status', protect, adminOnly, async (req: Aut
   } catch (error: any) {
     console.error('Status update error:', error);
     res.status(500).json({ message: error.message || 'Status update failed' });
+  }
+});
+
+// @route   GET /api/mun/admin/export/csv
+// @desc    Export all MUN registrations as CSV
+// @access  Admin only
+router.get('/admin/export/csv', protect, adminOnly, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const User = (await import('../models/User')).default;
+    const users = await User.find({ preferredCommittee: { $ne: '' } })
+      .select('-password')
+      .sort({ createdAt: -1 });
+
+    // CSV header
+    const headers = [
+      'Name',
+      'Email',
+      'Phone',
+      'College',
+      'Branch',
+      'Year',
+      'Preferred Committee',
+      'Country Preferences',
+      'Experience Level',
+      'Has Attended MUN',
+      'Previous MUN Experience',
+      'Allotted Country',
+      'Allotted Committee',
+      'Allotted Newspaper',
+      'Position Paper Status',
+      'Position Paper URL',
+      'Registration Date',
+    ];
+
+    // Convert to CSV rows
+    const rows = users.map((user) => {
+      const countryPrefsStr = (user.countryPreferences || []).filter(c => c).join('; ');
+      
+      return [
+        `"${(user.name || '').replace(/"/g, '""')}"`,
+        `"${user.email}"`,
+        `"${user.phone || ''}"`,
+        `"${(user.college || '').replace(/"/g, '""')}"`,
+        `"${(user.branch || '').replace(/"/g, '""')}"`,
+        `"${user.year || ''}"`,
+        `"${user.preferredCommittee || ''}"`,
+        `"${countryPrefsStr}"`,
+        `"${user.experienceLevel || ''}"`,
+        `"${user.hasAttendedMun ? 'Yes' : 'No'}"`,
+        `"${(user.previousMunExperience || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        `"${user.allottedCountry || ''}"`,
+        `"${user.allottedCommittee || ''}"`,
+        `"${user.allottedNewspaper || ''}"`,
+        `"${user.positionPaperStatus || 'not_submitted'}"`,
+        `"${user.positionPaperUrl || ''}"`,
+        `"${new Date(user.createdAt).toLocaleString()}"`,
+      ].join(',');
+    });
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=mun_registrations.csv');
+    res.send(csvContent);
+  } catch (error: any) {
+    console.error('Error exporting MUN registrations:', error);
+    res.status(500).json({ message: error.message || 'Failed to export registrations' });
   }
 });
 

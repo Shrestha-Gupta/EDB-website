@@ -322,4 +322,84 @@ router.put('/admin/:registrationId', protect, async (req: AuthRequest, res: Resp
   }
 });
 
+// @route   GET /api/events/admin/export/csv
+// @desc    Export all event registrations as CSV
+// @access  Private/Admin
+router.get('/admin/export/csv', protect, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const user = req.user;
+
+    if (!user || user.role !== 'admin') {
+      res.status(403).json({ message: 'Not authorized' });
+      return;
+    }
+
+    const { eventType } = req.query;
+    const query: any = {};
+    if (eventType) query.eventType = eventType;
+
+    const registrations = await EventRegistration.find(query).sort({ createdAt: -1 });
+
+    // CSV header
+    const headers = [
+      'Event Type',
+      'Name',
+      'Email',
+      'Phone',
+      'College',
+      'Branch',
+      'Year',
+      'Is Team Registration',
+      'Team Name',
+      'Team Members',
+      'Title',
+      'Description',
+      'Status',
+      'Submission URL',
+      'Submission File Name',
+      'Submission Date',
+      'Admin Remarks',
+      'Registration Date',
+    ];
+
+    // Convert to CSV rows
+    const rows = registrations.map((reg) => {
+      const teamMembersStr = reg.teamMembers
+        ? reg.teamMembers.map((m: any) => `${m.name} (${m.email})`).join('; ')
+        : '';
+      
+      return [
+        `"${reg.eventType}"`,
+        `"${(reg.name || '').replace(/"/g, '""')}"`,
+        `"${reg.email}"`,
+        `"${reg.phone || ''}"`,
+        `"${(reg.college || '').replace(/"/g, '""')}"`,
+        `"${(reg.branch || '').replace(/"/g, '""')}"`,
+        `"${reg.year || ''}"`,
+        `"${reg.isTeamRegistration ? 'Yes' : 'No'}"`,
+        `"${(reg.teamName || '').replace(/"/g, '""')}"`,
+        `"${teamMembersStr.replace(/"/g, '""')}"`,
+        `"${(reg.title || '').replace(/"/g, '""')}"`,
+        `"${(reg.description || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        `"${reg.registrationStatus}"`,
+        `"${reg.submissionUrl || ''}"`,
+        `"${(reg.submissionFileName || '').replace(/"/g, '""')}"`,
+        `"${reg.submissionDate ? new Date(reg.submissionDate).toLocaleString() : ''}"`,
+        `"${(reg.adminRemarks || '').replace(/"/g, '""').replace(/\n/g, ' ')}"`,
+        `"${new Date(reg.createdAt).toLocaleString()}"`,
+      ].join(',');
+    });
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+    const filename = eventType ? `${eventType}_registrations.csv` : 'all_event_registrations.csv';
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+    res.send(csvContent);
+  } catch (error: any) {
+    console.error('Error exporting event registrations:', error);
+    res.status(500).json({ message: error.message || 'Failed to export registrations' });
+  }
+});
+
 export default router;

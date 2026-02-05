@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-export interface IUser {
+export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
   email: string;
   password: string;
@@ -19,12 +19,21 @@ export interface IUser {
   experienceLevel: 'beginner' | 'intermediate' | 'advanced' | '';
   hasAttendedMun: boolean;
   previousMunExperience: string;
+  // Allotted details (assigned by admin)
+  allottedCountry: string;
+  allottedCommittee: string;
+  allottedNewspaper: string; // For IP participants
+  // Position Paper fields
+  positionPaperUrl: string;
+  positionPaperSubmittedAt: Date | null;
+  positionPaperStatus: 'not_submitted' | 'submitted' | 'under_review' | 'approved' | 'revision_requested';
+  positionPaperRemarks: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     email: {
       type: String,
@@ -109,6 +118,29 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    // Newspaper assignment for IP participants
+    allottedNewspaper: {
+      type: String,
+      default: '',
+    },
+    // Position Paper fields (for direct upload without application)
+    positionPaperUrl: {
+      type: String,
+      default: '',
+    },
+    positionPaperSubmittedAt: {
+      type: Date,
+      default: null,
+    },
+    positionPaperStatus: {
+      type: String,
+      enum: ['not_submitted', 'submitted', 'under_review', 'approved', 'revision_requested'],
+      default: 'not_submitted',
+    },
+    positionPaperRemarks: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,
@@ -139,7 +171,8 @@ userSchema.methods.comparePassword = async function (candidatePassword: string):
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// @ts-expect-error mongoose model type instantiation issue
-const User = mongoose.model('User', userSchema);
+// Workaround for mongoose v9 TypeScript depth issue
+const schemaAny = userSchema as any;
+const User = mongoose.model('User', schemaAny) as any as Model<IUser>;
 
 export default User;

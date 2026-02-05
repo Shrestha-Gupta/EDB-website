@@ -40,7 +40,8 @@ export interface IEventRegistration extends Document {
   updatedAt: Date;
 }
 
-const EventRegistrationSchema = new Schema<IEventRegistration>(
+// Workaround for mongoose v9 TypeScript depth issue
+const EventRegistrationSchema: any = new (Schema as any)(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -142,4 +143,4 @@ const EventRegistrationSchema = new Schema<IEventRegistration>(
 // Compound index to prevent duplicate registrations for the same event
 EventRegistrationSchema.index({ userId: 1, eventType: 1 }, { unique: true });
 
-export default mongoose.model<IEventRegistration>('EventRegistration', EventRegistrationSchema);
+export default (mongoose.model as any)('EventRegistration', EventRegistrationSchema) as mongoose.Model<IEventRegistration>;
