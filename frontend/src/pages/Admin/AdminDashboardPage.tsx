@@ -256,6 +256,25 @@ const AdminDashboardPage = () => {
             </Link>
             <p className="text-stone-600 text-sm mt-1">Comprehensive User Data</p>
           </motion.div>
+
+          {/* Certificate Generator Card */}
+          <motion.div
+            className="bg-white p-6 rounded-lg border border-stone-200 shadow-sm"
+            whileHover={{ y: -2, boxShadow: "0 8px 30px rgba(0,0,0,0.08)" }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <span className="text-2xl">📜</span>
+              </div>
+            </div>
+            <Link
+              to="/admin/certificates"
+              className="text-amber-600 hover:text-amber-700 font-semibold flex items-center gap-1"
+            >
+              Certificates →
+            </Link>
+            <p className="text-stone-600 text-sm mt-1">Bulk Certificate Generator</p>
+          </motion.div>
         </div>
 
         {/* Tabs */}
