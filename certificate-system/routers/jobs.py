@@ -38,6 +38,7 @@ class BulkSendRequest(BaseModel):
     event_name: str = ""
     subject: str = "Your Certificate"
     body: str = ""
+    caption: str = ""
     participants: list[ParticipantInput]
 
 
@@ -49,6 +50,7 @@ def send_email(
     cert_path: str,
     subject: str,
     body: str,
+    caption: str = "",
 ) -> bool:
     """Send one email with the certificate PDF attached."""
     smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
@@ -64,8 +66,10 @@ def send_email(
     msg["To"] = to_email
     msg["Subject"] = subject
 
-    # Personalise body
-    if body:
+    # Personalise body — use caption if provided, else body, else default
+    if caption:
+        final_body = caption.replace("{name}", name)
+    elif body:
         final_body = body.replace("{name}", name)
     else:
         final_body = (
@@ -136,6 +140,7 @@ def process_job(job_id: str):
                 cert_path=cert_path,
                 subject=subject,
                 body="",
+                caption=job.caption,
             )
 
             participant.status = "sent"
@@ -165,6 +170,7 @@ async def create_job(req: BulkSendRequest):
         id=new_id(),
         template_id=req.template_id,
         event_name=req.event_name,
+        caption=req.caption,
         total=len(req.participants),
         participants=[
             ParticipantResult(

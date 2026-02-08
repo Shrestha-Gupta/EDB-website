@@ -33,6 +33,19 @@ export default function CertificatePage() {
   const [sendTemplate, setSendTemplate] = useState<string>('')
   const [sending, setSending] = useState(false)
 
+  // Caption state with default message
+  const DEFAULT_CAPTION = `Dear {name},
+
+Greetings from The Editorial Board.
+
+Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *Arunoday '26*.
+
+You're welcome to share your certificate and a brief reflection on LinkedIn. Feel free to tag us at https://linkedin.com/company/theeditorialboard, so that we can celebrate your achievement together.
+
+Warm regards,
+The Editorial Board`
+  const [caption, setCaption] = useState(DEFAULT_CAPTION)
+
   // Jobs state
   const [jobs, setJobs] = useState<Job[]>([])
   const [activeJob, setActiveJob] = useState<Job | null>(null)
@@ -140,7 +153,14 @@ export default function CertificatePage() {
 
     setSending(true)
     try {
-      const result = await createBulkJob(sendTemplate, eventName.trim(), participants)
+      const result = await createBulkJob(
+        sendTemplate,
+        eventName.trim(),
+        participants,
+        undefined,
+        undefined,
+        caption.trim()
+      )
       setTab('jobs')
       const job = await getJob(result.job_id)
       setActiveJob(job)
@@ -348,10 +368,35 @@ export default function CertificatePage() {
                     />
                   </div>
 
+                  {/* Email Caption */}
+                  <div className="bg-white rounded-xl border border-stone-200 p-6">
+                    <h3 className="font-serif font-bold text-stone-700 mb-3">
+                      3. Email Caption
+                    </h3>
+                    <p className="text-xs text-stone-400 mb-3">
+                      This message will be sent in the email body along with the certificate.
+                      Use <strong>{'{name}'}</strong> to insert the participant's name.
+                    </p>
+                    <textarea
+                      value={caption}
+                      onChange={(e) => setCaption(e.target.value)}
+                      rows={10}
+                      className="w-full px-4 py-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-400 outline-none resize-y font-mono text-sm leading-relaxed"
+                      placeholder="Enter the email message..."
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setCaption(DEFAULT_CAPTION)}
+                      className="mt-2 text-xs text-amber-600 hover:text-amber-800 underline"
+                    >
+                      Reset to default caption
+                    </button>
+                  </div>
+
                   {/* Upload CSV */}
                   <div className="bg-white rounded-xl border border-stone-200 p-6">
                     <h3 className="font-serif font-bold text-stone-700 mb-3">
-                      3. Upload Participants
+                      4. Upload Participants
                     </h3>
                     <p className="text-xs text-stone-400 mb-3">
                       CSV or Excel with columns: <strong>name</strong>, <strong>email</strong>,{' '}

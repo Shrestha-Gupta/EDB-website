@@ -61,6 +61,7 @@ class Job(BaseModel):
     id: str
     template_id: str
     event_name: str
+    caption: str = ""
     status: JobStatus = JobStatus.PENDING
     total: int = 0
     sent: int = 0

@@ -158,7 +158,8 @@ export async function createBulkJob(
   eventName: string,
   participants: Participant[],
   subject?: string,
-  body?: string
+  body?: string,
+  caption?: string
 ): Promise<{ job_id: string; status: string; total: number }> {
   const res = await fetch(`${CERT_API_BASE}/api/jobs`, {
     method: "POST",
@@ -168,6 +169,7 @@ export async function createBulkJob(
       event_name: eventName,
       subject: subject || `Certificate - ${eventName}`,
       body: body || "",
+      caption: caption || "",
       participants,
     }),
   });
