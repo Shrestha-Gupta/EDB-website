@@ -51,6 +51,7 @@ def send_email(
     subject: str,
     body: str,
     caption: str = "",
+    event_name: str = "",
 ) -> bool:
     """Send one email with the certificate PDF attached."""
     smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
@@ -68,14 +69,14 @@ def send_email(
 
     # Personalise body — use caption if provided, else body, else default
     if caption:
-        final_body = caption.replace("{name}", name)
+        final_body = caption.replace("{name}", name).replace("{event_name}", event_name or "our event")
     elif body:
-        final_body = body.replace("{name}", name)
+        final_body = body.replace("{name}", name).replace("{event_name}", event_name or "our event")
     else:
         final_body = (
             f"Dear {name},\n\n"
             f"Greetings from The Editorial Board.\n\n"
-            f"Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *our event*.\n\n"
+            f"Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *{event_name or 'our event'}*.\n\n"
             f"You're welcome to share your certificate and a brief reflection on LinkedIn. Feel free to tag us at https://linkedin.com/company/theeditorialboard, so that we can celebrate your achievement together.\n\n"
             f"Warm regards,\nThe Editorial Board"
         )
@@ -141,6 +142,7 @@ def process_job(job_id: str):
                 subject=subject,
                 body="",
                 caption=job.caption,
+                event_name=job.event_name,
             )
 
             participant.status = "sent"

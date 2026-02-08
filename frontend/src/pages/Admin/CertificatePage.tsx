@@ -38,7 +38,7 @@ export default function CertificatePage() {
 
 Greetings from The Editorial Board.
 
-Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *Arunoday '26*.
+Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *{event_name}*.
 
 You're welcome to share your certificate and a brief reflection on LinkedIn. Feel free to tag us at https://linkedin.com/company/theeditorialboard, so that we can celebrate your achievement together.
 
@@ -375,7 +375,7 @@ The Editorial Board`
                     </h3>
                     <p className="text-xs text-stone-400 mb-3">
                       This message will be sent in the email body along with the certificate.
-                      Use <strong>{'{name}'}</strong> to insert the participant's name.
+                      Use <strong>{'{name}'}</strong> for participant name and <strong>{'{event_name}'}</strong> for event name.
                     </p>
                     <textarea
                       value={caption}
