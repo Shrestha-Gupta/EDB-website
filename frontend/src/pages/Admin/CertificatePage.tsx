@@ -34,7 +34,7 @@ export default function CertificatePage() {
   const [sending, setSending] = useState(false)
 
   // Caption state with default message
-  const DEFAULT_CAPTION = `Dear {name},
+  const DEFAULT_CAPTION = `Dear Participant,
 
 Greetings from The Editorial Board.
 
@@ -375,7 +375,7 @@ The Editorial Board`
                     </h3>
                     <p className="text-xs text-stone-400 mb-3">
                       This message will be sent in the email body along with the certificate.
-                      Use <strong>{'{name}'}</strong> for participant name and <strong>{'{event_name}'}</strong> for event name.
+                      Use <strong>{'{event_name}'}</strong> to insert the event name (or edit freely).
                     </p>
                     <textarea
                       value={caption}

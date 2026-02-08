@@ -74,7 +74,7 @@ def send_email(
         final_body = body.replace("{name}", name).replace("{event_name}", event_name or "our event")
     else:
         final_body = (
-            f"Dear {name},\n\n"
+            f"Dear Participant,\n\n"
             f"Greetings from The Editorial Board.\n\n"
             f"Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *{event_name or 'our event'}*.\n\n"
             f"You're welcome to share your certificate and a brief reflection on LinkedIn. Feel free to tag us at https://linkedin.com/company/theeditorialboard, so that we can celebrate your achievement together.\n\n"

@@ -129,7 +129,7 @@ class CertificateSender:
             msg['To'] = to_email
             msg['Subject'] = f'Certificate of Participation - {event_name}' if event_name else 'Your Certificate'
 
-            body = f"""Dear {name},
+            body = f"""Dear Participant,
 
 Greetings from The Editorial Board.
 
