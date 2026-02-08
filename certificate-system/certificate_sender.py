@@ -131,14 +131,14 @@ class CertificateSender:
 
             body = f"""Dear {name},
 
-Congratulations! 🎉
+Greetings from The Editorial Board.
 
-Please find your certificate of participation attached.
+Please find your attached *Certificate of Participation*, issued in recognition of your involvement and contribution to *{event_name if event_name else 'our event'}*.
 
-Thank you for being a part of {event_name if event_name else 'our event'}.
+You're welcome to share your certificate and a brief reflection on LinkedIn. Feel free to tag us at https://linkedin.com/company/theeditorialboard, so that we can celebrate your achievement together.
 
-Best regards,
-EDB Team
+Warm regards,
+The Editorial Board
 """
             msg.attach(MIMEText(body, 'plain'))
 
