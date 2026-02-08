@@ -15,9 +15,11 @@ import {
   type EventRegistration,
   type ArunodayRegistration,
   type MunUser,
+  getAllDebateRegistrations,
+  type DebateRegistrationData,
 } from "../../services/adminApi";
 
-type TabType = "users" | "events" | "arunoday" | "mun";
+type TabType = "users" | "events" | "arunoday" | "debate" | "mun";
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const AdminDashboardPage = () => {
   const [users, setUsers] = useState<MunUser[]>([]);
   const [eventRegistrations, setEventRegistrations] = useState<EventRegistration[]>([]);
   const [arunodayRegistrations, setArunodayRegistrations] = useState<ArunodayRegistration[]>([]);
+  const [debateRegistrations, setDebateRegistrations] = useState<DebateRegistrationData[]>([]);
   
   // Filters
   const [eventFilter, setEventFilter] = useState<string>("all");
@@ -60,14 +63,16 @@ const AdminDashboardPage = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [usersData, eventsData, arunodayData] = await Promise.all([
+      const [usersData, eventsData, arunodayData, debateData] = await Promise.all([
         getAllUsers(),
         getAllEventRegistrations(),
         getArunodayRegistrations(),
+        getAllDebateRegistrations(),
       ]);
       setUsers(usersData);
       setEventRegistrations(eventsData.registrations);
       setArunodayRegistrations(arunodayData);
+      setDebateRegistrations(debateData);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     } finally {
@@ -123,10 +128,21 @@ const AdminDashboardPage = () => {
     );
   });
 
+  const filteredDebate = debateRegistrations.filter((reg) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      reg.fullName.toLowerCase().includes(query) ||
+      reg.email.toLowerCase().includes(query) ||
+      reg.rollNo.toLowerCase().includes(query)
+    );
+  });
+
   const tabs = [
     { id: "users" as TabType, label: "Users", count: users.length },
     { id: "events" as TabType, label: "Events", count: eventRegistrations.length },
     { id: "arunoday" as TabType, label: "Arunoday", count: arunodayRegistrations.length },
+    { id: "debate" as TabType, label: "Debate", count: debateRegistrations.length },
     { id: "mun" as TabType, label: "MUN", count: null },
   ];
 
@@ -217,6 +233,22 @@ const AdminDashboardPage = () => {
               {arunodayRegistrations.length}
             </p>
             <p className="text-stone-600 text-sm">Arunoday Teams</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+            className="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center">
+                <span className="text-2xl">🎤</span>
+              </div>
+            </div>
+            <p className="text-3xl font-bold text-stone-900 mb-1">
+              {debateRegistrations.length}
+            </p>
+            <p className="text-stone-600 text-sm">Debate Registrations</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -998,6 +1030,70 @@ const AdminDashboardPage = () => {
                   </div>
                 </motion.div>
               )}
+
+              {/* Debate Tab */}
+              {activeTab === "debate" && (
+                <motion.div
+                  key="debate"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-stone-200">
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Name
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Roll No
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Branch
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Email
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-stone-600">
+                            Phone
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredDebate.map((reg, idx) => (
+                          <tr
+                            key={idx}
+                            className="border-b border-stone-100 hover:bg-stone-50"
+                          >
+                            <td className="py-3 px-4 font-medium text-stone-900">
+                              {reg.fullName}
+                            </td>
+                            <td className="py-3 px-4 text-stone-600">
+                              {reg.rollNo}
+                            </td>
+                            <td className="py-3 px-4 text-stone-600">
+                              {reg.branch}
+                            </td>
+                            <td className="py-3 px-4 text-stone-600">
+                              {reg.email}
+                            </td>
+                            <td className="py-3 px-4 text-stone-600">
+                              {reg.contactNumber}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {filteredDebate.length === 0 && (
+                      <p className="text-center text-stone-500 py-8">
+                        No Debate registrations found
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+
             </AnimatePresence>
           </div>
         </div>

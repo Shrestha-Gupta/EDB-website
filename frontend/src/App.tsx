@@ -24,6 +24,7 @@ const GalleryPage = lazy(() => import("./pages/Gallery/GalleryPage"));
 const CanvasPage = lazy(() => import("./pages/Canvas/CanvasPage"));
 const MagazineIssues = lazy(() => import("./pages/MagazineIssues"));
 const ArunodayLivePage = lazy(() => import("./pages/ArunodayLive/ArunodayLivePage"));
+const DebateRegistrationPage = lazy(() => import("./pages/DebateRegistrationPage"));
 
 // MUN Pages
 const MunPage = lazy(() => import("./pages/MUN/MunPage"));
@@ -143,6 +144,7 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
+                    <Route path="/debate-registration" element={<DebateRegistrationPage />} />
 
                     {/* Auth Routes - Redirected for Prod */}
                     <Route path="/login" element={<Navigate to="/" replace />} />

@@ -27,8 +27,14 @@ export {
   getEvents,
   type MunApplication,
   type MunUser,
+  type MunUser,
   type MunEvent
 } from './munApi';
+
+export {
+  getAllDebateRegistrations,
+  type DebateRegistrationData
+} from './debateService';
 
 // Arunoday Types
 export interface ArunodayTeamMember {
