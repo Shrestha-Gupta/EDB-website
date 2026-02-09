@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IDebateRegistration extends Document {
   fullName: string;
@@ -9,7 +9,7 @@ export interface IDebateRegistration extends Document {
   createdAt: Date;
 }
 
-const DebateRegistrationSchema: Schema = new Schema({
+const DebateRegistrationSchema = new Schema({
   fullName: { type: String, required: true },
   branch: { type: String, required: true },
   rollNo: { type: String, required: true },
@@ -18,4 +18,8 @@ const DebateRegistrationSchema: Schema = new Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<IDebateRegistration>('DebateRegistration', DebateRegistrationSchema);
+// Workaround for mongoose v9 TypeScript depth issue
+const schemaAny = DebateRegistrationSchema as any;
+const DebateRegistration = mongoose.model('DebateRegistration', schemaAny) as any as Model<IDebateRegistration>;
+
+export default DebateRegistration;
