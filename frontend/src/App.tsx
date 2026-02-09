@@ -28,6 +28,9 @@ const DebateRegistrationPage = lazy(() => import("./pages/DebateRegistrationPage
 
 // MUN Pages
 const MunPage = lazy(() => import("./pages/MUN/MunPage"));
+
+// ADC Page
+const ADCPage = lazy(() => import("./pages/ADC/ADCPage"));
 const MunLoginPage = lazy(() => import("./pages/MUN/MunLoginPage"));
 const MunRegisterPage = lazy(() => import("./pages/MUN/MunRegisterPage"));
 const MunCompleteProfilePage = lazy(() => import("./pages/MUN/MunCompleteProfilePage"));
@@ -146,11 +149,14 @@ function App() {
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
                     <Route path="/debate-registration" element={<DebateRegistrationPage />} />
 
-                    {/* Auth Routes - Redirected for Prod */}
-                    <Route path="/login" element={<Navigate to="/" replace />} />
-                    <Route path="/signup" element={<Navigate to="/" replace />} />
-                    <Route path="/dashboard" element={<Navigate to="/" replace />} />
-                    <Route path="/profile" element={<Navigate to="/" replace />} />
+                    {/* Auth Routes */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+
+                    {/* ADC Route */}
+                    <Route path="/adc" element={<ADCPage />} />
 
                     {/* MUN Routes */}
                     <Route path="/mun" element={<MunPage />} />

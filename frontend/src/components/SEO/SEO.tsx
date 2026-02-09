@@ -256,5 +256,42 @@ export const seoConfigs = {
     description: 'Access all issues of our magazines - Tiresia quarterly editions and Malvika annual editions. Read the best of student writing, photography, and creative works.',
     keywords: 'magazine issues, Tiresia editions, Malvika editions, college magazine archive, student publications',
     url: '/magazine',
+  },
+  adc: {
+    title: 'Annual Debate Competition - ADC 2026',
+    description: 'Register for MMMUT\'s Annual Debate Competition (ADC) 2026. Compete in Group Discussion and Debate rounds. Showcase your oratory skills and win exciting prizes!',
+    keywords: 'Annual Debate Competition, ADC 2026, MMMUT debate, group discussion, GD round, college debate, public speaking, oratory competition',
+    url: '/adc',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Annual Debate Competition 2026",
+      "description": "MMMUT's premier debate competition featuring Group Discussion and Debate rounds",
+      "startDate": "2026-02-17",
+      "endDate": "2026-02-19",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "MMMUT Campus",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Gorakhpur",
+          "addressRegion": "Uttar Pradesh",
+          "addressCountry": "IN"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "The Editorial Board - MMMUT",
+        "url": "https://edb-mmmut.vercel.app"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
   }
 };
