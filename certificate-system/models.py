@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import Optional
 from enum import Enum
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # ── Template Models ──────────────────────────────────────────────
@@ -84,4 +84,4 @@ def new_id() -> str:
 
 
 def now_iso() -> str:
-    return datetime.utcnow().isoformat() + "Z"
+    return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')

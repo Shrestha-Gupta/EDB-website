@@ -22,6 +22,9 @@ from routers.certificates import generate_certificate
 
 logger = logging.getLogger(__name__)
 
+# Thread lock for safe concurrent access to jobs_store
+_jobs_lock = threading.Lock()
+
 router = APIRouter()
 
 

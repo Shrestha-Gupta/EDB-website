@@ -26,6 +26,12 @@ export default function CertificateEditor({ template, onSave }: Props) {
   const [scale, setScale] = useState(1)
   const [saving, setSaving] = useState(false)
 
+  // Sync fields when template changes
+  useEffect(() => {
+    setFields(template.fields)
+    setSelectedField(null)
+  }, [template.id])
+
   // Calculate scale to fit editor
   useEffect(() => {
     if (canvasRef.current && template.width > 0) {
@@ -126,8 +132,10 @@ export default function CertificateEditor({ template, onSave }: Props) {
     try {
       const updated = await updateTemplateFields(template.id, fields)
       onSave(updated)
-    } catch (err) {
+      alert('Field positions saved successfully!')
+    } catch (err: any) {
       console.error('Failed to save:', err)
+      alert(err?.message || 'Failed to save field positions. Is the backend running?')
     } finally {
       setSaving(false)
     }
@@ -345,8 +353,8 @@ export default function CertificateEditor({ template, onSave }: Props) {
           <label className="block text-xs text-stone-500 mb-1">Zoom: {Math.round(scale * 100)}%</label>
           <input
             type="range"
-            min={0.05}
-            max={0.5}
+            min={0.1}
+            max={1.0}
             step={0.01}
             value={scale}
             onChange={(e) => setScale(Number(e.target.value))}

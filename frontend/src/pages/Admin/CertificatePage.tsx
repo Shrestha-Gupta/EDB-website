@@ -12,6 +12,7 @@ import {
   createBulkJob,
   listJobs,
   getJob,
+  getTemplateImageUrl,
 } from '../../services/certificateApi'
 
 type Tab = 'templates' | 'send' | 'jobs'
@@ -53,12 +54,16 @@ The Editorial Board`
 
   // ── Load data ──────────────────────────────────────────────
 
+  const [backendError, setBackendError] = useState(false)
+
   const loadTemplates = useCallback(async () => {
     try {
       const data = await listTemplates()
       setTemplates(data)
+      setBackendError(false)
     } catch (err) {
       console.error(err)
+      setBackendError(true)
     }
   }, [])
 
@@ -66,8 +71,10 @@ The Editorial Board`
     try {
       const data = await listJobs()
       setJobs(data)
+      setBackendError(false)
     } catch (err) {
       console.error(err)
+      setBackendError(true)
     }
   }, [])
 
@@ -101,7 +108,18 @@ The Editorial Board`
 
   const handleTemplateUpload = async () => {
     const file = templateFileRef.current?.files?.[0]
-    if (!file || !templateName.trim()) return
+    if (!file && !templateName.trim()) {
+      alert('Please enter a template name and select an image file.')
+      return
+    }
+    if (!templateName.trim()) {
+      alert('Please enter a template name.')
+      return
+    }
+    if (!file) {
+      alert('Please select a template image file (PNG or JPG).')
+      return
+    }
 
     setUploading(true)
     try {
@@ -110,8 +128,9 @@ The Editorial Board`
       setSelectedTemplate(tpl)
       setTemplateName('')
       if (templateFileRef.current) templateFileRef.current.value = ''
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      alert(err?.message || 'Failed to upload template. Make sure the certificate backend server is running.')
     } finally {
       setUploading(false)
     }
@@ -123,8 +142,9 @@ The Editorial Board`
       await deleteTemplate(id)
       setTemplates((prev) => prev.filter((t) => t.id !== id))
       if (selectedTemplate?.id === id) setSelectedTemplate(null)
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      alert(err?.message || 'Failed to delete template.')
     }
   }
 
@@ -139,7 +159,11 @@ The Editorial Board`
       setParticipants(result.participants)
       setCsvFileName(file.name)
     } catch (err: any) {
-      alert(err.message || 'Failed to parse file')
+      console.error(err)
+      alert(err?.message || 'Failed to parse file. Make sure the certificate backend server is running.')
+    } finally {
+      // Reset input so re-selecting the same file triggers onChange again
+      if (e.target) e.target.value = ''
     }
   }
 
@@ -242,7 +266,7 @@ The Editorial Board`
                   />
                   <button
                     onClick={handleTemplateUpload}
-                    disabled={uploading || !templateName.trim()}
+                    disabled={uploading}
                     className="px-6 py-2.5 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 disabled:opacity-50 transition-colors whitespace-nowrap"
                   >
                     {uploading ? 'Uploading...' : 'Upload'}
@@ -258,8 +282,16 @@ The Editorial Board`
                       key={tpl.id}
                       className="bg-white rounded-xl border border-stone-200 overflow-hidden hover:shadow-md transition-shadow"
                     >
-                      <div className="h-40 bg-stone-100 flex items-center justify-center text-6xl">
-                        📄
+                      <div className="h-40 bg-stone-100 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={getTemplateImageUrl(tpl)}
+                          alt={tpl.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none'
+                            ;(e.target as HTMLImageElement).parentElement!.innerHTML = '<span class="text-6xl">📄</span>'
+                          }}
+                        />
                       </div>
                       <div className="p-4">
                         <h3 className="font-serif font-bold text-stone-800">{tpl.name}</h3>
@@ -424,6 +456,14 @@ The Editorial Board`
                   >
                     {sending ? '⏳ Starting...' : `📧 Send ${participants.length} Certificates`}
                   </motion.button>
+
+                  {backendError && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm">
+                      <p className="font-bold">⚠️ Certificate backend is not reachable</p>
+                      <p className="mt-1">Make sure the FastAPI server is running on <code className="bg-red-100 px-1 rounded">http://localhost:8000</code></p>
+                      <p className="mt-1 text-xs text-red-500">Run: <code className="bg-red-100 px-1 rounded">cd certificate-system && uvicorn app:app --reload --port 8000</code></p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Right: Participant Preview */}

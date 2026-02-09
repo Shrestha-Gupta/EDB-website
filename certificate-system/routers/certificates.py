@@ -27,6 +27,14 @@ FONT_MAP = {
     "Courier": "/System/Library/Fonts/Courier.dfont",
 }
 
+# Linux / Docker fallback fonts
+LINUX_FONT_FALLBACKS = [
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+    "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+    "/usr/share/fonts/TTF/DejaVuSans.ttf",
+]
+
 
 def resolve_font(family: str, size: int) -> ImageFont.FreeTypeFont:
     """Try custom fonts dir, then system fonts, then default."""
@@ -45,7 +53,12 @@ def resolve_font(family: str, size: int) -> ImageFont.FreeTypeFont:
         if Path(path).exists():
             return ImageFont.truetype(path, size)
 
-    # 4. Fallback
+    # 4. Linux / Docker fallback
+    for path in LINUX_FONT_FALLBACKS:
+        if Path(path).exists():
+            return ImageFont.truetype(path, size)
+
+    # 5. Fallback
     return ImageFont.load_default()
 
 
