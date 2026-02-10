@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.PROD 
+  ? 'https://edb-website-7oxz.vercel.app' 
+  : 'http://localhost:5000';
 
 export interface DebateRegistrationData {
   fullName: string;
@@ -10,7 +12,7 @@ export interface DebateRegistrationData {
 
 export const registerForDebate = async (data: DebateRegistrationData) => {
   try {
-    const response = await fetch(`${API_URL}/debate/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/debate/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +34,7 @@ export const registerForDebate = async (data: DebateRegistrationData) => {
 
 export const getAllDebateRegistrations = async () => {
   try {
-    const response = await fetch(`${API_URL}/debate/all`);
+    const response = await fetch(`${API_BASE_URL}/api/debate/all`);
     const responseData = await response.json();
 
     if (!response.ok) {
