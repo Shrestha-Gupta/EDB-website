@@ -240,7 +240,7 @@ const ADCPage = () => {
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(251, 146, 60, 0.4)" }}
               >
                 <Calendar className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                <span className="text-sm md:text-lg font-bold text-white">17 - 19 Feb 2026</span>
+                <span className="text-sm md:text-lg font-bold text-white">17 and 19 Feb 2026</span>
               </motion.div>
               <motion.div 
                 className="flex items-center gap-2 md:gap-3 bg-gradient-to-r from-amber-500/90 to-orange-500/90 backdrop-blur-sm px-3 py-2 md:px-5 md:py-3 rounded-xl border border-amber-400/50 shadow-lg"
