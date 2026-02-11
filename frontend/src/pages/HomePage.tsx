@@ -24,6 +24,15 @@ const containerVariants = {
 const FeaturedEvents = () => {
   const events = [
     {
+      name: "Annual Debate Competition",
+      subtitle: "Battle of Intellect",
+      icon: "🎙️",
+      description: "Join MMMUT's premier debate competition. Engage in Group Discussions and Debates to showcase your oratory skills.",
+      link: "/adc",
+      eventType: "live",
+      isLive: true
+    },
+    {
       name: "Arunoday",
       subtitle: "The Literary Extravaganza",
       icon: "🌅",
@@ -97,16 +106,28 @@ const FeaturedEvents = () => {
               className="group"
             >
               <div className="border-t-4 border-amber-600 bg-white p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                <h3 className="text-xl font-serif font-bold text-stone-900 mb-1">{event.name}</h3>
+                <div className="flex items-start justify-between mb-1">
+                  <h3 className="text-xl font-serif font-bold text-stone-900">{event.name}</h3>
+                  {event.isLive && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      LIVE
+                    </span>
+                  )}
+                </div>
                 <p className="text-amber-600 font-medium text-sm mb-4 pb-4 border-b border-stone-100">{event.subtitle}</p>
                 <p className="text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
                   {event.description}
                 </p>
                 <Link
                   to={event.link}
-                  className="inline-flex items-center gap-2 text-stone-900 hover:text-amber-600 font-medium text-sm transition-colors group-hover:gap-3"
+                  className={`inline-flex items-center justify-center gap-2 font-medium text-sm transition-all group-hover:gap-3 ${
+                    event.isLive
+                      ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white px-4 py-2.5 rounded-lg hover:from-red-700 hover:to-orange-600 shadow-md'
+                      : 'text-stone-900 hover:text-amber-600'
+                  }`}
                 >
-                  View Winners
+                  {event.isLive ? 'Register Now' : 'View Winners'}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

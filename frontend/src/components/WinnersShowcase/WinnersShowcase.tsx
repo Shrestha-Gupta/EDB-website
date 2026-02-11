@@ -54,7 +54,7 @@ const WinnersShowcase = () => {
     },
     { 
       rank: 2, 
-      teamName: "Pratekshan", 
+      teamName: "Pralekhan", 
       description: "Exceptional storytelling and journalistic excellence",
       members: [
         "Nishoo Yadav (ECE, 1st Year)",
@@ -244,7 +244,7 @@ const WinnersShowcase = () => {
                         src={
                           team.teamName === "Ink and Insight" 
                             ? "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop"
-                            : team.teamName === "Pratekshan"
+                            : team.teamName === "Pralekhan"
                             ? "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1000&auto=format&fit=crop"
                             : "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1000&auto=format&fit=crop"
                         }

@@ -243,14 +243,14 @@ const sophomoreTeam = [
     name: "Shlok",
     department: "Computer Science and Engineering",
     image:
-      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765641663/44249_fvzbka.jpg",
+      "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1770657849/WhatsApp_Image_2026-01-16_at_3.05.42_AM_gbj2qf.jpg",
   },
   {
     id: 14,
     name: "Shivam Gupta",
     department: "Electronics and Communication Engineering",
     image:
-      "https://res.cloudinary.com/dml0jlwlv/image/upload/v1765621947/Shivamgupta_-_Shivam_nggock.png",
+      "https://res.cloudinary.com/dwdx4kjgx/image/upload/v1770657847/WhatsApp_Image_2026-01-16_at_3.05.42_AM_gbj2qf.jpg",
   },
   {
     id: 15,
