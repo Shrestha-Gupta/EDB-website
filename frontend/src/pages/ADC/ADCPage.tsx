@@ -81,13 +81,13 @@ const ADCPage = () => {
       <div className="relative pt-24">
         {/* Debate Stage Background Image */}
         <div className="absolute inset-0 h-[450px] md:h-[500px] overflow-hidden">
-          <img 
-            src="https://res.cloudinary.com/dwdx4kjgx/image/upload/v1770657827/download_1_njaxom.jpg" 
+          <img
+            src="https://res.cloudinary.com/dt7cr6zuz/image/upload/v1770818820/abc_qvyigh.jpg"
             alt="Debate Stage"
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-85"
           />
           {/* Gradient overlay to blend into page background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-stone-50/70 to-stone-50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-stone-50/20 to-stone-50" />
           {/* Noise texture overlay */}
           <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay pointer-events-none" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
@@ -149,7 +149,7 @@ const ADCPage = () => {
               transition={{ duration: 0.3, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-8 md:gap-12 text-stone-700 mb-8"
             >
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-3"
                 whileInView={{ scale: [1, 1.05, 1] }}
                 viewport={{ once: true }}
@@ -158,7 +158,7 @@ const ADCPage = () => {
                 <Calendar className="w-7 h-7 text-amber-600" />
                 <span className="text-lg md:text-xl font-medium">17 - 19 Feb 2026</span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-3"
                 whileInView={{ scale: [1, 1.05, 1] }}
                 viewport={{ once: true }}
@@ -167,7 +167,7 @@ const ADCPage = () => {
                 <MapPin className="w-7 h-7 text-amber-600" />
                 <span className="text-lg md:text-xl font-medium">MMMUT Campus</span>
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-3"
                 whileInView={{ scale: [1, 1.05, 1] }}
                 viewport={{ once: true }}
@@ -194,8 +194,8 @@ const ADCPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-16">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
         {/* Competition Format Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -233,30 +233,30 @@ const ADCPage = () => {
                   <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl border-t-4 h-full transition-all duration-300 cursor-pointer group"
                     style={{ borderImage: `linear-gradient(to right, ${index === 0 ? '#3b82f6, #06b6d4' : '#ef4444, #f97316'}) 1` }}
                   >
-                      {/* Round number badge */}
-                      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold text-white bg-gradient-to-r ${round.color} mb-4`}>
-                        <Clock className="w-4 h-4" />
-                        {round.round}
+                    {/* Round number badge */}
+                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold text-white bg-gradient-to-r ${round.color} mb-4`}>
+                      <Clock className="w-4 h-4" />
+                      {round.round}
+                    </div>
+                    
+                    <div className="flex items-start gap-4 mb-4">
+                      <motion.div 
+                        className={`p-3 rounded-xl bg-gradient-to-br ${round.color} text-white shadow-lg flex-shrink-0`}
+                        whileHover={{ rotate: 5, scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {round.icon}
+                      </motion.div>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-serif font-bold text-stone-900">{round.name}</h3>
+                        <p className="text-stone-500 font-medium flex items-center gap-2 mt-1 text-sm md:text-base">
+                          <Calendar className="w-4 h-4" />
+                          {round.date}
+                        </p>
                       </div>
-                      
-                      <div className="flex items-start gap-4 mb-4">
-                        <motion.div 
-                          className={`p-3 rounded-xl bg-gradient-to-br ${round.color} text-white shadow-lg flex-shrink-0`}
-                          whileHover={{ rotate: 5, scale: 1.1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {round.icon}
-                        </motion.div>
-                        <div>
-                          <h3 className="text-xl md:text-2xl font-serif font-bold text-stone-900">{round.name}</h3>
-                          <p className="text-stone-500 font-medium flex items-center gap-2 mt-1 text-sm md:text-base">
-                            <Calendar className="w-4 h-4" />
-                            {round.date}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-stone-600 leading-relaxed text-sm md:text-base">{round.description}</p>
+                    </div>
+                    
+                    <p className="text-stone-600 leading-relaxed text-sm md:text-base">{round.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -279,7 +279,7 @@ const ADCPage = () => {
             <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto mb-4"></div>
             <p className="text-stone-600 text-lg">Discover the benefits of joining the competition</p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: <Target className="w-7 h-7 md:w-8 md:h-8" />, title: "Sharpen Skills", desc: "Enhance critical thinking & public speaking", gradient: "from-blue-500 to-cyan-500", borderColor: "#93c5fd" },
@@ -298,7 +298,7 @@ const ADCPage = () => {
                 style={{ borderColor: item.borderColor }}
               >
                 <div className="text-center">
-                  <motion.div 
+                  <motion.div
                     className={`w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white shadow-lg group-hover:shadow-xl`}
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.5 }}
@@ -381,7 +381,7 @@ const ADCPage = () => {
                 <div className="relative group">
                   {/* Subtle glow effect */}
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-red-500 to-amber-500 rounded-2xl opacity-10 group-hover:opacity-20 blur-sm transition-all duration-500" />
-                  
+
                   <div className="relative bg-white rounded-2xl p-6 md:p-10 shadow-xl border border-orange-200/50">
                     {error && (
                       <motion.div
@@ -394,112 +394,112 @@ const ADCPage = () => {
                       </motion.div>
                     )}
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="fullName" className="block text-sm font-semibold text-stone-700 mb-2">
-                          Full Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="fullName"
-                          name="fullName"
-                          required
-                          value={formData.fullName}
-                          onChange={handleChange}
-                          className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                          placeholder="Enter your full name"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="rollNo" className="block text-sm font-semibold text-stone-700 mb-2">
-                          Roll Number <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="rollNo"
-                          name="rollNo"
-                          required
-                          value={formData.rollNo}
-                          onChange={handleChange}
-                          className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                          placeholder="University Roll No."
-                        />
-                      </div>
-                    </div>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="fullName" className="block text-sm font-semibold text-stone-700 mb-2">
+                            Full Name <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            required
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
+                            placeholder="Enter your full name"
+                          />
+                        </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="branch" className="block text-sm font-semibold text-stone-700 mb-2">
-                          Branch / Course <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="branch"
-                          name="branch"
-                          required
-                          value={formData.branch}
-                          onChange={handleChange}
-                          className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                          placeholder="e.g. B.Tech CSE"
-                        />
+                        <div>
+                          <label htmlFor="rollNo" className="block text-sm font-semibold text-stone-700 mb-2">
+                            Roll Number <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="rollNo"
+                            name="rollNo"
+                            required
+                            value={formData.rollNo}
+                            onChange={handleChange}
+                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
+                            placeholder="University Roll No."
+                          />
+                        </div>
                       </div>
 
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="branch" className="block text-sm font-semibold text-stone-700 mb-2">
+                            Branch / Course <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="branch"
+                            name="branch"
+                            required
+                            value={formData.branch}
+                            onChange={handleChange}
+                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
+                            placeholder="e.g. B.Tech CSE"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="contactNumber" className="block text-sm font-semibold text-stone-700 mb-2">
+                            Contact Number <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            id="contactNumber"
+                            name="contactNumber"
+                            required
+                            value={formData.contactNumber}
+                            onChange={handleChange}
+                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
+                            placeholder="WhatsApp number preferred"
+                          />
+                        </div>
+                      </div>
+
                       <div>
-                        <label htmlFor="contactNumber" className="block text-sm font-semibold text-stone-700 mb-2">
-                          Contact Number <span className="text-red-500">*</span>
+                        <label htmlFor="email" className="block text-sm font-semibold text-stone-700 mb-2">
+                          Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
-                          type="tel"
-                          id="contactNumber"
-                          name="contactNumber"
+                          type="email"
+                          id="email"
+                          name="email"
                           required
-                          value={formData.contactNumber}
+                          value={formData.email}
                           onChange={handleChange}
                           className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                          placeholder="WhatsApp number preferred"
+                          placeholder="your.email@example.com"
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-stone-700 mb-2">
-                        Email Address <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div className="pt-4">
-                      <motion.button
-                        type="submit"
-                        disabled={isLoading}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="relative w-full overflow-hidden bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_100%] hover:bg-[position:100%_0] text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/30 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500"
-                      >
-                        {/* Animated border glow */}
-                        <span className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse" />
-                        {isLoading ? (
-                          <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                        ) : (
-                          <>
-                            <span className="text-lg">Submit Registration</span>
-                            <Send className="w-5 h-5" />
-                          </>
-                        )}
-                      </motion.button>
-                    </div>
-                  </form>
+                      <div className="pt-4">
+                        <motion.button
+                          type="submit"
+                          disabled={isLoading}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="relative w-full overflow-hidden bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_100%] hover:bg-[position:100%_0] text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/30 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500"
+                        >
+                          {/* Animated border glow */}
+                          <span className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse" />
+                          {isLoading ? (
+                            <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                          ) : (
+                            <>
+                              <span className="text-lg">Submit Registration</span>
+                              <Send className="w-5 h-5" />
+                            </>
+                          )}
+                        </motion.button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </motion.div>
@@ -570,13 +570,13 @@ const ADCPage = () => {
                 </div>
               </div>
             </div>
-            
+
             <p className="text-stone-600 mb-6">
               Have questions about certificates or results? Our coordinators are here!
             </p>
-            
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <a 
+              <a
                 href="tel:+917004324717"
                 className="flex items-center gap-3 bg-white p-4 rounded-xl border border-orange-300 hover:shadow-md transition-all duration-300"
               >
@@ -592,8 +592,8 @@ const ADCPage = () => {
                   <div className="text-orange-600 font-medium">+91 7004324717</div>
                 </div>
               </a>
-              
-              <a 
+
+              <a
                 href="tel:+918115303806"
                 className="flex items-center gap-3 bg-white p-4 rounded-xl border border-orange-300 hover:shadow-md transition-all duration-300"
               >
