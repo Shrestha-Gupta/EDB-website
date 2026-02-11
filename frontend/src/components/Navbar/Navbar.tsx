@@ -204,6 +204,25 @@ export default function Navbar() {
         </svg>
       ),
     },
+    {
+      name: "ADC",
+      path: "/adc",
+      icon: (
+        <svg
+          className="w-full h-full"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+          />
+        </svg>
+      ),
+    },
     // Contact moved to separate button
   ];
 
@@ -242,30 +261,53 @@ export default function Navbar() {
           </Link>
 
           {/* Middle: Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 justify-center px-4">
-            {navLinks.slice(0, 10).map((link) => (
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 flex-1 justify-center px-2">
+            {navLinks.slice(0, 11).map((link) => (
               <Link key={link.name} to={link.path} onMouseEnter={() => prefetchRoute(link.path)} onFocus={() => prefetchRoute(link.path)}>
-                <motion.div
-                  className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${isActive(link.path) ? "text-orange-500" : "text-gray-700"
-                    }`}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {/* Before pseudo-element (top and bottom borders) */}
+                {link.name === "ADC" ? (
+                  /* Highlighted ADC Button */
                   <motion.div
-                    className="absolute inset-0 border-t border-b border-orange-500/50 opacity-0 group-hover:opacity-100"
-                    initial={{ scaleX: 0.1 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="relative z-10 uppercase tracking-wide xl:tracking-wider text-xs inline-block group-hover:text-orange-500"
-                    initial={{ letterSpacing: "0.05em" }}
-                    whileHover={{ letterSpacing: "0.1em" }}
-                    transition={{ duration: 0.3 }}
+                    className="relative px-2.5 xl:px-3 py-2 rounded-full font-bold text-xs xl:text-sm tracking-wide bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg overflow-hidden"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {link.name}
-                  </motion.span>
-                </motion.div>
+                    {/* Pulsing glow effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-red-400 to-orange-400"
+                      animate={{ opacity: [0.5, 0.8, 0.5] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                      </span>
+                      ADC
+                    </span>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    className={`relative px-2 xl:px-3 py-2 rounded-md font-medium text-xs xl:text-sm tracking-wide transition-all duration-300 overflow-hidden group ${isActive(link.path) ? "text-orange-500" : "text-gray-700"
+                      }`}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Before pseudo-element (top and bottom borders) */}
+                    <motion.div
+                      className="absolute inset-0 border-t border-b border-orange-500/50 opacity-0 group-hover:opacity-100"
+                      initial={{ scaleX: 0.1 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span
+                      className="relative z-10 uppercase tracking-wide xl:tracking-wider text-xs inline-block group-hover:text-orange-500"
+                      initial={{ letterSpacing: "0.05em" }}
+                      whileHover={{ letterSpacing: "0.1em" }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {link.name}
+                    </motion.span>
+                  </motion.div>
+                )}
               </Link>
             ))}
           </div>
@@ -307,7 +349,12 @@ export default function Navbar() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
 
                 <span className="relative z-10 text-amber-600">
@@ -437,16 +484,16 @@ export default function Navbar() {
                       </Link>
                     )} */}
 
-                    {/* Contact Button */}
+                    {/* Sign In Button */}
                     <Link
-                      to="/contact"
+                      to="/login"
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-white border border-gray-200 text-gray-700 font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-white border-2 border-amber-500 text-amber-600 font-semibold rounded-xl shadow-sm hover:bg-amber-50 transition-all duration-200 active:scale-[0.98]"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
-                      Contact Us
+                      Sign In
                     </Link>
                   </motion.div>
                 </div>

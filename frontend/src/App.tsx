@@ -24,9 +24,13 @@ const GalleryPage = lazy(() => import("./pages/Gallery/GalleryPage"));
 const CanvasPage = lazy(() => import("./pages/Canvas/CanvasPage"));
 const MagazineIssues = lazy(() => import("./pages/MagazineIssues"));
 const ArunodayLivePage = lazy(() => import("./pages/ArunodayLive/ArunodayLivePage"));
+const DebateRegistrationPage = lazy(() => import("./pages/DebateRegistrationPage"));
 
 // MUN Pages
 const MunPage = lazy(() => import("./pages/MUN/MunPage"));
+
+// ADC Page
+const ADCPage = lazy(() => import("./pages/ADC/ADCPage"));
 const MunLoginPage = lazy(() => import("./pages/MUN/MunLoginPage"));
 const MunRegisterPage = lazy(() => import("./pages/MUN/MunRegisterPage"));
 const MunCompleteProfilePage = lazy(() => import("./pages/MUN/MunCompleteProfilePage"));
@@ -41,6 +45,7 @@ const MunSelectCommitteePage = lazy(() => import("./pages/MUN/MunSelectCommittee
 // Admin Pages
 const AdminDashboardPage = lazy(() => import("./pages/Admin/AdminDashboardPage"));
 const UserInfoPage = lazy(() => import("./pages/Admin/UserInfoPage"));
+const CertificatePage = lazy(() => import("./pages/Admin/CertificatePage"));
 
 // Auth Pages
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
@@ -142,12 +147,16 @@ function App() {
                     <Route path="/canvas" element={<CanvasPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/arunoday-live" element={<ArunodayLivePage />} />
+                    <Route path="/debate-registration" element={<DebateRegistrationPage />} />
 
-                    {/* Auth Routes - Redirected for Prod */}
-                    <Route path="/login" element={<Navigate to="/" replace />} />
-                    <Route path="/signup" element={<Navigate to="/" replace />} />
-                    <Route path="/dashboard" element={<Navigate to="/" replace />} />
-                    <Route path="/profile" element={<Navigate to="/" replace />} />
+                    {/* Auth Routes */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+
+                    {/* ADC Route */}
+                    <Route path="/adc" element={<ADCPage />} />
 
                     {/* MUN Routes */}
                     <Route path="/mun" element={<MunPage />} />
@@ -165,6 +174,7 @@ function App() {
                     {/* Admin Routes */}
                     <Route path="/admin" element={<AdminDashboardPage />} />
                     <Route path="/admin/user-info" element={<UserInfoPage />} />
+                    <Route path="/admin/certificates" element={<CertificatePage />} />
                   </Routes>
                 </AnimatePresence>
               </Suspense>

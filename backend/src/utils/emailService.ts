@@ -316,7 +316,82 @@ export const sendMunNewspaperAssignmentEmail = async (data: MunNewspaperAssignme
   }
 };
 
+/**
+ * Send Debate Competition registration confirmation email
+ */
+export const sendDebateConfirmationEmail = async (recipientEmail: string, recipientName: string): Promise<boolean> => {
+  try {
+    const transporter = getTransporter();
+    const smtpEmail = process.env.SMTP_EMAIL;
+
+    const mailOptions = {
+      from: `"The Editorial Board" <${smtpEmail}>`,
+      to: recipientEmail,
+      subject: `Registration Confirmed: Annual Debate Competition`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
+              .container { max-width: 600px; margin: 40px auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+              .header { background: linear-gradient(135deg, #c53030 0%, #e53e3e 100%); color: white; padding: 40px 30px; text-align: center; }
+              .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+              .content { padding: 40px 30px; }
+              .greeting { font-size: 18px; color: #2d3748; margin-bottom: 20px; font-weight: 600; }
+              .info-box { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 20px; border-radius: 6px; margin: 20px 0; }
+              .footer { background: #2d3748; padding: 20px; text-align: center; color: white; font-size: 14px; }
+              .link { color: #e53e3e; text-decoration: none; font-weight: 600; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>Registration Confirmed! 🎤</h1>
+                <p style="margin: 10px 0 0; opacity: 0.9;">Annual Debate Competition</p>
+              </div>
+              <div class="content">
+                <p class="greeting">Hello ${recipientName},</p>
+                <p>Thank you for registering for the <strong>Annual Debate Competition</strong> organized by The Editorial Board, MMMUT Gorakhpur.</p>
+                
+                <div class="info-box">
+                  <p style="margin: 0; color: #742a2a;">
+                    <strong>✅ Your registration has been successfully recorded.</strong><br>
+                    We have received your details and are excited to have your participation.
+                  </p>
+                </div>
+
+                <p>Please stay tuned for further updates regarding the schedule, topics, and rules of the competition. We will be sharing more information soon.</p>
+
+                <p>If you have any questions, feel free to reply to this email.</p>
+                
+                <p style="margin-top: 30px;">
+                  Best of luck!<br>
+                  <strong>The Editorial Board</strong><br>
+                  MMMUT Gorakhpur
+                </p>
+              </div>
+              <div class="footer">
+                <p>&copy; ${new Date().getFullYear()} The Editorial Board, MMMUT. All rights reserved.</p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `
+    };
+
+    const result = await transporter.sendMail(mailOptions);
+    console.log(`Debate registration email sent to ${recipientEmail}:`, result.messageId);
+    return true;
+  } catch (error) {
+    console.error('Failed to send debate registration email:', error);
+    return false;
+  }
+};
+
 export default {
   sendMunCountryAssignmentEmail,
   sendMunNewspaperAssignmentEmail,
+  sendDebateConfirmationEmail,
 };
+

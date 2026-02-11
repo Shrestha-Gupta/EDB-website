@@ -33,6 +33,7 @@ import munRoutes from "./routes/mun";
 import arunodayRoutes from "./routes/arunoday";
 import eventsRoutes from "./routes/events";
 import userInfoRoutes from "./routes/userInfo";
+import debateRoutes from "./routes/debateRoutes";
 
 // Import database connection
 import connectDB from "./config/database";
@@ -141,6 +142,7 @@ app.use("/api/mun", munRoutes);
 app.use("/api/arunoday", arunodayRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/admin/user-info", userInfoRoutes);
+app.use("/api/debate", debateRoutes);
 
 // Contact form endpoint
 app.post('/api/contact', upload.single('image'), async (req, res) => {
