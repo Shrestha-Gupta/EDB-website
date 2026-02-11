@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
-import { Calendar, MapPin, Users, Mic2, MessageSquare, ArrowRight, Send, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { Calendar, MapPin, Users, Mic2, MessageSquare, ArrowRight, Send, CheckCircle, AlertCircle, Clock, Target, Trophy, Award, UserPlus } from "lucide-react";
 import { type DebateRegistrationData, registerForDebate } from "../../services/debateService";
 
 const ADCPage = () => {
@@ -282,10 +282,10 @@ const ADCPage = () => {
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "🎯", title: "Sharpen Skills", desc: "Enhance critical thinking & public speaking", gradient: "from-blue-500 to-cyan-500", borderColor: "#93c5fd" },
-              { icon: "🏆", title: "Win Prizes", desc: "Exciting rewards for top performers", gradient: "from-amber-500 to-orange-500", borderColor: "#fcd34d" },
-              { icon: "📜", title: "Certificates", desc: "Recognition for all participants", gradient: "from-green-500 to-emerald-500", borderColor: "#86efac" },
-              { icon: "🤝", title: "Network", desc: "Connect with like-minded debaters", gradient: "from-purple-500 to-pink-500", borderColor: "#d8b4fe" },
+              { icon: <Target className="w-7 h-7 md:w-8 md:h-8" />, title: "Sharpen Skills", desc: "Enhance critical thinking & public speaking", gradient: "from-blue-500 to-cyan-500", borderColor: "#93c5fd" },
+              { icon: <Trophy className="w-7 h-7 md:w-8 md:h-8" />, title: "Win Prizes", desc: "Exciting rewards for top performers", gradient: "from-amber-500 to-orange-500", borderColor: "#fcd34d" },
+              { icon: <Award className="w-7 h-7 md:w-8 md:h-8" />, title: "Certificates", desc: "Recognition for all participants", gradient: "from-green-500 to-emerald-500", borderColor: "#86efac" },
+              { icon: <UserPlus className="w-7 h-7 md:w-8 md:h-8" />, title: "Network", desc: "Connect with like-minded debaters", gradient: "from-purple-500 to-pink-500", borderColor: "#d8b4fe" },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -299,7 +299,7 @@ const ADCPage = () => {
               >
                 <div className="text-center">
                   <motion.div 
-                    className={`w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-2xl md:text-3xl shadow-lg group-hover:shadow-xl`}
+                    className={`w-14 h-14 md:w-16 md:h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white shadow-lg group-hover:shadow-xl`}
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >
@@ -535,7 +535,7 @@ const ADCPage = () => {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold">•</span>
-                <span>Topics for both rounds will be announced on the spot.</span>
+                <span>The topic for the debate will be informed in advance while that for GD will be told on spot.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold">•</span>
