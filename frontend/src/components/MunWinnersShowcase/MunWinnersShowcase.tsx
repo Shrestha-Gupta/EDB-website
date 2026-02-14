@@ -11,6 +11,7 @@ const MunWinnersShowcase = () => {
       icon: <Gavel className="w-6 h-6" />,
       description: "Demonstrated exceptional diplomacy and leadership.",
       image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
+      color: "bg-amber-600",
       winners: [
         { name: "Aditya Pandey", dept: "EE, 1st Year" },
         { name: "Vedansh Tiwari", dept: "IT, 1st Year" },
@@ -23,6 +24,7 @@ const MunWinnersShowcase = () => {
       icon: <Mic className="w-5 h-5" />,
       description: "Captivated the committee with powerful speeches.",
       image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80",
+      color: "bg-amber-600",
       winners: [
         { name: "Parul Tiwari", dept: "IT, 1st Year" },
         { name: "Ananaya Kumar", dept: "EE, 1st Year" },
@@ -35,6 +37,7 @@ const MunWinnersShowcase = () => {
       icon: <FileText className="w-5 h-5" />,
       description: "Exhibited outstanding research and policy analysis.",
       image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+      color: "bg-amber-600",
       winners: [
         { name: "Shaurya Kumar", dept: "ECE, 1st Year" },
         { name: "Ananya Prasad", dept: "ECE, 1st Year" }
@@ -46,6 +49,7 @@ const MunWinnersShowcase = () => {
       icon: <Scroll className="w-5 h-5" />,
       description: "Crafted the most comprehensive solutions.",
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+      color: "bg-amber-600",
       winners: [
         { name: "Vivekanand Tiwari", dept: "IT, 1st Year" }
       ]
@@ -56,6 +60,7 @@ const MunWinnersShowcase = () => {
       icon: <PenTool className="w-5 h-5" />,
       description: "Reported committee proceedings with flair.",
       image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
+      color: "bg-amber-600",
       winners: [
         { name: "Kaushiki Kesarwani", dept: "CSE, 1st Year" }
       ]
@@ -64,18 +69,18 @@ const MunWinnersShowcase = () => {
 
   return (
     <div className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50 text-stone-900 py-8 px-4 sm:px-6 lg:px-8">
-      
+
       {/* --- HEADER --- */}
       <div className="relative z-10 max-w-4xl mx-auto text-center mb-12">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-stone-200 text-stone-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
           <div className="w-1.5 h-1.5 rounded-full bg-amber-600"></div>
           <span>Malaviya Model United Nations</span>
         </div>
-        
+
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-stone-900 mb-4">
           Awards of <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 via-amber-600 to-yellow-700">Diplomacy</span>
         </h1>
-        
+
         <p className="text-base text-stone-600 max-w-2xl mx-auto leading-relaxed">
           Honoring the delegates who shaped the debate, drafted the solutions, and led the committees with distinction.
         </p>
@@ -83,9 +88,9 @@ const MunWinnersShowcase = () => {
 
       {/* --- AWARDS --- */}
       <div className="relative z-10 max-w-6xl mx-auto space-y-6">
-        
+
         {/* Best Delegate - Full Width Highlight Card */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -94,24 +99,24 @@ const MunWinnersShowcase = () => {
         >
           {/* Background Image with Overlay */}
           <div className="absolute inset-0">
-            <img 
+            <img
               src={awards[0].image}
               alt=""
               className="w-full h-full object-cover opacity-60"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/90 to-white/80"></div>
             {/* Dot Pattern */}
-            <div 
-              className="absolute inset-0 opacity-[0.08]" 
-              style={{ 
-                backgroundImage: 'radial-gradient(#1e293b 1px, transparent 1px)', 
-                backgroundSize: '16px 16px' 
+            <div
+              className="absolute inset-0 opacity-[0.08]"
+              style={{
+                backgroundImage: 'radial-gradient(#1e293b 1px, transparent 1px)',
+                backgroundSize: '16px 16px'
               }}
             ></div>
           </div>
-            
+
           <div className="relative p-6 backdrop-blur-sm">
-            <div class="flex items-center gap-4 mb-5">
+            <div className="flex items-center gap-4 mb-5">
               <div className="p-3 flex items-center justify-center bg-amber-600 text-white shadow-lg">
                 {awards[0].icon}
               </div>
@@ -151,25 +156,25 @@ const MunWinnersShowcase = () => {
             >
               {/* Background Image with Overlay */}
               <div className="absolute inset-0">
-                <img 
+                <img
                   src={award.image}
                   alt=""
                   className="w-full h-full object-cover opacity-50"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-white/90 to-white/85"></div>
                 {/* Dot Pattern */}
-                <div 
-                  className="absolute inset-0 opacity-[0.06]" 
-                  style={{ 
-                    backgroundImage: 'radial-gradient(#78716c 1px, transparent 1px)', 
-                    backgroundSize: '16px 16px' 
+                <div
+                  className="absolute inset-0 opacity-[0.06]"
+                  style={{
+                    backgroundImage: 'radial-gradient(#78716c 1px, transparent 1px)',
+                    backgroundSize: '16px 16px'
                   }}
                 ></div>
               </div>
-              
+
               <div className="relative p-5 backdrop-blur-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2.5 flex items-center justify-center bg-stone-100 text-stone-700 group-hover:bg-amber-100 group-hover:text-amber-700 transition-colors">
+                  <div className={`p-2.5 flex items-center justify-center ${award.color} text-white shadow-md`}>
                     {award.icon}
                   </div>
                   <div className="flex-1">

@@ -11,41 +11,41 @@ import WinnersShowcase from "../../components/WinnersShowcase/WinnersShowcase";
 
 const ArunodayLivePage = () => {
   const { isAuthenticated } = useAuth();
-  
+
   const scrollToWinners = () => {
     document.getElementById("winners-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Main Events - All Arunoday events
   const mainEvents = [
-    { 
-      name: "Model United Nations", 
-      subtitle: "Diplomatic Excellence", 
-      eligibility: "Open to All Years", 
+    {
+      name: "Model United Nations",
+      subtitle: "Diplomatic Excellence",
+      eligibility: "Open to All Years",
       description: "Step into the shoes of world leaders. Debate, negotiate, and make history.",
       link: "/mun",
       eventType: null
     },
-    { 
-      name: "Pralekh", 
-      subtitle: "Newsletter Writing", 
-      eligibility: "Open to All Years", 
+    {
+      name: "Pralekh",
+      subtitle: "Newsletter Writing",
+      eligibility: "Open to All Years",
       description: "Express your thoughts through compelling and creative newsletter writing.",
       link: "/dashboard",
       eventType: "pralekh" as EventType
     },
-    { 
-      name: "Plotlines", 
-      subtitle: "Creative Writing", 
-      eligibility: "Open to All Years", 
+    {
+      name: "Plotlines",
+      subtitle: "Creative Writing",
+      eligibility: "Open to All Years",
       description: "Craft captivating stories and let your imagination run wild on paper.",
       link: "/dashboard",
       eventType: "plotlines" as EventType
     },
-    { 
-      name: "Open Mic", 
-      subtitle: "Poetry & Performance", 
-      eligibility: "Open to All Years", 
+    {
+      name: "Open Mic",
+      subtitle: "Poetry & Performance",
+      eligibility: "Open to All Years",
       description: "Take the stage and share your voice through poetry, spoken word, or performance.",
       link: "/dashboard",
       eventType: "openmic" as EventType
@@ -68,8 +68,8 @@ const ArunodayLivePage = () => {
       <div className="relative pt-24">
         {/* Rising Sun Background Image */}
         <div className="absolute inset-0 h-[450px] md:h-[500px] overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=2000&auto=format&fit=crop" 
+          <img
+            src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=2000&auto=format&fit=crop"
             alt="Arunoday Rising Sun"
             className="w-full h-full object-cover opacity-60"
           />
@@ -90,7 +90,7 @@ const ArunodayLivePage = () => {
         >
           <div className="text-center">
             {/* Main Title */}
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-stone-900 mb-6 drop-shadow-sm"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,20 +100,28 @@ const ArunodayLivePage = () => {
             </motion.h1>
 
             {/* Subtitle */}
-            <motion.div
+            <motion.p
+              className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              "Where creativity meets culture, and talents find their stage."
+            </motion.p>
+
+            {/* Event Concluded Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-4 border-2 border-amber-600/30 bg-stone-50/80 backdrop-blur-sm">
-                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
-                <span className="text-sm font-medium tracking-wider text-stone-700 uppercase">Event Concluded</span>
-                <div className="h-2 w-2 rounded-full bg-amber-600"></div>
-              </div>
-              <p className="text-xl md:text-2xl text-stone-600 font-serif italic max-w-3xl mx-auto leading-relaxed">
-                "Where creativity meets culture, and talents find their stage."
-              </p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-stone-700 flex items-center justify-center gap-3">
+                <span className="relative flex h-3 w-3">
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-stone-500"></span>
+                </span>
+                Event Concluded
+              </h2>
             </motion.div>
 
             {/* Event Info */}
@@ -147,7 +155,7 @@ const ArunodayLivePage = () => {
           </div>
         </motion.div>
       </div>
-      
+
       {/* Decorative Background Elements */}
       <div className="absolute top-[500px] right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
@@ -200,7 +208,7 @@ const ArunodayLivePage = () => {
               Celebrating the rising stars who outshined the competition.
             </p>
           </div>
-          
+
           <WinnersShowcase />
         </motion.div>
 
@@ -289,13 +297,13 @@ const ArunodayLivePage = () => {
                 </div>
               </div>
             </div>
-            
+
             <p className="text-stone-600 mb-6">
               Have questions regarding the event results? Our coordinators are here!
             </p>
-            
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <a 
+              <a
                 href="tel:+917004324717"
                 className="flex items-center gap-3 bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 hover:shadow-md transition-all duration-300 group"
               >
@@ -311,8 +319,8 @@ const ArunodayLivePage = () => {
                   <div className="text-sm text-amber-600">+91 7004324717</div>
                 </div>
               </a>
-              
-              <a 
+
+              <a
                 href="tel:+918115303806"
                 className="flex items-center gap-3 bg-white p-4 rounded-lg border border-amber-200 hover:border-amber-400 hover:shadow-md transition-all duration-300 group"
               >

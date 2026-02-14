@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen, Users, Award, Globe, Target, Heart, Sparkles } from "lucide-react";
+import { BookOpen, Users, Award, Globe, Target, Heart } from "lucide-react";
 import { useIsMobile } from "../../hooks/useDevicePerformance";
 
 const stats = [
@@ -168,10 +168,10 @@ export default function About() {
               "We believe every story deserves to be told, every voice deserves
               to be heard, and every word has the power to inspire change."
             </p>
-            <div className="mt-6 flex items-center justify-center gap-2">
-              <div className="w-12 h-1 bg-linear-to-r from-orange-500 to-amber-500 rounded-full"></div>
-              <Sparkles className="w-5 h-5 text-orange-500" />
-              <div className="w-12 h-1 bg-linear-to-r from-amber-500 to-orange-500 rounded-full"></div>
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-orange-500"></div>
+              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-l from-transparent via-orange-400 to-orange-500"></div>
             </div>
           </div>
         </motion.div>

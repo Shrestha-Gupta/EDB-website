@@ -16,25 +16,25 @@ const events = [
     month: 'FEB',
     type: 'Workshop',
     description: 'When dawn breaks upon the realm of words, Arunoday \'26 unfolds, where narratives are spoken, shaped, and tested. Guided by The Editorial Board, language is treated as both craft and responsibility. Enter and witness the narrative being unveiled and carried forward.',
-    status: 'registration-open',
+    status: 'past',
     location: 'MPH',
     theme: 'from-orange-500 to-amber-500',
     image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1768374921/grey-new-12_n96vgh.jpg'
   },
   {
-  id: 2,
-  title: 'MUN',
-  subtitle: 'Model United Nations Conference',
-  date: 'February 10, 2025',
-  day: '10',
-  month: 'FEB',
-  type: 'Workshop',
-  description: 'Model United Nations (MUN) at Arunoday ’26 is a dynamic diplomatic simulation that brings global discourse to life. Delegates represent nations, engage in structured debate, negotiate policies, and collaboratively draft resolutions on pressing international issues. Guided by The Editorial Board, the conference fosters critical thinking, diplomacy, leadership, and responsible communication, offering participants an immersive experience in international relations and global decision-making.',
-  status: 'registration-open',
-  location: 'MPH',
-  theme: 'from-orange-500 to-amber-500',
-  image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1768374455/Mun_Poster_z1qvoj.jpg'
-},
+    id: 2,
+    title: 'MUN',
+    subtitle: 'Model United Nations Conference',
+    date: 'February 10, 2025',
+    day: '10',
+    month: 'FEB',
+    type: 'Workshop',
+    description: 'Model United Nations (MUN) at Arunoday ’26 is a dynamic diplomatic simulation that brings global discourse to life. Delegates represent nations, engage in structured debate, negotiate policies, and collaboratively draft resolutions on pressing international issues. Guided by The Editorial Board, the conference fosters critical thinking, diplomacy, leadership, and responsible communication, offering participants an immersive experience in international relations and global decision-making.',
+    status: 'past',
+    location: 'MPH',
+    theme: 'from-orange-500 to-amber-500',
+    image: 'https://res.cloudinary.com/dml0jlwlv/image/upload/v1768374455/Mun_Poster_z1qvoj.jpg'
+  },
 
   {
     id: 3,
@@ -73,7 +73,7 @@ const events = [
     month: 'DEC',
     type: 'Debate',
     description: 'A classic parliamentary debate fostering critical thinking and public speaking excellence among students.',
-    status: 'past',
+    status: 'upcoming',
     location: 'Senate Hall',
     theme: 'from-stone-600 to-stone-800',
     image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=1000&auto=format&fit=crop'
@@ -87,7 +87,7 @@ const events = [
     month: 'APR',
     type: 'Social',
     description: 'The traditional board photoshoot. A day of bonding, styling, and capturing the faces behind the words.',
-    status: 'upcoming',
+    status: 'past',
     location: 'Campus Garden',
     theme: 'from-amber-600 to-yellow-500',
     image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop'
@@ -105,8 +105,8 @@ const containerVariants = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.5 }
   },
@@ -116,15 +116,15 @@ const cardVariants = {
 export default function EventsPage() {
   const [filter, setFilter] = useState('all')
 
-  const filteredEvents = filter === 'all' 
-    ? events 
+  const filteredEvents = filter === 'all'
+    ? events
     : events.filter(event => event.status === filter)
 
   return (
     <div className="bg-stone-50 min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 2xl:px-12 relative overflow-x-hidden font-sans text-stone-800">
       <SEO {...seoConfigs.events} />
       <ParticlesBackground />
-      
+
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-125 h-125 bg-amber-200/20 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-orange-200/20 rounded-full blur-[100px] pointer-events-none" />
@@ -137,7 +137,7 @@ export default function EventsPage() {
       >
         {/* --- Hero Section --- */}
         <motion.div className="text-center mb-16 space-y-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -147,18 +147,18 @@ export default function EventsPage() {
             The Editorial Board
             <span className="h-px w-12 bg-amber-700/40"></span>
           </motion.div>
-          
+
           <h1 className="text-6xl md:text-8xl 2xl:text-9xl 3xl:text-[10rem] font-serif font-bold text-stone-900 mb-6 drop-shadow-sm">
             Events<span className="text-amber-600">.</span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl 2xl:text-3xl text-stone-600 font-serif italic max-w-3xl 2xl:max-w-4xl mx-auto leading-relaxed">
             "A curation of literary excellence, cultural festivities, and intellectual discourse."
           </p>
         </motion.div>
 
         {/* --- Filters --- */}
-        <motion.div 
+        <motion.div
           className="flex flex-wrap gap-3 justify-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -170,13 +170,13 @@ export default function EventsPage() {
               onClick={() => setFilter(filterType)}
               className={`
                 px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 relative overflow-hidden group
-                ${filter === filterType 
-                  ? 'text-white shadow-lg shadow-amber-900/20' 
+                ${filter === filterType
+                  ? 'text-white shadow-lg shadow-amber-900/20'
                   : 'text-stone-600 hover:text-amber-700 bg-white border border-stone-200'}
               `}
             >
               {filter === filterType && (
-                <motion.div 
+                <motion.div
                   layoutId="activePill"
                   className="absolute inset-0 bg-linear-to-r from-amber-600 to-orange-600"
                 />
@@ -200,8 +200,8 @@ export default function EventsPage() {
                 className="group perspective"
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-amber-900/10 transition-all duration-500 border border-stone-100 flex flex-col md:flex-row relative">
-                  
-                  {/* Left: Image */ }
+
+                  {/* Left: Image */}
                   <div className="md:w-72 relative overflow-hidden h-64 md:h-auto">
                     <div className={`absolute inset-0 bg-linear-to-br ${event.theme} opacity-20 mix-blend-overlay z-10`} />
                     <img
@@ -225,9 +225,9 @@ export default function EventsPage() {
                         </div>
                         <span className={`
                           hidden md:inline-flex px-3 py-1 rounded border text-xs font-bold uppercase tracking-wider
-                          ${event.status === 'upcoming' ? 'border-amber-500 text-amber-700 bg-amber-50' : 
-                            event.status === 'rising-soon' ? 'border-orange-500 text-orange-700 bg-orange-50' : 
-                            'border-stone-300 text-stone-500 bg-stone-100'}
+                          ${event.status === 'upcoming' ? 'border-amber-500 text-amber-700 bg-amber-50' :
+                            event.status === 'rising-soon' ? 'border-orange-500 text-orange-700 bg-orange-50' :
+                              'border-stone-300 text-stone-500 bg-stone-100'}
                         `}>
                           {event.status.replace('-', ' ')}
                         </span>
@@ -247,16 +247,16 @@ export default function EventsPage() {
 
                     <div className="flex items-center gap-4 pt-6 border-t border-stone-200">
                       <Link to={
-                        event.title === 'Arunoday' ? '/arunoday-live' : 
-                        event.title === 'MUN' ? '/mun' : 
-                        '#'
+                        event.title === 'Arunoday' ? '/arunoday-live' :
+                          event.title === 'MUN' ? '/mun' :
+                            '#'
                       }>
                         <button className="bg-stone-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-colors flex items-center gap-2 group/btn">
                           View Details
                           <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                         </button>
                       </Link>
-                      
+
                       {event.status === 'registration-open' && event.title !== 'Arunoday' && event.title !== 'MUN' && (
                         <Link to='#'>
                           <button className="text-stone-900 px-8 py-3 rounded-lg font-bold border-2 border-stone-900 hover:bg-stone-900 hover:text-white transition-all">
@@ -273,7 +273,7 @@ export default function EventsPage() {
         </motion.div>
 
         {/* --- Call to Action --- */}
-        <motion.div 
+        <motion.div
           className="mt-24 bg-linear-to-br from-brand-red/10 to-brand-orange/10 border-4 border-brand-red p-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -284,18 +284,18 @@ export default function EventsPage() {
             Propose an Event
           </h2>
           <p className="text-xl text-brand-black/70 max-w-2xl mx-auto mb-10">
-            Do you have a vision for a literary workshop or a cultural phenomenon? 
+            Do you have a vision for a literary workshop or a cultural phenomenon?
             <br />We provide the platform, you provide the creativity.
           </p>
-            <Link to="/contact" className="w-full sm:w-auto inline-block">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer text-center md:hover:shadow-lg shadow-2xl hover:shadow-orange-900/20 transition-all"
-              >
-                Submit Proposal
-              </motion.button>
-            </Link>
+          <Link to="/contact" className="w-full sm:w-auto inline-block">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-linear-to-r from-brand-red to-brand-red text-black font-bold py-4 px-12 text-lg rounded-3xl cursor-pointer text-center md:hover:shadow-lg shadow-2xl hover:shadow-orange-900/20 transition-all"
+            >
+              Submit Proposal
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Footer spacing */}
