@@ -1,56 +1,9 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ParticlesBackground from "../../components/ParticlesBackground/ParticlesBackground";
 import SEO, { seoConfigs } from "../../components/SEO/SEO";
-import { Calendar, MapPin, Users, Mic2, MessageSquare, ArrowRight, Send, CheckCircle, AlertCircle, Clock, Target, Trophy, Award, UserPlus } from "lucide-react";
-import { type DebateRegistrationData, registerForDebate } from "../../services/debateService";
+import { Calendar, MapPin, Users, Mic2, MessageSquare, ArrowRight, Clock, Target, Trophy, Award, UserPlus } from "lucide-react";
 
 const ADCPage = () => {
-  const [formData, setFormData] = useState<DebateRegistrationData>({
-    fullName: '',
-    branch: '',
-    rollNo: '',
-    contactNumber: '',
-    email: '',
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    if (error) setError(null);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      await registerForDebate(formData);
-      setSuccess(true);
-      setFormData({
-        fullName: '',
-        branch: '',
-        rollNo: '',
-        contactNumber: '',
-        email: '',
-      });
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const scrollToRegister = () => {
-    document.getElementById("register-section")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const rounds = [
     {
       round: "Round 1",
@@ -126,20 +79,19 @@ const ADCPage = () => {
               "Where words become weapons and ideas ignite change."
             </motion.p>
 
-            {/* Registration Open Badge */}
+            {/* Event Postponed Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-10"
             >
-              <h2 className="text-2xl md:text-3xl font-semibold text-stone-700 flex items-center justify-center gap-3">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                Registrations Open
-              </h2>
+              <div className="inline-block bg-amber-100 border-2 border-amber-400 rounded-full px-6 py-3">
+                <h2 className="text-2xl md:text-3xl font-semibold text-amber-800 flex items-center justify-center gap-3">
+                  <Clock className="w-6 h-6" />
+                  Event Postponed
+                </h2>
+              </div>
             </motion.div>
 
             {/* Event Info */}
@@ -178,17 +130,18 @@ const ADCPage = () => {
               </motion.div>
             </motion.div>
 
-            {/* CTA Button */}
-            <motion.button
-              onClick={scrollToRegister}
+            {/* Info Message */}
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-amber-500/25"
+              className="max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-xl p-6 text-center"
             >
-              Register Now
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
+              <p className="text-stone-700 text-lg">
+                The Annual Debate Competition has been postponed. New dates will be announced soon.<br />
+                Stay tuned for updates!
+              </p>
+            </motion.div>
           </div>
         </motion.div>
       </div>
@@ -313,7 +266,7 @@ const ADCPage = () => {
           </div>
         </motion.div>
 
-        {/* Registration Section */}
+        {/* Registration Section - Postponed Message */}
         <motion.div
           id="register-section"
           initial={{ opacity: 0, y: 30 }}
@@ -324,187 +277,49 @@ const ADCPage = () => {
         >
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 mb-3">
-              Register Now
+              Registration Status
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto mb-4"></div>
-            <p className="text-stone-600 text-lg">
-              Secure your spot in the competition. Limited seats available!
-            </p>
+            <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mb-4"></div>
           </div>
 
-          <AnimatePresence mode="wait">
-            {success ? (
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 p-10 rounded-2xl text-center shadow-xl">
               <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="max-w-2xl mx-auto"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", duration: 0.5 }}
               >
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 p-10 rounded-2xl text-center shadow-xl">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", duration: 0.5 }}
-                  >
-                    <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
-                  </motion.div>
-                  <h3 className="text-3xl font-bold text-green-800 mb-4">
-                    Registration Successful! 🎉
-                  </h3>
-                  <p className="text-green-700 text-lg mb-6">
-                    You're officially registered for the Annual Debate Competition. A confirmation email has been sent to your registered email address.
-                  </p>
-                  <div className="bg-white/60 rounded-xl p-4 mb-6">
-                    <p className="text-green-800 font-medium">
-                      📅 Round 1 (GD): 17th February 2026<br />
-                      📍 Venue: MMMUT Campus
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setSuccess(false)}
-                    className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-colors"
-                  >
-                    Register Another Participant
-                  </button>
-                </div>
+                <Clock className="w-20 h-20 text-amber-600 mx-auto mb-6" />
               </motion.div>
-            ) : (
-              <motion.div
-                key="form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="max-w-2xl mx-auto"
-              >
-                {/* Form card with subtle glow effect */}
-                <div className="relative group">
-                  {/* Subtle glow effect */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-red-500 to-amber-500 rounded-2xl opacity-10 group-hover:opacity-20 blur-sm transition-all duration-500" />
-
-                  <div className="relative bg-white rounded-2xl p-6 md:p-10 shadow-xl border border-orange-200/50">
-                    {error && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mb-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl flex items-center gap-3"
-                      >
-                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                        <p>{error}</p>
-                      </motion.div>
-                    )}
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label htmlFor="fullName" className="block text-sm font-semibold text-stone-700 mb-2">
-                            Full Name <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            required
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                            placeholder="Enter your full name"
-                          />
-                        </div>
-
-                        <div>
-                          <label htmlFor="rollNo" className="block text-sm font-semibold text-stone-700 mb-2">
-                            Roll Number <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            id="rollNo"
-                            name="rollNo"
-                            required
-                            value={formData.rollNo}
-                            onChange={handleChange}
-                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                            placeholder="University Roll No."
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label htmlFor="branch" className="block text-sm font-semibold text-stone-700 mb-2">
-                            Branch / Course <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            id="branch"
-                            name="branch"
-                            required
-                            value={formData.branch}
-                            onChange={handleChange}
-                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                            placeholder="e.g. B.Tech CSE"
-                          />
-                        </div>
-
-                        <div>
-                          <label htmlFor="contactNumber" className="block text-sm font-semibold text-stone-700 mb-2">
-                            Contact Number <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            id="contactNumber"
-                            name="contactNumber"
-                            required
-                            value={formData.contactNumber}
-                            onChange={handleChange}
-                            className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                            placeholder="WhatsApp number preferred"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-semibold text-stone-700 mb-2">
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          required
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="w-full bg-stone-50 border-2 border-stone-200 rounded-xl px-4 py-3.5 text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-
-                      <div className="pt-4">
-                        <motion.button
-                          type="submit"
-                          disabled={isLoading}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="relative w-full overflow-hidden bg-gradient-to-r from-red-600 via-orange-500 to-red-600 bg-[length:200%_100%] hover:bg-[position:100%_0] text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/30 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500"
-                        >
-                          {/* Animated border glow */}
-                          <span className="absolute inset-0 rounded-xl border-2 border-white/20 animate-pulse" />
-                          {isLoading ? (
-                            <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                          ) : (
-                            <>
-                              <span className="text-lg">Submit Registration</span>
-                              <Send className="w-5 h-5" />
-                            </>
-                          )}
-                        </motion.button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              <h3 className="text-3xl font-bold text-amber-900 mb-4">
+                Event Postponed
+              </h3>
+              <p className="text-amber-800 text-lg mb-6">
+                The Annual Debate Competition has been postponed to a later date. We appreciate your understanding and interest in participating.
+              </p>
+              <div className="bg-white/60 rounded-xl p-4 mb-6">
+                <p className="text-amber-900 font-medium">
+                  📅 New dates will be announced soon<br />
+                  📧 Registered participants will be notified via email
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="/contact"
+                  className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl transition-colors inline-flex items-center justify-center gap-2"
+                >
+                  Contact Us
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+                <a
+                  href="/events"
+                  className="px-8 py-3 bg-white hover:bg-stone-50 text-amber-800 border-2 border-amber-300 font-bold rounded-xl transition-colors inline-flex items-center justify-center gap-2"
+                >
+                  View Other Events
+                </a>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Important Info */}

@@ -23,15 +23,15 @@ const containerVariants = {
 // Featured Events Section
 const FeaturedEvents = () => {
   const events = [
-    {
-      name: "Annual Debate Competition",
-      subtitle: "Battle of Intellect",
-      icon: "🎙️",
-      description: "Join MMMUT's premier debate competition. Engage in Group Discussions and Debates to showcase your oratory skills.",
-      link: "/adc",
-      eventType: "live",
-      isLive: true
-    },
+    // {
+    //   name: "Annual Debate Competition",
+    //   subtitle: "Battle of Intellect",
+    //   icon: "🎙️",
+    //   description: "Join MMMUT's premier debate competition. Engage in Group Discussions and Debates to showcase your oratory skills.",
+    //   link: "/adc",
+    //   eventType: "live",
+    //   isLive: true
+    // },
     {
       name: "Arunoday",
       subtitle: "The Literary Extravaganza",
